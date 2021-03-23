@@ -48,7 +48,7 @@
     <Compile Include="ElementPropertiesProvider.cs" />
     <Compile Include="DistanceOutline.cs" />
     <Compile Include="RedlinesService.cs" />
-    <Compile Include="RedlinesProvider.cs" />
+    <Compile Include="DistanceOutlinesProvider.cs" />
     <Compile Include="TextPropertiesProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TextProperties.cs" />
