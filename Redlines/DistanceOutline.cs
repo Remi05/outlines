@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 
 namespace Redlines
 {
@@ -11,12 +6,15 @@ namespace Redlines
     {
         public Point StartPoint { get; private set; }
         public Point EndPoint { get; private set; }
+        public Point MidPoint { get; private set; }
         public double Distance { get; private set; }
+        public bool IsVertical => StartPoint.X == EndPoint.X;
 
         public DistanceOutline(Point startPoint, Point endPoint)
         {
             StartPoint = startPoint;
             EndPoint = endPoint;
+            MidPoint = Point.Add(StartPoint, Point.Subtract(EndPoint, StartPoint) / 2);
             Distance = Point.Subtract(EndPoint, StartPoint).Length;
         }
     }
