@@ -1,6 +1,6 @@
 ﻿namespace RedlinesApp
 {
-    partial class Form1
+    partial class MainPage
     {
         /// <summary>
         /// Required designer variable.
