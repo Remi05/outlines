@@ -15,6 +15,8 @@ namespace RedlinesApp
         public MainPage()
         {
             InitializeComponent();
+            BackColor = Color.Magenta;
+            TransparencyKey = Color.Magenta;
         }
     }
 }
