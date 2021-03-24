@@ -1,6 +1,6 @@
 #  ![Redlines Icon](RedlinesApp/Assets/favicon.ico) Redlines
 
-An app to help review your app's UI.
+An app to help review your UI implementation.
 
 ## License
 
