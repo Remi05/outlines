@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Automation;
 
@@ -72,12 +73,24 @@ namespace Redlines
 
         public void TargetElementAt(Point cursorPosition)
         {
-            TargetElement = AutomationElement.FromPoint(cursorPosition);
+            TargetElement = TryGetElementFromPoint(cursorPosition);
         }
 
         public void SelectElementAt(Point cursorPosition)
         {
-            SelectedElement = AutomationElement.FromPoint(cursorPosition);
+            SelectedElement = TryGetElementFromPoint(cursorPosition);
+        }
+
+        private AutomationElement TryGetElementFromPoint(Point point)
+        {
+            try
+            {
+                return AutomationElement.FromPoint(point);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
         private void UpdateDistanceOutlines()

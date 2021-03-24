@@ -10,6 +10,8 @@ namespace RedlinesApp
         private RedlinesService RedlinesService { get; set; } = new RedlinesService();
         private ColorConfig ColorConfig { get; set; } = new ColorConfig();
         private DimensionsConfig DimensionsConfig { get; set; } = new DimensionsConfig();
+        private GlobalMouseListener GlobalMouseListener { get; set; }
+        private System.Timers.Timer TargetTimer { get; set; }
         private bool ShouldPaintOverlay { get; set; } = true;
 
         protected override bool ShowWithoutActivation => true;
@@ -30,20 +32,39 @@ namespace RedlinesApp
             RedlinesService.TargetElementChanged += new TargetElementChangedHandler(Invalidate);
 
             // Register to global mouse events.
-            MouseMessageFilter mouseHandler = new MouseMessageFilter();
-            mouseHandler.MouseDown += new MouseDownEventHandler(OnMouseDown);
-            mouseHandler.MouseMoved += new MouseMovedEventHandler(OnMouseMoved);
-            Application.AddMessageFilter(mouseHandler);
+            GlobalMouseListener = new GlobalMouseListener();
+            GlobalMouseListener.MouseDown += OnMouseDown;
+            GlobalMouseListener.MouseMoved += OnMouseMoved;
+            GlobalMouseListener.RegisterToMouseEvents();
+
+            // Set the target element after hovering for 0.2s.
+            TargetTimer = new System.Timers.Timer();
+            TargetTimer.Interval = 200;
+            TargetTimer.AutoReset = false;
+            TargetTimer.Elapsed += new System.Timers.ElapsedEventHandler((_, __) => OnTargetTimeElapsed());
         }
 
         private void OnMouseDown()
         {
+            Hide();
             RedlinesService.SelectElementAt(Helpers.DrawingPointToWindowsPoint(Cursor.Position));
+            Show();
         }
 
         private void OnMouseMoved()
         {
-            RedlinesService.TargetElementAt(Helpers.DrawingPointToWindowsPoint(Cursor.Position));
+            TargetTimer.Stop();
+            TargetTimer.Start();            
+        }
+
+        private delegate void TargetElementDelegate();
+        private void OnTargetTimeElapsed()
+        {
+            Invoke(new TargetElementDelegate(() => {
+                Hide();
+                RedlinesService.TargetElementAt(Helpers.DrawingPointToWindowsPoint(Cursor.Position));
+                Show();
+            }));
         }
 
         private void ToggleShoudlPaintOverlay()

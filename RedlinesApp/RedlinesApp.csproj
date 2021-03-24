@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="ColorConfig.cs" />
     <Compile Include="DimensionsConfig.cs" />
+    <Compile Include="GlobalMouseListener.cs" />
     <Compile Include="Helpers.cs" />
     <Compile Include="MainPage.cs">
       <SubType>Form</SubType>
@@ -60,7 +61,6 @@
     <Compile Include="MainPage.Designer.cs">
       <DependentUpon>MainPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="MouseMessageFilter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="MainPage.resx">
