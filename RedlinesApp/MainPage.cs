@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,10 +14,8 @@ namespace RedlinesApp
     public partial class MainPage : Form
     {
         private RedlinesService RedlinesService { get; set; } = new RedlinesService();
+        private ColorConfig ColorConfig { get; set; } = new ColorConfig();
 
-        private Color DistanceOutlinesColor { get; set; } = Color.FromArgb(242, 72, 34);
-        private Color SelectedElementOutlineColor { get; set; } = Color.FromArgb(24, 160, 251);
-        private Color TargetElementOutlineColor { get; set; } = Color.FromArgb(242, 72, 34);
 
         protected override bool ShowWithoutActivation => true;
 
@@ -59,15 +57,15 @@ namespace RedlinesApp
         {
             foreach (var distanceOutline in RedlinesService.DistanceOutlines)
             {
-                DrawDistanceOutline(e.Graphics, distanceOutline, DistanceOutlinesColor);
+                DrawDistanceOutline(e.Graphics, distanceOutline, ColorConfig.DistanceOutlineColor);
             }
 
             // We don't want to draw the target element outline if it is also the selected element.
             if (RedlinesService.TargetElementProperties != RedlinesService.SelectedElementProperties)
             {
-                DrawElementOutline(e.Graphics, RedlinesService.TargetElementProperties, TargetElementOutlineColor);
+                DrawElementOutline(e.Graphics, RedlinesService.TargetElementProperties, ColorConfig.TargetElementOutlineColor);
             }
-            DrawElementOutline(e.Graphics, RedlinesService.SelectedElementProperties, SelectedElementOutlineColor);
+            DrawElementOutline(e.Graphics, RedlinesService.SelectedElementProperties, ColorConfig.SelectedElementOutlineColor);
         }
 
         private void DrawDistanceOutline(Graphics graphics, DistanceOutline distanceOutline, Color color)
@@ -82,7 +80,7 @@ namespace RedlinesApp
             graphics.DrawLine(new Pen(color, 1), PointToClient(screenStartPoint), PointToClient(screenEndPoint));
 
             Rectangle rect = Helpers.GetTextRectangleForDistanceOutline(distanceOutline);
-            DrawFilledRectWithText(graphics, rect, distanceOutline.Distance.ToString(), color, Color.White);
+            DrawFilledRectWithText(graphics, rect, distanceOutline.Distance.ToString(), color, ColorConfig.TextColor);
         }
 
         private void DrawElementOutline(Graphics graphics, ElementProperties elementProperties, Color color)
@@ -97,7 +95,7 @@ namespace RedlinesApp
 
             Rectangle sizeRect = Helpers.GetTextRectangleForOutlineRect(elementProperties.BoundingRect);
             string sizeText = $"{elementProperties.BoundingRect.Width} x {elementProperties.BoundingRect.Height}";
-            DrawFilledRectWithText(graphics, sizeRect, sizeText, color, Color.White);
+            DrawFilledRectWithText(graphics, sizeRect, sizeText, color, ColorConfig.TextColor);
         }
 
         private void DrawFilledRectWithText(Graphics graphics, Rectangle rect, string text, Color fillColor, Color textColor)
