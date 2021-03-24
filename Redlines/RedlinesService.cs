@@ -41,7 +41,7 @@ namespace Redlines
             get { return selectedElementProperties; }
             set
             {
-                if (value != selectedElementProperties)
+                if (!(selectedElementProperties?.Equals(value) ?? value == null))
                 {
                     selectedElementProperties = value;
                     UpdateDistanceOutlines();
@@ -56,7 +56,7 @@ namespace Redlines
             get { return targetElementProperties; }
             set
             {
-                if (value != targetElementProperties)
+                if (!(targetElementProperties?.Equals(value) ?? value == null))
                 {
                     targetElementProperties = value;
                     UpdateDistanceOutlines();

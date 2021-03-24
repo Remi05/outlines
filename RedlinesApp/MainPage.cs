@@ -40,13 +40,13 @@ namespace RedlinesApp
             ShowIcon = false;
             TopMost = true;
 
-            RedlinesService.SelectedElementChanged += new SelectedElementChangedHandler(Redraw);
-            RedlinesService.TargetElementChanged += new TargetElementChangedHandler(Redraw);
+            // Force a redraw when the selected or target element changes.
+            RedlinesService.SelectedElementChanged += new SelectedElementChangedHandler(Invalidate);
+            RedlinesService.TargetElementChanged += new TargetElementChangedHandler(Invalidate);
         }
 
         private void OnMouseDown()
         {
-            Invalidate();
             RedlinesService.OnCursorDown(Helpers.DrawingPointToWindowsPoint(Cursor.Position));
         }
 
@@ -55,29 +55,15 @@ namespace RedlinesApp
             RedlinesService.OnCursorMove(Helpers.DrawingPointToWindowsPoint(Cursor.Position));
         }
 
-        private void Redraw()
-        {
-            using (Graphics graphics = CreateGraphics())
-            {
-                foreach (var distanceOutline in RedlinesService.DistanceOutlines)
-                {
-                    DrawDistanceOutline(graphics, distanceOutline, DistanceOutlinesColor);
-                }
-
-                DrawElementOutline(graphics, RedlinesService.SelectedElementProperties, SelectedElementOutlineColor);
-                DrawElementOutline(graphics, RedlinesService.TargetElementProperties, TargetElementOutlineColor);
-            }
-        }
-
         private void MainPage_Paint(object sender, PaintEventArgs e)
         {
-            //    foreach (var distanceOutline in RedlinesService.DistanceOutlines)
-            //    {
-            //        DrawDistanceOutline(e.Graphics, distanceOutline, DistanceOutlinesColor);
-            //    }
+            foreach (var distanceOutline in RedlinesService.DistanceOutlines)
+            {
+                DrawDistanceOutline(e.Graphics, distanceOutline, DistanceOutlinesColor);
+            }
 
-            //    DrawElementOutline(e.Graphics, RedlinesService.SelectedElementProperties, SelectedElementOutlineColor);
-            //    DrawElementOutline(e.Graphics, RedlinesService.TargetElementProperties, TargetElementOutlineColor);
+            DrawElementOutline(e.Graphics, RedlinesService.SelectedElementProperties, SelectedElementOutlineColor);
+            DrawElementOutline(e.Graphics, RedlinesService.TargetElementProperties, TargetElementOutlineColor);
         }
 
         private void DrawDistanceOutline(Graphics graphics, DistanceOutline distanceOutline, Color color)
