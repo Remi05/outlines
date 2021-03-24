@@ -1,7 +1,4 @@
-﻿using System.Drawing;
-using Redlines;
-
-namespace RedlinesApp
+﻿namespace RedlinesApp
 {
     public static class Helpers
     {
