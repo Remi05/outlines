@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using Redlines;
 
@@ -10,7 +11,6 @@ namespace RedlinesApp
         private ColorConfig ColorConfig { get; set; } = new ColorConfig();
         private DimensionsConfig DimensionsConfig { get; set; } = new DimensionsConfig();
         private bool ShouldPaintOverlay { get; set; } = true;
-
 
         protected override bool ShowWithoutActivation => true;
 
@@ -82,12 +82,22 @@ namespace RedlinesApp
                 return;
             }
 
+            Pen linePen = new Pen(color, DimensionsConfig.DistanceOutlineWidth);
+            if (distanceOutline.IsGap)
+            {
+                linePen.DashStyle = DashStyle.Custom;
+                linePen.DashPattern = new float[] { DimensionsConfig.DashLength, DimensionsConfig.DashLength };
+            }
+
             Point screenStartPoint = Helpers.WindowsPointToDrawingPoint(distanceOutline.StartPoint);
             Point screenEndPoint = Helpers.WindowsPointToDrawingPoint(distanceOutline.EndPoint);
-            graphics.DrawLine(new Pen(color, 1), PointToClient(screenStartPoint), PointToClient(screenEndPoint));
+            graphics.DrawLine(linePen, PointToClient(screenStartPoint), PointToClient(screenEndPoint));
 
-            Rectangle distanceTextRect = GetDistanceTextRectangle(distanceOutline);
-            DrawFilledRectWithText(graphics, distanceTextRect, distanceOutline.Distance.ToString(), color, ColorConfig.TextColor);
+            if (!distanceOutline.IsGap)
+            {
+                Rectangle distanceTextRect = GetDistanceTextRectangle(distanceOutline);
+                DrawFilledRectWithText(graphics, distanceTextRect, distanceOutline.Distance.ToString(), color, ColorConfig.TextColor);
+            }
         }
 
         private void DrawElementOutline(Graphics graphics, ElementProperties elementProperties, Color color)
@@ -98,7 +108,7 @@ namespace RedlinesApp
             }
             Rectangle outlineRect = Helpers.WindowsRectToDrawingRect(elementProperties.BoundingRect);
             outlineRect.Location = PointToClient(outlineRect.Location);
-            graphics.DrawRectangle(new Pen(color, 2), outlineRect);
+            graphics.DrawRectangle(new Pen(color, DimensionsConfig.ElementOutlineWidth), outlineRect);
 
             Rectangle dimensionsTextRect = GetDimensionsTextRectangle(elementProperties.BoundingRect);
             string dimensionsText = $"{elementProperties.BoundingRect.Width} x {elementProperties.BoundingRect.Height}";

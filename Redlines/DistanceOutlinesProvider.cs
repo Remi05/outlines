@@ -49,15 +49,35 @@ namespace Redlines
                 {
                     // Top to Bottom
                     var selectedTopCenter = new Point(selectedCenter.X, selectedElement.BoundingRect.Top);
-                    var topToBottomOutline = new DistanceOutline(selectedTopCenter, new Point(selectedCenter.X, targetElement.BoundingRect.Bottom));
+                    var lineEnd = new Point(selectedCenter.X, targetElement.BoundingRect.Bottom);
+                    var topToBottomOutline = new DistanceOutline(selectedTopCenter, lineEnd);
                     distanceOutlines.Add(topToBottomOutline);
+
+                    if (lineEnd.X < targetElement.BoundingRect.Left)
+                    {
+                        distanceOutlines.Add(new DistanceOutline(lineEnd, targetElement.BoundingRect.BottomLeft, true));
+                    }
+                    else if (lineEnd.X > targetElement.BoundingRect.Right)
+                    {
+                        distanceOutlines.Add(new DistanceOutline(lineEnd, targetElement.BoundingRect.BottomRight, true));
+                    }
                 }
                 else if (selectedElement.BoundingRect.Bottom < targetElement.BoundingRect.Top)
                 {
                     // Bottom to Top
                     var selectedBottomCenter = new Point(selectedCenter.X, selectedElement.BoundingRect.Bottom);
-                    var bottomToTopOutline = new DistanceOutline(selectedBottomCenter, new Point(selectedCenter.X, targetElement.BoundingRect.Top));
+                    var lineEnd = new Point(selectedCenter.X, targetElement.BoundingRect.Top);
+                    var bottomToTopOutline = new DistanceOutline(selectedBottomCenter, lineEnd);
                     distanceOutlines.Add(bottomToTopOutline);
+
+                    if (lineEnd.X < targetElement.BoundingRect.Left)
+                    {
+                        distanceOutlines.Add(new DistanceOutline(lineEnd, targetElement.BoundingRect.TopLeft, true));
+                    }
+                    else if (lineEnd.X > targetElement.BoundingRect.Right)
+                    {
+                        distanceOutlines.Add(new DistanceOutline(lineEnd, targetElement.BoundingRect.TopRight, true));
+                    }
                 }
 
                 // Horizontal
@@ -65,15 +85,35 @@ namespace Redlines
                 {
                     // Left to Right
                     var selectedLeftCenter = new Point(selectedElement.BoundingRect.Left, selectedCenter.Y);
-                    var leftToRightOutline = new DistanceOutline(selectedLeftCenter, new Point(targetElement.BoundingRect.Right, selectedCenter.Y));
+                    var lineEnd = new Point(targetElement.BoundingRect.Right, selectedCenter.Y);
+                    var leftToRightOutline = new DistanceOutline(selectedLeftCenter, lineEnd);
                     distanceOutlines.Add(leftToRightOutline);
+
+                    if (lineEnd.Y < targetElement.BoundingRect.Top)
+                    {
+                        distanceOutlines.Add(new DistanceOutline(lineEnd, targetElement.BoundingRect.TopRight, true));
+                    }
+                    else if (lineEnd.Y > targetElement.BoundingRect.Bottom)
+                    {
+                        distanceOutlines.Add(new DistanceOutline(lineEnd, targetElement.BoundingRect.BottomRight, true));
+                    }
                 }
                 else if (selectedElement.BoundingRect.Right < targetElement.BoundingRect.Left)
                 {
                     // Right to Left
                     var selectedRightCenter = new Point(selectedElement.BoundingRect.Right, selectedCenter.Y);
+                    var lineEnd = new Point(targetElement.BoundingRect.Left, selectedCenter.Y);
                     var rightToLeftOutline = new DistanceOutline(selectedRightCenter, new Point(targetElement.BoundingRect.Left, selectedCenter.Y));
                     distanceOutlines.Add(rightToLeftOutline);
+
+                    if (lineEnd.Y < targetElement.BoundingRect.Top)
+                    {
+                        distanceOutlines.Add(new DistanceOutline(lineEnd, targetElement.BoundingRect.TopLeft, true));
+                    }
+                    else if (lineEnd.Y > targetElement.BoundingRect.Bottom)
+                    {
+                        distanceOutlines.Add(new DistanceOutline(lineEnd, targetElement.BoundingRect.BottomLeft, true));
+                    }
                 }
             }
 
