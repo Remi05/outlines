@@ -70,12 +70,12 @@ namespace Redlines
         public SelectedElementChangedHandler SelectedElementChanged;
         public TargetElementChangedHandler TargetElementChanged;
 
-        public void OnCursorMove(Point cursorPosition)
+        public void TargetElementAt(Point cursorPosition)
         {
             TargetElement = AutomationElement.FromPoint(cursorPosition);
         }
 
-        public void OnCursorDown(Point cursorPosition)
+        public void SelectElementAt(Point cursorPosition)
         {
             SelectedElement = AutomationElement.FromPoint(cursorPosition);
         }

@@ -45,12 +45,13 @@ namespace RedlinesApp
 
         private void OnMouseDown()
         {
-            RedlinesService.OnCursorDown(Helpers.DrawingPointToWindowsPoint(Cursor.Position));
+            RedlinesService.SelectElementAt(Helpers.DrawingPointToWindowsPoint(Cursor.Position));
         }
 
         private void OnMouseMoved()
         {
-            RedlinesService.OnCursorMove(Helpers.DrawingPointToWindowsPoint(Cursor.Position));
+            RedlinesService.TargetElementAt(Helpers.DrawingPointToWindowsPoint(Cursor.Position));
+        }
         }
 
         private void MainPage_Paint(object sender, PaintEventArgs e)
