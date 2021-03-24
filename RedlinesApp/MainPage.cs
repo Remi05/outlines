@@ -1,11 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 using System.Windows.Forms;
 using Redlines;
 
@@ -22,14 +15,6 @@ namespace RedlinesApp
 
         public MainPage()
         {
-            // Make the app DPI-aware to get correct dimensions.
-            Application.EnableVisualStyles();
-
-            MouseMessageFilter mouseHandler = new MouseMessageFilter();
-            mouseHandler.MouseDown += new MouseDownEventHandler(OnMouseDown);
-            mouseHandler.MouseMoved += new MouseMovedEventHandler(OnMouseMoved);
-            Application.AddMessageFilter(mouseHandler);
-
             InitializeComponent();
 
             BackColor = Color.Magenta;
@@ -42,6 +27,12 @@ namespace RedlinesApp
             // Force a redraw when the selected or target element changes.
             RedlinesService.SelectedElementChanged += new SelectedElementChangedHandler(Invalidate);
             RedlinesService.TargetElementChanged += new TargetElementChangedHandler(Invalidate);
+
+            // Register to global mouse events.
+            MouseMessageFilter mouseHandler = new MouseMessageFilter();
+            mouseHandler.MouseDown += new MouseDownEventHandler(OnMouseDown);
+            mouseHandler.MouseMoved += new MouseMovedEventHandler(OnMouseMoved);
+            Application.AddMessageFilter(mouseHandler);
         }
 
         private void OnMouseDown()

@@ -14,6 +14,7 @@ namespace RedlinesApp
         [STAThread]
         static void Main()
         {
+            // Make the app DPI-aware to get correct dimensions.
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainPage());
