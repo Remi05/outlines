@@ -1,4 +1,4 @@
-﻿using System.Drawing;
+using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using Redlines;
@@ -24,6 +24,7 @@ namespace RedlinesApp
             TransparencyKey = BackColor;
             FormBorderStyle = FormBorderStyle.None;
             WindowState = FormWindowState.Maximized;
+            ShowInTaskbar = false;
             ShowIcon = false;
             TopMost = true;
 
