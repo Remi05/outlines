@@ -37,21 +37,34 @@ namespace RedlinesApp
         private const int MK_LBUTTON = 0x0001;
         private const int MK_CONTROL = 0x0008;
 
+        private HookProc MouseHookProc { get; set; }
+        private IntPtr MouseHookPtr { get; set; }
+
         public MouseMovedEventHandler MouseMoved;
         public MouseDownEventHandler MouseDown;
 
         public void RegisterToMouseEvents()
         {
-            HookProc mouseHookProc = new HookProc(MouseHookProc);
+            MouseHookProc = new HookProc(MouseProc);
 
             using (Process curProcess = Process.GetCurrentProcess())
             using (ProcessModule curModule = curProcess.MainModule)
             {
-                SetWindowsHookEx(WH_MOUSE_LL, mouseHookProc, GetModuleHandle(curModule.ModuleName), 0);
+                MouseHookPtr = SetWindowsHookEx(WH_MOUSE_LL, MouseHookProc, GetModuleHandle(curModule.ModuleName), 0);
             }
         }
 
-        private int MouseHookProc(int code, IntPtr wParam, IntPtr lParam)
+        public void UnregisterFromMouseEvents()
+        {
+            if (MouseHookPtr != IntPtr.Zero)
+            {
+                UnhookWindowsHookEx(MouseHookPtr);
+                MouseHookPtr = IntPtr.Zero;
+                MouseHookProc = null;
+            }
+        }
+
+        private int MouseProc(int code, IntPtr wParam, IntPtr lParam)
         {
             if (code < 0)
             {
