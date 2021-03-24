@@ -1,4 +1,4 @@
-using System.Drawing;
+﻿using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using Redlines;
@@ -163,6 +163,16 @@ namespace RedlinesApp
             System.Windows.Point bottomCenter = System.Windows.Point.Add(outlineRect.BottomLeft, System.Windows.Point.Subtract(outlineRect.BottomRight, outlineRect.BottomLeft) / 2);
             Point rectPos = Point.Add(Helpers.WindowsPointToDrawingPoint(bottomCenter), offset);
             return new Rectangle(rectPos, DimensionsConfig.DimensionsRectangleSize);
+        }
+
+        private void toggleOverlayToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            ToggleShoudlPaintOverlay();
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
