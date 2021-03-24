@@ -15,6 +15,7 @@ namespace RedlinesApp
     {
         private RedlinesService RedlinesService { get; set; } = new RedlinesService();
         private ColorConfig ColorConfig { get; set; } = new ColorConfig();
+        private bool ShouldPaintOverlay { get; set; } = true;
 
 
         protected override bool ShowWithoutActivation => true;
@@ -52,10 +53,23 @@ namespace RedlinesApp
         {
             RedlinesService.TargetElementAt(Helpers.DrawingPointToWindowsPoint(Cursor.Position));
         }
+
+        private void ToggleShoudlPaintOverlay()
+        {
+            ShouldPaintOverlay = !ShouldPaintOverlay;
+            if (!ShouldPaintOverlay)
+            {
+                Invalidate();
+            }
         }
 
         private void MainPage_Paint(object sender, PaintEventArgs e)
         {
+            if (!ShouldPaintOverlay)
+            {
+                return;
+            }
+
             foreach (var distanceOutline in RedlinesService.DistanceOutlines)
             {
                 DrawDistanceOutline(e.Graphics, distanceOutline, ColorConfig.DistanceOutlineColor);
