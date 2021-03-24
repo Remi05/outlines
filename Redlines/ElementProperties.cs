@@ -16,5 +16,15 @@ namespace Redlines
         {
             return BoundingRect.GetHashCode();
         }
+
+        public static bool operator==(ElementProperties ep1, ElementProperties ep2)
+        {
+            return ep1?.Equals(ep2) ?? ep2 is null;
+        }
+
+        public static bool operator!=(ElementProperties ep1, ElementProperties ep2)
+        {
+            return !(ep1 == ep2);
+        }
     }
 }
