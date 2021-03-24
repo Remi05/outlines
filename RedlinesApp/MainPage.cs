@@ -28,8 +28,8 @@ namespace RedlinesApp
             TopMost = true;
 
             // Force a redraw when the selected or target element changes.
-            RedlinesService.SelectedElementChanged += new SelectedElementChangedHandler(Invalidate);
-            RedlinesService.TargetElementChanged += new TargetElementChangedHandler(Invalidate);
+            RedlinesService.SelectedElementChanged += Invalidate;
+            RedlinesService.TargetElementChanged += Invalidate;
 
             // Register to global mouse events.
             GlobalMouseListener = new GlobalMouseListener();
@@ -41,7 +41,7 @@ namespace RedlinesApp
             TargetTimer = new System.Timers.Timer();
             TargetTimer.Interval = 200;
             TargetTimer.AutoReset = false;
-            TargetTimer.Elapsed += new System.Timers.ElapsedEventHandler((_, __) => OnTargetTimeElapsed());
+            TargetTimer.Elapsed += (_, __) => OnTargetTimeElapsed();
         }
 
         private void OnMouseDown()
