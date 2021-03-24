@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ColorConfig.cs" />
+    <Compile Include="DimensionsConfig.cs" />
     <Compile Include="Helpers.cs" />
     <Compile Include="MainPage.cs">
       <SubType>Form</SubType>

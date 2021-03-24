@@ -8,6 +8,7 @@ namespace RedlinesApp
     {
         private RedlinesService RedlinesService { get; set; } = new RedlinesService();
         private ColorConfig ColorConfig { get; set; } = new ColorConfig();
+        private DimensionsConfig DimensionsConfig { get; set; } = new DimensionsConfig();
         private bool ShouldPaintOverlay { get; set; } = true;
 
 
@@ -85,8 +86,8 @@ namespace RedlinesApp
             Point screenEndPoint = Helpers.WindowsPointToDrawingPoint(distanceOutline.EndPoint);
             graphics.DrawLine(new Pen(color, 1), PointToClient(screenStartPoint), PointToClient(screenEndPoint));
 
-            Rectangle rect = Helpers.GetTextRectangleForDistanceOutline(distanceOutline);
-            DrawFilledRectWithText(graphics, rect, distanceOutline.Distance.ToString(), color, ColorConfig.TextColor);
+            Rectangle distanceTextRect = GetDistanceTextRectangle(distanceOutline);
+            DrawFilledRectWithText(graphics, distanceTextRect, distanceOutline.Distance.ToString(), color, ColorConfig.TextColor);
         }
 
         private void DrawElementOutline(Graphics graphics, ElementProperties elementProperties, Color color)
@@ -99,9 +100,9 @@ namespace RedlinesApp
             outlineRect.Location = PointToClient(outlineRect.Location);
             graphics.DrawRectangle(new Pen(color, 2), outlineRect);
 
-            Rectangle sizeRect = Helpers.GetTextRectangleForOutlineRect(elementProperties.BoundingRect);
-            string sizeText = $"{elementProperties.BoundingRect.Width} x {elementProperties.BoundingRect.Height}";
-            DrawFilledRectWithText(graphics, sizeRect, sizeText, color, ColorConfig.TextColor);
+            Rectangle dimensionsTextRect = GetDimensionsTextRectangle(elementProperties.BoundingRect);
+            string dimensionsText = $"{elementProperties.BoundingRect.Width} x {elementProperties.BoundingRect.Height}";
+            DrawFilledRectWithText(graphics, dimensionsTextRect, dimensionsText, color, ColorConfig.TextColor);
         }
 
         private void DrawFilledRectWithText(Graphics graphics, Rectangle rect, string text, Color fillColor, Color textColor)
@@ -115,6 +116,21 @@ namespace RedlinesApp
             stringFormat.Alignment = StringAlignment.Center;
             stringFormat.LineAlignment = StringAlignment.Center;
             graphics.DrawString(text, font, textBrush, rect, stringFormat);
+        }
+
+        private Rectangle GetDistanceTextRectangle(DistanceOutline distanceOutline)
+        {
+            Size offset = distanceOutline.IsVertical ? new Size(DimensionsConfig.TextRectangleOffset, 0) : new Size(0, DimensionsConfig.TextRectangleOffset);
+            Point rectPos = Point.Add(Helpers.WindowsPointToDrawingPoint(distanceOutline.MidPoint), offset);
+            return new Rectangle(rectPos, DimensionsConfig.DistanceRectangleSize);
+        }
+
+        private Rectangle GetDimensionsTextRectangle(System.Windows.Rect outlineRect)
+        {
+            Size offset = new Size(-DimensionsConfig.DimensionsRectangleSize.Width / 2, DimensionsConfig.TextRectangleOffset);
+            System.Windows.Point bottomCenter = System.Windows.Point.Add(outlineRect.BottomLeft, System.Windows.Point.Subtract(outlineRect.BottomRight, outlineRect.BottomLeft) / 2);
+            Point rectPos = Point.Add(Helpers.WindowsPointToDrawingPoint(bottomCenter), offset);
+            return new Rectangle(rectPos, DimensionsConfig.DimensionsRectangleSize);
         }
     }
 }
