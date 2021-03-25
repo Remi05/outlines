@@ -4,7 +4,14 @@ namespace Redlines
 {
     public class ElementProperties
     {
-        public Rect BoundingRect { get; set; }
+        public string Name { get; private set; }
+        public Rect BoundingRect { get; private set; }
+
+        public ElementProperties(string name, Rect boundingRect)
+        {
+            Name = name;
+            BoundingRect = boundingRect;
+        }
 
         public override bool Equals(object obj)
         {
