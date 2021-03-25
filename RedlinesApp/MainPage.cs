@@ -101,6 +101,7 @@ namespace RedlinesApp
 
             DrawElementOutline(e.Graphics, RedlinesService.SelectedElementProperties, ColorConfig.SelectedElementOutlineColor);
             UpdateSelectedElementProperties();
+            UpdateSelectedTextProperties();
 
             // We don't want to draw the target element outline if it is also the selected element.
             if (RedlinesService.TargetElementProperties != RedlinesService.SelectedElementProperties)
@@ -123,6 +124,22 @@ namespace RedlinesApp
             heightValueLabel.Text = selectedElementRect.Height.ToString() + "px";
             topValueLabel.Text = selectedElementRect.Top.ToString() + "px";
             leftValueLabel.Text = selectedElementRect.Left.ToString() + "px";
+        }
+
+        private void UpdateSelectedTextProperties()
+        {
+            if (RedlinesService.SelectedTextProperties != null)
+            {
+                fontNameValueLabel.Text = RedlinesService.SelectedTextProperties.FontName;
+                fontSizeValueLabel.Text = RedlinesService.SelectedTextProperties.FontSize;
+                fontWeightValueLabel.Text = RedlinesService.SelectedTextProperties.FontWeight;           
+            }
+            else
+            {
+                fontNameValueLabel.Text = "";
+                fontSizeValueLabel.Text = "";
+                fontWeightValueLabel.Text = "";
+            }
         }
 
         private void DrawDistanceOutline(Graphics graphics, DistanceOutline distanceOutline, Color color)

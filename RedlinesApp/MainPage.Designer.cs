@@ -1,4 +1,4 @@
-﻿namespace RedlinesApp
+namespace RedlinesApp
 {
     partial class MainPage
     {
@@ -35,23 +35,32 @@
             this.toggleOverlayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.propertiesPanel = new System.Windows.Forms.Panel();
+            this.textPropertiesLabel = new System.Windows.Forms.Label();
+            this.separatorLabel2 = new System.Windows.Forms.Label();
             this.currentColorHexValueLabel = new System.Windows.Forms.Label();
+            this.widthLabel = new System.Windows.Forms.Label();
             this.currentColorRgbValueLabel = new System.Windows.Forms.Label();
+            this.propertiesLabel = new System.Windows.Forms.Label();
+            this.heightLabel = new System.Windows.Forms.Label();
             this.currentColorPanel = new System.Windows.Forms.Panel();
             this.colorsLabel = new System.Windows.Forms.Label();
-            this.sepratorLabel1 = new System.Windows.Forms.Label();
+            this.topLabel = new System.Windows.Forms.Label();
+            this.topValueLabel = new System.Windows.Forms.Label();
             this.separatorLabel1 = new System.Windows.Forms.Label();
+            this.leftValueLabel = new System.Windows.Forms.Label();
+            this.leftLabel = new System.Windows.Forms.Label();
+            this.heightValueLabel = new System.Windows.Forms.Label();
             this.nameValueLabel = new System.Windows.Forms.Label();
             this.nameLabel = new System.Windows.Forms.Label();
-            this.leftValueLabel = new System.Windows.Forms.Label();
-            this.topValueLabel = new System.Windows.Forms.Label();
-            this.heightValueLabel = new System.Windows.Forms.Label();
             this.widthValueLabel = new System.Windows.Forms.Label();
-            this.leftLabel = new System.Windows.Forms.Label();
-            this.topLabel = new System.Windows.Forms.Label();
-            this.heightLabel = new System.Windows.Forms.Label();
-            this.widthLabel = new System.Windows.Forms.Label();
-            this.propertiesLabel = new System.Windows.Forms.Label();
+            this.fontNameLabel = new System.Windows.Forms.Label();
+            this.fontSizeLabel = new System.Windows.Forms.Label();
+            this.fontWeightLabel = new System.Windows.Forms.Label();
+            this.fontNameValueLabel = new System.Windows.Forms.Label();
+            this.fontSizeValueLabel = new System.Windows.Forms.Label();
+            this.fontWeightValueLabel = new System.Windows.Forms.Label();
+            this.foregroundColorPanel = new System.Windows.Forms.Panel();
+            this.foregroundColorRgbValueLabel = new System.Windows.Forms.Label();
             this.trayIconContextMenuStrip.SuspendLayout();
             this.propertiesPanel.SuspendLayout();
             this.SuspendLayout();
@@ -89,51 +98,108 @@
             // propertiesPanel
             // 
             this.propertiesPanel.BackColor = System.Drawing.Color.White;
+            this.propertiesPanel.Controls.Add(this.foregroundColorRgbValueLabel);
+            this.propertiesPanel.Controls.Add(this.foregroundColorPanel);
+            this.propertiesPanel.Controls.Add(this.fontWeightValueLabel);
+            this.propertiesPanel.Controls.Add(this.fontSizeValueLabel);
+            this.propertiesPanel.Controls.Add(this.fontNameValueLabel);
+            this.propertiesPanel.Controls.Add(this.fontWeightLabel);
+            this.propertiesPanel.Controls.Add(this.fontSizeLabel);
+            this.propertiesPanel.Controls.Add(this.fontNameLabel);
+            this.propertiesPanel.Controls.Add(this.textPropertiesLabel);
+            this.propertiesPanel.Controls.Add(this.separatorLabel2);
             this.propertiesPanel.Controls.Add(this.currentColorHexValueLabel);
+            this.propertiesPanel.Controls.Add(this.widthLabel);
             this.propertiesPanel.Controls.Add(this.currentColorRgbValueLabel);
+            this.propertiesPanel.Controls.Add(this.propertiesLabel);
+            this.propertiesPanel.Controls.Add(this.heightLabel);
             this.propertiesPanel.Controls.Add(this.currentColorPanel);
             this.propertiesPanel.Controls.Add(this.colorsLabel);
-            this.propertiesPanel.Controls.Add(this.sepratorLabel1);
+            this.propertiesPanel.Controls.Add(this.topLabel);
+            this.propertiesPanel.Controls.Add(this.topValueLabel);
             this.propertiesPanel.Controls.Add(this.separatorLabel1);
+            this.propertiesPanel.Controls.Add(this.leftValueLabel);
+            this.propertiesPanel.Controls.Add(this.leftLabel);
+            this.propertiesPanel.Controls.Add(this.heightValueLabel);
             this.propertiesPanel.Controls.Add(this.nameValueLabel);
             this.propertiesPanel.Controls.Add(this.nameLabel);
-            this.propertiesPanel.Controls.Add(this.leftValueLabel);
-            this.propertiesPanel.Controls.Add(this.topValueLabel);
-            this.propertiesPanel.Controls.Add(this.heightValueLabel);
             this.propertiesPanel.Controls.Add(this.widthValueLabel);
-            this.propertiesPanel.Controls.Add(this.leftLabel);
-            this.propertiesPanel.Controls.Add(this.topLabel);
-            this.propertiesPanel.Controls.Add(this.heightLabel);
-            this.propertiesPanel.Controls.Add(this.widthLabel);
-            this.propertiesPanel.Controls.Add(this.propertiesLabel);
             this.propertiesPanel.Dock = System.Windows.Forms.DockStyle.Right;
             this.propertiesPanel.Location = new System.Drawing.Point(570, 0);
             this.propertiesPanel.Name = "propertiesPanel";
-            this.propertiesPanel.Size = new System.Drawing.Size(230, 450);
+            this.propertiesPanel.Size = new System.Drawing.Size(230, 630);
             this.propertiesPanel.TabIndex = 1;
+            // 
+            // textPropertiesLabel
+            // 
+            this.textPropertiesLabel.AutoSize = true;
+            this.textPropertiesLabel.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textPropertiesLabel.Location = new System.Drawing.Point(22, 411);
+            this.textPropertiesLabel.Name = "textPropertiesLabel";
+            this.textPropertiesLabel.Size = new System.Drawing.Size(124, 21);
+            this.textPropertiesLabel.TabIndex = 18;
+            this.textPropertiesLabel.Text = "Text Properties";
+            // 
+            // separatorLabel2
+            // 
+            this.separatorLabel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.separatorLabel2.Location = new System.Drawing.Point(0, 131);
+            this.separatorLabel2.Name = "separatorLabel2";
+            this.separatorLabel2.Size = new System.Drawing.Size(230, 1);
+            this.separatorLabel2.TabIndex = 17;
             // 
             // currentColorHexValueLabel
             // 
             this.currentColorHexValueLabel.AutoSize = true;
             this.currentColorHexValueLabel.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.currentColorHexValueLabel.Location = new System.Drawing.Point(64, 315);
+            this.currentColorHexValueLabel.Location = new System.Drawing.Point(64, 81);
             this.currentColorHexValueLabel.Name = "currentColorHexValueLabel";
             this.currentColorHexValueLabel.Size = new System.Drawing.Size(0, 21);
             this.currentColorHexValueLabel.TabIndex = 16;
+            // 
+            // widthLabel
+            // 
+            this.widthLabel.AutoSize = true;
+            this.widthLabel.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.widthLabel.Location = new System.Drawing.Point(26, 235);
+            this.widthLabel.Name = "widthLabel";
+            this.widthLabel.Size = new System.Drawing.Size(52, 21);
+            this.widthLabel.TabIndex = 1;
+            this.widthLabel.Text = "Width";
             // 
             // currentColorRgbValueLabel
             // 
             this.currentColorRgbValueLabel.AutoSize = true;
             this.currentColorRgbValueLabel.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.currentColorRgbValueLabel.Location = new System.Drawing.Point(64, 283);
+            this.currentColorRgbValueLabel.Location = new System.Drawing.Point(64, 49);
             this.currentColorRgbValueLabel.Name = "currentColorRgbValueLabel";
             this.currentColorRgbValueLabel.Size = new System.Drawing.Size(0, 21);
             this.currentColorRgbValueLabel.TabIndex = 15;
             // 
+            // propertiesLabel
+            // 
+            this.propertiesLabel.AutoSize = true;
+            this.propertiesLabel.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.propertiesLabel.Location = new System.Drawing.Point(22, 155);
+            this.propertiesLabel.Name = "propertiesLabel";
+            this.propertiesLabel.Size = new System.Drawing.Size(88, 21);
+            this.propertiesLabel.TabIndex = 0;
+            this.propertiesLabel.Text = "Properties";
+            // 
+            // heightLabel
+            // 
+            this.heightLabel.AutoSize = true;
+            this.heightLabel.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.heightLabel.Location = new System.Drawing.Point(26, 270);
+            this.heightLabel.Name = "heightLabel";
+            this.heightLabel.Size = new System.Drawing.Size(56, 21);
+            this.heightLabel.TabIndex = 2;
+            this.heightLabel.Text = "Height";
+            // 
             // currentColorPanel
             // 
             this.currentColorPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.currentColorPanel.Location = new System.Drawing.Point(26, 296);
+            this.currentColorPanel.Location = new System.Drawing.Point(27, 62);
             this.currentColorPanel.Name = "currentColorPanel";
             this.currentColorPanel.Size = new System.Drawing.Size(20, 20);
             this.currentColorPanel.TabIndex = 14;
@@ -142,32 +208,70 @@
             // 
             this.colorsLabel.AutoSize = true;
             this.colorsLabel.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.colorsLabel.Location = new System.Drawing.Point(22, 243);
+            this.colorsLabel.Location = new System.Drawing.Point(22, 20);
             this.colorsLabel.Name = "colorsLabel";
             this.colorsLabel.Size = new System.Drawing.Size(58, 21);
             this.colorsLabel.TabIndex = 13;
             this.colorsLabel.Text = "Colors";
             // 
-            // sepratorLabel1
+            // topLabel
             // 
-            this.sepratorLabel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.sepratorLabel1.Location = new System.Drawing.Point(0, 228);
-            this.sepratorLabel1.Name = "sepratorLabel1";
-            this.sepratorLabel1.Size = new System.Drawing.Size(200, 1);
-            this.sepratorLabel1.TabIndex = 12;
+            this.topLabel.AutoSize = true;
+            this.topLabel.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.topLabel.Location = new System.Drawing.Point(26, 305);
+            this.topLabel.Name = "topLabel";
+            this.topLabel.Size = new System.Drawing.Size(34, 21);
+            this.topLabel.TabIndex = 3;
+            this.topLabel.Text = "Top";
+            // 
+            // topValueLabel
+            // 
+            this.topValueLabel.AutoSize = true;
+            this.topValueLabel.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.topValueLabel.Location = new System.Drawing.Point(100, 305);
+            this.topValueLabel.Name = "topValueLabel";
+            this.topValueLabel.Size = new System.Drawing.Size(0, 21);
+            this.topValueLabel.TabIndex = 7;
             // 
             // separatorLabel1
             // 
             this.separatorLabel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.separatorLabel1.Location = new System.Drawing.Point(0, 228);
+            this.separatorLabel1.Location = new System.Drawing.Point(0, 381);
             this.separatorLabel1.Name = "separatorLabel1";
             this.separatorLabel1.Size = new System.Drawing.Size(230, 1);
             this.separatorLabel1.TabIndex = 11;
             // 
+            // leftValueLabel
+            // 
+            this.leftValueLabel.AutoSize = true;
+            this.leftValueLabel.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.leftValueLabel.Location = new System.Drawing.Point(100, 340);
+            this.leftValueLabel.Name = "leftValueLabel";
+            this.leftValueLabel.Size = new System.Drawing.Size(0, 21);
+            this.leftValueLabel.TabIndex = 8;
+            // 
+            // leftLabel
+            // 
+            this.leftLabel.AutoSize = true;
+            this.leftLabel.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.leftLabel.Location = new System.Drawing.Point(26, 340);
+            this.leftLabel.Name = "leftLabel";
+            this.leftLabel.Size = new System.Drawing.Size(36, 21);
+            this.leftLabel.TabIndex = 4;
+            this.leftLabel.Text = "Left";
+            // 
+            // heightValueLabel
+            // 
+            this.heightValueLabel.AutoSize = true;
+            this.heightValueLabel.Location = new System.Drawing.Point(100, 270);
+            this.heightValueLabel.Name = "heightValueLabel";
+            this.heightValueLabel.Size = new System.Drawing.Size(0, 20);
+            this.heightValueLabel.TabIndex = 6;
+            // 
             // nameValueLabel
             // 
             this.nameValueLabel.AutoSize = true;
-            this.nameValueLabel.Location = new System.Drawing.Point(96, 57);
+            this.nameValueLabel.Location = new System.Drawing.Point(100, 200);
             this.nameValueLabel.Name = "nameValueLabel";
             this.nameValueLabel.Size = new System.Drawing.Size(0, 20);
             this.nameValueLabel.TabIndex = 10;
@@ -175,102 +279,97 @@
             // nameLabel
             // 
             this.nameLabel.AutoSize = true;
-            this.nameLabel.Location = new System.Drawing.Point(22, 57);
+            this.nameLabel.Location = new System.Drawing.Point(26, 200);
             this.nameLabel.Name = "nameLabel";
             this.nameLabel.Size = new System.Drawing.Size(51, 20);
             this.nameLabel.TabIndex = 9;
             this.nameLabel.Text = "Name";
             // 
-            // leftValueLabel
-            // 
-            this.leftValueLabel.AutoSize = true;
-            this.leftValueLabel.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.leftValueLabel.Location = new System.Drawing.Point(96, 189);
-            this.leftValueLabel.Name = "leftValueLabel";
-            this.leftValueLabel.Size = new System.Drawing.Size(0, 21);
-            this.leftValueLabel.TabIndex = 8;
-            // 
-            // topValueLabel
-            // 
-            this.topValueLabel.AutoSize = true;
-            this.topValueLabel.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.topValueLabel.Location = new System.Drawing.Point(96, 157);
-            this.topValueLabel.Name = "topValueLabel";
-            this.topValueLabel.Size = new System.Drawing.Size(0, 21);
-            this.topValueLabel.TabIndex = 7;
-            // 
-            // heightValueLabel
-            // 
-            this.heightValueLabel.AutoSize = true;
-            this.heightValueLabel.Location = new System.Drawing.Point(96, 126);
-            this.heightValueLabel.Name = "heightValueLabel";
-            this.heightValueLabel.Size = new System.Drawing.Size(0, 20);
-            this.heightValueLabel.TabIndex = 6;
-            // 
             // widthValueLabel
             // 
             this.widthValueLabel.AutoSize = true;
-            this.widthValueLabel.Location = new System.Drawing.Point(96, 93);
+            this.widthValueLabel.Location = new System.Drawing.Point(100, 235);
             this.widthValueLabel.Name = "widthValueLabel";
             this.widthValueLabel.Size = new System.Drawing.Size(0, 20);
             this.widthValueLabel.TabIndex = 5;
             // 
-            // leftLabel
+            // fontNameLabel
             // 
-            this.leftLabel.AutoSize = true;
-            this.leftLabel.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.leftLabel.Location = new System.Drawing.Point(22, 188);
-            this.leftLabel.Name = "leftLabel";
-            this.leftLabel.Size = new System.Drawing.Size(36, 21);
-            this.leftLabel.TabIndex = 4;
-            this.leftLabel.Text = "Left";
+            this.fontNameLabel.AutoSize = true;
+            this.fontNameLabel.Location = new System.Drawing.Point(26, 452);
+            this.fontNameLabel.Name = "fontNameLabel";
+            this.fontNameLabel.Size = new System.Drawing.Size(88, 20);
+            this.fontNameLabel.TabIndex = 10;
+            this.fontNameLabel.Text = "Font Name";
             // 
-            // topLabel
+            // fontSizeLabel
             // 
-            this.topLabel.AutoSize = true;
-            this.topLabel.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.topLabel.Location = new System.Drawing.Point(22, 157);
-            this.topLabel.Name = "topLabel";
-            this.topLabel.Size = new System.Drawing.Size(34, 21);
-            this.topLabel.TabIndex = 3;
-            this.topLabel.Text = "Top";
+            this.fontSizeLabel.AutoSize = true;
+            this.fontSizeLabel.Location = new System.Drawing.Point(26, 493);
+            this.fontSizeLabel.Name = "fontSizeLabel";
+            this.fontSizeLabel.Size = new System.Drawing.Size(77, 20);
+            this.fontSizeLabel.TabIndex = 11;
+            this.fontSizeLabel.Text = "Font Size";
             // 
-            // heightLabel
+            // fontWeightLabel
             // 
-            this.heightLabel.AutoSize = true;
-            this.heightLabel.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.heightLabel.Location = new System.Drawing.Point(22, 125);
-            this.heightLabel.Name = "heightLabel";
-            this.heightLabel.Size = new System.Drawing.Size(56, 21);
-            this.heightLabel.TabIndex = 2;
-            this.heightLabel.Text = "Height";
+            this.fontWeightLabel.AutoSize = true;
+            this.fontWeightLabel.Location = new System.Drawing.Point(26, 532);
+            this.fontWeightLabel.Name = "fontWeightLabel";
+            this.fontWeightLabel.Size = new System.Drawing.Size(96, 20);
+            this.fontWeightLabel.TabIndex = 12;
+            this.fontWeightLabel.Text = "Font Weight";
             // 
-            // widthLabel
+            // fontNameValueLabel
             // 
-            this.widthLabel.AutoSize = true;
-            this.widthLabel.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.widthLabel.Location = new System.Drawing.Point(22, 93);
-            this.widthLabel.Name = "widthLabel";
-            this.widthLabel.Size = new System.Drawing.Size(52, 21);
-            this.widthLabel.TabIndex = 1;
-            this.widthLabel.Text = "Width";
+            this.fontNameValueLabel.AutoSize = true;
+            this.fontNameValueLabel.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fontNameValueLabel.Location = new System.Drawing.Point(140, 452);
+            this.fontNameValueLabel.Name = "fontNameValueLabel";
+            this.fontNameValueLabel.Size = new System.Drawing.Size(0, 21);
+            this.fontNameValueLabel.TabIndex = 19;
             // 
-            // propertiesLabel
+            // fontSizeValueLabel
             // 
-            this.propertiesLabel.AutoSize = true;
-            this.propertiesLabel.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.propertiesLabel.Location = new System.Drawing.Point(18, 14);
-            this.propertiesLabel.Name = "propertiesLabel";
-            this.propertiesLabel.Size = new System.Drawing.Size(88, 21);
-            this.propertiesLabel.TabIndex = 0;
-            this.propertiesLabel.Text = "Properties";
+            this.fontSizeValueLabel.AutoSize = true;
+            this.fontSizeValueLabel.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fontSizeValueLabel.Location = new System.Drawing.Point(140, 493);
+            this.fontSizeValueLabel.Name = "fontSizeValueLabel";
+            this.fontSizeValueLabel.Size = new System.Drawing.Size(0, 21);
+            this.fontSizeValueLabel.TabIndex = 20;
+            // 
+            // fontWeightValueLabel
+            // 
+            this.fontWeightValueLabel.AutoSize = true;
+            this.fontWeightValueLabel.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fontWeightValueLabel.Location = new System.Drawing.Point(140, 532);
+            this.fontWeightValueLabel.Name = "fontWeightValueLabel";
+            this.fontWeightValueLabel.Size = new System.Drawing.Size(0, 21);
+            this.fontWeightValueLabel.TabIndex = 20;
+            // 
+            // foregroundColorPanel
+            // 
+            this.foregroundColorPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.foregroundColorPanel.Location = new System.Drawing.Point(30, 575);
+            this.foregroundColorPanel.Name = "foregroundColorPanel";
+            this.foregroundColorPanel.Size = new System.Drawing.Size(20, 20);
+            this.foregroundColorPanel.TabIndex = 15;
+            // 
+            // foregroundColorRgbValueLabel
+            // 
+            this.foregroundColorRgbValueLabel.AutoSize = true;
+            this.foregroundColorRgbValueLabel.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.foregroundColorRgbValueLabel.Location = new System.Drawing.Point(73, 574);
+            this.foregroundColorRgbValueLabel.Name = "foregroundColorRgbValueLabel";
+            this.foregroundColorRgbValueLabel.Size = new System.Drawing.Size(0, 21);
+            this.foregroundColorRgbValueLabel.TabIndex = 21;
             // 
             // MainPage
             // 
             this.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 630);
             this.Controls.Add(this.propertiesPanel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainPage";
@@ -302,11 +401,20 @@
         private System.Windows.Forms.Label nameLabel;
         private System.Windows.Forms.Label nameValueLabel;
         private System.Windows.Forms.Label separatorLabel1;
-        private System.Windows.Forms.Label sepratorLabel1;
         private System.Windows.Forms.Label currentColorRgbValueLabel;
         private System.Windows.Forms.Panel currentColorPanel;
         private System.Windows.Forms.Label colorsLabel;
         private System.Windows.Forms.Label currentColorHexValueLabel;
+        private System.Windows.Forms.Label separatorLabel2;
+        private System.Windows.Forms.Label textPropertiesLabel;
+        private System.Windows.Forms.Label fontNameLabel;
+        private System.Windows.Forms.Label fontSizeLabel;
+        private System.Windows.Forms.Label fontWeightLabel;
+        private System.Windows.Forms.Label fontNameValueLabel;
+        private System.Windows.Forms.Label fontWeightValueLabel;
+        private System.Windows.Forms.Label fontSizeValueLabel;
+        private System.Windows.Forms.Label foregroundColorRgbValueLabel;
+        private System.Windows.Forms.Panel foregroundColorPanel;
     }
 }
 

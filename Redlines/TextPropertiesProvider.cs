@@ -11,8 +11,13 @@ namespace Redlines
                 return null;
             }
 
-            var textPattern = element.GetCurrentPattern(TextPattern.Pattern) as TextPattern;
+            object textPatternObject;
+            if (!element.TryGetCurrentPattern(TextPattern.Pattern, out textPatternObject))
+            {
+                return null;
+            }
 
+            TextPattern textPattern = (TextPattern)textPatternObject;
             var textProperties = new TextProperties()
             {
                 FontName = textPattern.DocumentRange.GetAttributeValue(TextPattern.FontNameAttribute).ToString(),

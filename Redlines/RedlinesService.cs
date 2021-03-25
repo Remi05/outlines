@@ -21,6 +21,7 @@ namespace Redlines
             set
             {
                 selectedElement = value;
+                SelectedTextProperties = TextPropertiesProvider.GetTextProperties(SelectedElement);
                 SelectedElementProperties = ElementPropertiesProvider.GetElementProperties(SelectedElement);
             }
         }
@@ -50,6 +51,8 @@ namespace Redlines
                 }
             }
         }
+
+        public TextProperties SelectedTextProperties { get; private set; }
 
         private ElementProperties targetElementProperties = null;
         public ElementProperties TargetElementProperties
