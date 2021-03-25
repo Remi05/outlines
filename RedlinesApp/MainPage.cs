@@ -11,6 +11,7 @@ namespace RedlinesApp
         private ColorConfig ColorConfig { get; set; } = new ColorConfig();
         private DimensionsConfig DimensionsConfig { get; set; } = new DimensionsConfig();
         private GlobalInputListener GlobalInputListener { get; set; }
+        private ColorPicker ColorPicker { get; set; } = new ColorPicker();
         private System.Timers.Timer TargetTimer { get; set; }
         private bool ShouldPaintOverlay { get; set; } = true;
 

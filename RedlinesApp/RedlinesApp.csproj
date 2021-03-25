@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ColorConfig.cs" />
+    <Compile Include="ColorPicker.cs" />
     <Compile Include="DimensionsConfig.cs" />
     <Compile Include="GlobalInputListener.cs" />
     <Compile Include="Helpers.cs" />
