@@ -131,7 +131,7 @@ namespace RedlinesApp
             if (RedlinesService.SelectedTextProperties != null)
             {
                 fontNameValueLabel.Text = RedlinesService.SelectedTextProperties.FontName;
-                fontSizeValueLabel.Text = RedlinesService.SelectedTextProperties.FontSize;
+                fontSizeValueLabel.Text = RedlinesService.SelectedTextProperties.FontSize + "px";
                 fontWeightValueLabel.Text = RedlinesService.SelectedTextProperties.FontWeight;           
             }
             else
