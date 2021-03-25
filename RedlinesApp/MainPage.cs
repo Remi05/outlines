@@ -89,12 +89,13 @@ namespace RedlinesApp
                 DrawDistanceOutline(e.Graphics, distanceOutline, ColorConfig.DistanceOutlineColor);
             }
 
+            DrawElementOutline(e.Graphics, RedlinesService.SelectedElementProperties, ColorConfig.SelectedElementOutlineColor);
+
             // We don't want to draw the target element outline if it is also the selected element.
             if (RedlinesService.TargetElementProperties != RedlinesService.SelectedElementProperties)
             {
                 DrawElementOutline(e.Graphics, RedlinesService.TargetElementProperties, ColorConfig.TargetElementOutlineColor);
             }
-            DrawElementOutline(e.Graphics, RedlinesService.SelectedElementProperties, ColorConfig.SelectedElementOutlineColor);
         }
 
         private void DrawDistanceOutline(Graphics graphics, DistanceOutline distanceOutline, Color color)
