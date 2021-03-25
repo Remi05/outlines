@@ -35,6 +35,14 @@ namespace RedlinesApp
             this.toggleOverlayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.propertiesPanel = new System.Windows.Forms.Panel();
+            this.foregroundColorRgbValueLabel = new System.Windows.Forms.Label();
+            this.foregroundColorPanel = new System.Windows.Forms.Panel();
+            this.fontWeightValueLabel = new System.Windows.Forms.Label();
+            this.fontSizeValueLabel = new System.Windows.Forms.Label();
+            this.fontNameValueLabel = new System.Windows.Forms.Label();
+            this.fontWeightLabel = new System.Windows.Forms.Label();
+            this.fontSizeLabel = new System.Windows.Forms.Label();
+            this.fontNameLabel = new System.Windows.Forms.Label();
             this.textPropertiesLabel = new System.Windows.Forms.Label();
             this.separatorLabel2 = new System.Windows.Forms.Label();
             this.currentColorHexValueLabel = new System.Windows.Forms.Label();
@@ -53,14 +61,6 @@ namespace RedlinesApp
             this.nameValueLabel = new System.Windows.Forms.Label();
             this.nameLabel = new System.Windows.Forms.Label();
             this.widthValueLabel = new System.Windows.Forms.Label();
-            this.fontNameLabel = new System.Windows.Forms.Label();
-            this.fontSizeLabel = new System.Windows.Forms.Label();
-            this.fontWeightLabel = new System.Windows.Forms.Label();
-            this.fontNameValueLabel = new System.Windows.Forms.Label();
-            this.fontSizeValueLabel = new System.Windows.Forms.Label();
-            this.fontWeightValueLabel = new System.Windows.Forms.Label();
-            this.foregroundColorPanel = new System.Windows.Forms.Panel();
-            this.foregroundColorRgbValueLabel = new System.Windows.Forms.Label();
             this.trayIconContextMenuStrip.SuspendLayout();
             this.propertiesPanel.SuspendLayout();
             this.SuspendLayout();
@@ -130,15 +130,86 @@ namespace RedlinesApp
             this.propertiesPanel.Size = new System.Drawing.Size(230, 630);
             this.propertiesPanel.TabIndex = 1;
             // 
+            // foregroundColorRgbValueLabel
+            // 
+            this.foregroundColorRgbValueLabel.AutoSize = true;
+            this.foregroundColorRgbValueLabel.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.foregroundColorRgbValueLabel.Location = new System.Drawing.Point(73, 574);
+            this.foregroundColorRgbValueLabel.Name = "foregroundColorRgbValueLabel";
+            this.foregroundColorRgbValueLabel.Size = new System.Drawing.Size(0, 21);
+            this.foregroundColorRgbValueLabel.TabIndex = 21;
+            // 
+            // foregroundColorPanel
+            // 
+            this.foregroundColorPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.foregroundColorPanel.Location = new System.Drawing.Point(30, 575);
+            this.foregroundColorPanel.Name = "foregroundColorPanel";
+            this.foregroundColorPanel.Size = new System.Drawing.Size(20, 20);
+            this.foregroundColorPanel.TabIndex = 15;
+            // 
+            // fontWeightValueLabel
+            // 
+            this.fontWeightValueLabel.AutoSize = true;
+            this.fontWeightValueLabel.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fontWeightValueLabel.Location = new System.Drawing.Point(140, 532);
+            this.fontWeightValueLabel.Name = "fontWeightValueLabel";
+            this.fontWeightValueLabel.Size = new System.Drawing.Size(0, 21);
+            this.fontWeightValueLabel.TabIndex = 20;
+            // 
+            // fontSizeValueLabel
+            // 
+            this.fontSizeValueLabel.AutoSize = true;
+            this.fontSizeValueLabel.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fontSizeValueLabel.Location = new System.Drawing.Point(140, 493);
+            this.fontSizeValueLabel.Name = "fontSizeValueLabel";
+            this.fontSizeValueLabel.Size = new System.Drawing.Size(0, 21);
+            this.fontSizeValueLabel.TabIndex = 20;
+            // 
+            // fontNameValueLabel
+            // 
+            this.fontNameValueLabel.AutoSize = true;
+            this.fontNameValueLabel.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fontNameValueLabel.Location = new System.Drawing.Point(140, 452);
+            this.fontNameValueLabel.Name = "fontNameValueLabel";
+            this.fontNameValueLabel.Size = new System.Drawing.Size(0, 21);
+            this.fontNameValueLabel.TabIndex = 19;
+            // 
+            // fontWeightLabel
+            // 
+            this.fontWeightLabel.AutoSize = true;
+            this.fontWeightLabel.Location = new System.Drawing.Point(26, 532);
+            this.fontWeightLabel.Name = "fontWeightLabel";
+            this.fontWeightLabel.Size = new System.Drawing.Size(59, 20);
+            this.fontWeightLabel.TabIndex = 12;
+            this.fontWeightLabel.Text = "Weight";
+            // 
+            // fontSizeLabel
+            // 
+            this.fontSizeLabel.AutoSize = true;
+            this.fontSizeLabel.Location = new System.Drawing.Point(26, 493);
+            this.fontSizeLabel.Name = "fontSizeLabel";
+            this.fontSizeLabel.Size = new System.Drawing.Size(40, 20);
+            this.fontSizeLabel.TabIndex = 11;
+            this.fontSizeLabel.Text = "Size";
+            // 
+            // fontNameLabel
+            // 
+            this.fontNameLabel.AutoSize = true;
+            this.fontNameLabel.Location = new System.Drawing.Point(26, 452);
+            this.fontNameLabel.Name = "fontNameLabel";
+            this.fontNameLabel.Size = new System.Drawing.Size(42, 20);
+            this.fontNameLabel.TabIndex = 10;
+            this.fontNameLabel.Text = "Font";
+            // 
             // textPropertiesLabel
             // 
             this.textPropertiesLabel.AutoSize = true;
             this.textPropertiesLabel.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textPropertiesLabel.Location = new System.Drawing.Point(22, 411);
             this.textPropertiesLabel.Name = "textPropertiesLabel";
-            this.textPropertiesLabel.Size = new System.Drawing.Size(124, 21);
+            this.textPropertiesLabel.Size = new System.Drawing.Size(101, 21);
             this.textPropertiesLabel.TabIndex = 18;
-            this.textPropertiesLabel.Text = "Text Properties";
+            this.textPropertiesLabel.Text = "Typography";
             // 
             // separatorLabel2
             // 
@@ -292,77 +363,6 @@ namespace RedlinesApp
             this.widthValueLabel.Name = "widthValueLabel";
             this.widthValueLabel.Size = new System.Drawing.Size(0, 20);
             this.widthValueLabel.TabIndex = 5;
-            // 
-            // fontNameLabel
-            // 
-            this.fontNameLabel.AutoSize = true;
-            this.fontNameLabel.Location = new System.Drawing.Point(26, 452);
-            this.fontNameLabel.Name = "fontNameLabel";
-            this.fontNameLabel.Size = new System.Drawing.Size(88, 20);
-            this.fontNameLabel.TabIndex = 10;
-            this.fontNameLabel.Text = "Font Name";
-            // 
-            // fontSizeLabel
-            // 
-            this.fontSizeLabel.AutoSize = true;
-            this.fontSizeLabel.Location = new System.Drawing.Point(26, 493);
-            this.fontSizeLabel.Name = "fontSizeLabel";
-            this.fontSizeLabel.Size = new System.Drawing.Size(77, 20);
-            this.fontSizeLabel.TabIndex = 11;
-            this.fontSizeLabel.Text = "Font Size";
-            // 
-            // fontWeightLabel
-            // 
-            this.fontWeightLabel.AutoSize = true;
-            this.fontWeightLabel.Location = new System.Drawing.Point(26, 532);
-            this.fontWeightLabel.Name = "fontWeightLabel";
-            this.fontWeightLabel.Size = new System.Drawing.Size(96, 20);
-            this.fontWeightLabel.TabIndex = 12;
-            this.fontWeightLabel.Text = "Font Weight";
-            // 
-            // fontNameValueLabel
-            // 
-            this.fontNameValueLabel.AutoSize = true;
-            this.fontNameValueLabel.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fontNameValueLabel.Location = new System.Drawing.Point(140, 452);
-            this.fontNameValueLabel.Name = "fontNameValueLabel";
-            this.fontNameValueLabel.Size = new System.Drawing.Size(0, 21);
-            this.fontNameValueLabel.TabIndex = 19;
-            // 
-            // fontSizeValueLabel
-            // 
-            this.fontSizeValueLabel.AutoSize = true;
-            this.fontSizeValueLabel.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fontSizeValueLabel.Location = new System.Drawing.Point(140, 493);
-            this.fontSizeValueLabel.Name = "fontSizeValueLabel";
-            this.fontSizeValueLabel.Size = new System.Drawing.Size(0, 21);
-            this.fontSizeValueLabel.TabIndex = 20;
-            // 
-            // fontWeightValueLabel
-            // 
-            this.fontWeightValueLabel.AutoSize = true;
-            this.fontWeightValueLabel.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fontWeightValueLabel.Location = new System.Drawing.Point(140, 532);
-            this.fontWeightValueLabel.Name = "fontWeightValueLabel";
-            this.fontWeightValueLabel.Size = new System.Drawing.Size(0, 21);
-            this.fontWeightValueLabel.TabIndex = 20;
-            // 
-            // foregroundColorPanel
-            // 
-            this.foregroundColorPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.foregroundColorPanel.Location = new System.Drawing.Point(30, 575);
-            this.foregroundColorPanel.Name = "foregroundColorPanel";
-            this.foregroundColorPanel.Size = new System.Drawing.Size(20, 20);
-            this.foregroundColorPanel.TabIndex = 15;
-            // 
-            // foregroundColorRgbValueLabel
-            // 
-            this.foregroundColorRgbValueLabel.AutoSize = true;
-            this.foregroundColorRgbValueLabel.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.foregroundColorRgbValueLabel.Location = new System.Drawing.Point(73, 574);
-            this.foregroundColorRgbValueLabel.Name = "foregroundColorRgbValueLabel";
-            this.foregroundColorRgbValueLabel.Size = new System.Drawing.Size(0, 21);
-            this.foregroundColorRgbValueLabel.TabIndex = 21;
             // 
             // MainPage
             // 
