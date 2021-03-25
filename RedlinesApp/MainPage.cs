@@ -48,9 +48,12 @@ namespace RedlinesApp
 
         private void OnMouseDown()
         {
-            Hide();
-            RedlinesService.SelectElementAt(Helpers.DrawingPointToWindowsPoint(Cursor.Position));
-            Show();
+            if (System.Windows.Input.Keyboard.IsKeyDown(System.Windows.Input.Key.LeftCtrl))
+            {
+                Hide();
+                RedlinesService.SelectElementAt(Helpers.DrawingPointToWindowsPoint(Cursor.Position));
+                Show();
+            }
         }
 
         private void OnMouseMoved()
