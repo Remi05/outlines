@@ -37,6 +37,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -53,7 +54,7 @@
   <ItemGroup>
     <Compile Include="ColorConfig.cs" />
     <Compile Include="DimensionsConfig.cs" />
-    <Compile Include="GlobalMouseListener.cs" />
+    <Compile Include="GlobalInputListener.cs" />
     <Compile Include="Helpers.cs" />
     <Compile Include="MainPage.cs">
       <SubType>Form</SubType>

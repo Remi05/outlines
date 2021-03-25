@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using System.Threading.Tasks;
 
 namespace RedlinesApp
 {
     public delegate void MouseMovedEventHandler();
     public delegate void MouseDownEventHandler();
+    public delegate void KeyDownEventHandler();
+    public delegate void KeyUpEventHandler();
 
-    public class GlobalMouseListener
+    public class GlobalInputListener
     {
         private delegate int HookProc(int code, IntPtr wParam, IntPtr lParam);
 
@@ -33,23 +34,31 @@ namespace RedlinesApp
 
         private const int WM_MOUSEMOVE = 0x0200; // https://docs.microsoft.com/en-us/windows/win32/inputdev/wm-mousemove
         private const int WM_LBUTTONDOWN = 0x0201; //https://docs.microsoft.com/en-us/windows/win32/inputdev/wm-lbuttondown
+        private const int WM_KEYDOWN = 0x0100; // https://docs.microsoft.com/en-us/windows/win32/inputdev/wm-keydown
+        private const int WM_KEYUP = 0x0101; // https://docs.microsoft.com/en-us/windows/win32/inputdev/wm-keyup
 
         private const int MK_LBUTTON = 0x0001;
         private const int MK_CONTROL = 0x0008;
 
+        private HookProc KeyboardHookProc { get; set; }
         private HookProc MouseHookProc { get; set; }
+        private IntPtr KeyboardHookPtr { get; set; }
         private IntPtr MouseHookPtr { get; set; }
 
-        public MouseMovedEventHandler MouseMoved;
+        public KeyDownEventHandler KeyDown;
+        public KeyUpEventHandler KeyUp;
         public MouseDownEventHandler MouseDown;
+        public MouseMovedEventHandler MouseMoved;
 
         public void RegisterToMouseEvents()
         {
+            KeyboardHookProc = new HookProc(KeyboardProc);
             MouseHookProc = new HookProc(MouseProc);
 
             using (Process curProcess = Process.GetCurrentProcess())
             using (ProcessModule curModule = curProcess.MainModule)
             {
+                KeyboardHookPtr = SetWindowsHookEx(WH_KEYBOARD_LL, KeyboardHookProc, GetModuleHandle(curModule.ModuleName), 0);
                 MouseHookPtr = SetWindowsHookEx(WH_MOUSE_LL, MouseHookProc, GetModuleHandle(curModule.ModuleName), 0);
             }
         }
@@ -58,10 +67,35 @@ namespace RedlinesApp
         {
             if (MouseHookPtr != IntPtr.Zero)
             {
-                UnhookWindowsHookEx(MouseHookPtr);
+                UnhookWindowsHookEx(KeyboardHookPtr);
+                UnhookWindowsHookEx(MouseHookPtr); 
+                KeyboardHookPtr = IntPtr.Zero;
                 MouseHookPtr = IntPtr.Zero;
+                KeyboardHookProc = null;
                 MouseHookProc = null;
             }
+        }
+
+        private int KeyboardProc(int code, IntPtr wParam, IntPtr lParam)
+        {
+            if (code < 0)
+            {
+                return CallNextHookEx(IntPtr.Zero, code, wParam, lParam);
+            }
+
+            int message = wParam.ToInt32();
+
+            switch (message)
+            {
+                case WM_KEYDOWN:
+                    KeyDown?.Invoke();
+                    break;
+                case WM_KEYUP:
+                    KeyUp?.Invoke();
+                    break;
+            }
+
+            return CallNextHookEx(IntPtr.Zero, code, wParam, lParam);
         }
 
         private int MouseProc(int code, IntPtr wParam, IntPtr lParam)

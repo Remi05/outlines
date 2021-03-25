@@ -1,4 +1,4 @@
-﻿using System.Drawing;
+using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using Redlines;
@@ -10,7 +10,7 @@ namespace RedlinesApp
         private RedlinesService RedlinesService { get; set; } = new RedlinesService();
         private ColorConfig ColorConfig { get; set; } = new ColorConfig();
         private DimensionsConfig DimensionsConfig { get; set; } = new DimensionsConfig();
-        private GlobalMouseListener GlobalMouseListener { get; set; }
+        private GlobalInputListener GlobalInputListener { get; set; }
         private System.Timers.Timer TargetTimer { get; set; }
         private bool ShouldPaintOverlay { get; set; } = true;
 
@@ -33,10 +33,10 @@ namespace RedlinesApp
             RedlinesService.TargetElementChanged += Invalidate;
 
             // Register to global mouse events.
-            GlobalMouseListener = new GlobalMouseListener();
-            GlobalMouseListener.MouseDown += OnMouseDown;
-            GlobalMouseListener.MouseMoved += OnMouseMoved;
-            GlobalMouseListener.RegisterToMouseEvents();
+            GlobalInputListener = new GlobalInputListener();
+            GlobalInputListener.MouseDown += OnMouseDown;
+            GlobalInputListener.MouseMoved += OnMouseMoved;
+            GlobalInputListener.RegisterToMouseEvents();
 
             // Set the target element after hovering for 0.2s.
             TargetTimer = new System.Timers.Timer();
