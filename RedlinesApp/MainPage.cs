@@ -55,8 +55,17 @@ namespace RedlinesApp
 
         private void OnMouseMoved()
         {
+            UpdateColorPicker();
             TargetTimer.Stop();
-            TargetTimer.Start();            
+            TargetTimer.Start();
+        }
+
+        private void UpdateColorPicker()
+        {
+            Color curColor = ColorPicker.GetColorAt(Cursor.Position);
+            currentColorPanel.BackColor = curColor;
+            currentColorRgbValueLabel.Text = $"({curColor.R}, {curColor.G}, {curColor.B})";
+            currentColorHexValueLabel.Text = $"#{curColor.R.ToString("X2")}{curColor.G.ToString("X2")}{curColor.B.ToString("X2")}";
         }
 
         private delegate void TargetElementDelegate();
@@ -91,12 +100,29 @@ namespace RedlinesApp
             }
 
             DrawElementOutline(e.Graphics, RedlinesService.SelectedElementProperties, ColorConfig.SelectedElementOutlineColor);
+            UpdateSelectedElementProperties();
 
             // We don't want to draw the target element outline if it is also the selected element.
             if (RedlinesService.TargetElementProperties != RedlinesService.SelectedElementProperties)
             {
                 DrawElementOutline(e.Graphics, RedlinesService.TargetElementProperties, ColorConfig.TargetElementOutlineColor);
             }
+        }
+
+        private void UpdateSelectedElementProperties()
+        {
+            if (RedlinesService.SelectedElementProperties == null)
+            {
+                return;
+            }
+
+            nameValueLabel.Text = RedlinesService.SelectedElementProperties.Name;
+
+            var selectedElementRect = RedlinesService.SelectedElementProperties.BoundingRect;
+            widthValueLabel.Text = selectedElementRect.Width.ToString() + "px";
+            heightValueLabel.Text = selectedElementRect.Height.ToString() + "px";
+            topValueLabel.Text = selectedElementRect.Top.ToString() + "px";
+            leftValueLabel.Text = selectedElementRect.Left.ToString() + "px";
         }
 
         private void DrawDistanceOutline(Graphics graphics, DistanceOutline distanceOutline, Color color)
