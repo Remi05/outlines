@@ -41,7 +41,7 @@ namespace RedlinesApp
 
             // Set the target element after hovering for 0.2s.
             TargetTimer = new System.Timers.Timer();
-            TargetTimer.Interval = 200;
+            TargetTimer.Interval = 500;
             TargetTimer.AutoReset = false;
             TargetTimer.Elapsed += (_, __) => OnTargetTimeElapsed();
         }
@@ -153,7 +153,7 @@ namespace RedlinesApp
             }
 
             Pen linePen = new Pen(color, DimensionsConfig.DistanceOutlineWidth);
-            if (distanceOutline.IsGap)
+            if (distanceOutline.IsDashedLine)
             {
                 linePen.DashStyle = DashStyle.Custom;
                 linePen.DashPattern = new float[] { DimensionsConfig.DashLength, DimensionsConfig.DashLength };
@@ -163,7 +163,7 @@ namespace RedlinesApp
             Point screenEndPoint = Helpers.WindowsPointToDrawingPoint(distanceOutline.EndPoint);
             graphics.DrawLine(linePen, PointToClient(screenStartPoint), PointToClient(screenEndPoint));
 
-            if (!distanceOutline.IsGap)
+            if (!distanceOutline.IsDashedLine)
             {
                 Rectangle distanceTextRect = GetDistanceTextRectangle(distanceOutline);
                 DrawFilledRectWithText(graphics, distanceTextRect, distanceOutline.Distance.ToString(), color, ColorConfig.TextColor);
