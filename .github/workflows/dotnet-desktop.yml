@@ -1,0 +1,44 @@
+name: .NET Framework Desktop
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+
+  build:
+
+    strategy:
+      matrix:
+        configuration: [Debug, Release]
+
+    runs-on: windows-latest
+
+    env:
+      Solution_Name: Redlines.sln 
+  
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - name: Setup MSBuild.exe
+      uses: microsoft/setup-msbuild@v1
+      
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v1.0.5
+     
+    - name: Restore NuGet Packages
+      run: nuget restore $env:Solution_Name
+    
+    - name: Build Solution
+      run: msbuild $env:Solution_Name /p:Configuration=${{matrix.configuration}}
+
+    - name: 'Publish Redlines App'
+      uses: actions/upload-artifact@v2
+      with:	
+        name: 'Redlines App'	
+        path: '.\RedlinesApp\bin\${{matrix.configuration}}\'
