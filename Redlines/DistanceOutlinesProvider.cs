@@ -71,6 +71,8 @@ namespace Redlines
                 var topToBottomOutline = new DistanceOutline(selectedTopCenter, lineEnd);
                 distanceOutlines.Add(topToBottomOutline);
 
+                distanceOutlines.AddRange(GetVerticalAligmentLines(targetElement.BoundingRect, selectedElement.BoundingRect));
+
                 if (lineEnd.X < targetElement.BoundingRect.Left)
                 {
                     distanceOutlines.Add(new DistanceOutline(lineEnd, targetElement.BoundingRect.BottomLeft, true));
@@ -87,6 +89,8 @@ namespace Redlines
                 var lineEnd = new Point(selectedElementCenter.X, targetElement.BoundingRect.Top);
                 var bottomToTopOutline = new DistanceOutline(selectedBottomCenter, lineEnd);
                 distanceOutlines.Add(bottomToTopOutline);
+
+                distanceOutlines.AddRange(GetVerticalAligmentLines(selectedElement.BoundingRect, targetElement.BoundingRect));
 
                 if (lineEnd.X < targetElement.BoundingRect.Left)
                 {
@@ -113,6 +117,8 @@ namespace Redlines
                 var leftToRightOutline = new DistanceOutline(selectedLeftCenter, lineEnd);
                 distanceOutlines.Add(leftToRightOutline);
 
+                distanceOutlines.AddRange(GetHorizontalAligmentLines(targetElement.BoundingRect, selectedElement.BoundingRect));
+
                 if (lineEnd.Y < targetElement.BoundingRect.Top)
                 {
                     distanceOutlines.Add(new DistanceOutline(lineEnd, targetElement.BoundingRect.TopRight, true));
@@ -130,6 +136,8 @@ namespace Redlines
                 var rightToLeftOutline = new DistanceOutline(selectedRightCenter, new Point(targetElement.BoundingRect.Left, selectedElementCenter.Y));
                 distanceOutlines.Add(rightToLeftOutline);
 
+                distanceOutlines.AddRange(GetHorizontalAligmentLines(selectedElement.BoundingRect, targetElement.BoundingRect));
+
                 if (lineEnd.Y < targetElement.BoundingRect.Top)
                 {
                     distanceOutlines.Add(new DistanceOutline(lineEnd, targetElement.BoundingRect.TopLeft, true));
@@ -138,6 +146,40 @@ namespace Redlines
                 {
                     distanceOutlines.Add(new DistanceOutline(lineEnd, targetElement.BoundingRect.BottomLeft, true));
                 }
+            }
+
+            return distanceOutlines;
+        }
+
+        private List<DistanceOutline> GetHorizontalAligmentLines(Rect leftRect, Rect rightRect)
+        {
+            List<DistanceOutline> distanceOutlines = new List<DistanceOutline>();
+
+            if (leftRect.Top == rightRect.Top)
+            {
+                distanceOutlines.Add(new DistanceOutline(leftRect.TopRight, rightRect.TopLeft, true));
+            }
+
+            if (leftRect.Bottom == rightRect.Bottom)
+            {
+                distanceOutlines.Add(new DistanceOutline(leftRect.BottomRight, rightRect.BottomLeft, true));
+            }
+
+            return distanceOutlines;
+        }
+
+        private List<DistanceOutline> GetVerticalAligmentLines(Rect topRect, Rect bottomRect)
+        {
+            List<DistanceOutline> distanceOutlines = new List<DistanceOutline>();
+
+            if (topRect.Left == bottomRect.Left)
+            {
+                distanceOutlines.Add(new DistanceOutline(topRect.BottomLeft, bottomRect.TopLeft, true));
+            }
+
+            if (topRect.Right == bottomRect.Right)
+            {
+                distanceOutlines.Add(new DistanceOutline(topRect.BottomRight, bottomRect.TopRight, true));
             }
 
             return distanceOutlines;
