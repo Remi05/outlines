@@ -61,6 +61,7 @@ namespace RedlinesApp
             this.nameValueLabel = new System.Windows.Forms.Label();
             this.nameLabel = new System.Windows.Forms.Label();
             this.widthValueLabel = new System.Windows.Forms.Label();
+            this.togglePropertiesPaneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.trayIconContextMenuStrip.SuspendLayout();
             this.propertiesPanel.SuspendLayout();
             this.SuspendLayout();
@@ -76,22 +77,23 @@ namespace RedlinesApp
             // 
             this.trayIconContextMenuStrip.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.trayIconContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.togglePropertiesPaneToolStripMenuItem,
             this.toggleOverlayToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.trayIconContextMenuStrip.Name = "trayIconContextMenuStrip";
-            this.trayIconContextMenuStrip.Size = new System.Drawing.Size(203, 68);
+            this.trayIconContextMenuStrip.Size = new System.Drawing.Size(265, 133);
             // 
             // toggleOverlayToolStripMenuItem
             // 
             this.toggleOverlayToolStripMenuItem.Name = "toggleOverlayToolStripMenuItem";
-            this.toggleOverlayToolStripMenuItem.Size = new System.Drawing.Size(202, 32);
+            this.toggleOverlayToolStripMenuItem.Size = new System.Drawing.Size(264, 32);
             this.toggleOverlayToolStripMenuItem.Text = "Toggle Overlay";
             this.toggleOverlayToolStripMenuItem.Click += new System.EventHandler(this.toggleOverlayToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(202, 32);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(264, 32);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -364,6 +366,13 @@ namespace RedlinesApp
             this.widthValueLabel.Size = new System.Drawing.Size(0, 20);
             this.widthValueLabel.TabIndex = 5;
             // 
+            // togglePropertiesPaneToolStripMenuItem
+            // 
+            this.togglePropertiesPaneToolStripMenuItem.Name = "togglePropertiesPaneToolStripMenuItem";
+            this.togglePropertiesPaneToolStripMenuItem.Size = new System.Drawing.Size(264, 32);
+            this.togglePropertiesPaneToolStripMenuItem.Text = "Toggle Properties Pane";
+            this.togglePropertiesPaneToolStripMenuItem.Click += new System.EventHandler(this.togglePropertiesPaneToolStripMenuItem_Click);
+            // 
             // MainPage
             // 
             this.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
@@ -415,6 +424,7 @@ namespace RedlinesApp
         private System.Windows.Forms.Label fontSizeValueLabel;
         private System.Windows.Forms.Label foregroundColorRgbValueLabel;
         private System.Windows.Forms.Panel foregroundColorPanel;
+        private System.Windows.Forms.ToolStripMenuItem togglePropertiesPaneToolStripMenuItem;
     }
 }
 

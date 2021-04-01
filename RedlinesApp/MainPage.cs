@@ -222,5 +222,10 @@ namespace RedlinesApp
         {
             Application.Exit();
         }
+
+        private void togglePropertiesPaneToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            propertiesPanel.Visible = !propertiesPanel.Visible;
+        }
     }
 }
