@@ -1,4 +1,4 @@
-#  ![Redlines Icon](RedlinesApp/Assets/favicon.ico) Redlines
+#  ![Redlines Icon](RedlinesApp/Assets/favicon.ico) Redlines [![.NET Framework Desktop](https://github.com/Remi05/redlines/actions/workflows/dotnet-framework-desktop.yml/badge.svg)](https://github.com/Remi05/redlines/actions/workflows/dotnet-framework-desktop.yml)
 
 An app to help review your UI implementation.
 
