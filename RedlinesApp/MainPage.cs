@@ -27,7 +27,8 @@ namespace RedlinesApp
             ShowInTaskbar = false;
             ShowIcon = false;
             TopMost = true;
-            DesktopBounds = SystemInformation.VirtualScreen;
+
+            ScreenHelper.CoverAllDisplays(this);
 
             // Force a redraw when the selected or target element changes.
             RedlinesService.SelectedElementChanged += Invalidate;
