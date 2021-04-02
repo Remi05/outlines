@@ -24,10 +24,10 @@ namespace RedlinesApp
             BackColor = Color.Magenta;
             TransparencyKey = BackColor;
             FormBorderStyle = FormBorderStyle.None;
-            WindowState = FormWindowState.Maximized;
             ShowInTaskbar = false;
             ShowIcon = false;
             TopMost = true;
+            DesktopBounds = SystemInformation.VirtualScreen;
 
             // Force a redraw when the selected or target element changes.
             RedlinesService.SelectedElementChanged += Invalidate;
