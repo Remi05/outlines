@@ -21,12 +21,12 @@ namespace RedlinesApp
         {
             InitializeComponent();
 
-            BackColor = Color.Magenta;
-            TransparencyKey = BackColor;
             FormBorderStyle = FormBorderStyle.None;
             ShowInTaskbar = false;
             ShowIcon = false;
             TopMost = true;
+
+            MakeWindowTransparent();
 
             ScreenHelper.CoverAllDisplays(this);
 
@@ -38,7 +38,9 @@ namespace RedlinesApp
             GlobalInputListener = new GlobalInputListener();
             GlobalInputListener.MouseDown += OnMouseDown;
             GlobalInputListener.MouseMoved += OnMouseMoved;
-            GlobalInputListener.RegisterToMouseEvents();
+            GlobalInputListener.KeyDown += OnKeyDown;
+            GlobalInputListener.KeyUp += OnKeyUp;
+            GlobalInputListener.RegisterToInputEvents();
 
             // Set the target element after hovering for 0.2s.
             TargetTimer = new System.Timers.Timer();
@@ -72,6 +74,22 @@ namespace RedlinesApp
             currentColorHexValueLabel.Text = $"#{curColor.R.ToString("X2")}{curColor.G.ToString("X2")}{curColor.B.ToString("X2")}";
         }
 
+        private void OnKeyDown()
+        {
+            if (System.Windows.Input.Keyboard.IsKeyDown(System.Windows.Input.Key.LeftCtrl))
+            {
+                MakeWindowSemiTransparent();
+            }
+        }
+
+        private void OnKeyUp()
+        {
+            if (System.Windows.Input.Keyboard.IsKeyDown(System.Windows.Input.Key.LeftCtrl))
+            {
+                MakeWindowTransparent();
+            }
+        }
+
         private delegate void TargetElementDelegate();
         private void OnTargetTimeElapsed()
         {
@@ -82,13 +100,26 @@ namespace RedlinesApp
             }));
         }
 
-        private void ToggleShoudlPaintOverlay()
+        private void ToggleShoudlPaintOverlay()                       
         {
             ShouldPaintOverlay = !ShouldPaintOverlay;
             if (!ShouldPaintOverlay)
             {
                 Invalidate();
             }
+        }
+
+        private void MakeWindowTransparent()
+        {
+            BackColor = Color.Magenta;
+            TransparencyKey = BackColor;
+            Opacity = 1.0;
+        }
+
+        private void MakeWindowSemiTransparent()
+        {
+            BackColor = Color.Black;
+            Opacity = 0.5;
         }
 
         private void MainPage_Paint(object sender, PaintEventArgs e)

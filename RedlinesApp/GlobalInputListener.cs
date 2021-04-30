@@ -50,7 +50,7 @@ namespace RedlinesApp
         public MouseDownEventHandler MouseDown;
         public MouseMovedEventHandler MouseMoved;
 
-        public void RegisterToMouseEvents()
+        public void RegisterToInputEvents()
         {
             KeyboardHookProc = new HookProc(KeyboardProc);
             MouseHookProc = new HookProc(MouseProc);
@@ -63,7 +63,7 @@ namespace RedlinesApp
             }
         }
 
-        public void UnregisterFromMouseEvents()
+        public void UnregisterFromInputEvents()
         {
             if (MouseHookPtr != IntPtr.Zero)
             {
