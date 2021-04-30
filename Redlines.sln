@@ -11,16 +11,26 @@ Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
+		UiAccessDebug|Any CPU = UiAccessDebug|Any CPU
+		UiAccessRelease|Any CPU = UiAccessRelease|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{177350CC-0237-4A77-B2F2-86631C4A7DDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{177350CC-0237-4A77-B2F2-86631C4A7DDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{177350CC-0237-4A77-B2F2-86631C4A7DDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{177350CC-0237-4A77-B2F2-86631C4A7DDA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{177350CC-0237-4A77-B2F2-86631C4A7DDA}.UiAccessDebug|Any CPU.ActiveCfg = UiAccessDebug|Any CPU
+		{177350CC-0237-4A77-B2F2-86631C4A7DDA}.UiAccessDebug|Any CPU.Build.0 = UiAccessDebug|Any CPU
+		{177350CC-0237-4A77-B2F2-86631C4A7DDA}.UiAccessRelease|Any CPU.ActiveCfg = UiAccessRelease|Any CPU
+		{177350CC-0237-4A77-B2F2-86631C4A7DDA}.UiAccessRelease|Any CPU.Build.0 = UiAccessRelease|Any CPU
 		{D775E93C-CAEE-43BD-9B67-36FCAE02494E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D775E93C-CAEE-43BD-9B67-36FCAE02494E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D775E93C-CAEE-43BD-9B67-36FCAE02494E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D775E93C-CAEE-43BD-9B67-36FCAE02494E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D775E93C-CAEE-43BD-9B67-36FCAE02494E}.UiAccessDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D775E93C-CAEE-43BD-9B67-36FCAE02494E}.UiAccessDebug|Any CPU.Build.0 = Debug|Any CPU
+		{D775E93C-CAEE-43BD-9B67-36FCAE02494E}.UiAccessRelease|Any CPU.ActiveCfg = Release|Any CPU
+		{D775E93C-CAEE-43BD-9B67-36FCAE02494E}.UiAccessRelease|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
