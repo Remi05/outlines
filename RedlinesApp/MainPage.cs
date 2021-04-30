@@ -232,9 +232,24 @@ namespace RedlinesApp
 
         private Rectangle GetDistanceTextRectangle(DistanceOutline distanceOutline)
         {
+            Point midPoint = Helpers.WindowsPointToDrawingPoint(distanceOutline.MidPoint);
+
+            // Default to a centered rectangle to the right or below the line.
             Size offset = distanceOutline.IsVertical ? new Size(DimensionsConfig.TextRectangleOffset, 0) : new Size(0, DimensionsConfig.TextRectangleOffset);
-            Point rectPos = Point.Add(Helpers.WindowsPointToDrawingPoint(distanceOutline.MidPoint), offset);
-            return new Rectangle(rectPos, DimensionsConfig.DistanceRectangleSize);
+            Point rectPos = Point.Add(midPoint, offset);
+            Rectangle textRect = new Rectangle(rectPos, DimensionsConfig.DistanceRectangleSize);
+
+            Rectangle monitorRect = Screen.FromPoint(midPoint).Bounds;
+            if (!monitorRect.Contains(textRect))
+            {
+                // If the text is outside the screen when shown to the right or below, try on the left or above.
+                offset = distanceOutline.IsVertical ? new Size(-DimensionsConfig.TextRectangleOffset - DimensionsConfig.DistanceRectangleSize.Width, 0)
+                                                    : new Size(0, -DimensionsConfig.TextRectangleOffset - DimensionsConfig.DistanceRectangleSize.Height);
+                rectPos = Point.Add(midPoint, offset);
+                textRect = new Rectangle(rectPos, DimensionsConfig.DistanceRectangleSize);
+            }
+
+            return textRect;
         }
 
         private Rectangle GetDimensionsTextRectangle(System.Windows.Rect outlineRect)
@@ -249,7 +264,7 @@ namespace RedlinesApp
 
             if (!monitorRect.Contains(textRect))
             {
-                // Try a centered rectangle above the outline if it can't be shown below.
+                // If the text is outside the screen when shown below, try above the outline.
                 offset.Height = -DimensionsConfig.TextRectangleOffset - DimensionsConfig.DimensionsRectangleSize.Height;
                 System.Windows.Point topCenter = System.Windows.Point.Add(outlineRect.TopLeft, System.Windows.Point.Subtract(outlineRect.TopRight, outlineRect.TopLeft) / 2);
                 rectPos = Point.Add(Helpers.WindowsPointToDrawingPoint(topCenter), offset);
