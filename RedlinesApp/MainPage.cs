@@ -260,25 +260,23 @@ namespace RedlinesApp
             Size offset = new Size(-DimensionsConfig.DimensionsRectangleSize.Width / 2, DimensionsConfig.TextRectangleOffset);
             System.Windows.Point bottomCenter = System.Windows.Point.Add(outlineRect.BottomLeft, System.Windows.Point.Subtract(outlineRect.BottomRight, outlineRect.BottomLeft) / 2);
             Point rectPos = Point.Add(Helpers.WindowsPointToDrawingPoint(bottomCenter), offset);
-            Rectangle textRect = new Rectangle(rectPos, DimensionsConfig.DimensionsRectangleSize);
+            Point textRectBottomLeft = Point.Add(rectPos, new Size(0, DimensionsConfig.DimensionsRectangleSize.Height));
 
-            if (!monitorRect.Contains(textRect))
+            if (!monitorRect.Contains(textRectBottomLeft))
             {
                 // If the text is outside the screen when shown below, try above the outline.
                 offset.Height = -DimensionsConfig.TextRectangleOffset - DimensionsConfig.DimensionsRectangleSize.Height;
                 System.Windows.Point topCenter = System.Windows.Point.Add(outlineRect.TopLeft, System.Windows.Point.Subtract(outlineRect.TopRight, outlineRect.TopLeft) / 2);
                 rectPos = Point.Add(Helpers.WindowsPointToDrawingPoint(topCenter), offset);
-                textRect = new Rectangle(rectPos, DimensionsConfig.DimensionsRectangleSize);
 
-                if (!monitorRect.Contains(textRect))
+                if (!monitorRect.Contains(rectPos))
                 {
                     // Fallback to a centered rectangle at the bottom of the outline, but inside of it, if it can't be shown above or below.
                     rectPos = Point.Add(Helpers.WindowsPointToDrawingPoint(bottomCenter), offset);
-                    textRect = new Rectangle(rectPos, DimensionsConfig.DimensionsRectangleSize);
                 }
             }
 
-            return textRect;
+            return new Rectangle(rectPos, DimensionsConfig.DimensionsRectangleSize);
         }
 
         private void toggleOverlayToolStripMenuItem_Click(object sender, System.EventArgs e)
