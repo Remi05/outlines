@@ -239,10 +239,31 @@ namespace RedlinesApp
 
         private Rectangle GetDimensionsTextRectangle(System.Windows.Rect outlineRect)
         {
+            Rectangle monitorRect = Screen.FromRectangle(Helpers.WindowsRectToDrawingRect(outlineRect)).Bounds;
+
+            // Default to a centered rectangle below the outline.
             Size offset = new Size(-DimensionsConfig.DimensionsRectangleSize.Width / 2, DimensionsConfig.TextRectangleOffset);
             System.Windows.Point bottomCenter = System.Windows.Point.Add(outlineRect.BottomLeft, System.Windows.Point.Subtract(outlineRect.BottomRight, outlineRect.BottomLeft) / 2);
             Point rectPos = Point.Add(Helpers.WindowsPointToDrawingPoint(bottomCenter), offset);
-            return new Rectangle(rectPos, DimensionsConfig.DimensionsRectangleSize);
+            Rectangle textRect = new Rectangle(rectPos, DimensionsConfig.DimensionsRectangleSize);
+
+            if (!monitorRect.Contains(textRect))
+            {
+                // Try a centered rectangle above the outline if it can't be shown below.
+                offset.Height = -DimensionsConfig.TextRectangleOffset - DimensionsConfig.DimensionsRectangleSize.Height;
+                System.Windows.Point topCenter = System.Windows.Point.Add(outlineRect.TopLeft, System.Windows.Point.Subtract(outlineRect.TopRight, outlineRect.TopLeft) / 2);
+                rectPos = Point.Add(Helpers.WindowsPointToDrawingPoint(topCenter), offset);
+                textRect = new Rectangle(rectPos, DimensionsConfig.DimensionsRectangleSize);
+
+                if (!monitorRect.Contains(textRect))
+                {
+                    // Fallback to a centered rectangle at the bottom of the outline, but inside of it, if it can't be shown above or below.
+                    rectPos = Point.Add(Helpers.WindowsPointToDrawingPoint(bottomCenter), offset);
+                    textRect = new Rectangle(rectPos, DimensionsConfig.DimensionsRectangleSize);
+                }
+            }
+
+            return textRect;
         }
 
         private void toggleOverlayToolStripMenuItem_Click(object sender, System.EventArgs e)
