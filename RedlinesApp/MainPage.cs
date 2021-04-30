@@ -232,16 +232,50 @@ namespace RedlinesApp
 
         private Rectangle GetDistanceTextRectangle(DistanceOutline distanceOutline)
         {
+            Point midPoint = Helpers.WindowsPointToDrawingPoint(distanceOutline.MidPoint);
+
+            // Default to a centered rectangle to the right or below the line.
             Size offset = distanceOutline.IsVertical ? new Size(DimensionsConfig.TextRectangleOffset, 0) : new Size(0, DimensionsConfig.TextRectangleOffset);
-            Point rectPos = Point.Add(Helpers.WindowsPointToDrawingPoint(distanceOutline.MidPoint), offset);
-            return new Rectangle(rectPos, DimensionsConfig.DistanceRectangleSize);
+            Point rectPos = Point.Add(midPoint, offset);
+            Rectangle textRect = new Rectangle(rectPos, DimensionsConfig.DistanceRectangleSize);
+
+            Rectangle monitorRect = Screen.FromPoint(midPoint).Bounds;
+            if (!monitorRect.Contains(textRect))
+            {
+                // If the text is outside the screen when shown to the right or below, try on the left or above.
+                offset = distanceOutline.IsVertical ? new Size(-DimensionsConfig.TextRectangleOffset - DimensionsConfig.DistanceRectangleSize.Width, 0)
+                                                    : new Size(0, -DimensionsConfig.TextRectangleOffset - DimensionsConfig.DistanceRectangleSize.Height);
+                rectPos = Point.Add(midPoint, offset);
+                textRect = new Rectangle(rectPos, DimensionsConfig.DistanceRectangleSize);
+            }
+
+            return textRect;
         }
 
         private Rectangle GetDimensionsTextRectangle(System.Windows.Rect outlineRect)
         {
+            Rectangle monitorRect = Screen.FromRectangle(Helpers.WindowsRectToDrawingRect(outlineRect)).Bounds;
+
+            // Default to a centered rectangle below the outline.
             Size offset = new Size(-DimensionsConfig.DimensionsRectangleSize.Width / 2, DimensionsConfig.TextRectangleOffset);
             System.Windows.Point bottomCenter = System.Windows.Point.Add(outlineRect.BottomLeft, System.Windows.Point.Subtract(outlineRect.BottomRight, outlineRect.BottomLeft) / 2);
             Point rectPos = Point.Add(Helpers.WindowsPointToDrawingPoint(bottomCenter), offset);
+            Point textRectBottomLeft = Point.Add(rectPos, new Size(0, DimensionsConfig.DimensionsRectangleSize.Height));
+
+            if (!monitorRect.Contains(textRectBottomLeft))
+            {
+                // If the text is outside the screen when shown below, try above the outline.
+                offset.Height = -DimensionsConfig.TextRectangleOffset - DimensionsConfig.DimensionsRectangleSize.Height;
+                System.Windows.Point topCenter = System.Windows.Point.Add(outlineRect.TopLeft, System.Windows.Point.Subtract(outlineRect.TopRight, outlineRect.TopLeft) / 2);
+                rectPos = Point.Add(Helpers.WindowsPointToDrawingPoint(topCenter), offset);
+
+                if (!monitorRect.Contains(rectPos))
+                {
+                    // Fallback to a centered rectangle at the bottom of the outline, but inside of it, if it can't be shown above or below.
+                    rectPos = Point.Add(Helpers.WindowsPointToDrawingPoint(bottomCenter), offset);
+                }
+            }
+
             return new Rectangle(rectPos, DimensionsConfig.DimensionsRectangleSize);
         }
 
