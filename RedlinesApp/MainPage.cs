@@ -13,6 +13,7 @@ namespace RedlinesApp
         private GlobalInputListener GlobalInputListener { get; set; }
         private ColorPicker ColorPicker { get; set; } = new ColorPicker();
         private System.Timers.Timer TargetTimer { get; set; }
+        private System.Timers.Timer ColorPickerTimer { get; set; }
         private bool ShouldPaintOverlay { get; set; } = true;
 
         protected override bool ShowWithoutActivation => true;
@@ -42,11 +43,17 @@ namespace RedlinesApp
             GlobalInputListener.KeyUp += OnKeyUp;
             GlobalInputListener.RegisterToInputEvents();
 
-            // Set the target element after hovering for 0.2s.
+            // Set the target element after hovering for 0.5s.
             TargetTimer = new System.Timers.Timer();
             TargetTimer.Interval = 500;
             TargetTimer.AutoReset = false;
-            TargetTimer.Elapsed += (_, __) => OnTargetTimeElapsed();
+            TargetTimer.Elapsed += (_, __) => OnTargetTimerElapsed();
+
+            // Update the color picker after hovering for 0.05s;
+            ColorPickerTimer = new System.Timers.Timer();
+            ColorPickerTimer.Interval = 50;
+            ColorPickerTimer.AutoReset = false;
+            ColorPickerTimer.Elapsed += (_, __) => OnColorPickerTimerElapsed();
         }
 
         private void OnMouseDown()
@@ -61,17 +68,10 @@ namespace RedlinesApp
 
         private void OnMouseMoved()
         {
-            UpdateColorPicker();
+            ColorPickerTimer.Stop();
+            ColorPickerTimer.Start();
             TargetTimer.Stop();
             TargetTimer.Start();
-        }
-
-        private void UpdateColorPicker()
-        {
-            Color curColor = ColorPicker.GetColorAt(Cursor.Position);
-            currentColorPanel.BackColor = curColor;
-            currentColorRgbValueLabel.Text = $"({curColor.R}, {curColor.G}, {curColor.B})";
-            currentColorHexValueLabel.Text = $"#{curColor.R.ToString("X2")}{curColor.G.ToString("X2")}{curColor.B.ToString("X2")}";
         }
 
         private void OnKeyDown()
@@ -91,13 +91,29 @@ namespace RedlinesApp
         }
 
         private delegate void TargetElementDelegate();
-        private void OnTargetTimeElapsed()
+        private void OnTargetTimerElapsed()
         {
             Invoke(new TargetElementDelegate(() => {
                 Hide();
                 RedlinesService.TargetElementAt(Helpers.DrawingPointToWindowsPoint(Cursor.Position));
                 Show();
             }));
+        }
+
+        private delegate void ColorPickerDelegate();
+        private void OnColorPickerTimerElapsed()
+        {
+            Invoke(new ColorPickerDelegate(() => {
+                UpdateColorPicker();
+            }));
+        }
+
+        private void UpdateColorPicker()
+        {
+            Color curColor = ColorPicker.GetColorAt(Cursor.Position);
+            currentColorPanel.BackColor = curColor;
+            currentColorRgbValueLabel.Text = $"({curColor.R}, {curColor.G}, {curColor.B})";
+            currentColorHexValueLabel.Text = $"#{curColor.R.ToString("X2")}{curColor.G.ToString("X2")}{curColor.B.ToString("X2")}";
         }
 
         private void ToggleShoudlPaintOverlay()                       
