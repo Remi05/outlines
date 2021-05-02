@@ -43,9 +43,9 @@ namespace RedlinesApp
             GlobalInputListener.KeyUp += OnKeyUp;
             GlobalInputListener.RegisterToInputEvents();
 
-            // Set the target element after hovering for 0.5s.
+            // Set the target element after hovering for 0.3s.
             TargetTimer = new System.Timers.Timer();
-            TargetTimer.Interval = 500;
+            TargetTimer.Interval = 300;
             TargetTimer.AutoReset = false;
             TargetTimer.Elapsed += (_, __) => OnTargetTimerElapsed();
 
