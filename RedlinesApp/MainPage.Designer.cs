@@ -82,7 +82,7 @@ namespace RedlinesApp
             this.toggleOverlayToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.trayIconContextMenuStrip.Name = "trayIconContextMenuStrip";
-            this.trayIconContextMenuStrip.Size = new System.Drawing.Size(265, 133);
+            this.trayIconContextMenuStrip.Size = new System.Drawing.Size(265, 100);
             // 
             // togglePropertiesPaneToolStripMenuItem
             // 
@@ -135,15 +135,16 @@ namespace RedlinesApp
             this.propertiesPanel.Controls.Add(this.nameLabel);
             this.propertiesPanel.Controls.Add(this.widthValueLabel);
             this.propertiesPanel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.propertiesPanel.Location = new System.Drawing.Point(570, 0);
+            this.propertiesPanel.Location = new System.Drawing.Point(534, 0);
             this.propertiesPanel.Name = "propertiesPanel";
-            this.propertiesPanel.Size = new System.Drawing.Size(230, 630);
+            this.propertiesPanel.Size = new System.Drawing.Size(266, 630);
             this.propertiesPanel.TabIndex = 1;
             // 
             // foregroundColorRgbValueLabel
             // 
             this.foregroundColorRgbValueLabel.AutoSize = true;
             this.foregroundColorRgbValueLabel.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.foregroundColorRgbValueLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.foregroundColorRgbValueLabel.Location = new System.Drawing.Point(73, 574);
             this.foregroundColorRgbValueLabel.Name = "foregroundColorRgbValueLabel";
             this.foregroundColorRgbValueLabel.Size = new System.Drawing.Size(0, 21);
@@ -161,6 +162,7 @@ namespace RedlinesApp
             // 
             this.fontWeightValueLabel.AutoSize = true;
             this.fontWeightValueLabel.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fontWeightValueLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.fontWeightValueLabel.Location = new System.Drawing.Point(140, 532);
             this.fontWeightValueLabel.Name = "fontWeightValueLabel";
             this.fontWeightValueLabel.Size = new System.Drawing.Size(0, 21);
@@ -170,6 +172,7 @@ namespace RedlinesApp
             // 
             this.fontSizeValueLabel.AutoSize = true;
             this.fontSizeValueLabel.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fontSizeValueLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.fontSizeValueLabel.Location = new System.Drawing.Point(140, 493);
             this.fontSizeValueLabel.Name = "fontSizeValueLabel";
             this.fontSizeValueLabel.Size = new System.Drawing.Size(0, 21);
@@ -179,6 +182,7 @@ namespace RedlinesApp
             // 
             this.fontNameValueLabel.AutoSize = true;
             this.fontNameValueLabel.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fontNameValueLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.fontNameValueLabel.Location = new System.Drawing.Point(140, 452);
             this.fontNameValueLabel.Name = "fontNameValueLabel";
             this.fontNameValueLabel.Size = new System.Drawing.Size(0, 21);
@@ -187,6 +191,7 @@ namespace RedlinesApp
             // fontWeightLabel
             // 
             this.fontWeightLabel.AutoSize = true;
+            this.fontWeightLabel.ForeColor = System.Drawing.Color.Gray;
             this.fontWeightLabel.Location = new System.Drawing.Point(26, 532);
             this.fontWeightLabel.Name = "fontWeightLabel";
             this.fontWeightLabel.Size = new System.Drawing.Size(59, 20);
@@ -196,6 +201,7 @@ namespace RedlinesApp
             // fontSizeLabel
             // 
             this.fontSizeLabel.AutoSize = true;
+            this.fontSizeLabel.ForeColor = System.Drawing.Color.Gray;
             this.fontSizeLabel.Location = new System.Drawing.Point(26, 493);
             this.fontSizeLabel.Name = "fontSizeLabel";
             this.fontSizeLabel.Size = new System.Drawing.Size(40, 20);
@@ -205,6 +211,7 @@ namespace RedlinesApp
             // fontNameLabel
             // 
             this.fontNameLabel.AutoSize = true;
+            this.fontNameLabel.ForeColor = System.Drawing.Color.Gray;
             this.fontNameLabel.Location = new System.Drawing.Point(26, 452);
             this.fontNameLabel.Name = "fontNameLabel";
             this.fontNameLabel.Size = new System.Drawing.Size(42, 20);
@@ -215,6 +222,7 @@ namespace RedlinesApp
             // 
             this.textPropertiesLabel.AutoSize = true;
             this.textPropertiesLabel.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textPropertiesLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.textPropertiesLabel.Location = new System.Drawing.Point(22, 411);
             this.textPropertiesLabel.Name = "textPropertiesLabel";
             this.textPropertiesLabel.Size = new System.Drawing.Size(101, 21);
@@ -224,15 +232,17 @@ namespace RedlinesApp
             // separatorLabel2
             // 
             this.separatorLabel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.separatorLabel2.ForeColor = System.Drawing.Color.Gray;
             this.separatorLabel2.Location = new System.Drawing.Point(0, 131);
             this.separatorLabel2.Name = "separatorLabel2";
-            this.separatorLabel2.Size = new System.Drawing.Size(230, 1);
+            this.separatorLabel2.Size = new System.Drawing.Size(266, 1);
             this.separatorLabel2.TabIndex = 17;
             // 
             // currentColorHexValueLabel
             // 
             this.currentColorHexValueLabel.AutoSize = true;
             this.currentColorHexValueLabel.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.currentColorHexValueLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.currentColorHexValueLabel.Location = new System.Drawing.Point(64, 81);
             this.currentColorHexValueLabel.Name = "currentColorHexValueLabel";
             this.currentColorHexValueLabel.Size = new System.Drawing.Size(0, 21);
@@ -242,6 +252,7 @@ namespace RedlinesApp
             // 
             this.widthLabel.AutoSize = true;
             this.widthLabel.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.widthLabel.ForeColor = System.Drawing.Color.Gray;
             this.widthLabel.Location = new System.Drawing.Point(26, 235);
             this.widthLabel.Name = "widthLabel";
             this.widthLabel.Size = new System.Drawing.Size(52, 21);
@@ -252,6 +263,7 @@ namespace RedlinesApp
             // 
             this.currentColorRgbValueLabel.AutoSize = true;
             this.currentColorRgbValueLabel.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.currentColorRgbValueLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.currentColorRgbValueLabel.Location = new System.Drawing.Point(64, 49);
             this.currentColorRgbValueLabel.Name = "currentColorRgbValueLabel";
             this.currentColorRgbValueLabel.Size = new System.Drawing.Size(0, 21);
@@ -261,6 +273,7 @@ namespace RedlinesApp
             // 
             this.propertiesLabel.AutoSize = true;
             this.propertiesLabel.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.propertiesLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.propertiesLabel.Location = new System.Drawing.Point(22, 155);
             this.propertiesLabel.Name = "propertiesLabel";
             this.propertiesLabel.Size = new System.Drawing.Size(88, 21);
@@ -271,6 +284,7 @@ namespace RedlinesApp
             // 
             this.heightLabel.AutoSize = true;
             this.heightLabel.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.heightLabel.ForeColor = System.Drawing.Color.Gray;
             this.heightLabel.Location = new System.Drawing.Point(26, 270);
             this.heightLabel.Name = "heightLabel";
             this.heightLabel.Size = new System.Drawing.Size(56, 21);
@@ -289,6 +303,7 @@ namespace RedlinesApp
             // 
             this.colorsLabel.AutoSize = true;
             this.colorsLabel.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.colorsLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.colorsLabel.Location = new System.Drawing.Point(22, 20);
             this.colorsLabel.Name = "colorsLabel";
             this.colorsLabel.Size = new System.Drawing.Size(58, 21);
@@ -299,6 +314,7 @@ namespace RedlinesApp
             // 
             this.topLabel.AutoSize = true;
             this.topLabel.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.topLabel.ForeColor = System.Drawing.Color.Gray;
             this.topLabel.Location = new System.Drawing.Point(26, 305);
             this.topLabel.Name = "topLabel";
             this.topLabel.Size = new System.Drawing.Size(34, 21);
@@ -309,6 +325,7 @@ namespace RedlinesApp
             // 
             this.topValueLabel.AutoSize = true;
             this.topValueLabel.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.topValueLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.topValueLabel.Location = new System.Drawing.Point(100, 305);
             this.topValueLabel.Name = "topValueLabel";
             this.topValueLabel.Size = new System.Drawing.Size(0, 21);
@@ -319,7 +336,7 @@ namespace RedlinesApp
             this.separatorLabel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.separatorLabel1.Location = new System.Drawing.Point(0, 381);
             this.separatorLabel1.Name = "separatorLabel1";
-            this.separatorLabel1.Size = new System.Drawing.Size(230, 1);
+            this.separatorLabel1.Size = new System.Drawing.Size(266, 1);
             this.separatorLabel1.TabIndex = 11;
             // 
             // leftValueLabel
@@ -335,6 +352,7 @@ namespace RedlinesApp
             // 
             this.leftLabel.AutoSize = true;
             this.leftLabel.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.leftLabel.ForeColor = System.Drawing.Color.Gray;
             this.leftLabel.Location = new System.Drawing.Point(26, 340);
             this.leftLabel.Name = "leftLabel";
             this.leftLabel.Size = new System.Drawing.Size(36, 21);
@@ -344,6 +362,7 @@ namespace RedlinesApp
             // heightValueLabel
             // 
             this.heightValueLabel.AutoSize = true;
+            this.heightValueLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.heightValueLabel.Location = new System.Drawing.Point(100, 270);
             this.heightValueLabel.Name = "heightValueLabel";
             this.heightValueLabel.Size = new System.Drawing.Size(0, 20);
@@ -352,6 +371,7 @@ namespace RedlinesApp
             // nameValueLabel
             // 
             this.nameValueLabel.AutoSize = true;
+            this.nameValueLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.nameValueLabel.Location = new System.Drawing.Point(100, 200);
             this.nameValueLabel.Name = "nameValueLabel";
             this.nameValueLabel.Size = new System.Drawing.Size(0, 20);
@@ -360,6 +380,7 @@ namespace RedlinesApp
             // nameLabel
             // 
             this.nameLabel.AutoSize = true;
+            this.nameLabel.ForeColor = System.Drawing.Color.Gray;
             this.nameLabel.Location = new System.Drawing.Point(26, 200);
             this.nameLabel.Name = "nameLabel";
             this.nameLabel.Size = new System.Drawing.Size(51, 20);
@@ -369,6 +390,7 @@ namespace RedlinesApp
             // widthValueLabel
             // 
             this.widthValueLabel.AutoSize = true;
+            this.widthValueLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.widthValueLabel.Location = new System.Drawing.Point(100, 235);
             this.widthValueLabel.Name = "widthValueLabel";
             this.widthValueLabel.Size = new System.Drawing.Size(0, 20);
