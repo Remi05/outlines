@@ -43,9 +43,9 @@ namespace RedlinesApp
             GlobalInputListener.KeyUp += OnKeyUp;
             GlobalInputListener.RegisterToInputEvents();
 
-            // Set the target element after hovering for 0.3s.
+            // Set the target element after hovering for 0.1s.
             TargetTimer = new System.Timers.Timer();
-            TargetTimer.Interval = 300;
+            TargetTimer.Interval = 100;
             TargetTimer.AutoReset = false;
             TargetTimer.Elapsed += (_, __) => OnTargetTimerElapsed();
 
@@ -60,9 +60,7 @@ namespace RedlinesApp
         {
             if (System.Windows.Input.Keyboard.IsKeyDown(System.Windows.Input.Key.LeftCtrl))
             {
-                Hide();
                 RedlinesService.SelectElementAt(Helpers.DrawingPointToWindowsPoint(Cursor.Position));
-                Show();
             }
         }
 
@@ -94,9 +92,7 @@ namespace RedlinesApp
         private void OnTargetTimerElapsed()
         {
             Invoke(new TargetElementDelegate(() => {
-                Hide();
                 RedlinesService.TargetElementAt(Helpers.DrawingPointToWindowsPoint(Cursor.Position));
-                Show();
             }));
         }
 
