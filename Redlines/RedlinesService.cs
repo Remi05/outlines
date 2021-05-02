@@ -10,6 +10,7 @@ namespace Redlines
 
     public class RedlinesService
     {
+        private IElementProvider ElementProvider { get; set; } = new CustomElementProvider();
         private DistanceOutlinesProvider DistanceOutlinesProvider { get; set; } = new DistanceOutlinesProvider();
         private ElementPropertiesProvider ElementPropertiesProvider { get; set; } = new ElementPropertiesProvider();
         private TextPropertiesProvider TextPropertiesProvider { get; set; } = new TextPropertiesProvider();
@@ -76,24 +77,12 @@ namespace Redlines
 
         public void TargetElementAt(Point cursorPosition)
         {
-            TargetElement = TryGetElementFromPoint(cursorPosition);
+            TargetElement = ElementProvider.TryGetElementFromPoint(cursorPosition);
         }
 
         public void SelectElementAt(Point cursorPosition)
         {
-            SelectedElement = TryGetElementFromPoint(cursorPosition);
-        }
-
-        private AutomationElement TryGetElementFromPoint(Point point)
-        {
-            try
-            {
-                return AutomationElement.FromPoint(point);
-            }
-            catch (Exception)
-            {
-                return null;
-            }
+            SelectedElement = ElementProvider.TryGetElementFromPoint(cursorPosition);
         }
 
         private void UpdateDistanceOutlines()
