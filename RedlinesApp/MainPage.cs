@@ -72,17 +72,17 @@ namespace RedlinesApp
             TargetTimer.Start();
         }
 
-        private void OnKeyDown()
+        private void OnKeyDown(Keys key)
         {
-            if (System.Windows.Input.Keyboard.IsKeyDown(System.Windows.Input.Key.LeftCtrl))
+            if (key == Keys.LControlKey)
             {
                 MakeWindowSemiTransparent();
             }
         }
 
-        private void OnKeyUp()
+        private void OnKeyUp(Keys key)
         {
-            if (System.Windows.Input.Keyboard.IsKeyDown(System.Windows.Input.Key.LeftCtrl))
+            if (key == Keys.LControlKey)
             {
                 MakeWindowTransparent();
             }

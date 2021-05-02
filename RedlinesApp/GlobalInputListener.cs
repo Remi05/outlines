@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
 namespace RedlinesApp
 {
     public delegate void MouseMovedEventHandler();
     public delegate void MouseDownEventHandler();
-    public delegate void KeyDownEventHandler();
-    public delegate void KeyUpEventHandler();
+    public delegate void KeyDownEventHandler(Keys key);
+    public delegate void KeyUpEventHandler(Keys key);
 
     public class GlobalInputListener
     {
@@ -84,14 +85,16 @@ namespace RedlinesApp
             }
 
             int message = wParam.ToInt32();
+            int vkCode = Marshal.ReadInt32(lParam); ;
+            Keys key = (Keys)vkCode;
 
             switch (message)
             {
                 case WM_KEYDOWN:
-                    KeyDown?.Invoke();
+                    KeyDown?.Invoke(key);
                     break;
                 case WM_KEYUP:
-                    KeyUp?.Invoke();
+                    KeyUp?.Invoke(key);
                     break;
             }
 
