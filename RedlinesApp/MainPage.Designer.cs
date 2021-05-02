@@ -32,6 +32,7 @@ namespace RedlinesApp
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainPage));
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.trayIconContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.togglePropertiesPaneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toggleOverlayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.propertiesPanel = new System.Windows.Forms.Panel();
@@ -61,7 +62,7 @@ namespace RedlinesApp
             this.nameValueLabel = new System.Windows.Forms.Label();
             this.nameLabel = new System.Windows.Forms.Label();
             this.widthValueLabel = new System.Windows.Forms.Label();
-            this.togglePropertiesPaneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.textLayerPanel = new System.Windows.Forms.Panel();
             this.trayIconContextMenuStrip.SuspendLayout();
             this.propertiesPanel.SuspendLayout();
             this.SuspendLayout();
@@ -82,6 +83,13 @@ namespace RedlinesApp
             this.exitToolStripMenuItem});
             this.trayIconContextMenuStrip.Name = "trayIconContextMenuStrip";
             this.trayIconContextMenuStrip.Size = new System.Drawing.Size(265, 133);
+            // 
+            // togglePropertiesPaneToolStripMenuItem
+            // 
+            this.togglePropertiesPaneToolStripMenuItem.Name = "togglePropertiesPaneToolStripMenuItem";
+            this.togglePropertiesPaneToolStripMenuItem.Size = new System.Drawing.Size(264, 32);
+            this.togglePropertiesPaneToolStripMenuItem.Text = "Toggle Properties Pane";
+            this.togglePropertiesPaneToolStripMenuItem.Click += new System.EventHandler(this.togglePropertiesPaneToolStripMenuItem_Click);
             // 
             // toggleOverlayToolStripMenuItem
             // 
@@ -366,12 +374,15 @@ namespace RedlinesApp
             this.widthValueLabel.Size = new System.Drawing.Size(0, 20);
             this.widthValueLabel.TabIndex = 5;
             // 
-            // togglePropertiesPaneToolStripMenuItem
+            // textLayerPanel
             // 
-            this.togglePropertiesPaneToolStripMenuItem.Name = "togglePropertiesPaneToolStripMenuItem";
-            this.togglePropertiesPaneToolStripMenuItem.Size = new System.Drawing.Size(264, 32);
-            this.togglePropertiesPaneToolStripMenuItem.Text = "Toggle Properties Pane";
-            this.togglePropertiesPaneToolStripMenuItem.Click += new System.EventHandler(this.togglePropertiesPaneToolStripMenuItem_Click);
+            this.textLayerPanel.BackColor = System.Drawing.Color.Transparent;
+            this.textLayerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textLayerPanel.Location = new System.Drawing.Point(0, 0);
+            this.textLayerPanel.Name = "textLayerPanel";
+            this.textLayerPanel.Size = new System.Drawing.Size(534, 630);
+            this.textLayerPanel.TabIndex = 2;
+            this.textLayerPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.textLayerPanel_Paint);
             // 
             // MainPage
             // 
@@ -379,6 +390,7 @@ namespace RedlinesApp
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 630);
+            this.Controls.Add(this.textLayerPanel);
             this.Controls.Add(this.propertiesPanel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainPage";
@@ -425,6 +437,7 @@ namespace RedlinesApp
         private System.Windows.Forms.Label foregroundColorRgbValueLabel;
         private System.Windows.Forms.Panel foregroundColorPanel;
         private System.Windows.Forms.ToolStripMenuItem togglePropertiesPaneToolStripMenuItem;
+        private System.Windows.Forms.Panel textLayerPanel;
     }
 }
 
