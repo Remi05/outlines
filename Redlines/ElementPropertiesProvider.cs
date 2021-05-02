@@ -13,19 +13,16 @@ namespace Redlines
                 return null;
             }
 
-            string name = element.Current.Name;
-
-            Rect boundingRect;
-            try
-            {
-                boundingRect = element.Current.BoundingRectangle;
+            try 
+            { 
+                string name = element.Current.Name;
+                Rect boundingRect = element.Current.BoundingRectangle;
+                return new ElementProperties(name, boundingRect);
             }
             catch (Exception)
             {
-                boundingRect = Rect.Empty;
+                return null;
             }
-
-            return new ElementProperties(name, boundingRect);
         }
     }
 }
