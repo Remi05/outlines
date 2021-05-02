@@ -45,7 +45,7 @@ namespace RedlinesApp
 
             // Set the target element after hovering for 0.1s.
             TargetTimer = new System.Timers.Timer();
-            TargetTimer.Interval = 100;
+            TargetTimer.Interval = 75;
             TargetTimer.AutoReset = false;
             TargetTimer.Elapsed += (_, __) => OnTargetTimerElapsed();
 
