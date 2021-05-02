@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Automation;
 
 namespace Redlines
@@ -13,7 +14,16 @@ namespace Redlines
             }
 
             string name = element.Current.Name;
-            Rect boundingRect = element.Current.BoundingRectangle;
+
+            Rect boundingRect;
+            try
+            {
+                boundingRect = element.Current.BoundingRectangle;
+            }
+            catch (Exception)
+            {
+                boundingRect = Rect.Empty;
+            }
 
             return new ElementProperties(name, boundingRect);
         }
