@@ -60,6 +60,9 @@
     <Prefer32Bit>true</Prefer32Bit>
     <ApplicationManifest>uiaccessapp.manifest</ApplicationManifest>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Assets/favicon-desktop.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
