@@ -1,4 +1,4 @@
-#  ![Outlines Icon](OutlinesApp/Assets/favicon.ico) Outlines [![.NET Framework Desktop](https://github.com/Remi05/redlines/actions/workflows/dotnet-framework-desktop.yml/badge.svg)](https://github.com/Remi05/redlines/actions/workflows/dotnet-framework-desktop.yml)
+#  ![Outlines Icon](OutlinesApp/Assets/favicon.ico) Outlines [![.NET Framework Desktop](https://github.com/Remi05/outlines/actions/workflows/dotnet-framework-desktop.yml/badge.svg)](https://github.com/Remi05/outlines/actions/workflows/dotnet-framework-desktop.yml)
 
 An app to help review your UI implementation.
 
@@ -7,7 +7,7 @@ An app to help review your UI implementation.
 Outlines is licensed under an [MIT License](LICENSE.md).
 
 ## Getting Started
-Checkout our [User Guide Wiki page](https://github.com/Remi05/redlines/wiki/User-Guide).
+Checkout our [User Guide Wiki page](https://github.com/Remi05/outlines/wiki/User-Guide).
 
 ## Screenshots
 
