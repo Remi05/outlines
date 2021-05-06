@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace RedlinesApp
+namespace OutlinesApp
 {
     public class ColorConfig
     {

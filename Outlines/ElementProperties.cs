@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace Redlines
+namespace Outlines
 {
     public class ElementProperties
     {

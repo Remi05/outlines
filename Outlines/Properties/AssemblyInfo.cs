@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("RedlinesApp")]
+[assembly: AssemblyTitle("Outlines")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("RedlinesApp")]
+[assembly: AssemblyProduct("Outlines")]
 [assembly: AssemblyCopyright("Copyright ©  2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("177350cc-0237-4a77-b2f2-86631c4a7dda")]
+[assembly: Guid("d775e93c-caee-43bd-9b67-36fcae02494e")]
 
 // Version information for an assembly consists of the following four values:
 //

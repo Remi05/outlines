@@ -1,13 +1,13 @@
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
-using Redlines;
+using Outlines;
 
-namespace RedlinesApp
+namespace OutlinesApp
 {
     public partial class MainPage : Form
     {
-        private RedlinesService RedlinesService { get; set; } = new RedlinesService();
+        private OutlinesService OutlinesService { get; set; } = new OutlinesService();
         private ColorConfig ColorConfig { get; set; } = new ColorConfig();
         private DimensionsConfig DimensionsConfig { get; set; } = new DimensionsConfig();
         private GlobalInputListener GlobalInputListener { get; set; }
@@ -32,8 +32,8 @@ namespace RedlinesApp
             ScreenHelper.CoverAllDisplays(this);
 
             // Force a redraw when the selected or target element changes.
-            RedlinesService.SelectedElementChanged += Invalidate;
-            RedlinesService.TargetElementChanged += Invalidate;
+            OutlinesService.SelectedElementChanged += Invalidate;
+            OutlinesService.TargetElementChanged += Invalidate;
 
             // Register to global mouse events.
             GlobalInputListener = new GlobalInputListener();
@@ -60,7 +60,7 @@ namespace RedlinesApp
         {
             if (System.Windows.Input.Keyboard.IsKeyDown(System.Windows.Input.Key.LeftCtrl))
             {
-                RedlinesService.SelectElementAt(Helpers.DrawingPointToWindowsPoint(Cursor.Position));
+                OutlinesService.SelectElementAt(Helpers.DrawingPointToWindowsPoint(Cursor.Position));
             }
         }
 
@@ -92,7 +92,7 @@ namespace RedlinesApp
         private void OnTargetTimerElapsed()
         {
             Invoke(new TargetElementDelegate(() => {
-                RedlinesService.TargetElementAt(Helpers.DrawingPointToWindowsPoint(Cursor.Position));
+                OutlinesService.TargetElementAt(Helpers.DrawingPointToWindowsPoint(Cursor.Position));
             }));
         }
 
@@ -141,19 +141,19 @@ namespace RedlinesApp
                 return;
             }
 
-            foreach (var distanceOutline in RedlinesService.DistanceOutlines)
+            foreach (var distanceOutline in OutlinesService.DistanceOutlines)
             {
                 DrawDistanceOutline(e.Graphics, distanceOutline, ColorConfig.DistanceOutlineColor);
             }
 
-            DrawElementOutline(e.Graphics, RedlinesService.SelectedElementProperties, ColorConfig.SelectedElementOutlineColor);
+            DrawElementOutline(e.Graphics, OutlinesService.SelectedElementProperties, ColorConfig.SelectedElementOutlineColor);
             UpdateSelectedElementProperties();
             UpdateSelectedTextProperties();
 
             // We don't want to draw the target element outline if it is also the selected element.
-            if (RedlinesService.TargetElementProperties != RedlinesService.SelectedElementProperties)
+            if (OutlinesService.TargetElementProperties != OutlinesService.SelectedElementProperties)
             {
-                DrawElementOutline(e.Graphics, RedlinesService.TargetElementProperties, ColorConfig.TargetElementOutlineColor);
+                DrawElementOutline(e.Graphics, OutlinesService.TargetElementProperties, ColorConfig.TargetElementOutlineColor);
             }
         }
 
@@ -164,30 +164,30 @@ namespace RedlinesApp
                 return;
             }
 
-            foreach (var distanceOutline in RedlinesService.DistanceOutlines)
+            foreach (var distanceOutline in OutlinesService.DistanceOutlines)
             {
                 DrawDistanceTextRect(e.Graphics, distanceOutline, ColorConfig.DistanceOutlineColor);
             }
 
-            DrawDimensionsTextRect(e.Graphics, RedlinesService.SelectedElementProperties, ColorConfig.SelectedElementOutlineColor);
+            DrawDimensionsTextRect(e.Graphics, OutlinesService.SelectedElementProperties, ColorConfig.SelectedElementOutlineColor);
 
             // We don't want to draw the target element's dimensions text if it is also the selected element.
-            if (RedlinesService.TargetElementProperties != RedlinesService.SelectedElementProperties)
+            if (OutlinesService.TargetElementProperties != OutlinesService.SelectedElementProperties)
             {
-                DrawDimensionsTextRect(e.Graphics, RedlinesService.TargetElementProperties, ColorConfig.TargetElementOutlineColor);
+                DrawDimensionsTextRect(e.Graphics, OutlinesService.TargetElementProperties, ColorConfig.TargetElementOutlineColor);
             }
         }
 
         private void UpdateSelectedElementProperties()
         {
-            if (RedlinesService.SelectedElementProperties == null)
+            if (OutlinesService.SelectedElementProperties == null)
             {
                 return;
             }
 
-            nameValueLabel.Text = RedlinesService.SelectedElementProperties.Name;
+            nameValueLabel.Text = OutlinesService.SelectedElementProperties.Name;
 
-            var selectedElementRect = RedlinesService.SelectedElementProperties.BoundingRect;
+            var selectedElementRect = OutlinesService.SelectedElementProperties.BoundingRect;
             widthValueLabel.Text = selectedElementRect.Width.ToString() + "px";
             heightValueLabel.Text = selectedElementRect.Height.ToString() + "px";
             topValueLabel.Text = selectedElementRect.Top.ToString() + "px";
@@ -196,11 +196,11 @@ namespace RedlinesApp
 
         private void UpdateSelectedTextProperties()
         {
-            if (RedlinesService.SelectedTextProperties != null)
+            if (OutlinesService.SelectedTextProperties != null)
             {
-                fontNameValueLabel.Text = RedlinesService.SelectedTextProperties.FontName;
-                fontSizeValueLabel.Text = RedlinesService.SelectedTextProperties.FontSize + "px";
-                fontWeightValueLabel.Text = RedlinesService.SelectedTextProperties.FontWeight;           
+                fontNameValueLabel.Text = OutlinesService.SelectedTextProperties.FontName;
+                fontSizeValueLabel.Text = OutlinesService.SelectedTextProperties.FontSize + "px";
+                fontWeightValueLabel.Text = OutlinesService.SelectedTextProperties.FontWeight;           
             }
             else
             {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Automation;
 
-namespace Redlines
+namespace Outlines
 {
     public class CustomElementProvider  : IElementProvider
     {
@@ -12,7 +12,7 @@ namespace Redlines
         public CustomElementProvider()
         {
             
-            FitlerCondition = new AndCondition(new NotCondition(new PropertyCondition(AutomationElement.NameProperty, "redlines")),
+            FitlerCondition = new AndCondition(new NotCondition(new PropertyCondition(AutomationElement.NameProperty, "outlines")),
                                                new PropertyCondition(AutomationElement.IsOffscreenProperty, false));
         }
 

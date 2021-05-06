@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-namespace RedlinesApp
+namespace OutlinesApp
 {
     public delegate void MouseMovedEventHandler();
     public delegate void MouseDownEventHandler();

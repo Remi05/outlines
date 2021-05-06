@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Automation;
 
-namespace Redlines
+namespace Outlines
 {
     public delegate void SelectedElementChangedHandler();
     public delegate void TargetElementChangedHandler();
 
-    public class RedlinesService
+    public class OutlinesService
     {
         private IElementProvider ElementProvider { get; set; } = new CustomElementProvider();
         private DistanceOutlinesProvider DistanceOutlinesProvider { get; set; } = new DistanceOutlinesProvider();
