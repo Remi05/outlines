@@ -61,7 +61,7 @@
     <ApplicationManifest>uiaccessapp.manifest</ApplicationManifest>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Assets/favicon-desktop.ico</ApplicationIcon>
+    <ApplicationIcon>Assets/favicon-white-desktop.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="PresentationCore" />
