@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Automation;
 
-namespace Redlines
+namespace Outlines
 {
     public class ElementPropertiesProvider
     {

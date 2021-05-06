@@ -1,4 +1,4 @@
-﻿namespace RedlinesApp
+﻿namespace OutlinesApp
 {
     public static class Helpers
     {

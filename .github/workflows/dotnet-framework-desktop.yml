@@ -17,7 +17,7 @@ jobs:
     runs-on: windows-latest
 
     env:
-      Solution_Name: Redlines.sln 
+      Solution_Name: OutlinesApp.sln 
   
     steps:
     - name: Checkout
@@ -37,8 +37,8 @@ jobs:
     - name: Build Solution
       run: msbuild $env:Solution_Name /p:Configuration=${{matrix.configuration}}
 
-    - name: 'Publish Redlines App'
+    - name: 'Publish Outlines App'
       uses: actions/upload-artifact@v2
       with:	
-        name: 'Redlines App'	
-        path: '.\RedlinesApp\bin\${{matrix.configuration}}\'
+        name: 'Outlines App'	
+        path: '.\OutlinesApp\bin\${{matrix.configuration}}\'

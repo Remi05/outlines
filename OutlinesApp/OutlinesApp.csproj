@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{177350CC-0237-4A77-B2F2-86631C4A7DDA}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>RedlinesApp</RootNamespace>
-    <AssemblyName>RedlinesApp</AssemblyName>
+    <RootNamespace>OutlinesApp</RootNamespace>
+    <AssemblyName>OutlinesApp</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -104,6 +104,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="uiaccessapp.manifest" />
     <None Include="app.manifest" />
@@ -121,9 +122,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Redlines\Redlines.csproj">
+    <ProjectReference Include="..\Outlines\Outlines.csproj">
       <Project>{d775e93c-caee-43bd-9b67-36fcae02494e}</Project>
-      <Name>Redlines</Name>
+      <Name>Outlines</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

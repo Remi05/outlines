@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Runtime.InteropServices;
 
-namespace RedlinesApp
+namespace OutlinesApp
 {
     public class ColorPicker
     {

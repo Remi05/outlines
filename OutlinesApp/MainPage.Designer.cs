@@ -1,4 +1,4 @@
-namespace RedlinesApp
+namespace OutlinesApp
 {
     partial class MainPage
     {
@@ -71,7 +71,7 @@ namespace RedlinesApp
             // 
             this.notifyIcon.ContextMenuStrip = this.trayIconContextMenuStrip;
             this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
-            this.notifyIcon.Text = "redlines";
+            this.notifyIcon.Text = "outlines";
             this.notifyIcon.Visible = true;
             // 
             // trayIconContextMenuStrip
@@ -416,7 +416,7 @@ namespace RedlinesApp
             this.Controls.Add(this.propertiesPanel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainPage";
-            this.Text = "redlines";
+            this.Text = "outlines";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.MainPage_Paint);
             this.trayIconContextMenuStrip.ResumeLayout(false);
             this.propertiesPanel.ResumeLayout(false);
