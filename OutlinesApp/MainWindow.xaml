@@ -6,6 +6,8 @@
         xmlns:local="clr-namespace:OutlinesApp"
         xmlns:views="clr-namespace:OutlinesApp.Views"
         mc:Ignorable="d"
+        Loaded="OnLoaded"
+        Unloaded="OnUnloaded"
         AllowsTransparency="True"
         Background="Transparent"    
         ShowInTaskbar="False"
