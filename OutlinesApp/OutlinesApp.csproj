@@ -74,7 +74,6 @@
     </Compile>
     <Compile Include="ColorConfig.cs" />
     <Compile Include="ColorPickerService.cs" />
-    <Compile Include="GlobalInputListener.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

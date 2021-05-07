@@ -1,23 +1,17 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using System.Windows.Input;
 
-namespace OutlinesApp
+namespace Outlines
 {
-    public delegate void MouseMovedEventHandler();
-    public delegate void MouseDownEventHandler();
-    public delegate void KeyDownEventHandler(Key key);
-    public delegate void KeyUpEventHandler(Key key);
-
-    public class GlobalInputListener
+    public class GlobalInputListener : IGlobalInputListener
     {
         private delegate int HookProc(int code, IntPtr wParam, IntPtr lParam);
 
         [DllImport("user32.dll", EntryPoint = "SetWindowsHookEx", SetLastError = true)]
         static extern IntPtr SetWindowsHookEx(int idHook, HookProc lpfn, IntPtr hMod, uint dwThreadId);
 
-        [DllImport("user32.dll")] 
+        [DllImport("user32.dll")]
         public static extern int UnhookWindowsHookEx(IntPtr hhook);
 
         [DllImport("user32.dll")]
@@ -25,6 +19,24 @@ namespace OutlinesApp
 
         [DllImport("kernel32.dll", CharSet = CharSet.Auto)]
         static extern IntPtr GetModuleHandle(string lpModuleName);
+
+        // Based on https://docs.microsoft.com/en-us/previous-versions/dd162805(v=vs.85)
+        [StructLayout(LayoutKind.Sequential)]
+        private struct POINT
+        {
+            public int x;
+            public int y;
+        }
+
+        // Based on https://docs.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-mousehookstruct
+        [StructLayout(LayoutKind.Sequential)]
+        private class MouseHookStruct
+        {
+            public POINT pt;
+            public IntPtr hwnd;
+            public uint wHitTestCode;
+            public IntPtr dwExtraInfo;
+        }
 
         // From https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setwindowshookexa
         private const int WH_CALLWNDPROC = 4;
@@ -46,10 +58,10 @@ namespace OutlinesApp
         private IntPtr KeyboardHookPtr { get; set; }
         private IntPtr MouseHookPtr { get; set; }
 
-        public KeyDownEventHandler KeyDown;
-        public KeyUpEventHandler KeyUp;
-        public MouseDownEventHandler MouseDown;
-        public MouseMovedEventHandler MouseMoved;
+        public event KeyDownEventHandler KeyDown;
+        public event KeyUpEventHandler KeyUp;
+        public event MouseDownEventHandler MouseDown;
+        public event MouseMovedEventHandler MouseMoved;
 
         public void RegisterToInputEvents()
         {
@@ -69,7 +81,7 @@ namespace OutlinesApp
             if (MouseHookPtr != IntPtr.Zero)
             {
                 UnhookWindowsHookEx(KeyboardHookPtr);
-                UnhookWindowsHookEx(MouseHookPtr); 
+                UnhookWindowsHookEx(MouseHookPtr);
                 KeyboardHookPtr = IntPtr.Zero;
                 MouseHookPtr = IntPtr.Zero;
                 KeyboardHookProc = null;
@@ -86,15 +98,14 @@ namespace OutlinesApp
 
             int message = wParam.ToInt32();
             int vkCode = Marshal.ReadInt32(lParam); ;
-            Key key = (Key)vkCode;
 
             switch (message)
             {
                 case WM_KEYDOWN:
-                    KeyDown?.Invoke(key);
+                    KeyDown?.Invoke(vkCode);
                     break;
                 case WM_KEYUP:
-                    KeyUp?.Invoke(key);
+                    KeyUp?.Invoke(vkCode);
                     break;
             }
 
@@ -109,14 +120,15 @@ namespace OutlinesApp
             }
 
             int message = wParam.ToInt32();
+            var mouseHookStruct = Marshal.PtrToStructure(lParam, typeof(MouseHookStruct)) as MouseHookStruct;
 
             switch (message)
             {
-                case WM_MOUSEMOVE:
-                    MouseMoved?.Invoke();
+                case WM_MOUSEMOVE:                
+                    MouseMoved?.Invoke(mouseHookStruct.pt.x, mouseHookStruct.pt.y);
                     break;
                 case WM_LBUTTONDOWN:
-                    MouseDown?.Invoke();
+                    MouseDown?.Invoke(mouseHookStruct.pt.x, mouseHookStruct.pt.y);
                     break;
             }
 
