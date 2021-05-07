@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace OutlinesApp
+namespace OutlinesAppForms
 {
     public class ColorConfig
     {

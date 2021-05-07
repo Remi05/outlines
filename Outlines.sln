@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30128.74
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OutlinesApp", "OutlinesApp\OutlinesApp.csproj", "{177350CC-0237-4A77-B2F2-86631C4A7DDA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OutlinesAppForms", "OutlinesAppForms\OutlinesAppForms.csproj", "{177350CC-0237-4A77-B2F2-86631C4A7DDA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Outlines", "Outlines\Outlines.csproj", "{D775E93C-CAEE-43BD-9B67-36FCAE02494E}"
 EndProject

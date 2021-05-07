@@ -1,4 +1,4 @@
-namespace OutlinesApp
+namespace OutlinesAppForms
 {
     partial class MainPage
     {

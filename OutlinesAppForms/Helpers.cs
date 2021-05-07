@@ -1,4 +1,4 @@
-﻿namespace OutlinesApp
+﻿namespace OutlinesAppForms
 {
     public static class Helpers
     {

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace OutlinesApp.Properties {
+namespace OutlinesAppForms.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
