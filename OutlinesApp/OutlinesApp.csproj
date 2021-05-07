@@ -57,6 +57,9 @@
     </ApplicationDefinition>
     <Compile Include="DimensionsConfig.cs" />
     <Compile Include="ViewModels\PropertiesViewModel.cs" />
+    <Compile Include="Views\InspectorPage.xaml.cs">
+      <DependentUpon>InspectorPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ScreenHelper.cs" />
     <Compile Include="Views\PropertiesPanel.xaml.cs">
       <DependentUpon>PropertiesPanel.xaml</DependentUpon>
@@ -76,6 +79,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\InspectorPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\PropertiesPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
