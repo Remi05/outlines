@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:OutlinesApp"
         mc:Ignorable="d"
         AllowsTransparency="True"
-        Background="Transparent"
+        Background="Transparent"    
+        ShowInTaskbar="False"
         WindowState="Maximized"
         WindowStyle="None"
         Title="Outlines">
