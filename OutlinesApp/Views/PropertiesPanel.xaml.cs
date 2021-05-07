@@ -5,12 +5,14 @@ namespace OutlinesApp.Views
 {
     public partial class PropertiesPanel : UserControl
     {
-        public PropertiesViewModel ViewModel { get; private set; }
-
         public PropertiesPanel()
         {
-            InitializeComponent();
-            DataContext = ViewModel;
+            InitializeComponent();         
+        }
+
+        private void OnLoaded(object sender, System.Windows.RoutedEventArgs e)
+        {
+            DataContext = ServiceContainer.Instance.GetService<PropertiesViewModel>();
         }
     }
 }
