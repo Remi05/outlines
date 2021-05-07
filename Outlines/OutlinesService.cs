@@ -5,10 +5,7 @@ using System.Windows.Automation;
 
 namespace Outlines
 {
-    public delegate void SelectedElementChangedHandler();
-    public delegate void TargetElementChangedHandler();
-
-    public class OutlinesService
+    public class OutlinesService : IOutlinesService
     {
         private IElementProvider ElementProvider { get; set; } = new CustomElementProvider();
         private DistanceOutlinesProvider DistanceOutlinesProvider { get; set; } = new DistanceOutlinesProvider();
@@ -18,7 +15,7 @@ namespace Outlines
         private AutomationElement selectedElement = null;
         private AutomationElement SelectedElement
         {
-            get { return selectedElement;  }
+            get { return selectedElement; }
             set
             {
                 selectedElement = value;
@@ -72,8 +69,8 @@ namespace Outlines
 
         public List<DistanceOutline> DistanceOutlines { get; private set; } = new List<DistanceOutline>();
 
-        public SelectedElementChangedHandler SelectedElementChanged;
-        public TargetElementChangedHandler TargetElementChanged;
+        public event SelectedElementChangedHandler SelectedElementChanged;
+        public event TargetElementChangedHandler TargetElementChanged;
 
         public void TargetElementAt(Point cursorPosition)
         {

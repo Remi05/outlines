@@ -49,6 +49,7 @@
     <Compile Include="ElementPropertiesProvider.cs" />
     <Compile Include="DistanceOutline.cs" />
     <Compile Include="IElementProvider.cs" />
+    <Compile Include="IOutlinesService.cs" />
     <Compile Include="OutlinesService.cs" />
     <Compile Include="DistanceOutlinesProvider.cs" />
     <Compile Include="TextPropertiesProvider.cs" />
