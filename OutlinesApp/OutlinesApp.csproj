@@ -62,6 +62,9 @@
     <Compile Include="Views\InspectorPage.xaml.cs">
       <DependentUpon>InspectorPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\OutlinesLayer.xaml.cs">
+      <DependentUpon>OutlinesLayer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ScreenHelper.cs" />
     <Compile Include="Views\PropertiesPanel.xaml.cs">
       <DependentUpon>PropertiesPanel.xaml</DependentUpon>
@@ -81,6 +84,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\InspectorPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\OutlinesLayer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

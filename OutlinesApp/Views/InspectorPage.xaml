@@ -9,6 +9,7 @@
       Title="InspectorPage">
 
     <Grid>
+        <local:OutlinesLayer />
         <local:PropertiesPanel Width="240" HorizontalAlignment="Right" Margin="0,16,16,16"/>
     </Grid>
 </Page>
