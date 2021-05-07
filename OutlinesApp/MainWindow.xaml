@@ -5,6 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OutlinesApp"
         mc:Ignorable="d"
+        AllowsTransparency="True"
+        Background="Transparent"
+        WindowState="Maximized"
+        WindowStyle="None"
         Title="Outlines">
     <Grid>
         
