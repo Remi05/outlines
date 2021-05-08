@@ -60,6 +60,7 @@
     </ApplicationDefinition>
     <Compile Include="DimensionsConfig.cs" />
     <Compile Include="ServiceContainer.cs" />
+    <Compile Include="ViewModels\ColorPickerViewModel.cs" />
     <Compile Include="ViewModels\InspectorViewModel.cs" />
     <Compile Include="ViewModels\PropertiesViewModel.cs" />
     <Compile Include="Views\InspectorPage.xaml.cs">
