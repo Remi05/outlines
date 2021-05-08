@@ -11,6 +11,22 @@ namespace OutlinesApp.ViewModels
         private IOutlinesService OutlinesService { get; set; }
         private IGlobalInputListener GlobalInputListener { get; set; }
 
+        private bool isBackdropVisible = false;
+        public bool IsBackdropVisible
+        {
+            get => isBackdropVisible;
+            private set
+            {
+                if (value != isBackdropVisible)
+                {
+                    isBackdropVisible = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsBackdropVisible)));
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(BackdropVisibility)));
+                }
+            }
+        }
+
+        public Visibility BackdropVisibility => IsBackdropVisible ? Visibility.Visible : Visibility.Collapsed;
 
         private ElementProperties selectedElementProperties;
         public ElementProperties SelectedElementProperties
@@ -88,24 +104,32 @@ namespace OutlinesApp.ViewModels
             Lines = OutlinesService.DistanceOutlines;
         }
 
-        private void OnMouseMoved(int cursorX, int cursorY)
+        private void OnMouseMoved(Point cursorPoint)
         {
-            //OutlinesService.TargetElementAt(new Point(cursorX, cursorY));
+            //OutlinesService.TargetElementAt(cursorPos);
         }
 
-        private void OnMouseDown(int cursorX, int cursorY)
+        private void OnMouseDown(Point cursorPos)
         {
-            OutlinesService.SelectElementAt(new Point(cursorX, cursorY));
+            OutlinesService.SelectElementAt(cursorPos);
         }
 
         private void OnKeyDown(int vkCode)
         {
-
+            Key key = KeyInterop.KeyFromVirtualKey(vkCode);
+            if (key == Key.LeftCtrl)
+            {
+                IsBackdropVisible = true;
+            }
         }
 
         private void OnKeyUp(int vkCode)
         {
-
+            Key key = KeyInterop.KeyFromVirtualKey(vkCode);
+            if (key == Key.LeftCtrl)
+            {
+                IsBackdropVisible = false;
+            }
         }
     }
 }

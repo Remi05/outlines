@@ -1,4 +1,5 @@
 ﻿using System.Windows.Controls;
+using OutlinesApp.ViewModels;
 
 namespace OutlinesApp.Views
 {
@@ -7,6 +8,11 @@ namespace OutlinesApp.Views
         public InspectorPage()
         {
             InitializeComponent();
+        }
+
+        private void OnLoaded(object sender, System.Windows.RoutedEventArgs e)
+        {
+            DataContext = ServiceContainer.Instance.GetService<InspectorViewModel>();
         }
     }
 }
