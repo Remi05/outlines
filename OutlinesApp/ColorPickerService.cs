@@ -5,7 +5,7 @@ using System.Windows.Media;
 
 namespace OutlinesApp
 {
-    public class ColorPickerService
+    public class ColorPickerService : IColorPickerService
     {
         [DllImport("gdi32")]
         public static extern uint GetPixel(IntPtr hDC, int xPos, int yPos);
