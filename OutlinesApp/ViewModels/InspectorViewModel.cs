@@ -8,6 +8,8 @@ namespace OutlinesApp.ViewModels
 {
     public class InspectorViewModel : INotifyPropertyChanged
     {
+        private const int TargetHoverDelayInMs = 75;
+
         private IOutlinesService OutlinesService { get; set; }
         private IGlobalInputListener GlobalInputListener { get; set; }
 
@@ -84,7 +86,9 @@ namespace OutlinesApp.ViewModels
 
                 if (GlobalInputListener != null)
                 {
-                    GlobalInputListener.MouseMoved += OnMouseMoved;
+                    HoverWatcher targetHoverWatcher = new HoverWatcher(TargetHoverDelayInMs);
+                    targetHoverWatcher.MouseHovered += OnMouseHovered;
+                    GlobalInputListener.MouseMoved += targetHoverWatcher.OnMouseMoved;
                     GlobalInputListener.MouseDown += OnMouseDown;
                     GlobalInputListener.KeyDown += OnKeyDown;
                     GlobalInputListener.KeyUp += OnKeyUp;
@@ -104,9 +108,9 @@ namespace OutlinesApp.ViewModels
             Lines = OutlinesService.DistanceOutlines;
         }
 
-        private void OnMouseMoved(Point cursorPoint)
+        private void OnMouseHovered(Point cursorPos)
         {
-            //OutlinesService.TargetElementAt(cursorPos);
+            OutlinesService.TargetElementAt(cursorPos);
         }
 
         private void OnMouseDown(Point cursorPos)

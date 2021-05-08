@@ -7,6 +7,8 @@ namespace OutlinesApp.ViewModels
 {
     public class ColorPickerViewModel : INotifyPropertyChanged
     {
+        private const int HoverDelayInMs = 50;
+
         private IColorPickerService ColorPickerService { get; set; }
         private IGlobalInputListener GlobalInputListener { get; set; }
 
@@ -36,10 +38,12 @@ namespace OutlinesApp.ViewModels
         {
             ColorPickerService = colorPickerService;
             GlobalInputListener = globalInputListener;
-            GlobalInputListener.MouseMoved += OnMouseMove;
+            var hoverWatcher = new HoverWatcher(HoverDelayInMs);
+            hoverWatcher.MouseHovered += OnMouseHovered;
+            GlobalInputListener.MouseMoved += hoverWatcher.OnMouseMoved;
         }
 
-        private void OnMouseMove(Point cursorPos)
+        private void OnMouseHovered(Point cursorPos)
         {
             PickedColor = ColorPickerService.GetColorAt(cursorPos);
         }
