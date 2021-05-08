@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using System.Windows;
 
 namespace Outlines
 {
@@ -121,14 +122,15 @@ namespace Outlines
 
             int message = wParam.ToInt32();
             var mouseHookStruct = Marshal.PtrToStructure(lParam, typeof(MouseHookStruct)) as MouseHookStruct;
+            var cursorPos = new Point(mouseHookStruct.pt.x, mouseHookStruct.pt.y);
 
             switch (message)
             {
                 case WM_MOUSEMOVE:                
-                    MouseMoved?.Invoke(mouseHookStruct.pt.x, mouseHookStruct.pt.y);
+                    MouseMoved?.Invoke(cursorPos);
                     break;
                 case WM_LBUTTONDOWN:
-                    MouseDown?.Invoke(mouseHookStruct.pt.x, mouseHookStruct.pt.y);
+                    MouseDown?.Invoke(cursorPos);
                     break;
             }
 
