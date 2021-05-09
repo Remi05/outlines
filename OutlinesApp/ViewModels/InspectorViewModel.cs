@@ -23,12 +23,37 @@ namespace OutlinesApp.ViewModels
                 {
                     isBackdropVisible = value;
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsBackdropVisible)));
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(BackdropVisibility)));
                 }
             }
         }
 
-        public Visibility BackdropVisibility => IsBackdropVisible ? Visibility.Visible : Visibility.Collapsed;
+        private bool isOverlayVisible = true;
+        public bool IsOverlayVisible
+        {
+            get => isOverlayVisible;
+            private set
+            {
+                if (value != isOverlayVisible)
+                {
+                    isOverlayVisible = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsOverlayVisible)));
+                }
+            }
+        }
+
+        private bool isPropertiesPanelVisible = true;
+        public bool IsPropertiesPanelVisible
+        {
+            get => isPropertiesPanelVisible;
+            private set
+            {
+                if (value != isPropertiesPanelVisible)
+                {
+                    isPropertiesPanelVisible = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsPropertiesPanelVisible)));
+                }
+            }
+        }
 
         private ElementProperties selectedElementProperties;
         public ElementProperties SelectedElementProperties

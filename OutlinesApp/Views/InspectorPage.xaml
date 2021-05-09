@@ -10,8 +10,8 @@
       Title="InspectorPage">
 
     <Grid>
-        <Border Background="Black" Opacity="0.3" Visibility="{Binding BackdropVisibility, Mode=OneWay}" />
-        <local:OutlinesLayer />
-        <local:PropertiesPanel Width="240" HorizontalAlignment="Right" Margin="0,16,16,16"/>
+        <Border Background="Black" Opacity="0.3" Visibility="{Binding IsBackdropVisible, Converter={StaticResource BoolToVisibility}, FallbackValue=Collapsed}" />
+        <local:OutlinesLayer Visibility="{Binding IsOverlayVisible, Converter={StaticResource BoolToVisibility}, FallbackValue=Visible}" />
+        <local:PropertiesPanel Width="240" HorizontalAlignment="Right" Margin="0,16,16,16" Visibility="{Binding IsPropertiesPanelVisible, Converter={StaticResource BoolToVisibility}, FallbackValue=Visible}" />
     </Grid>
 </Page>
