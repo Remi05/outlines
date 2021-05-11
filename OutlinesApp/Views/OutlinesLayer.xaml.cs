@@ -1,6 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
 using OutlinesApp.ViewModels;
-using Outlines;
 
 namespace OutlinesApp.Views
 {
@@ -11,9 +11,9 @@ namespace OutlinesApp.Views
             InitializeComponent();
         }
 
-        private void OnLoaded(object sender, System.Windows.RoutedEventArgs e)
+        private void OnLoaded(object sender, RoutedEventArgs e)
         {
-            DataContext = ServiceContainer.Instance.GetService<InspectorViewModel>();
+            DataContext = ServiceContainer.Instance.GetService<OutlinesViewModel>();
         }
     }
 }
