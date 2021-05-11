@@ -11,9 +11,19 @@
     
     <UserControl.Resources>
         <ResourceDictionary>
+            <SolidColorBrush x:Key="SelectedElementOutlineBrush" Color="#18A0FB" />
+            <SolidColorBrush x:Key="TargetElementOutlineBrush" Color="#F24822" />
+            <SolidColorBrush x:Key="DistanceOutlineBrush" Color="#F24822" />
+            
             <DoubleCollection x:Key="DashPattern">5,4,5,4</DoubleCollection>
+
+            <Style x:Key="ElementOutlineStyle" TargetType="Rectangle">
+                <Setter Property="Stroke" Value="{StaticResource SelectedElementOutlineBrush}" />
+                <Setter Property="StrokeThickness" Value="2" />
+            </Style>          
+
             <Style x:Key="DistanceOutlineStyle" TargetType="Line">
-                <Setter Property="Stroke" Value="#F24822" />
+                <Setter Property="Stroke" Value="{StaticResource DistanceOutlineBrush}" />
                 <Setter Property="StrokeThickness" Value="2" />
                 <Style.Triggers>
                     <DataTrigger Binding="{Binding Path=IsDashedLine}" Value="True">
@@ -21,36 +31,14 @@
                     </DataTrigger>
                 </Style.Triggers>
             </Style>
-            <Style x:Key="SelectedElementStyle" TargetType="Rectangle">
-                <Setter Property="Stroke" Value="#18A0FB" />
-                <Setter Property="StrokeThickness" Value="2" />
-            </Style>            
-            <Style x:Key="TargetElementStyle" TargetType="Rectangle">
-                <Setter Property="Stroke" Value="#F24822" />
-                <Setter Property="StrokeThickness" Value="2" />
+            
+            <Style x:Key="DimensionsStyle">
+                
             </Style>
         </ResourceDictionary>
     </UserControl.Resources>
     
     <Grid>
-        <Canvas>
-            <Rectangle x:Name="SelectedElementOutline" 
-                Style="{StaticResource SelectedElementStyle}"
-                Visibility="{Binding IsSelectedElementRectVisible, Converter={StaticResource BoolToVisibility}, FallbackValue=Collapsed}"
-                Canvas.Top="{Binding SelectedElementRect.Top}"
-                Canvas.Left="{Binding SelectedElementRect.Left}"
-                Width="{Binding SelectedElementRect.Width}"
-                Height="{Binding SelectedElementRect.Height}" />
-
-            <Rectangle x:Name="TargetElementOutline" 
-                Style="{StaticResource TargetElementStyle}"
-                Visibility="{Binding IsTargetElementRectVisible, Converter={StaticResource BoolToVisibility}, FallbackValue=Collapsed}"
-                Canvas.Top="{Binding TargetElementRect.Top}"
-                Canvas.Left="{Binding TargetElementRect.Left}"
-                Width="{Binding TargetElementRect.Width}"
-                Height="{Binding TargetElementRect.Height}" />
-        </Canvas>
-
         <ItemsControl ItemsSource="{Binding DistanceOutlines}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -63,5 +51,45 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
+
+        <Canvas>
+            <Rectangle x:Name="SelectedElementOutline" 
+                Style="{StaticResource ElementOutlineStyle}"
+                Stroke="{StaticResource SelectedElementOutlineBrush}"
+                Visibility="{Binding IsSelectedElementRectVisible, Converter={StaticResource BoolToVisibility}, FallbackValue=Collapsed}"
+                Canvas.Top="{Binding SelectedElementRect.Top}"
+                Canvas.Left="{Binding SelectedElementRect.Left}"
+                Width="{Binding SelectedElementRect.Width}"
+                Height="{Binding SelectedElementRect.Height}" />
+
+            <Grid
+                Visibility="{Binding IsSelectedElementRectVisible, Converter={StaticResource BoolToVisibility}, FallbackValue=Collapsed}"
+                Canvas.Top="{Binding SelectedElementDimensionsViewModel.ContainerRect.Top}"
+                Canvas.Left="{Binding SelectedElementDimensionsViewModel.ContainerRect.Left}"
+                Width="{Binding SelectedElementDimensionsViewModel.ContainerRect.Width}">
+                <Border Background="{StaticResource SelectedElementOutlineBrush}" CornerRadius="3" HorizontalAlignment="Center" Margin="0,8,0,0">
+                    <TextBlock Text="{Binding SelectedElementDimensionsViewModel.DimensionsText}" Foreground="White" HorizontalAlignment="Center" Padding="8,2,8,2" />
+                </Border>
+            </Grid>
+
+            <Rectangle x:Name="TargetElementOutline" 
+                Style="{StaticResource ElementOutlineStyle}"
+                Stroke="{StaticResource TargetElementOutlineBrush}"
+                Visibility="{Binding IsTargetElementRectVisible, Converter={StaticResource BoolToVisibility}, FallbackValue=Collapsed}"
+                Canvas.Top="{Binding TargetElementRect.Top}"
+                Canvas.Left="{Binding TargetElementRect.Left}"
+                Width="{Binding TargetElementRect.Width}"
+                Height="{Binding TargetElementRect.Height}" />
+
+            <Grid
+                Visibility="{Binding IsTargetElementRectVisible, Converter={StaticResource BoolToVisibility}, FallbackValue=Collapsed}"
+                Canvas.Top="{Binding TargetElementDimensionsViewModel.ContainerRect.Top}"
+                Canvas.Left="{Binding TargetElementDimensionsViewModel.ContainerRect.Left}"
+                Width="{Binding TargetElementDimensionsViewModel.ContainerRect.Width}">
+                <Border Background="{StaticResource TargetElementOutlineBrush}" CornerRadius="3" HorizontalAlignment="Center" Margin="0,8,0,0">
+                    <TextBlock Text="{Binding TargetElementDimensionsViewModel.DimensionsText}" Foreground="White" HorizontalAlignment="Center" Padding="10,2,10,2" />
+                </Border>
+            </Grid>
+        </Canvas>
     </Grid>
 </UserControl>
