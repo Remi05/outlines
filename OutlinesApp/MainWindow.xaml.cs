@@ -18,7 +18,7 @@ namespace OutlinesApp
             IScreenHelper screenHelper = new ScreenHelper(this);
             InspectorViewModel inspectorViewModel = new InspectorViewModel(outlinesService, globalInputListener);
             PropertiesViewModel propertiesViewModel = new PropertiesViewModel(outlinesService);
-            OutlinesViewModel outlinesViewModel = new OutlinesViewModel(this, outlinesService);
+            OutlinesViewModel outlinesViewModel = new OutlinesViewModel(Dispatcher, screenHelper, outlinesService);
 
             var serviceContainer = ServiceContainer.Instance;
             serviceContainer.AddService(typeof(IOutlinesService), outlinesService);
