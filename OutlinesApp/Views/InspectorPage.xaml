@@ -12,6 +12,8 @@
     <Grid>
         <Border Background="Black" Opacity="0.3" Visibility="{Binding IsBackdropVisible, Converter={StaticResource BoolToVisibility}, FallbackValue=Collapsed}" />
         <local:OutlinesOverlay Visibility="{Binding IsOverlayVisible, Converter={StaticResource BoolToVisibility}, FallbackValue=Visible}" />
-        <local:PropertiesPanel Width="240" HorizontalAlignment="Right" Margin="0,16,16,16" Visibility="{Binding IsPropertiesPanelVisible, Converter={StaticResource BoolToVisibility}, FallbackValue=Visible}" />
+        <Grid Margin="0,30,0,30">
+            <local:PropertiesPanel Width="240" HorizontalAlignment="Right" Margin="0,16,16,16" Visibility="{Binding IsPropertiesPanelVisible, Converter={StaticResource BoolToVisibility}, FallbackValue=Visible}" />
+        </Grid>
     </Grid>
 </Page>
