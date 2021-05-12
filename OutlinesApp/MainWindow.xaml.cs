@@ -12,7 +12,6 @@ namespace OutlinesApp
         public MainWindow()
         {
             InitializeComponent();
-            IntPtr handle = new WindowInteropHelper(this).Handle;
 
             IOutlinesService outlinesService = new OutlinesService();
             IGlobalInputListener globalInputListener = new GlobalInputListener();
