@@ -9,13 +9,13 @@ namespace Outlines
         public Point MidPoint { get; private set; }
         public double Distance { get; private set; }
         public bool IsVertical => StartPoint.X == EndPoint.X;
-        public bool IsDashedLine { get; private set; }
+        public bool IsAlignmentLine { get; private set; }
 
-        public DistanceOutline(Point startPoint, Point endPoint, bool isDashedLine = false)
+        public DistanceOutline(Point startPoint, Point endPoint, bool isAlignmentLine = false)
         {
             StartPoint = startPoint;
             EndPoint = endPoint;
-            IsDashedLine = isDashedLine;
+            IsAlignmentLine = isAlignmentLine;
             MidPoint = Point.Add(StartPoint, Point.Subtract(EndPoint, StartPoint) / 2);
             Distance = Point.Subtract(EndPoint, StartPoint).Length;
         }
