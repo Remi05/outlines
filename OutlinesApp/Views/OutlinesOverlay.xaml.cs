@@ -1,19 +1,20 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using OutlinesApp.Services;
 using OutlinesApp.ViewModels;
 
 namespace OutlinesApp.Views
 {
-    public partial class OutlinesLayer : UserControl
+    public partial class OutlinesOverlay : UserControl
     {
-        public OutlinesLayer()
+        public OutlinesOverlay()
         {
             InitializeComponent();
         }
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
-            DataContext = ServiceContainer.Instance.GetService<OutlinesViewModel>();
+            DataContext = ServiceContainer.Instance.GetService<OverlayViewModel>();
         }
     }
 }
