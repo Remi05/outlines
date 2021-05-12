@@ -10,7 +10,7 @@
         Unloaded="OnUnloaded"
         AllowsTransparency="True"
         Background="Transparent"    
-        ShowInTaskbar="False"
+        ShowInTaskbar="True"
         Topmost="True"
         WindowState="Maximized"
         WindowStyle="None"
