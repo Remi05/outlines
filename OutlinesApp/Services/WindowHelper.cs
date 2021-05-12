@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Runtime.InteropServices;
-using System.Windows;
+using System.Windows.Forms;
 
 namespace OutlinesApp.Services
 {
@@ -11,7 +11,8 @@ namespace OutlinesApp.Services
 
         public void CoverAllDisplays(IntPtr hWnd)
         {
-            MoveWindow(hWnd, (int)SystemParameters.VirtualScreenLeft, (int)SystemParameters.VirtualScreenTop, (int)SystemParameters.VirtualScreenWidth, (int)SystemParameters.VirtualScreenHeight, true);
+            System.Drawing.Rectangle displaysRect = SystemInformation.VirtualScreen;
+            MoveWindow(hWnd, displaysRect.X, displaysRect.Y, displaysRect.Width, displaysRect.Height, true);
         }
     }
 }
