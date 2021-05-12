@@ -7,7 +7,7 @@ using OutlinesApp.Services;
 
 namespace OutlinesApp.ViewModels
 {
-    public class OutlinesViewModel : INotifyPropertyChanged
+    public class OverlayViewModel : INotifyPropertyChanged
     {
         private Dispatcher Dispatcher { get; set; }
         private IScreenHelper ScreenHelper { get; set; }
@@ -56,7 +56,7 @@ namespace OutlinesApp.ViewModels
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public OutlinesViewModel(Dispatcher dispatcher, IScreenHelper screenHelper, IOutlinesService outlinesService)
+        public OverlayViewModel(Dispatcher dispatcher, IScreenHelper screenHelper, IOutlinesService outlinesService)
         {
             Dispatcher = dispatcher;
             ScreenHelper = screenHelper;

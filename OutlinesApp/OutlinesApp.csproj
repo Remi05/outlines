@@ -66,7 +66,7 @@
     <Compile Include="ViewModels\ColorPickerViewModel.cs" />
     <Compile Include="ViewModels\DimensionViewModel.cs" />
     <Compile Include="ViewModels\InspectorViewModel.cs" />
-    <Compile Include="ViewModels\OutlinesViewModel.cs" />
+    <Compile Include="ViewModels\OverlayViewModel.cs" />
     <Compile Include="ViewModels\PropertiesViewModel.cs" />
     <Compile Include="Views\InspectorPage.xaml.cs">
       <DependentUpon>InspectorPage.xaml</DependentUpon>

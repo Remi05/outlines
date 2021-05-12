@@ -18,7 +18,7 @@ namespace OutlinesApp
             IScreenHelper screenHelper = new ScreenHelper(this);
             InspectorViewModel inspectorViewModel = new InspectorViewModel(outlinesService, globalInputListener);
             PropertiesViewModel propertiesViewModel = new PropertiesViewModel(outlinesService);
-            OutlinesViewModel outlinesViewModel = new OutlinesViewModel(Dispatcher, screenHelper, outlinesService);
+            OverlayViewModel overlayViewModel = new OverlayViewModel(Dispatcher, screenHelper, outlinesService);
 
             var serviceContainer = ServiceContainer.Instance;
             serviceContainer.AddService(typeof(IOutlinesService), outlinesService);
@@ -26,7 +26,7 @@ namespace OutlinesApp
             serviceContainer.AddService(typeof(IScreenHelper), screenHelper);
             serviceContainer.AddService(typeof(InspectorViewModel), inspectorViewModel);
             serviceContainer.AddService(typeof(PropertiesViewModel), propertiesViewModel);
-            serviceContainer.AddService(typeof(OutlinesViewModel), outlinesViewModel);
+            serviceContainer.AddService(typeof(OverlayViewModel), overlayViewModel);
         }
 
         private void OnLoaded(object sender, RoutedEventArgs e)
