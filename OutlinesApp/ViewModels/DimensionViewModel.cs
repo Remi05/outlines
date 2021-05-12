@@ -12,7 +12,7 @@ namespace OutlinesApp.ViewModels
         private ElementProperties ElementProperties { get; set; }
         private IScreenHelper ScreenHelper { get; set; }
 
-        public string DimensionsText => $"{ElementProperties.BoundingRect.Width}x{ElementProperties.BoundingRect.Height}";
+        public string DimensionsText => $"{ElementProperties.BoundingRect.Width} x {ElementProperties.BoundingRect.Height}";
 
         public Rect ContainerRect { get; private set; }
 
