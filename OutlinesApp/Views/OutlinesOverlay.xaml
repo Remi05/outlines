@@ -27,13 +27,33 @@
                 <Setter Property="StrokeThickness" Value="2" />
                 <Style.Triggers>
                     <DataTrigger Binding="{Binding Path=IsDashedLine}" Value="True">
-                        <Setter Property="StrokeDashArray" Value="{DynamicResource DashPattern}"/>
+                        <Setter Property="StrokeDashArray" Value="{StaticResource DashPattern}"/>
                     </DataTrigger>
                 </Style.Triggers>
             </Style>
             
-            <Style x:Key="DimensionsStyle">
-                
+            <Style x:Key="DistanceTextContainerStyle" TargetType="Border">
+                <Setter Property="Background" Value="{StaticResource DistanceOutlineBrush}" />
+                <Setter Property="CornerRadius" Value="3" />
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding Path=IsVertical}" Value="True">
+                        <Setter Property="HorizontalAlignment" Value="Left"/>
+                        <Setter Property="VerticalAlignment" Value="Center"/>
+                        <Setter Property="Margin" Value="8,0,0,0"/>
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding Path=IsVertical}" Value="False">
+                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                        <Setter Property="VerticalAlignment" Value="Top"/>
+                        <Setter Property="Margin" Value="0,8,0,0"/>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+
+            <Style x:Key="DistanceTextStyle" TargetType="TextBlock">
+                <Setter Property="Foreground" Value="White" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="Padding" Value="10,2,10,2" />
             </Style>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -91,5 +111,28 @@
                 </Border>
             </Grid>
         </Canvas>
+
+        <ItemsControl ItemsSource="{Binding DistanceOutlines}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Canvas />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border Style="{StaticResource DistanceTextContainerStyle}">
+                        <TextBlock Text="{Binding DistanceText}" Style="{StaticResource DistanceTextStyle}" />
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+            <ItemsControl.ItemContainerStyle>
+                <Style TargetType="ContentPresenter">
+                    <Setter Property="Visibility" Value="{Binding IsTextVisible, Converter={StaticResource BoolToVisibility}, FallbackValue=Collapsed}" />
+                    <Setter Property="Canvas.Top" Value="{Binding TextContainerRect.Top}" />
+                    <Setter Property="Canvas.Left" Value="{Binding TextContainerRect.Left}" />
+                    <Setter Property="Width" Value="{Binding TextContainerRect.Width}" />
+                </Style>
+            </ItemsControl.ItemContainerStyle>
+        </ItemsControl>
     </Grid>
 </UserControl>

@@ -13,7 +13,7 @@ namespace OutlinesApp.ViewModels
         private IScreenHelper ScreenHelper { get; set; }
         private IOutlinesService OutlinesService { get; set; }
 
-        public ObservableCollection<DistanceOutline> DistanceOutlines { get; private set; } = new ObservableCollection<DistanceOutline>();
+        public ObservableCollection<DistanceViewModel> DistanceOutlines { get; private set; } = new ObservableCollection<DistanceViewModel>();
 
         private Rect selectedElementRect = Rect.Empty;
         public Rect SelectedElementRect
@@ -94,12 +94,7 @@ namespace OutlinesApp.ViewModels
             Dispatcher.Invoke(() => 
             {
                 DistanceOutlines.Clear();
-                OutlinesService.DistanceOutlines.ForEach((distanceOutline) => 
-                {
-                    var start = ScreenHelper.PointFromScreen(distanceOutline.StartPoint);
-                    var end = ScreenHelper.PointFromScreen(distanceOutline.EndPoint);
-                    DistanceOutlines.Add(new DistanceOutline(start, end, distanceOutline.IsDashedLine));
-                });
+                OutlinesService.DistanceOutlines.ForEach(distanceOutline => DistanceOutlines.Add(new DistanceViewModel(distanceOutline, ScreenHelper)));
             });
         }
     }
