@@ -4,6 +4,7 @@ namespace OutlinesApp.Services
 {
     public interface IScreenHelper
     {
+        Rect GetMonitorRect(Point point);
         Point PointFromScreen(Point screenPoint);
         Point PointToScreen(Point localPoint);
         Rect RectFromScreen(Rect screenRect);

@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Forms;
 using System.Windows.Media;
 
 namespace OutlinesApp.Services
@@ -10,6 +11,13 @@ namespace OutlinesApp.Services
         public ScreenHelper(Visual rootVisual)
         {
             RootVisual = rootVisual;
+        }
+
+        public Rect GetMonitorRect(Point point)
+        {
+            var drawingPoint = new System.Drawing.Point((int)point.X, (int)point.Y);
+            var drawingRect = Screen.FromPoint(drawingPoint).Bounds;
+            return new Rect(new Point(drawingRect.Left, drawingRect.Top), new Size(drawingRect.Width, drawingRect.Height));
         }
 
         public Point PointFromScreen(Point screenPoint)
