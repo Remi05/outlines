@@ -60,7 +60,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="DimensionsConfig.cs" />
     <Compile Include="HoverWatcher.cs" />
     <Compile Include="Services\IColorPickerService.cs" />
     <Compile Include="Services\IScreenHelper.cs" />
@@ -90,7 +89,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ColorConfig.cs" />
     <Compile Include="Services\ColorPickerService.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
