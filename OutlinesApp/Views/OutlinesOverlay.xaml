@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:OutlinesApp.Views"
+             xmlns:vm="clr-namespace:OutlinesApp.ViewModels"
              mc:Ignorable="d" 
              Loaded="OnLoaded"
              Background="Transparent"
@@ -31,29 +32,70 @@
                     </DataTrigger>
                 </Style.Triggers>
             </Style>
-            
+
+            <Style x:Key="DimensionsTextContainerStyle" TargetType="Border">
+                <Setter Property="CornerRadius" Value="3" />
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Margin" Value="0,8,0,8"/>
+                <!--<Style.Triggers>
+                    <DataTrigger Binding="{Binding Path=TextPlacement}" Value="{x:Static vm:DimensionsTextPlacement.Below}">
+                        <Setter Property="VerticalAlignment" Value="Top"/>
+                        <Setter Property="Margin" Value="0,8,0,0"/>
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding Path=TextPlacement}" Value="{x:Static vm:DimensionsTextPlacement.Above}">
+                        <Setter Property="VerticalAlignment" Value="Bottom"/>
+                        <Setter Property="Margin" Value="0,0,0,8"/>
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding Path=TextPlacement}" Value="{x:Static vm:DimensionsTextPlacement.Inside}">
+                        <Setter Property="VerticalAlignment" Value="Bottom"/>
+                        <Setter Property="Margin" Value="0,0,0,8"/>
+                    </DataTrigger>
+                </Style.Triggers>-->
+            </Style>
+
+            <Style x:Key="DimensionsTextStyle" TargetType="TextBlock">
+                <Setter Property="Foreground" Value="White" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="Padding" Value="8,2,8,2" />
+            </Style>
+
             <Style x:Key="DistanceTextContainerStyle" TargetType="Border">
                 <Setter Property="Background" Value="{StaticResource DistanceOutlineBrush}" />
                 <Setter Property="CornerRadius" Value="3" />
-                <Style.Triggers>
-                    <DataTrigger Binding="{Binding Path=IsVertical}" Value="True">
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Margin" Value="8,8,8,8"/>
+                <!--<Style.Triggers>
+                    <DataTrigger Binding="{Binding Path=TextPlacement}" Value="{x:Static vm:DistanceTextPlacement.Right}">
                         <Setter Property="HorizontalAlignment" Value="Left"/>
                         <Setter Property="VerticalAlignment" Value="Center"/>
                         <Setter Property="Margin" Value="8,0,0,0"/>
                     </DataTrigger>
-                    <DataTrigger Binding="{Binding Path=IsVertical}" Value="False">
+                    <DataTrigger Binding="{Binding Path=TextPlacement}" Value="{x:Static vm:DistanceTextPlacement.Left}">
+                        <Setter Property="HorizontalAlignment" Value="Right"/>
+                        <Setter Property="VerticalAlignment" Value="Center"/>
+                        <Setter Property="Margin" Value="0,0,8,0"/>
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding Path=TextPlacement}" Value="{x:Static vm:DistanceTextPlacement.Bottom}">
                         <Setter Property="HorizontalAlignment" Value="Center"/>
                         <Setter Property="VerticalAlignment" Value="Top"/>
                         <Setter Property="Margin" Value="0,8,0,0"/>
                     </DataTrigger>
-                </Style.Triggers>
+                    <DataTrigger Binding="{Binding Path=TextPlacement}" Value="{x:Static vm:DistanceTextPlacement.Top}">
+                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                        <Setter Property="VerticalAlignment" Value="Bottom"/>
+                        <Setter Property="Margin" Value="0,0,0,8"/>
+                    </DataTrigger>
+                </Style.Triggers>-->
             </Style>
 
             <Style x:Key="DistanceTextStyle" TargetType="TextBlock">
                 <Setter Property="Foreground" Value="White" />
                 <Setter Property="HorizontalAlignment" Value="Center" />
                 <Setter Property="VerticalAlignment" Value="Center" />
-                <Setter Property="Padding" Value="10,2,10,2" />
+                <Setter Property="Padding" Value="8,2,8,2" />
             </Style>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -87,8 +129,8 @@
                 Canvas.Top="{Binding SelectedElementDimensionsViewModel.ContainerRect.Top}"
                 Canvas.Left="{Binding SelectedElementDimensionsViewModel.ContainerRect.Left}"
                 Width="{Binding SelectedElementDimensionsViewModel.ContainerRect.Width}">
-                <Border Background="{StaticResource SelectedElementOutlineBrush}" CornerRadius="3" HorizontalAlignment="Center" Margin="0,8,0,0">
-                    <TextBlock Text="{Binding SelectedElementDimensionsViewModel.DimensionsText}" Foreground="White" HorizontalAlignment="Center" Padding="8,2,8,2" />
+                <Border Background="{StaticResource SelectedElementOutlineBrush}" Style="{StaticResource DimensionsTextContainerStyle}">
+                    <TextBlock Text="{Binding SelectedElementDimensionsViewModel.DimensionsText}" Style="{StaticResource DimensionsTextStyle}" />
                 </Border>
             </Grid>
 
@@ -106,8 +148,8 @@
                 Canvas.Top="{Binding TargetElementDimensionsViewModel.ContainerRect.Top}"
                 Canvas.Left="{Binding TargetElementDimensionsViewModel.ContainerRect.Left}"
                 Width="{Binding TargetElementDimensionsViewModel.ContainerRect.Width}">
-                <Border Background="{StaticResource TargetElementOutlineBrush}" CornerRadius="3" HorizontalAlignment="Center" Margin="0,8,0,0">
-                    <TextBlock Text="{Binding TargetElementDimensionsViewModel.DimensionsText}" Foreground="White" HorizontalAlignment="Center" Padding="10,2,10,2" />
+                <Border Background="{StaticResource TargetElementOutlineBrush}" Style="{StaticResource DimensionsTextContainerStyle}">
+                    <TextBlock Text="{Binding TargetElementDimensionsViewModel.DimensionsText}" Style="{StaticResource DimensionsTextStyle}"  />
                 </Border>
             </Grid>
         </Canvas>

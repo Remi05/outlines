@@ -51,8 +51,8 @@ namespace OutlinesApp.ViewModels
         public bool IsSelectedElementRectVisible => SelectedElementRect != Rect.Empty;
         public bool IsTargetElementRectVisible => TargetElementRect != Rect.Empty && TargetElementRect != SelectedElementRect;
 
-        public DimensionViewModel SelectedElementDimensionsViewModel => OutlinesService.SelectedElementProperties == null ? null : new DimensionViewModel(OutlinesService.SelectedElementProperties, ScreenHelper);
-        public DimensionViewModel TargetElementDimensionsViewModel => OutlinesService.TargetElementProperties == null ? null : new DimensionViewModel(OutlinesService.TargetElementProperties, ScreenHelper);
+        public DimensionsViewModel SelectedElementDimensionsViewModel => OutlinesService.SelectedElementProperties == null ? null : new DimensionsViewModel(OutlinesService.SelectedElementProperties, ScreenHelper);
+        public DimensionsViewModel TargetElementDimensionsViewModel => OutlinesService.TargetElementProperties == null ? null : new DimensionsViewModel(OutlinesService.TargetElementProperties, ScreenHelper);
 
         public event PropertyChangedEventHandler PropertyChanged;
 

@@ -67,7 +67,7 @@
     <Compile Include="Services\ServiceContainer.cs" />
     <Compile Include="ViewModels\ColorPickerViewModel.cs" />
     <Compile Include="ViewModels\DistanceViewModel.cs" />
-    <Compile Include="ViewModels\DimensionViewModel.cs" />
+    <Compile Include="ViewModels\DimensionsViewModel.cs" />
     <Compile Include="ViewModels\InspectorViewModel.cs" />
     <Compile Include="ViewModels\OverlayViewModel.cs" />
     <Compile Include="ViewModels\PropertiesViewModel.cs" />
