@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Media;
 
-namespace OutlinesApp
+namespace OutlinesApp.Services
 {
     public class ColorPickerService : IColorPickerService
     {

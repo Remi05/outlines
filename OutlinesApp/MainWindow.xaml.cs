@@ -1,8 +1,9 @@
 using System;
 using System.Windows;
 using System.Windows.Interop;
-using OutlinesApp.ViewModels;
 using Outlines;
+using OutlinesApp.ViewModels;
+using OutlinesApp.Services;
 
 namespace OutlinesApp
 {

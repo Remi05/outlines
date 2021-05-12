@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Media;
 using Outlines;
+using OutlinesApp.Services;
 
 namespace OutlinesApp.ViewModels
 {

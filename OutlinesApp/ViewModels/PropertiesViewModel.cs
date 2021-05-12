@@ -1,5 +1,5 @@
-﻿using Outlines;
-using System.ComponentModel;
+﻿using System.ComponentModel;
+using Outlines;
 
 namespace OutlinesApp.ViewModels
 {

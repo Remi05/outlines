@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace OutlinesApp
+namespace OutlinesApp.Services
 {
     public class ServiceContainer
     {
@@ -29,7 +29,7 @@ namespace OutlinesApp
 
         public T GetService<T>() where T : class
         {
-            object service = null;
+            object service;
             Services.TryGetValue(typeof(T), out service);
             return service as T;
         }

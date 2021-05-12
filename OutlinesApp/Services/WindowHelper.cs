@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using System.Windows;
 
-namespace OutlinesApp
+namespace OutlinesApp.Services
 {
     public class WindowHelper
     {

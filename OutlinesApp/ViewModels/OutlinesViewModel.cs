@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Threading;
 using Outlines;
+using OutlinesApp.Services;
 
 namespace OutlinesApp.ViewModels
 {

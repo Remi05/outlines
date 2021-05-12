@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace OutlinesApp
+namespace OutlinesApp.Services
 {
     public interface IScreenHelper
     {
