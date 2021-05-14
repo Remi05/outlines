@@ -13,7 +13,7 @@ namespace OutlinesApp.ViewModels
         private IColorPickerService ColorPickerService { get; set; }
         private IGlobalInputListener GlobalInputListener { get; set; }
 
-        private Color pickedColor;
+        private Color pickedColor = Colors.Black;
         public Color PickedColor
         {
             get => pickedColor;
@@ -23,11 +23,14 @@ namespace OutlinesApp.ViewModels
                 {
                     pickedColor = value;
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(PickedColor)));
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(PickedColorBrush)));
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(PickedColorRbg)));
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(PickedColorHex)));
                 }
             }
         }
+
+        public Brush PickedColorBrush => new SolidColorBrush(PickedColor);
 
         public string PickedColorRbg => PickedColor == null ? "" : $"({PickedColor.R},{PickedColor.G},{PickedColor.B})";
 

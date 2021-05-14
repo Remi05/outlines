@@ -18,7 +18,7 @@ namespace OutlinesApp.Services
             IntPtr windowDC = GetWindowDC(IntPtr.Zero);
             uint color = GetPixel(windowDC, (int)point.X, (int)point.Y);
             byte[] colorBytes = BitConverter.GetBytes(color);
-            return Color.FromArgb(colorBytes[3], colorBytes[0], colorBytes[1], colorBytes[2]);
+            return Color.FromRgb(colorBytes[0], colorBytes[1], colorBytes[2]);
         }
     }
 }

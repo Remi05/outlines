@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Windows;
 using System.Windows.Interop;
 using Outlines;
@@ -13,20 +13,24 @@ namespace OutlinesApp
         {
             InitializeComponent();
 
-            IOutlinesService outlinesService = new OutlinesService();
+            IColorPickerService colorPickerService = new ColorPickerService();
             IGlobalInputListener globalInputListener = new GlobalInputListener();
+            IOutlinesService outlinesService = new OutlinesService();
             IScreenHelper screenHelper = new ScreenHelper(this);
+            ColorPickerViewModel colorPickerViewModel = new ColorPickerViewModel(colorPickerService, globalInputListener);
             InspectorViewModel inspectorViewModel = new InspectorViewModel(outlinesService, globalInputListener);
-            PropertiesViewModel propertiesViewModel = new PropertiesViewModel(outlinesService);
             OverlayViewModel overlayViewModel = new OverlayViewModel(Dispatcher, screenHelper, outlinesService);
+            PropertiesViewModel propertiesViewModel = new PropertiesViewModel(outlinesService);
 
             var serviceContainer = ServiceContainer.Instance;
-            serviceContainer.AddService(typeof(IOutlinesService), outlinesService);
+            serviceContainer.AddService(typeof(IColorPickerService), colorPickerService);
             serviceContainer.AddService(typeof(IGlobalInputListener), globalInputListener);
+            serviceContainer.AddService(typeof(IOutlinesService), outlinesService);
             serviceContainer.AddService(typeof(IScreenHelper), screenHelper);
+            serviceContainer.AddService(typeof(ColorPickerViewModel), colorPickerViewModel);
             serviceContainer.AddService(typeof(InspectorViewModel), inspectorViewModel);
-            serviceContainer.AddService(typeof(PropertiesViewModel), propertiesViewModel);
             serviceContainer.AddService(typeof(OverlayViewModel), overlayViewModel);
+            serviceContainer.AddService(typeof(PropertiesViewModel), propertiesViewModel);
         }
 
         private void OnLoaded(object sender, RoutedEventArgs e)
