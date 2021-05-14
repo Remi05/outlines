@@ -8,11 +8,19 @@
              Loaded="OnLoaded"
              d:DesignHeight="40" d:DesignWidth="240">
 
+    <UserControl.Resources>
+        <Style x:Key="ColorPreviewBorderStyle" TargetType="Border">
+            <Setter Property="BorderBrush" Value="#808080" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="4" />
+        </Style>
+    </UserControl.Resources>
+
     <Grid>
         <Border Style="{StaticResource SharedInspectorBorderStyle}" Effect="{StaticResource SharedShadowEffect}"/>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="12,12,12,12">
             <Grid Height="32" Width="32" Margin="0,0,16,0">
-                <Border Background="{Binding PickedColorBrush}" CornerRadius="4" />
+                <Border Background="{Binding PickedColorBrush}" Style="{StaticResource ColorPreviewBorderStyle}" />
             </Grid>
             <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center">
                 <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
