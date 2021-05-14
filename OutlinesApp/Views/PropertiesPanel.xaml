@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:OutlinesApp.Views"
              mc:Ignorable="d" 
              Loaded="OnLoaded"
-             d:DesignHeight="600" d:DesignWidth="320">
+             d:DesignHeight="600" d:DesignWidth="240">
 
     <UserControl.Resources>
         <ResourceDictionary>
@@ -29,11 +29,7 @@
     </UserControl.Resources>
     
     <Grid VerticalAlignment="Top">
-        <Border CornerRadius="8" Background="White">
-            <Border.Effect>
-                <DropShadowEffect Direction="225" BlurRadius="20" Opacity="0.3"/>
-            </Border.Effect>
-        </Border>
+        <Border Style="{StaticResource SharedInspectorBorderStyle}" Effect="{StaticResource SharedShadowEffect}" />
 
         <StackPanel Margin="16,16,16,16">
             <StackPanel x:Name="ElementPropertiesGroup" Margin="0,0,0,16">
