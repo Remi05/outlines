@@ -13,7 +13,7 @@ namespace OutlinesApp.Views
 
         private void OnLoaded(object sender, System.Windows.RoutedEventArgs e)
         {
-            DataContext = ServiceContainer.Instance.GetService<InspectorViewModel>();
+            Root.DataContext = ServiceContainer.Instance.GetService<InspectorViewModel>();
         }
     }
 }

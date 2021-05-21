@@ -27,8 +27,8 @@
             </Style>
         </ResourceDictionary>
     </UserControl.Resources>
-    
-    <Grid VerticalAlignment="Top">
+
+    <Grid Name="Root" VerticalAlignment="Top">
         <Border Style="{StaticResource SharedInspectorBorderStyle}" Effect="{StaticResource SharedShadowEffect}" />
 
         <StackPanel Margin="16,16,16,16">

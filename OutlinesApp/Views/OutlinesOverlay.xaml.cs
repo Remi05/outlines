@@ -14,7 +14,7 @@ namespace OutlinesApp.Views
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
-            DataContext = ServiceContainer.Instance.GetService<OverlayViewModel>();
+            Root.DataContext = ServiceContainer.Instance.GetService<OverlayViewModel>();
         }
     }
 }

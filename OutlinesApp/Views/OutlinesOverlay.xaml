@@ -99,8 +99,8 @@
             </Style>
         </ResourceDictionary>
     </UserControl.Resources>
-    
-    <Grid>
+
+    <Grid Name="Root">
         <ItemsControl ItemsSource="{Binding DistanceOutlines}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
