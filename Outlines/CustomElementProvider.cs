@@ -12,7 +12,8 @@ namespace Outlines
         public CustomElementProvider()
         {
             
-            FitlerCondition = new AndCondition(new NotCondition(new PropertyCondition(AutomationElement.NameProperty, "Outlines", PropertyConditionFlags.IgnoreCase)),
+            FitlerCondition = new AndCondition(new NotCondition(new AndCondition(new PropertyCondition(AutomationElement.NameProperty, "Outlines", PropertyConditionFlags.IgnoreCase), 
+                                                                                 new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Window))),
                                                new PropertyCondition(AutomationElement.IsOffscreenProperty, false));
         }
 
