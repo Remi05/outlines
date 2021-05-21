@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
@@ -68,6 +68,16 @@ namespace OutlinesApp.ViewModels
             GlobalInputListener.MouseDown += OnMouseDown;
             GlobalInputListener.KeyDown += OnKeyDown;
             GlobalInputListener.KeyUp += OnKeyUp;
+        }
+
+        public void ToggleOverlay()
+        {
+            IsOverlayVisible = !IsOverlayVisible;
+        }
+
+        public void TogglePropertiesPanel()
+        {
+            IsPropertiesPanelVisible = !IsPropertiesPanelVisible;
         }
 
         private void OnMouseHovered(Point cursorPos)

@@ -71,6 +71,7 @@
     <Compile Include="ViewModels\InspectorViewModel.cs" />
     <Compile Include="ViewModels\OverlayViewModel.cs" />
     <Compile Include="ViewModels\PropertiesViewModel.cs" />
+    <Compile Include="ViewModels\ToolBarViewModel.cs" />
     <Compile Include="Views\ColorPicker.xaml.cs">
       <DependentUpon>ColorPicker.xaml</DependentUpon>
     </Compile>

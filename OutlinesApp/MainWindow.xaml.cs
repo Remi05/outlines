@@ -21,6 +21,7 @@ namespace OutlinesApp
             InspectorViewModel inspectorViewModel = new InspectorViewModel(outlinesService, globalInputListener);
             OverlayViewModel overlayViewModel = new OverlayViewModel(Dispatcher, screenHelper, outlinesService);
             PropertiesViewModel propertiesViewModel = new PropertiesViewModel(outlinesService);
+            ToolBarViewModel toolBarViewModel = new ToolBarViewModel(inspectorViewModel);
 
             var serviceContainer = ServiceContainer.Instance;
             serviceContainer.AddService(typeof(IColorPickerService), colorPickerService);
@@ -31,6 +32,7 @@ namespace OutlinesApp
             serviceContainer.AddService(typeof(InspectorViewModel), inspectorViewModel);
             serviceContainer.AddService(typeof(OverlayViewModel), overlayViewModel);
             serviceContainer.AddService(typeof(PropertiesViewModel), propertiesViewModel);
+            serviceContainer.AddService(typeof(ToolBarViewModel), toolBarViewModel);
         }
 
         private void OnLoaded(object sender, RoutedEventArgs e)
