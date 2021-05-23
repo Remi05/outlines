@@ -6,15 +6,27 @@
       xmlns:local="clr-namespace:OutlinesApp.Views"
       mc:Ignorable="d" 
       Loaded="OnLoaded"
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="600" d:DesignWidth="1000"
       Title="InspectorPage">
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <Style x:Key="SidePanelStyle" TargetType="StackPanel">
+                <Setter Property="Width" Value="200" />
+                <Setter Property="HorizontalAlignment" Value="Right" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="Margin" Value="0,0,16,0" />
+            </Style>
+        </ResourceDictionary>
+    </Page.Resources>
 
     <Grid x:Name="Root">
         <Border Background="Black" Opacity="0.3" Visibility="{Binding IsBackdropVisible, Converter={StaticResource BoolToVisibility}, FallbackValue=Collapsed}" />
         <local:OutlinesOverlay Visibility="{Binding IsOverlayVisible, Converter={StaticResource BoolToVisibility}, FallbackValue=Visible}" />
         <local:ToolBar HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,12,0,0" />
         <Grid Margin="0,60,0,60">
-            <StackPanel Width="200" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,16,0" Visibility="{Binding IsPropertiesPanelVisible, Converter={StaticResource BoolToVisibility}, FallbackValue=Visible}">
+            <StackPanel Visibility="{Binding IsPropertiesPanelVisible, Converter={StaticResource BoolToVisibility}, FallbackValue=Visible}" 
+                        Style="{StaticResource SidePanelStyle}">
                 <local:ColorPicker Margin="0,0,0,12" />
                 <local:PropertiesPanel />
             </StackPanel>
