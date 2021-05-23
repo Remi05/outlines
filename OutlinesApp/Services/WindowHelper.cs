@@ -1,19 +1,18 @@
 ﻿using System;
-using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-namespace OutlinesApp
+namespace OutlinesApp.Services
 {
-    public static class ScreenHelper
+    public class WindowHelper
     {
         [DllImport("user32.dll", CharSet = CharSet.Ansi, SetLastError = true, ExactSpelling = true)]
         private static extern bool MoveWindow(IntPtr hWnd, int x, int y, int width, int height, bool shouldRepaint);
 
-        public static void CoverAllDisplays(Form form)
+        public void CoverAllDisplays(IntPtr hWnd)
         {
-            Rectangle displaysRect = SystemInformation.VirtualScreen;
-            MoveWindow(form.Handle, displaysRect.X, displaysRect.Y, displaysRect.Width, displaysRect.Height, true);
+            System.Drawing.Rectangle displaysRect = SystemInformation.VirtualScreen;
+            MoveWindow(hWnd, displaysRect.X, displaysRect.Y, displaysRect.Width, displaysRect.Height, true);
         }
     }
 }

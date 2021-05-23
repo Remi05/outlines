@@ -1,0 +1,16 @@
+<Application x:Class="OutlinesApp.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:OutlinesApp"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
+            <DropShadowEffect x:Key="SharedShadowEffect" Direction="225" BlurRadius="20" Opacity="0.3" />
+            <Style x:Key="SharedInspectorBorderStyle" TargetType="Border">
+                <Setter Property="Background" Value="White" />
+                <Setter Property="CornerRadius" Value="8" />
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

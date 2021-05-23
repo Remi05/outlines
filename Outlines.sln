@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30128.74
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OutlinesApp", "OutlinesApp\OutlinesApp.csproj", "{177350CC-0237-4A77-B2F2-86631C4A7DDA}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Outlines", "Outlines\Outlines.csproj", "{D775E93C-CAEE-43BD-9B67-36FCAE02494E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OutlinesApp", "OutlinesApp\OutlinesApp.csproj", "{22E7FA16-5E3A-4595-9A5F-3D838D76C312}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,14 +15,6 @@ Global
 		UiAccessRelease|Any CPU = UiAccessRelease|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{177350CC-0237-4A77-B2F2-86631C4A7DDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{177350CC-0237-4A77-B2F2-86631C4A7DDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{177350CC-0237-4A77-B2F2-86631C4A7DDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{177350CC-0237-4A77-B2F2-86631C4A7DDA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{177350CC-0237-4A77-B2F2-86631C4A7DDA}.UiAccessDebug|Any CPU.ActiveCfg = UiAccessDebug|Any CPU
-		{177350CC-0237-4A77-B2F2-86631C4A7DDA}.UiAccessDebug|Any CPU.Build.0 = UiAccessDebug|Any CPU
-		{177350CC-0237-4A77-B2F2-86631C4A7DDA}.UiAccessRelease|Any CPU.ActiveCfg = UiAccessRelease|Any CPU
-		{177350CC-0237-4A77-B2F2-86631C4A7DDA}.UiAccessRelease|Any CPU.Build.0 = UiAccessRelease|Any CPU
 		{D775E93C-CAEE-43BD-9B67-36FCAE02494E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D775E93C-CAEE-43BD-9B67-36FCAE02494E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D775E93C-CAEE-43BD-9B67-36FCAE02494E}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -31,6 +23,14 @@ Global
 		{D775E93C-CAEE-43BD-9B67-36FCAE02494E}.UiAccessDebug|Any CPU.Build.0 = Debug|Any CPU
 		{D775E93C-CAEE-43BD-9B67-36FCAE02494E}.UiAccessRelease|Any CPU.ActiveCfg = Release|Any CPU
 		{D775E93C-CAEE-43BD-9B67-36FCAE02494E}.UiAccessRelease|Any CPU.Build.0 = Release|Any CPU
+		{22E7FA16-5E3A-4595-9A5F-3D838D76C312}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22E7FA16-5E3A-4595-9A5F-3D838D76C312}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22E7FA16-5E3A-4595-9A5F-3D838D76C312}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22E7FA16-5E3A-4595-9A5F-3D838D76C312}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22E7FA16-5E3A-4595-9A5F-3D838D76C312}.UiAccessDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22E7FA16-5E3A-4595-9A5F-3D838D76C312}.UiAccessDebug|Any CPU.Build.0 = Debug|Any CPU
+		{22E7FA16-5E3A-4595-9A5F-3D838D76C312}.UiAccessRelease|Any CPU.ActiveCfg = Release|Any CPU
+		{22E7FA16-5E3A-4595-9A5F-3D838D76C312}.UiAccessRelease|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

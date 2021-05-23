@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="OutlinesApp.Views.ToolBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:OutlinesApp.Views"
+             mc:Ignorable="d" 
+             Loaded="OnLoaded">
+    
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <Style x:Key="ToolBarStyle" TargetType="Border">
+                <Setter Property="Background" Value="White" />
+                <Setter Property="CornerRadius" Value="4" />
+                <Setter Property="HorizontalAlignment" Value="Stretch" />
+                <Setter Property="Effect" Value="{StaticResource SharedShadowEffect}" />
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid Name="Root">
+        <Border Style="{StaticResource ToolBarStyle}" />
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+            <local:ToolBarButton Content="&#xE721;" Command="{Binding ToggleOverlayCommand}" />
+            <local:ToolBarButton Content="&#xE8FD;" Command="{Binding TogglePropertiesPanelCommand}" />
+            <local:ToolBarButton Content="&#xE711;" Command="{Binding CloseAppCommand}" Background="#FF5555" Foreground="White" />
+        </StackPanel>
+    </Grid>
+</UserControl>

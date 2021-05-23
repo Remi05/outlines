@@ -1,10 +1,11 @@
 ﻿using System;
-using System.Drawing;
 using System.Runtime.InteropServices;
+using System.Windows;
+using System.Windows.Media;
 
-namespace OutlinesApp
+namespace OutlinesApp.Services
 {
-    public class ColorPicker
+    public class ColorPickerService : IColorPickerService
     {
         [DllImport("gdi32")]
         public static extern uint GetPixel(IntPtr hDC, int xPos, int yPos);
@@ -15,9 +16,9 @@ namespace OutlinesApp
         public Color GetColorAt(Point point)
         {
             IntPtr windowDC = GetWindowDC(IntPtr.Zero);
-            uint color = GetPixel(windowDC, point.X, point.Y);
-            Color bgrColor = Color.FromArgb((int)color);
-            return Color.FromArgb(bgrColor.B, bgrColor.G, bgrColor.R);
+            uint color = GetPixel(windowDC, (int)point.X, (int)point.Y);
+            byte[] colorBytes = BitConverter.GetBytes(color);
+            return Color.FromRgb(colorBytes[0], colorBytes[1], colorBytes[2]);
         }
     }
 }
