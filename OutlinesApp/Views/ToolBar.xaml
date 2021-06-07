@@ -23,6 +23,7 @@
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
             <local:ToolBarButton Content="&#xE721;" Command="{Binding ToggleOverlayCommand}" />
             <local:ToolBarButton Content="&#xE8FD;" Command="{Binding TogglePropertiesPanelCommand}" />
+            <local:ToolBarButton Content="&#xE8B9;" Command="{Binding TakeScreenshotCommand}" />
             <local:ToolBarButton Content="&#xE711;" Command="{Binding CloseAppCommand}" Background="#FF5555" Foreground="White" />
         </StackPanel>
     </Grid>
