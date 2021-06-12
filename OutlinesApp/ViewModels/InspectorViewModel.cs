@@ -31,7 +31,7 @@ namespace OutlinesApp.ViewModels
         public bool IsOverlayVisible
         {
             get => isOverlayVisible;
-            private set
+            set
             {
                 if (value != isOverlayVisible)
                 {
@@ -45,7 +45,7 @@ namespace OutlinesApp.ViewModels
         public bool IsPropertiesPanelVisible
         {
             get => isPropertiesPanelVisible;
-            private set
+            set
             {
                 if (value != isPropertiesPanelVisible)
                 {
