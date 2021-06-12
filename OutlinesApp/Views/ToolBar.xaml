@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="OutlinesApp.Views.ToolBar"
+<UserControl x:Class="OutlinesApp.Views.ToolBar"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -23,6 +23,9 @@
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
             <local:ToolBarToggleButton Content="&#xE721;" IsChecked="{Binding InspectorViewModel.IsOverlayVisible, Mode=TwoWay}" ToolTip="Toggle Overlay" />
             <local:ToolBarToggleButton Content="&#xE8FD;" IsChecked="{Binding InspectorViewModel.IsPropertiesPanelVisible, Mode=TwoWay}" ToolTip="Toggle Properties Panel" />
+            <local:ToolBarButton Content="&#xED15;" Command="{Binding GiveFeedbackCommand}" ToolTip="Give Feedback" />
+            <local:ToolBarButton Content="&#xE9CE;" Command="{Binding GetHelpCommand}" ToolTip="Help" />
+            <local:ToolBarButton Content="&#xE946;" Command="{Binding ShowMoreInfoCommand}" ToolTip="More Info" Visibility="Collapsed" />
             <local:ToolBarButton Content="&#xE711;" Command="{Binding CloseAppCommand}" ToolTip="Close App" Background="#FF5555" Foreground="White" />
         </StackPanel>
     </Grid>
