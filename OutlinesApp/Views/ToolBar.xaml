@@ -21,9 +21,13 @@
     <Grid Name="Root">
         <Border Style="{StaticResource ToolBarStyle}" />
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
-            <local:ToolBarButton Content="&#xE721;" Command="{Binding ToggleOverlayCommand}" />
-            <local:ToolBarButton Content="&#xE8FD;" Command="{Binding TogglePropertiesPanelCommand}" />
-            <local:ToolBarButton Content="&#xE711;" Command="{Binding CloseAppCommand}" Background="#FF5555" Foreground="White" />
+            <Border x:Name="Handle" Height="35" Width="4" CornerRadius="1" Margin="0,0,5,0" Background="#38000000" BorderBrush="#40000000" BorderThickness="1" VerticalAlignment="Center" Visibility="Collapsed" />
+            <local:ToolBarToggleButton Content="&#xE721;" IsChecked="{Binding InspectorViewModel.IsOverlayVisible, Mode=TwoWay}" ToolTip="Toggle Overlay" />
+            <local:ToolBarToggleButton Content="&#xE8FD;" IsChecked="{Binding InspectorViewModel.IsPropertiesPanelVisible, Mode=TwoWay}" ToolTip="Toggle Properties Panel" />
+            <local:ToolBarButton Content="&#xED15;" Command="{Binding GiveFeedbackCommand}" ToolTip="Give Feedback" />
+            <local:ToolBarButton Content="&#xE9CE;" Command="{Binding GetHelpCommand}" ToolTip="Help" />
+            <local:ToolBarButton Content="&#xE946;" Command="{Binding ShowMoreInfoCommand}" ToolTip="More Info" Visibility="Collapsed" />
+            <local:ToolBarButton Content="&#xE711;" Command="{Binding CloseAppCommand}" ToolTip="Close App" Background="#FF5555" Foreground="White" />
         </StackPanel>
     </Grid>
 </UserControl>
