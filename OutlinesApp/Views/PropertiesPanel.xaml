@@ -36,7 +36,7 @@
                 <TextBlock Text="Element Properties" Style="{StaticResource PropertyGroupHeaderStyle}" />
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Name" Style="{StaticResource PropertyNameStyle}" />
-                    <TextBlock x:Name="ElementNameTextBlock" Text="{Binding ElementProperties.Name, Mode=OneWay}" Style="{StaticResource PropertyValueStyle}" />
+                    <TextBlock x:Name="ElementNameTextBlock" Text="{Binding ElementProperties.Name, Mode=OneWay}" Style="{StaticResource PropertyValueStyle}" ToolTip="{Binding ElementProperties.Name, Mode=OneWay}" TextTrimming="CharacterEllipsis" MaxWidth="125" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Width" Style="{StaticResource PropertyNameStyle}" />
