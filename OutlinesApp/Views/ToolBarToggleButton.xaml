@@ -60,7 +60,7 @@
                         <ControlTemplate.Triggers>
                             <Trigger Property="ToggleButton.IsChecked" Value="True">
                                 <Setter TargetName="Border1" Property="BorderBrush" Value="#8818A0FB" />
-                                <Setter TargetName="Border1" Property="BorderThickness" Value="1.5" />
+                                <Setter TargetName="Border1" Property="BorderThickness" Value="2" />
                             </Trigger>
                             <Trigger Property="ToggleButton.IsChecked" Value="False">
                                 <Setter TargetName="Border1" Property="BorderBrush" Value="#CCCCCC" />
