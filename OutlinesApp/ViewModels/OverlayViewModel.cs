@@ -67,25 +67,33 @@ namespace OutlinesApp.ViewModels
 
         private void OnSelectedElementChanged()
         {
-            if (OutlinesService.SelectedElementProperties != null)
+            Dispatcher.Invoke(() => 
             {
-                Dispatcher.Invoke(() => 
+                if (OutlinesService.SelectedElementProperties != null)
                 {
                     SelectedElementRect = ScreenHelper.RectFromScreen(OutlinesService.SelectedElementProperties.BoundingRect);
-                });
-            }
+                }
+                else
+                {
+                    SelectedElementRect = Rect.Empty;
+                }
+            });  
             UpdateDistanceOutlines();
         }
         
         private void OnTargetElementChanged()
-        {
-            if (OutlinesService.TargetElementProperties != null)
-            { 
-                Dispatcher.Invoke(() => 
+        {    
+            Dispatcher.Invoke(() => 
+            {
+                if (OutlinesService.TargetElementProperties != null)
                 {
                     TargetElementRect = ScreenHelper.RectFromScreen(OutlinesService.TargetElementProperties.BoundingRect);
-                });
-            }
+                }
+                else
+                {
+                    TargetElementRect = Rect.Empty;
+                }
+            });
             UpdateDistanceOutlines();
         }
 
