@@ -55,6 +55,20 @@ namespace OutlinesApp.ViewModels
             }
         }
 
+        private bool isTreeViewVisible = true;
+        public bool IsTreeViewVisible
+        {
+            get => isTreeViewVisible;
+            set
+            {
+                if (value != isTreeViewVisible)
+                {
+                    isTreeViewVisible = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsTreeViewVisible)));
+                }
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public InspectorViewModel(IOutlinesService outlinesService, IGlobalInputListener globalInputListener)

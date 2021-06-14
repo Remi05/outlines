@@ -1,0 +1,62 @@
+﻿<UserControl x:Class="OutlinesApp.Views.UiTreeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:OutlinesApp.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="200">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <Style x:Key="HeaderStyle" TargetType="TextBlock">
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="FontFamily" Value="Segoe UI Bold" />
+                <Setter Property="Margin" Value="0,0,0,8" />
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid x:Name="Root">
+        <Border Style="{StaticResource SharedInspectorBorderStyle}" Effect="{StaticResource SharedShadowEffectLeft}" />
+
+        <StackPanel Margin="16,16,16,16">
+            <TextBlock Text="Tree View" Style="{StaticResource HeaderStyle}" />
+            <TreeView ItemsSource="{Binding Elements}" SelectedItemChanged="OnSelectedItemChanged" BorderThickness="0" Margin="-8,0,0,0">
+                <!--<TreeViewItem Header="Employee1" IsSelected="True">
+                    <TreeViewItem Header="Jesper Aaberg"/>
+                    <TreeViewItem Header="Employee Number">
+                        <TreeViewItem Header="12345"/>
+                        <TreeViewItem Header="Employee1" IsSelected="True">
+                            <TreeViewItem Header="Jesper Aaberg"/>
+                            <TreeViewItem Header="Employee Number">
+                                <TreeViewItem Header="12345"/>
+                            </TreeViewItem>
+                            <TreeViewItem Header="Work Days">
+                                <TreeViewItem Header="Monday"/>
+                                <TreeViewItem Header="Tuesday"/>
+                                <TreeViewItem Header="Thursday"/>
+                            </TreeViewItem>
+                        </TreeViewItem>
+                    </TreeViewItem>
+                    <TreeViewItem Header="Work Days">
+                        <TreeViewItem Header="Monday"/>
+                        <TreeViewItem Header="Tuesday"/>
+                        <TreeViewItem Header="Thursday"/>
+                    </TreeViewItem>
+                </TreeViewItem>
+                <TreeViewItem Header="Employee2">
+                    <TreeViewItem Header="Dominik Paiha"/>
+                    <TreeViewItem Header="Employee Number">
+                        <TreeViewItem Header="98765"/>
+                    </TreeViewItem>
+                    <TreeViewItem Header="Work Days">
+                        <TreeViewItem Header="Tuesday"/>
+                        <TreeViewItem Header="Wednesday"/>
+                        <TreeViewItem Header="Friday"/>
+                    </TreeViewItem>
+                </TreeViewItem>-->
+            </TreeView>
+        </StackPanel>
+    </Grid>
+</UserControl>
