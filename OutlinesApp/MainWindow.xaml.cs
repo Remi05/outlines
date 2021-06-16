@@ -12,8 +12,9 @@ namespace OutlinesApp
         {
             InitializeComponent();
 
+            InputMaskingService inputMaskingService = new InputMaskingService(this);
             IColorPickerService colorPickerService = new ColorPickerService();
-            IGlobalInputListener globalInputListener = new GlobalInputListener();
+            IGlobalInputListener globalInputListener = new GlobalInputListener(inputMaskingService);
             IOutlinesService outlinesService = new OutlinesService();
             IScreenHelper screenHelper = new ScreenHelper(this);
             ColorPickerViewModel colorPickerViewModel = new ColorPickerViewModel(colorPickerService, globalInputListener);
@@ -23,6 +24,7 @@ namespace OutlinesApp
             ToolBarViewModel toolBarViewModel = new ToolBarViewModel(inspectorViewModel);
 
             var serviceContainer = ServiceContainer.Instance;
+            serviceContainer.AddService(typeof(InputMaskingService), inputMaskingService);
             serviceContainer.AddService(typeof(IColorPickerService), colorPickerService);
             serviceContainer.AddService(typeof(IGlobalInputListener), globalInputListener);
             serviceContainer.AddService(typeof(IOutlinesService), outlinesService);
