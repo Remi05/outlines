@@ -1,9 +1,8 @@
-﻿using System;
+﻿using System.ComponentModel;
 using System.Windows;
-using System.Windows.Interop;
 using Outlines;
-using OutlinesApp.ViewModels;
 using OutlinesApp.Services;
+using OutlinesApp.ViewModels;
 
 namespace OutlinesApp
 {
@@ -41,7 +40,7 @@ namespace OutlinesApp
             globalInputListener?.RegisterToInputEvents();
         }
 
-        private void OnUnloaded(object sender, RoutedEventArgs e)
+        private void OnClosing(object sender, CancelEventArgs e)
         {
             var globalInputListener = ServiceContainer.Instance.GetService<IGlobalInputListener>();
             globalInputListener?.UnregisterFromInputEvents();

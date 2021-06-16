@@ -7,7 +7,7 @@
         xmlns:views="clr-namespace:OutlinesApp.Views"
         mc:Ignorable="d"
         Loaded="OnLoaded"
-        Unloaded="OnUnloaded"
+        Closing="OnClosing"
         AllowsTransparency="True"
         Background="Transparent"    
         ShowInTaskbar="True"
