@@ -81,12 +81,15 @@ namespace Outlines
         {
             if (MouseHookPtr != IntPtr.Zero)
             {
-                UnhookWindowsHookEx(KeyboardHookPtr);
                 UnhookWindowsHookEx(MouseHookPtr);
-                KeyboardHookPtr = IntPtr.Zero;
                 MouseHookPtr = IntPtr.Zero;
-                KeyboardHookProc = null;
                 MouseHookProc = null;
+            }
+            if (KeyboardHookPtr != IntPtr.Zero)
+            {
+                UnhookWindowsHookEx(KeyboardHookPtr);
+                KeyboardHookPtr = IntPtr.Zero;
+                KeyboardHookProc = null;
             }
         }
 
