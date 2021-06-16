@@ -15,6 +15,8 @@ namespace OutlinesApp.Views
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
             Root.DataContext = ServiceContainer.Instance.GetService<OverlayViewModel>();
+            var inputMaskingService = ServiceContainer.Instance.GetService<InputMaskingService>();
+            inputMaskingService?.Ignore(this);
         }
     }
 }
