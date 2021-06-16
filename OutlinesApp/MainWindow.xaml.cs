@@ -1,10 +1,8 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Windows;
-using System.Windows.Interop;
 using Outlines;
-using OutlinesApp.ViewModels;
 using OutlinesApp.Services;
+using OutlinesApp.ViewModels;
 
 namespace OutlinesApp
 {
