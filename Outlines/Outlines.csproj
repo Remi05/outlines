@@ -51,6 +51,7 @@
     <Compile Include="GlobalInputListener.cs" />
     <Compile Include="IElementProvider.cs" />
     <Compile Include="IGlobalInputListener.cs" />
+    <Compile Include="IInputMaskingService.cs" />
     <Compile Include="IOutlinesService.cs" />
     <Compile Include="OutlinesService.cs" />
     <Compile Include="DistanceOutlinesProvider.cs" />
