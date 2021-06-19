@@ -16,7 +16,7 @@ namespace OutlinesApp.ViewModels
         private bool isBackdropVisible = false;
         public bool IsBackdropVisible
         {
-            get => isBackdropVisible;
+            get => isBackdropVisible && IsOverlayVisible;
             private set
             {
                 if (value != isBackdropVisible)
@@ -37,6 +37,7 @@ namespace OutlinesApp.ViewModels
                 {
                     isOverlayVisible = value;
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsOverlayVisible)));
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsBackdropVisible)));
                 }
             }
         }

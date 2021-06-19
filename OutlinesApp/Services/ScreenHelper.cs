@@ -32,6 +32,10 @@ namespace OutlinesApp.Services
 
         public Size SizeFromScreen(Size screenSize)
         {
+            if (screenSize.IsEmpty)
+            {
+                return screenSize;
+            }
             Matrix transformFromDevice = PresentationSource.FromVisual(RootVisual).CompositionTarget.TransformFromDevice;
             Vector screenSizeVector = new Vector(screenSize.Width, screenSize.Height);
             Vector localSizeVector = transformFromDevice.Transform(screenSizeVector);

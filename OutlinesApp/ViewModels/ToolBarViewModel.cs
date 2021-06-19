@@ -13,7 +13,7 @@ namespace OutlinesApp.ViewModels
         public ToolBarViewModel(InspectorViewModel inspectorViewModel)
         {
             InspectorViewModel = inspectorViewModel;
-            CloseAppCommand = new RelayCommand<object>(_ => App.Current.Shutdown());
+            CloseAppCommand = new RelayCommand<object>(_ => App.Current.Shutdown(0));
             GetHelpCommand = new RelayCommand<object>(_ => GetHelp());
             GiveFeedbackCommand = new RelayCommand<object>(_ => GiveFeedback());
             ShowMoreInfoCommand = new RelayCommand<object>(_ => ShowMoreInfo());
