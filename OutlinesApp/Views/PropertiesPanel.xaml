@@ -29,16 +29,9 @@
     </UserControl.Resources>
 
     <Grid Name="Root" VerticalAlignment="Top">
-<<<<<<< HEAD
         <Border Style="{StaticResource SharedInspectorBorderStyle}" Effect="{StaticResource SharedShadowEffectRight}" />
-
-        <StackPanel Margin="16,16,16,16">
-            <StackPanel x:Name="ElementPropertiesGroup" Margin="0,0,0,16">
-=======
-        <Border Style="{StaticResource SharedInspectorBorderStyle}" Effect="{StaticResource SharedShadowEffect}" />
         <StackPanel Margin="16">
             <StackPanel x:Name="ElementPropertiesGroup" Margin="0,0,0,12">
->>>>>>> main
                 <TextBlock Text="Element Properties" Style="{StaticResource PropertyGroupHeaderStyle}" />
                 <StackPanel Orientation="Horizontal">
                     <StackPanel Orientation="Vertical">
