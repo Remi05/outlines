@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CornerRadius.cs" />
+    <Compile Include="DetectedRectangle.cs" />
     <Compile Include="Line.cs" />
     <Compile Include="LineDetectionService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
