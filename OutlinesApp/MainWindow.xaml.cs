@@ -19,7 +19,7 @@ namespace OutlinesApp
             IScreenHelper screenHelper = new ScreenHelper(this);
             ColorPickerViewModel colorPickerViewModel = new ColorPickerViewModel(colorPickerService, globalInputListener);
             InspectorViewModel inspectorViewModel = new InspectorViewModel(outlinesService, globalInputListener);
-            OverlayViewModel overlayViewModel = new OverlayViewModel(Dispatcher, screenHelper, outlinesService);
+            OverlayViewModel overlayViewModel = new OverlayViewModel(Dispatcher, outlinesService, screenHelper);
             PropertiesViewModel propertiesViewModel = new PropertiesViewModel(outlinesService);
             ToolBarViewModel toolBarViewModel = new ToolBarViewModel(inspectorViewModel);
             UiTreeViewModel uiTreeViewModel = new UiTreeViewModel();

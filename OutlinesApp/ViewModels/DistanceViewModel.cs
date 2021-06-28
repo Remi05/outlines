@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using Outlines;
 using OutlinesApp.Services;
 
@@ -29,6 +30,10 @@ namespace OutlinesApp.ViewModels
 
         public DistanceViewModel(DistanceOutline distanceOutline, IScreenHelper screenHelper)
         {
+            if (distanceOutline == null || screenHelper == null)
+            {
+                throw new ArgumentNullException(distanceOutline == null ? nameof(distanceOutline) : nameof(screenHelper));
+            }
             DistanceOutline = distanceOutline;
             ScreenHelper = screenHelper;
             StartPoint = ScreenHelper.PointFromScreen(distanceOutline.StartPoint);
