@@ -32,7 +32,10 @@ namespace OutlinesApp.Services
 
         public void Ignore(FrameworkElement element)
         {
-            IgnoreSet.Add(element);
+            if (element != null)
+            {
+                IgnoreSet.Add(element);
+            }
         }
     }
 }

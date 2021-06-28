@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using Outlines;
 using OutlinesApp.Services;
 
@@ -22,6 +23,10 @@ namespace OutlinesApp.ViewModels
 
         public DimensionsViewModel(ElementProperties elementProperties, IScreenHelper screenHelper)
         {
+            if (elementProperties == null || screenHelper == null)
+            {
+                throw new ArgumentNullException(elementProperties == null ? nameof(elementProperties) : nameof(screenHelper));
+            }
             ElementProperties = elementProperties;
             ScreenHelper = screenHelper;
             InitializeContainerRect();

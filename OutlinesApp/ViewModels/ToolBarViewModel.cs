@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 
 namespace OutlinesApp.ViewModels
 {
@@ -12,6 +13,10 @@ namespace OutlinesApp.ViewModels
 
         public ToolBarViewModel(InspectorViewModel inspectorViewModel)
         {
+            if (inspectorViewModel == null)
+            {
+                throw new ArgumentNullException(nameof(inspectorViewModel));
+            }
             InspectorViewModel = inspectorViewModel;
             CloseAppCommand = new RelayCommand<object>(_ => App.Current.Shutdown(0));
             GetHelpCommand = new RelayCommand<object>(_ => GetHelp());

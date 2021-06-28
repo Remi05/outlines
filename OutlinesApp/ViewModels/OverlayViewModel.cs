@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Threading;
@@ -56,8 +57,12 @@ namespace OutlinesApp.ViewModels
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public OverlayViewModel(Dispatcher dispatcher, IScreenHelper screenHelper, IOutlinesService outlinesService)
+        public OverlayViewModel(Dispatcher dispatcher, IOutlinesService outlinesService, IScreenHelper screenHelper)
         {
+            if (dispatcher == null || outlinesService == null || screenHelper == null)
+            {
+                throw new ArgumentNullException(dispatcher == null ? nameof(dispatcher) : outlinesService == null ? nameof(outlinesService) : nameof(screenHelper));
+            }
             Dispatcher = dispatcher;
             ScreenHelper = screenHelper;
             OutlinesService = outlinesService;
@@ -69,14 +74,10 @@ namespace OutlinesApp.ViewModels
         {
             Dispatcher.Invoke(() => 
             {
-                if (OutlinesService.SelectedElementProperties != null)
-                {
-                    SelectedElementRect = ScreenHelper.RectFromScreen(OutlinesService.SelectedElementProperties.BoundingRect);
-                }
-                else
-                {
-                    SelectedElementRect = Rect.Empty;
-                }
+                SelectedElementRect = OutlinesService.SelectedElementProperties != null
+                                    ? ScreenHelper.RectFromScreen(OutlinesService.SelectedElementProperties.BoundingRect)
+                                    : Rect.Empty;
+
             });  
             UpdateDistanceOutlines();
         }
@@ -85,14 +86,9 @@ namespace OutlinesApp.ViewModels
         {    
             Dispatcher.Invoke(() => 
             {
-                if (OutlinesService.TargetElementProperties != null)
-                {
-                    TargetElementRect = ScreenHelper.RectFromScreen(OutlinesService.TargetElementProperties.BoundingRect);
-                }
-                else
-                {
-                    TargetElementRect = Rect.Empty;
-                }
+                TargetElementRect = OutlinesService.TargetElementProperties != null 
+                                    ? ScreenHelper.RectFromScreen(OutlinesService.TargetElementProperties.BoundingRect)
+                                    : Rect.Empty;
             });
             UpdateDistanceOutlines();
         }

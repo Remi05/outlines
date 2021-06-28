@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using System;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
@@ -60,6 +60,10 @@ namespace OutlinesApp.ViewModels
 
         public InspectorViewModel(IOutlinesService outlinesService, IGlobalInputListener globalInputListener)
         {
+            if (outlinesService == null || globalInputListener == null)
+            {
+                throw new ArgumentNullException(outlinesService == null ? nameof(outlinesService) : nameof(globalInputListener));
+            }
             OutlinesService = outlinesService;
             GlobalInputListener = globalInputListener;
 

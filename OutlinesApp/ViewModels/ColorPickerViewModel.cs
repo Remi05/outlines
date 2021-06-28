@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Media;
 using Outlines;
@@ -40,8 +41,13 @@ namespace OutlinesApp.ViewModels
 
         public ColorPickerViewModel(IColorPickerService colorPickerService, IGlobalInputListener globalInputListener)
         {
+            if (colorPickerService == null || globalInputListener == null)
+            {
+                throw new ArgumentNullException(colorPickerService == null ? nameof(colorPickerService) : nameof(globalInputListener));
+            }
             ColorPickerService = colorPickerService;
             GlobalInputListener = globalInputListener;
+
             var hoverWatcher = new HoverWatcher(HoverDelayInMs);
             hoverWatcher.MouseHovered += OnMouseHovered;
             GlobalInputListener.MouseMoved += hoverWatcher.OnMouseMoved;

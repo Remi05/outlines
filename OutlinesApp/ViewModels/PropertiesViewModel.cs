@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using Outlines;
 
 namespace OutlinesApp.ViewModels
@@ -39,8 +40,13 @@ namespace OutlinesApp.ViewModels
 
         public PropertiesViewModel(IOutlinesService outlinesService)
         {
+            if (outlinesService == null)
+            {
+                throw new ArgumentNullException(nameof(outlinesService));
+            }
             OutlinesService = outlinesService;
             OutlinesService.SelectedElementChanged += OnSelectedElementChanged;
+
             ElementProperties = OutlinesService.SelectedElementProperties;
             TextProperties = OutlinesService.SelectedTextProperties;
         }
