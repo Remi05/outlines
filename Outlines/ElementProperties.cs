@@ -5,11 +5,13 @@ namespace Outlines
     public class ElementProperties
     {
         public string Name { get; private set; }
+        public string ControlType { get; private set; }
         public Rect BoundingRect { get; private set; }
 
-        public ElementProperties(string name, Rect boundingRect)
+        public ElementProperties(string name, string controlType, Rect boundingRect)
         {
             Name = name;
+            ControlType = controlType;
             BoundingRect = boundingRect;
         }
 
