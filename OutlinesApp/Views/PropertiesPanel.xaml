@@ -35,18 +35,20 @@
                 <TextBlock Text="Element Properties" Style="{StaticResource PropertyGroupHeaderStyle}" />
                 <StackPanel Orientation="Horizontal">
                     <StackPanel Orientation="Vertical">
-                        <TextBlock Text="Name"   Style="{StaticResource PropertyNameStyle}" />
-                        <TextBlock Text="Width"  Style="{StaticResource PropertyNameStyle}" />
-                        <TextBlock Text="Height" Style="{StaticResource PropertyNameStyle}" />
-                        <TextBlock Text="Top"    Style="{StaticResource PropertyNameStyle}" />
-                        <TextBlock Text="Left"   Style="{StaticResource PropertyNameStyle}" />
+                        <TextBlock Text="Name"         Style="{StaticResource PropertyNameStyle}" />
+                        <TextBlock Text="Control Type" Style="{StaticResource PropertyNameStyle}" />
+                        <TextBlock Text="Width"        Style="{StaticResource PropertyNameStyle}" />
+                        <TextBlock Text="Height"       Style="{StaticResource PropertyNameStyle}" />
+                        <TextBlock Text="Top"          Style="{StaticResource PropertyNameStyle}" />
+                        <TextBlock Text="Left"         Style="{StaticResource PropertyNameStyle}" />
                     </StackPanel>
                     <StackPanel Orientation="Vertical">
-                        <TextBlock x:Name="ElementNameTextBlock"   Text="{Binding ElementProperties.Name, Mode=OneWay}"                Style="{StaticResource PropertyValueStyle}" ToolTip="{Binding ElementProperties.Name, Mode=OneWay}" TextTrimming="CharacterEllipsis" MaxWidth="125" />
-                        <TextBlock x:Name="ElementWidthTextBlock"  Text="{Binding ElementProperties.BoundingRect.Width, Mode=OneWay}"  Style="{StaticResource PropertyValueStyle}" />
-                        <TextBlock x:Name="ElementHeightTextBlock" Text="{Binding ElementProperties.BoundingRect.Height, Mode=OneWay}" Style="{StaticResource PropertyValueStyle}" />
-                        <TextBlock x:Name="ElementTopTextBlock"    Text="{Binding ElementProperties.BoundingRect.Top, Mode=OneWay}"    Style="{StaticResource PropertyValueStyle}" />
-                        <TextBlock x:Name="ElementLeftTextBlock"   Text="{Binding ElementProperties.BoundingRect.Left, Mode=OneWay}"   Style="{StaticResource PropertyValueStyle}" />
+                        <TextBlock x:Name="ElementNameTextBlock"        Text="{Binding ElementProperties.Name, Mode=OneWay}"                Style="{StaticResource PropertyValueStyle}" ToolTip="{Binding ElementProperties.Name, Mode=OneWay}" TextTrimming="CharacterEllipsis" MaxWidth="125" />
+                        <TextBlock x:Name="ElementControlTypeTextBlock" Text="{Binding ElementProperties.ControlType, Mode=OneWay}"         Style="{StaticResource PropertyValueStyle}" ToolTip="{Binding ElementProperties.ControlType, Mode=OneWay}" TextTrimming="CharacterEllipsis" MaxWidth="100" />
+                        <TextBlock x:Name="ElementWidthTextBlock"       Text="{Binding ElementProperties.BoundingRect.Width, Mode=OneWay}"  Style="{StaticResource PropertyValueStyle}" />
+                        <TextBlock x:Name="ElementHeightTextBlock"      Text="{Binding ElementProperties.BoundingRect.Height, Mode=OneWay}" Style="{StaticResource PropertyValueStyle}" />
+                        <TextBlock x:Name="ElementTopTextBlock"         Text="{Binding ElementProperties.BoundingRect.Top, Mode=OneWay}"    Style="{StaticResource PropertyValueStyle}" />
+                        <TextBlock x:Name="ElementLeftTextBlock"        Text="{Binding ElementProperties.BoundingRect.Left, Mode=OneWay}"   Style="{StaticResource PropertyValueStyle}" />
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
