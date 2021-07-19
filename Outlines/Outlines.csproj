@@ -56,6 +56,7 @@
     <Compile Include="IInputMaskingService.cs" />
     <Compile Include="IOutlinesService.cs" />
     <Compile Include="ITextPropertiesProvider.cs" />
+    <Compile Include="IUiTreeService.cs" />
     <Compile Include="OutlinesService.cs" />
     <Compile Include="DistanceOutlinesProvider.cs" />
     <Compile Include="TextPropertiesProvider.cs" />
