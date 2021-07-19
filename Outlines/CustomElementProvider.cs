@@ -17,6 +17,11 @@ namespace Outlines
                                                new PropertyCondition(AutomationElement.IsOffscreenProperty, false));
         }
 
+        public AutomationElement TryGetElementFromProperties(ElementProperties properties)
+        {
+            return properties?.Element;
+        }
+
         public AutomationElement TryGetElementFromPoint(Point point)
         {
             var res = GetContainingElement(AutomationElement.RootElement, point);

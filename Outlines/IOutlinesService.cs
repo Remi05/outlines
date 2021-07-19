@@ -17,6 +17,8 @@ namespace Outlines
         event TargetElementChangedHandler TargetElementChanged;
 
         void SelectElementAt(Point cursorPosition);
+        void SelectElementWithProperties(ElementProperties properties);
         void TargetElementAt(Point cursorPosition);
+        void TargetElementWithProperties(ElementProperties properties);
     }
 }

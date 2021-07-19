@@ -8,8 +8,8 @@ namespace Outlines
     public class OutlinesService : IOutlinesService
     {
         private IElementProvider ElementProvider { get; set; } = new CustomElementProvider();
-        private DistanceOutlinesProvider DistanceOutlinesProvider { get; set; } = new DistanceOutlinesProvider();
-        private ElementPropertiesProvider ElementPropertiesProvider { get; set; } = new ElementPropertiesProvider();
+        private IDistanceOutlinesProvider DistanceOutlinesProvider { get; set; } = new DistanceOutlinesProvider();
+        private IElementPropertiesProvider ElementPropertiesProvider { get; set; } = new ElementPropertiesProvider();
         private TextPropertiesProvider TextPropertiesProvider { get; set; } = new TextPropertiesProvider();
 
         private AutomationElement selectedElement = null;
@@ -72,14 +72,24 @@ namespace Outlines
         public event SelectedElementChangedHandler SelectedElementChanged;
         public event TargetElementChangedHandler TargetElementChanged;
 
+        public void SelectElementAt(Point cursorPosition)
+        {
+            SelectedElement = ElementProvider.TryGetElementFromPoint(cursorPosition);
+        }
+
+        public void SelectElementWithProperties(ElementProperties properties)
+        {
+            SelectedElement = ElementProvider.TryGetElementFromProperties(properties);
+        }
+
         public void TargetElementAt(Point cursorPosition)
         {
             TargetElement = ElementProvider.TryGetElementFromPoint(cursorPosition);
         }
 
-        public void SelectElementAt(Point cursorPosition)
+        public void TargetElementWithProperties(ElementProperties properties)
         {
-            SelectedElement = ElementProvider.TryGetElementFromPoint(cursorPosition);
+            TargetElement = ElementProvider.TryGetElementFromProperties(properties);
         }
 
         private void UpdateDistanceOutlines()
