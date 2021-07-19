@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Windows;
 using System.Windows.Automation;
 
 namespace Outlines
 {
-    public class ElementPropertiesProvider
+    public class ElementPropertiesProvider : IElementPropertiesProvider
     {
         public ElementProperties GetElementProperties(AutomationElement element)
         {
