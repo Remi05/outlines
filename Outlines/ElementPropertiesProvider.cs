@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Windows;
 using System.Windows.Automation;
 
@@ -13,12 +13,12 @@ namespace Outlines
                 return null;
             }
 
-            try 
-            { 
+            try
+            {
                 string name = element.Current.Name;
                 string controlType = element.Current.ControlType.ProgrammaticName.Replace("ControlType.", "").Trim();
                 Rect boundingRect = element.Current.BoundingRectangle;
-                return new ElementProperties(name, controlType, boundingRect);
+                return new ElementProperties(name, controlType, boundingRect, element);
             }
             catch (Exception)
             {

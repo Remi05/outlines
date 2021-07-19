@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Automation;
 
 namespace Outlines
 {
@@ -7,12 +8,19 @@ namespace Outlines
         public string Name { get; private set; }
         public string ControlType { get; private set; }
         public Rect BoundingRect { get; private set; }
+        internal AutomationElement Element { get; private set; }
 
         public ElementProperties(string name, string controlType, Rect boundingRect)
         {
             Name = name;
             ControlType = controlType;
             BoundingRect = boundingRect;
+        }
+
+        internal ElementProperties(string name, string controlType, Rect boundingRect, AutomationElement element)
+            : this(name, controlType, boundingRect)
+        {
+            Element = element;
         }
 
         public override bool Equals(object obj)
