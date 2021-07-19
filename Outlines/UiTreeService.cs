@@ -8,7 +8,7 @@ namespace Outlines
 
     public class UiTreeService : IUiTreeService
     {
-        private const int DefaultMaxTreeDepth = 4;
+        private const int DefaultMaxTreeDepth = 10;
 
         private IElementPropertiesProvider ElementPropertiesProvider { get; set; }
         private IOutlinesService OutlinesService { get; set; }
