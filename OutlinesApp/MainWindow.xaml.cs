@@ -17,11 +17,12 @@ namespace OutlinesApp
             IGlobalInputListener globalInputListener = new GlobalInputListener(inputMaskingService);
             IOutlinesService outlinesService = new OutlinesService();
             IScreenHelper screenHelper = new ScreenHelper(this);
+            IScreenshotService screenshotService = new ScreenshotService();
             ColorPickerViewModel colorPickerViewModel = new ColorPickerViewModel(colorPickerService, globalInputListener);
             InspectorViewModel inspectorViewModel = new InspectorViewModel(outlinesService, globalInputListener);
             OverlayViewModel overlayViewModel = new OverlayViewModel(Dispatcher, outlinesService, screenHelper);
             PropertiesViewModel propertiesViewModel = new PropertiesViewModel(outlinesService);
-            ToolBarViewModel toolBarViewModel = new ToolBarViewModel(inspectorViewModel);
+            ToolBarViewModel toolBarViewModel = new ToolBarViewModel(outlinesService, screenshotService, inspectorViewModel);
 
             var serviceContainer = ServiceContainer.Instance;
             serviceContainer.AddService(typeof(InputMaskingService), inputMaskingService);
@@ -29,6 +30,7 @@ namespace OutlinesApp
             serviceContainer.AddService(typeof(IGlobalInputListener), globalInputListener);
             serviceContainer.AddService(typeof(IOutlinesService), outlinesService);
             serviceContainer.AddService(typeof(IScreenHelper), screenHelper);
+            serviceContainer.AddService(typeof(IScreenshotService), screenshotService);
             serviceContainer.AddService(typeof(ColorPickerViewModel), colorPickerViewModel);
             serviceContainer.AddService(typeof(InspectorViewModel), inspectorViewModel);
             serviceContainer.AddService(typeof(OverlayViewModel), overlayViewModel);

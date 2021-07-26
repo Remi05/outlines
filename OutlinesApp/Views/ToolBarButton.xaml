@@ -56,6 +56,11 @@
                     <DropShadowEffect BlurRadius="1" Direction="-45" ShadowDepth="1" Opacity="0.15"/>
                 </Setter.Value>
             </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="LightGray"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
     </Button.Style>
 </Button>
