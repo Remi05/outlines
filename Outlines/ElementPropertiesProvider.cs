@@ -16,8 +16,9 @@ namespace Outlines
             try 
             { 
                 string name = element.Current.Name;
+                string controlType = element.Current.ControlType.ProgrammaticName.Replace("ControlType.", "").Trim();
                 Rect boundingRect = element.Current.BoundingRectangle;
-                return new ElementProperties(name, boundingRect);
+                return new ElementProperties(name, controlType, boundingRect);
             }
             catch (Exception)
             {

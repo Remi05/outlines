@@ -54,6 +54,8 @@ namespace Outlines
         private const int MK_LBUTTON = 0x0001;
         private const int MK_CONTROL = 0x0008;
 
+        private IInputMaskingService InputMaskingService { get; set; }
+
         private HookProc KeyboardHookProc { get; set; }
         private HookProc MouseHookProc { get; set; }
         private IntPtr KeyboardHookPtr { get; set; }
@@ -63,6 +65,11 @@ namespace Outlines
         public event KeyUpEventHandler KeyUp;
         public event MouseDownEventHandler MouseDown;
         public event MouseMovedEventHandler MouseMoved;
+
+        public GlobalInputListener(IInputMaskingService inputMaskingService = null)
+        {
+            InputMaskingService = inputMaskingService;
+        }
 
         public void RegisterToInputEvents()
         {
@@ -81,12 +88,15 @@ namespace Outlines
         {
             if (MouseHookPtr != IntPtr.Zero)
             {
-                UnhookWindowsHookEx(KeyboardHookPtr);
                 UnhookWindowsHookEx(MouseHookPtr);
-                KeyboardHookPtr = IntPtr.Zero;
                 MouseHookPtr = IntPtr.Zero;
-                KeyboardHookProc = null;
                 MouseHookProc = null;
+            }
+            if (KeyboardHookPtr != IntPtr.Zero)
+            {
+                UnhookWindowsHookEx(KeyboardHookPtr);
+                KeyboardHookPtr = IntPtr.Zero;
+                KeyboardHookProc = null;
             }
         }
 
@@ -123,15 +133,18 @@ namespace Outlines
             int message = wParam.ToInt32();
             var mouseHookStruct = Marshal.PtrToStructure(lParam, typeof(MouseHookStruct)) as MouseHookStruct;
             var cursorPos = new Point(mouseHookStruct.pt.x, mouseHookStruct.pt.y);
-
-            switch (message)
+       
+            if (InputMaskingService == null || !InputMaskingService.IsInInputMask(cursorPos))
             {
-                case WM_MOUSEMOVE:                
-                    MouseMoved?.Invoke(cursorPos);
-                    break;
-                case WM_LBUTTONDOWN:
-                    MouseDown?.Invoke(cursorPos);
-                    break;
+                switch (message)
+                {
+                    case WM_MOUSEMOVE:                
+                        MouseMoved?.Invoke(cursorPos);
+                        break;
+                    case WM_LBUTTONDOWN:
+                            MouseDown?.Invoke(cursorPos);
+                        break;
+                }
             }
 
             return CallNextHookEx(IntPtr.Zero, code, wParam, lParam);

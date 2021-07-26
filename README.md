@@ -2,13 +2,15 @@
 
 An app to help review your UI implementation.
 
+## Getting Started
+Checkout our [User Guide Wiki page](https://github.com/Remi05/outlines/wiki/User-Guide).
+
 ## License
 
 Outlines is licensed under an [MIT License](LICENSE.md).
 
-## Getting Started
-Checkout our [User Guide Wiki page](https://github.com/Remi05/outlines/wiki/User-Guide).
-
 ## Screenshots
 
-<img width="579" alt="Outlines_Screenshot" src="https://user-images.githubusercontent.com/12770956/112552593-523d2000-8d80-11eb-93c4-826b3e30b078.png">
+<img width="720" alt="Outlines_Preview" src="https://user-images.githubusercontent.com/12770956/121975457-81877b80-cd36-11eb-95fc-3f8091170c92.png">
+
+<img width="538" alt="Outlines_Screenshot" src="https://user-images.githubusercontent.com/12770956/112552593-523d2000-8d80-11eb-93c4-826b3e30b078.png">

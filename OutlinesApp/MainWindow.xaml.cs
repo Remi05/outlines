@@ -1,9 +1,8 @@
-﻿using System;
+﻿using System.ComponentModel;
 using System.Windows;
-using System.Windows.Interop;
 using Outlines;
-using OutlinesApp.ViewModels;
 using OutlinesApp.Services;
+using OutlinesApp.ViewModels;
 
 namespace OutlinesApp
 {
@@ -13,18 +12,20 @@ namespace OutlinesApp
         {
             InitializeComponent();
 
+            InputMaskingService inputMaskingService = new InputMaskingService(this);
             IColorPickerService colorPickerService = new ColorPickerService();
-            IGlobalInputListener globalInputListener = new GlobalInputListener();
+            IGlobalInputListener globalInputListener = new GlobalInputListener(inputMaskingService);
             IOutlinesService outlinesService = new OutlinesService();
             IScreenHelper screenHelper = new ScreenHelper(this);
             IScreenshotService screenshotService = new ScreenshotService();
             ColorPickerViewModel colorPickerViewModel = new ColorPickerViewModel(colorPickerService, globalInputListener);
             InspectorViewModel inspectorViewModel = new InspectorViewModel(outlinesService, globalInputListener);
-            OverlayViewModel overlayViewModel = new OverlayViewModel(Dispatcher, screenHelper, outlinesService);
+            OverlayViewModel overlayViewModel = new OverlayViewModel(Dispatcher, outlinesService, screenHelper);
             PropertiesViewModel propertiesViewModel = new PropertiesViewModel(outlinesService);
             ToolBarViewModel toolBarViewModel = new ToolBarViewModel(inspectorViewModel, outlinesService, screenshotService);
 
             var serviceContainer = ServiceContainer.Instance;
+            serviceContainer.AddService(typeof(InputMaskingService), inputMaskingService);
             serviceContainer.AddService(typeof(IColorPickerService), colorPickerService);
             serviceContainer.AddService(typeof(IGlobalInputListener), globalInputListener);
             serviceContainer.AddService(typeof(IOutlinesService), outlinesService);
@@ -43,7 +44,7 @@ namespace OutlinesApp
             globalInputListener?.RegisterToInputEvents();
         }
 
-        private void OnUnloaded(object sender, RoutedEventArgs e)
+        private void OnClosing(object sender, CancelEventArgs e)
         {
             var globalInputListener = ServiceContainer.Instance.GetService<IGlobalInputListener>();
             globalInputListener?.UnregisterFromInputEvents();

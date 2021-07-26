@@ -37,6 +37,30 @@
   <PropertyGroup>
     <ApplicationIcon>Assets/favicon-white-desktop.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'UiAccessDebug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\UiAccessDebug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+    <ApplicationManifest>uiaccessapp.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'UiAccessRelease|AnyCPU'">
+    <OutputPath>bin\UiAccessRelease\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+    <ApplicationManifest>uiaccessapp.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -61,8 +85,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="HoverWatcher.cs" />
+    <Compile Include="NullToVisibilityConverter.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="Services\IColorPickerService.cs" />
+    <Compile Include="Services\InputMaskingService.cs" />
     <Compile Include="Services\IScreenHelper.cs" />
     <Compile Include="Services\ServiceContainer.cs" />
     <Compile Include="ViewModels\ColorPickerViewModel.cs" />
@@ -91,6 +117,9 @@
     </Compile>
     <Compile Include="Views\ToolBarButton.xaml.cs">
       <DependentUpon>ToolBarButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ToolBarToggleButton.xaml.cs">
+      <DependentUpon>ToolBarToggleButton.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\ColorPicker.xaml">
       <SubType>Designer</SubType>
@@ -126,6 +155,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ToolBarButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ToolBarToggleButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
