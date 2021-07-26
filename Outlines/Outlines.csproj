@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -55,10 +56,12 @@
     <Compile Include="IGlobalInputListener.cs" />
     <Compile Include="IInputMaskingService.cs" />
     <Compile Include="IOutlinesService.cs" />
+    <Compile Include="IScreenshotService.cs" />
     <Compile Include="ITextPropertiesProvider.cs" />
     <Compile Include="IUiTreeService.cs" />
     <Compile Include="OutlinesService.cs" />
     <Compile Include="DistanceOutlinesProvider.cs" />
+    <Compile Include="ScreenshotService.cs" />
     <Compile Include="TextPropertiesProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TextProperties.cs" />
