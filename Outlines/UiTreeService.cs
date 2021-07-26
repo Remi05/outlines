@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows.Automation;
 
 namespace Outlines
@@ -8,7 +9,9 @@ namespace Outlines
 
     public class UiTreeService : IUiTreeService
     {
-        private const int DefaultMaxTreeDepth = 10;
+        private const int StartupTreeDepth = 2;
+        private const int FollowUpTreeDepth1 = 4;
+        private const int FollowUpTreeDepth2 = 10;
 
         private IElementPropertiesProvider ElementPropertiesProvider { get; set; }
         private IOutlinesService OutlinesService { get; set; }
@@ -37,25 +40,27 @@ namespace Outlines
             }
             ElementPropertiesProvider = elementPropertiesProvider;
             OutlinesService = outlinesService;
-            OutlinesService.SelectedElementChanged += UpdateRootNode;
-            UpdateRootNode();
+            InitializeUiTree();
         }
 
-        private void UpdateRootNode()
+        private async Task InitializeUiTree()
         {
-            var selectedElementProperties = OutlinesService.SelectedElementProperties;
-            if (selectedElementProperties != null)
-            {
-                RootNode = GetTreeNode(selectedElementProperties);
-            }
-            else
+            // Loading the entire tree on startup is slow, so just show minimal results at first and add more async.
+            await RefreshUiTree(StartupTreeDepth);
+            await RefreshUiTree(FollowUpTreeDepth1);
+            await RefreshUiTree(FollowUpTreeDepth2);
+        }
+
+        private async Task RefreshUiTree(int treeDepth)
+        {
+            await Task.Run(() =>
             {
                 var rootElementProperties = ElementPropertiesProvider.GetElementProperties(AutomationElement.RootElement);
-                RootNode = GetTreeNode(rootElementProperties);
-            }
+                RootNode = GetTreeNode(rootElementProperties, treeDepth);
+            });
         }
 
-        private UiTreeNode GetTreeNode(ElementProperties rootElementProperties, int remainingDepth = DefaultMaxTreeDepth)
+        private UiTreeNode GetTreeNode(ElementProperties rootElementProperties, int remainingDepth)
         {
             if (rootElementProperties == null)
             {
@@ -65,7 +70,7 @@ namespace Outlines
             {
                 var childrenElements = rootElementProperties.Element.FindAll(TreeScope.Children, Condition.TrueCondition);
                 var childrenNodes = new List<UiTreeNode>();
-                if (remainingDepth > 0)
+                if (remainingDepth > 1)
                 {
                     foreach (var child in childrenElements)
                     {

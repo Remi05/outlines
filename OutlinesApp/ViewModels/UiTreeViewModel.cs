@@ -1,24 +1,27 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Windows.Threading;
 using Outlines;
 
 namespace OutlinesApp.ViewModels
 {
     public class UiTreeViewModel : INotifyPropertyChanged
     {
+        private Dispatcher Dispatcher { get; set; }
         private IOutlinesService OutlinesService { get; set; }
         private IUiTreeService UiTreeService { get; set; }
         public ObservableCollection<UiTreeItemViewModel> Elements { get; private set; } = new ObservableCollection<UiTreeItemViewModel>();
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public UiTreeViewModel(IOutlinesService outlinesService, IUiTreeService uiTreeService)
+        public UiTreeViewModel(Dispatcher dispatcher, IOutlinesService outlinesService, IUiTreeService uiTreeService)
         {
-            if (outlinesService == null || uiTreeService == null)
+            if (dispatcher == null || outlinesService == null || uiTreeService == null)
             {
-                throw new ArgumentNullException(outlinesService == null ? nameof(outlinesService) : nameof(uiTreeService));
+                throw new ArgumentNullException(dispatcher == null ? nameof(dispatcher) : outlinesService == null ? nameof(outlinesService) : nameof(uiTreeService));
             }
+            Dispatcher = dispatcher;
             OutlinesService = outlinesService;
             UiTreeService = uiTreeService;
             UiTreeService.RootNodeChanged += UpdateUiTreeViewElements;
@@ -32,13 +35,16 @@ namespace OutlinesApp.ViewModels
 
         private void UpdateUiTreeViewElements()
         {
-            Elements.Clear();
-            if (UiTreeService.RootNode != null)
+            Dispatcher.Invoke(() =>
             {
-                var uiTreeItemViewModel = new UiTreeItemViewModel(UiTreeService.RootNode);
-                Elements.Add(uiTreeItemViewModel);
-            }
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Elements)));
+                Elements.Clear();
+                if (UiTreeService.RootNode != null)
+                {
+                    var uiTreeItemViewModel = new UiTreeItemViewModel(UiTreeService.RootNode);
+                    Elements.Add(uiTreeItemViewModel);
+                }
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Elements)));
+            });
         }
     }
 }
