@@ -9,7 +9,7 @@ namespace Outlines
 
     public class UiTreeService : IUiTreeService
     {
-        private const int MaxTreeDepth = -1;
+        private const int MaxTreeDepth = int.MaxValue;
         private const int StartupTreeDepth = 2;
         private const int FollowUpTreeDepth1 = 4;
         private const int FollowUpTreeDepth2 = 10;
