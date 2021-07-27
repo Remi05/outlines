@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Windows;
 using Outlines;
 
@@ -11,6 +12,7 @@ namespace OutlinesApp.ViewModels
     {
         private IOutlinesService OutlinesService { get; set; }
         private IScreenshotService ScreenshotService { get; set; }
+        private IFolderConfig FolderConfig { get; set; }
         public InspectorViewModel InspectorViewModel { get; set; }   
         
         public RelayCommand<object> CloseAppCommand { get; private set; }
@@ -19,14 +21,18 @@ namespace OutlinesApp.ViewModels
         public RelayCommand<object> ShowMoreInfoCommand { get; private set; }
         public RelayCommand<object> TakeScreenshotCommand { get; private set; }
 
-        public ToolBarViewModel(IOutlinesService outlinesService, IScreenshotService screenshotService, InspectorViewModel inspectorViewModel)
+        public ToolBarViewModel(IOutlinesService outlinesService, IScreenshotService screenshotService, IFolderConfig folderConfig, InspectorViewModel inspectorViewModel)
         {
-            if (outlinesService == null || screenshotService == null || inspectorViewModel == null)
+            if (outlinesService == null || screenshotService == null || folderConfig == null || inspectorViewModel == null)
             {
-                throw new ArgumentNullException(outlinesService == null ? nameof(outlinesService) : screenshotService == null ? nameof(screenshotService) : nameof(inspectorViewModel));
+                throw new ArgumentNullException(outlinesService == null ? nameof(outlinesService) 
+                                              : screenshotService == null ? nameof(screenshotService) 
+                                              : folderConfig == null ? nameof(folderConfig)
+                                              : nameof(inspectorViewModel));
             }
             OutlinesService = outlinesService;
             ScreenshotService = screenshotService;
+            FolderConfig = folderConfig;
             InspectorViewModel = inspectorViewModel;
 
             CloseAppCommand = new RelayCommand<object>(_ => App.Current.Shutdown(0));
@@ -53,17 +59,12 @@ namespace OutlinesApp.ViewModels
 
         private void TakeScreenshot()
         {
-            var elementProperties = OutlinesService.SelectedElementProperties;
-            if (elementProperties != null)
+            if (OutlinesService.SelectedElementProperties != null)
             {
-                App.Current.MainWindow.Hide();
-
-                Rect rect = elementProperties.BoundingRect;
-                Rectangle screenshotRect = new Rectangle((int)rect.Left, (int)rect.Top, (int)rect.Width, (int)rect.Height);
-                Bitmap screenshot = ScreenshotService.TakeScreenshot(screenshotRect);
-                screenshot.Save($"Screenshot-{DateTime.Now.ToFileTime()}.png", ImageFormat.Png);
-
-                App.Current.MainWindow.Show();
+                string fileName = $"Screenshot-{DateTime.Now.ToFileTime()}.png";
+                string filePath = Path.Combine(FolderConfig.GetScreenshotsFolderPath(), fileName);
+                Image screenshot = ScreenshotService.TakeScreenshot(OutlinesService.SelectedElementProperties);
+                screenshot.Save(filePath, ImageFormat.Png);
             }
         }
     }

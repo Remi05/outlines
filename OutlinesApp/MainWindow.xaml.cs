@@ -17,6 +17,7 @@ namespace OutlinesApp
             IDistanceOutlinesProvider distanceOutlinesProvider = new DistanceOutlinesProvider();
             IElementProvider elementProvider = new CustomElementProvider();
             IElementPropertiesProvider elementPropertiesProvider = new ElementPropertiesProvider();
+            IFolderConfig folderConfig = new FolderConfig();
             ITextPropertiesProvider textPropertiesProvider = new TextPropertiesProvider();
             IGlobalInputListener globalInputListener = new GlobalInputListener(inputMaskingService);
             IOutlinesService outlinesService = new OutlinesService(distanceOutlinesProvider, elementProvider, elementPropertiesProvider, textPropertiesProvider);
@@ -27,7 +28,7 @@ namespace OutlinesApp
             InspectorViewModel inspectorViewModel = new InspectorViewModel(outlinesService, globalInputListener);
             OverlayViewModel overlayViewModel = new OverlayViewModel(Dispatcher, outlinesService, screenHelper);
             PropertiesViewModel propertiesViewModel = new PropertiesViewModel(outlinesService);
-            ToolBarViewModel toolBarViewModel = new ToolBarViewModel(outlinesService, screenshotService, inspectorViewModel);
+            ToolBarViewModel toolBarViewModel = new ToolBarViewModel(outlinesService, screenshotService, folderConfig, inspectorViewModel);
             UiTreeViewModel uiTreeViewModel = new UiTreeViewModel(Dispatcher, outlinesService, uiTreeService);
 
             var serviceContainer = ServiceContainer.Instance;
@@ -36,6 +37,7 @@ namespace OutlinesApp
             serviceContainer.AddService(typeof(IDistanceOutlinesProvider), distanceOutlinesProvider);
             serviceContainer.AddService(typeof(IElementProvider), elementProvider);
             serviceContainer.AddService(typeof(IElementPropertiesProvider), elementPropertiesProvider);
+            serviceContainer.AddService(typeof(IFolderConfig), folderConfig);
             serviceContainer.AddService(typeof(ITextPropertiesProvider), textPropertiesProvider);
             serviceContainer.AddService(typeof(IGlobalInputListener), globalInputListener);
             serviceContainer.AddService(typeof(IOutlinesService), outlinesService);
