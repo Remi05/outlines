@@ -1,4 +1,4 @@
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Windows;
 using Outlines;
 using OutlinesApp.Services;
@@ -24,6 +24,7 @@ namespace OutlinesApp
             IScreenHelper screenHelper = new ScreenHelper(this);
             IScreenshotService screenshotService = new ScreenshotService(App.Current.MainWindow.Hide, App.Current.MainWindow.Show);
             IUiTreeService uiTreeService = new UiTreeService(elementPropertiesProvider, outlinesService);
+            ISnapshotService snapshotService = new SnapshotService(screenshotService, uiTreeService, folderConfig);
             ColorPickerViewModel colorPickerViewModel = new ColorPickerViewModel(colorPickerService, globalInputListener);
             InspectorViewModel inspectorViewModel = new InspectorViewModel(outlinesService, globalInputListener);
             OverlayViewModel overlayViewModel = new OverlayViewModel(Dispatcher, outlinesService, screenHelper);
@@ -43,6 +44,7 @@ namespace OutlinesApp
             serviceContainer.AddService(typeof(IOutlinesService), outlinesService);
             serviceContainer.AddService(typeof(IScreenHelper), screenHelper);
             serviceContainer.AddService(typeof(IScreenshotService), screenshotService);
+            serviceContainer.AddService(typeof(ISnapshotService), snapshotService);
             serviceContainer.AddService(typeof(IUiTreeService), uiTreeService);
             serviceContainer.AddService(typeof(ColorPickerViewModel), colorPickerViewModel);
             serviceContainer.AddService(typeof(InspectorViewModel), inspectorViewModel);
