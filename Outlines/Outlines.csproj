@@ -67,6 +67,7 @@
     <Compile Include="OutlinesService.cs" />
     <Compile Include="DistanceOutlinesProvider.cs" />
     <Compile Include="ScreenshotService.cs" />
+    <Compile Include="Snapshot.cs" />
     <Compile Include="TextPropertiesProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TextProperties.cs" />
