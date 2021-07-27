@@ -1,4 +1,4 @@
-﻿using System.ComponentModel;
+using System.ComponentModel;
 using System.Windows;
 using Outlines;
 using OutlinesApp.Services;
@@ -21,7 +21,7 @@ namespace OutlinesApp
             IGlobalInputListener globalInputListener = new GlobalInputListener(inputMaskingService);
             IOutlinesService outlinesService = new OutlinesService(distanceOutlinesProvider, elementProvider, elementPropertiesProvider, textPropertiesProvider);
             IScreenHelper screenHelper = new ScreenHelper(this);
-            IScreenshotService screenshotService = new ScreenshotService();
+            IScreenshotService screenshotService = new ScreenshotService(App.Current.MainWindow.Hide, App.Current.MainWindow.Show);
             IUiTreeService uiTreeService = new UiTreeService(elementPropertiesProvider, outlinesService);
             ColorPickerViewModel colorPickerViewModel = new ColorPickerViewModel(colorPickerService, globalInputListener);
             InspectorViewModel inspectorViewModel = new InspectorViewModel(outlinesService, globalInputListener);
