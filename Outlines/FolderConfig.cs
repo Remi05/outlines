@@ -5,14 +5,14 @@ namespace Outlines
 {
     public class FolderConfig : IFolderConfig
     {
-        private readonly string ImagesRootFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures), "Outlines/");
+        private readonly string ImagesRootFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures), "Outlines");
         private string ScreenshotsFolderPath { get; set; }
         private string SnapshotsFolderPath { get; set; }
 
         public FolderConfig()
         {
-            ScreenshotsFolderPath = Path.Combine(ImagesRootFolder, "screenshots/");
-            SnapshotsFolderPath = Path.Combine(ImagesRootFolder, "snapshots/");
+            ScreenshotsFolderPath = Path.Combine(ImagesRootFolder, "screenshots");
+            SnapshotsFolderPath = Path.Combine(ImagesRootFolder, "snapshots");
         }
 
         public string GetScreenshotsFolderPath()
