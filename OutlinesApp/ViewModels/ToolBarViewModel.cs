@@ -12,6 +12,7 @@ namespace OutlinesApp.ViewModels
     {
         private IOutlinesService OutlinesService { get; set; }
         private IScreenshotService ScreenshotService { get; set; }
+        private ISnapshotService SnapshotService { get; set; }
         private IFolderConfig FolderConfig { get; set; }
         public InspectorViewModel InspectorViewModel { get; set; }   
         
@@ -20,18 +21,21 @@ namespace OutlinesApp.ViewModels
         public RelayCommand<object> GiveFeedbackCommand { get; private set; }
         public RelayCommand<object> ShowMoreInfoCommand { get; private set; }
         public RelayCommand<object> TakeScreenshotCommand { get; private set; }
+        public RelayCommand<object> TakeSnapshotCommand { get; private set; }
 
-        public ToolBarViewModel(IOutlinesService outlinesService, IScreenshotService screenshotService, IFolderConfig folderConfig, InspectorViewModel inspectorViewModel)
+        public ToolBarViewModel(IOutlinesService outlinesService, IScreenshotService screenshotService, ISnapshotService snapshotService, IFolderConfig folderConfig, InspectorViewModel inspectorViewModel)
         {
-            if (outlinesService == null || screenshotService == null || folderConfig == null || inspectorViewModel == null)
+            if (outlinesService == null || screenshotService == null || snapshotService == null || folderConfig == null || inspectorViewModel == null)
             {
                 throw new ArgumentNullException(outlinesService == null ? nameof(outlinesService) 
                                               : screenshotService == null ? nameof(screenshotService) 
+                                              : snapshotService == null ? nameof(snapshotService) 
                                               : folderConfig == null ? nameof(folderConfig)
                                               : nameof(inspectorViewModel));
             }
             OutlinesService = outlinesService;
             ScreenshotService = screenshotService;
+            SnapshotService = snapshotService;
             FolderConfig = folderConfig;
             InspectorViewModel = inspectorViewModel;
 
@@ -40,6 +44,7 @@ namespace OutlinesApp.ViewModels
             GiveFeedbackCommand = new RelayCommand<object>(_ => GiveFeedback());
             ShowMoreInfoCommand = new RelayCommand<object>(_ => ShowMoreInfo());
             TakeScreenshotCommand = new RelayCommand<object>(_ => TakeScreenshot(), __ => OutlinesService.SelectedElementProperties != null);
+            TakeSnapshotCommand = new RelayCommand<object>(_ => TakeSnapshot(), __ => OutlinesService.SelectedElementProperties != null);
         }
 
         private void GetHelp()
@@ -65,6 +70,14 @@ namespace OutlinesApp.ViewModels
                 string filePath = Path.Combine(FolderConfig.GetScreenshotsFolderPath(), fileName);
                 Image screenshot = ScreenshotService.TakeScreenshot(OutlinesService.SelectedElementProperties);
                 screenshot.Save(filePath, ImageFormat.Png);
+            }
+        }
+        private void TakeSnapshot()
+        {
+            if (OutlinesService.SelectedElementProperties != null)
+            {
+                Snapshot snapshot = SnapshotService.TakeSnapshot(OutlinesService.SelectedElementProperties);
+                SnapshotService.SaveSnapshot(snapshot);
             }
         }
     }

@@ -26,6 +26,7 @@
             <local:ToolBarToggleButton Content="&#xF003;" IsChecked="{Binding InspectorViewModel.IsTreeViewVisible, Mode=TwoWay}" ToolTip="Toggle Tree View" />
             <local:ToolBarToggleButton Content="&#xE8FD;" IsChecked="{Binding InspectorViewModel.IsPropertiesPanelVisible, Mode=TwoWay}" ToolTip="Toggle Properties Panel" />
             <local:ToolBarButton Content="&#xE8B9;" Command="{Binding TakeScreenshotCommand}" ToolTip="Take Screenshot" />
+            <local:ToolBarButton Content="&#xE8B9;" Command="{Binding TakeSnapshotCommand}" ToolTip="Take Snapshot" />
             <local:ToolBarButton Content="&#xED15;" Command="{Binding GiveFeedbackCommand}" ToolTip="Give Feedback" />
             <local:ToolBarButton Content="&#xE9CE;" Command="{Binding GetHelpCommand}" ToolTip="Help" />
             <local:ToolBarButton Content="&#xE946;" Command="{Binding ShowMoreInfoCommand}" ToolTip="More Info" Visibility="Collapsed" />
