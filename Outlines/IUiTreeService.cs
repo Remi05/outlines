@@ -5,5 +5,7 @@
         UiTreeNode RootNode { get; }
 
         event RootNodeChangedEventHandler RootNodeChanged;
+
+        UiTreeNode GetSubTree(ElementProperties rootElementProperties);
     }
 }

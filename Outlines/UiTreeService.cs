@@ -9,6 +9,7 @@ namespace Outlines
 
     public class UiTreeService : IUiTreeService
     {
+        private const int MaxTreeDepth = -1;
         private const int StartupTreeDepth = 2;
         private const int FollowUpTreeDepth1 = 4;
         private const int FollowUpTreeDepth2 = 10;
@@ -56,11 +57,16 @@ namespace Outlines
             await Task.Run(() =>
             {
                 var rootElementProperties = ElementPropertiesProvider.GetElementProperties(AutomationElement.RootElement);
-                RootNode = GetTreeNode(rootElementProperties, treeDepth);
+                RootNode = GetSubTree(rootElementProperties, treeDepth);
             });
         }
 
-        private UiTreeNode GetTreeNode(ElementProperties rootElementProperties, int remainingDepth)
+        public UiTreeNode GetSubTree(ElementProperties rootElementProperties)
+        {
+            return GetSubTree(rootElementProperties, MaxTreeDepth);
+        }
+
+        private UiTreeNode GetSubTree(ElementProperties rootElementProperties, int treeDepth)
         {
             if (rootElementProperties == null)
             {
@@ -70,12 +76,12 @@ namespace Outlines
             {
                 var childrenElements = rootElementProperties.Element.FindAll(TreeScope.Children, Condition.TrueCondition);
                 var childrenNodes = new List<UiTreeNode>();
-                if (remainingDepth > 1)
+                if (treeDepth > 1)
                 {
                     foreach (var child in childrenElements)
                     {
                         ElementProperties childElementProperties = ElementPropertiesProvider.GetElementProperties(child as AutomationElement);
-                        UiTreeNode childNode = GetTreeNode(childElementProperties, remainingDepth - 1);
+                        UiTreeNode childNode = GetSubTree(childElementProperties, treeDepth - 1);
                         if (childNode != null)
                         {
                             childrenNodes.Add(childNode);
