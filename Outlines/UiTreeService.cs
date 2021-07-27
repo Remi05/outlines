@@ -88,7 +88,7 @@ namespace Outlines
                         }
                     }
                 }
-                return new UiTreeNode(rootElementProperties, childrenNodes);
+                return new UiTreeNode() { ElementProperties = rootElementProperties, Children = childrenNodes };
             }
             catch (Exception)
             {

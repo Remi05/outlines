@@ -19,7 +19,7 @@ namespace Outlines
                 ControlType controlType = element.Current.ControlType;
                 string controlTypeName = controlType == null ? "" : controlType.ProgrammaticName.Replace("ControlType.", "").Trim();
                 Rect boundingRect = element.Current.BoundingRectangle;
-                return new ElementProperties(name, controlTypeName, boundingRect, element);
+                return new ElementProperties() { Name = name, ControlType = controlTypeName, BoundingRect = boundingRect, Element = element };
             }
             catch (Exception)
             {
