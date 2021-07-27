@@ -56,6 +56,8 @@
     <Compile Include="IDistanceOutlinesProvider.cs" />
     <Compile Include="IElementPropertiesProvider.cs" />
     <Compile Include="IElementProvider.cs" />
+    <Compile Include="FolderConfig.cs" />
+    <Compile Include="IFolderConfig.cs" />
     <Compile Include="IGlobalInputListener.cs" />
     <Compile Include="IInputMaskingService.cs" />
     <Compile Include="IOutlinesService.cs" />
