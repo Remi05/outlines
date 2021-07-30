@@ -105,6 +105,9 @@
     <Compile Include="Views\ColorPicker.xaml.cs">
       <DependentUpon>ColorPicker.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\SnapshotInspectorPage.xaml.cs">
+      <DependentUpon>SnapshotInspectorPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\UiTreeView.xaml.cs">
       <DependentUpon>UiTreeView.xaml</DependentUpon>
     </Compile>
@@ -145,6 +148,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\SnapshotInspectorPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\UiTreeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
