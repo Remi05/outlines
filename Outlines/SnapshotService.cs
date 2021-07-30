@@ -46,26 +46,5 @@ namespace Outlines
             string filePath = Path.Combine(FolderConfig.GetSnapshotsFolder(), fileName);
             File.WriteAllText(filePath, snapshotJson);
         }
-
-        public Snapshot LoadSnapshot(string snapshotFilePath)
-        {
-            if (!File.Exists(snapshotFilePath))
-            {
-                return null;
-            }
-
-            string snapshotJson = File.ReadAllText(snapshotFilePath);
-            Snapshot snapshot = JsonConvert.DeserializeObject<Snapshot>(snapshotJson);
-
-            if (!string.IsNullOrWhiteSpace(snapshot.ScreenshotFilePath) && File.Exists(snapshot.ScreenshotFilePath))
-            {
-                using (var screenshot = Image.FromFile(snapshot.ScreenshotFilePath))
-                {
-                    snapshot.Screenshot = new Bitmap(screenshot);
-                }        
-            }
-
-            return snapshot;
-        }
     }
 }
