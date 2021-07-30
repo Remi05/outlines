@@ -92,6 +92,9 @@
     <Compile Include="Services\InputMaskingService.cs" />
     <Compile Include="Services\IScreenHelper.cs" />
     <Compile Include="Services\ServiceContainer.cs" />
+    <Compile Include="SnapshotInspectorWindow.xaml.cs">
+      <DependentUpon>SnapshotInspectorWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\ColorPickerViewModel.cs" />
     <Compile Include="ViewModels\DistanceViewModel.cs" />
     <Compile Include="ViewModels\DimensionsViewModel.cs" />
@@ -131,6 +134,10 @@
     <Compile Include="Views\ToolBarToggleButton.xaml.cs">
       <DependentUpon>ToolBarToggleButton.xaml</DependentUpon>
     </Compile>
+    <Page Include="SnapshotInspectorWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ColorPicker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
