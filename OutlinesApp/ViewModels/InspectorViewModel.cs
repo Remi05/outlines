@@ -89,16 +89,6 @@ namespace OutlinesApp.ViewModels
             GlobalInputListener.KeyUp += OnKeyUp;
         }
 
-        public void ToggleOverlay()
-        {
-            IsOverlayVisible = !IsOverlayVisible;
-        }
-
-        public void TogglePropertiesPanel()
-        {
-            IsPropertiesPanelVisible = !IsPropertiesPanelVisible;
-        }
-
         private void OnMouseHovered(Point cursorPos)
         {
             OutlinesService.TargetElementAt(cursorPos);
