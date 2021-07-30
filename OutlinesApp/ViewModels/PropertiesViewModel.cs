@@ -48,13 +48,13 @@ namespace OutlinesApp.ViewModels
             OutlinesService.SelectedElementChanged += OnSelectedElementChanged;
 
             ElementProperties = OutlinesService.SelectedElementProperties;
-            TextProperties = OutlinesService.SelectedTextProperties;
+            TextProperties = OutlinesService.SelectedElementProperties?.TextProperties;
         }
 
         protected void OnSelectedElementChanged()
         {
             ElementProperties = OutlinesService.SelectedElementProperties;
-            TextProperties = OutlinesService.SelectedTextProperties;
+            TextProperties = OutlinesService.SelectedElementProperties?.TextProperties;
         }
     }
 }

@@ -5,8 +5,6 @@ namespace Outlines
 {
     public interface IElementProvider
     {
-        AutomationElement TryGetElementFromPoint(Point point);
-
-        AutomationElement TryGetElementFromProperties(ElementProperties properties);
+        ElementProperties TryGetElementFromPoint(Point point);
     }
 }

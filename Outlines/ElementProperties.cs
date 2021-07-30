@@ -10,6 +10,7 @@ namespace Outlines
         public string Name { get; set; }
         public string ControlType { get; set; }
         public Rect BoundingRect { get; set; }
+        public TextProperties TextProperties { get; set; }
 
         [JsonIgnore]
         internal AutomationElement Element { get; set; }

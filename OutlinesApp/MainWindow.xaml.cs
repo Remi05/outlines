@@ -1,4 +1,4 @@
-﻿using System.ComponentModel;
+using System.ComponentModel;
 using System.Windows;
 using Outlines;
 using OutlinesApp.Services;
@@ -15,12 +15,12 @@ namespace OutlinesApp
             InputMaskingService inputMaskingService = new InputMaskingService(this);
             IColorPickerService colorPickerService = new ColorPickerService();
             IDistanceOutlinesProvider distanceOutlinesProvider = new DistanceOutlinesProvider();
-            IElementProvider elementProvider = new CustomElementProvider();
-            IElementPropertiesProvider elementPropertiesProvider = new ElementPropertiesProvider();
-            IFolderConfig folderConfig = new FolderConfig();
             ITextPropertiesProvider textPropertiesProvider = new TextPropertiesProvider();
+            IElementPropertiesProvider elementPropertiesProvider = new ElementPropertiesProvider(textPropertiesProvider);
+            IElementProvider elementProvider = new LiveElementProvider(elementPropertiesProvider);
+            IFolderConfig folderConfig = new FolderConfig();
             IGlobalInputListener globalInputListener = new GlobalInputListener(inputMaskingService);
-            IOutlinesService outlinesService = new OutlinesService(distanceOutlinesProvider, elementProvider, elementPropertiesProvider, textPropertiesProvider);
+            IOutlinesService outlinesService = new OutlinesService(distanceOutlinesProvider, elementProvider);
             IScreenHelper screenHelper = new ScreenHelper(this);
             IScreenshotService screenshotService = new ScreenshotService(App.Current.MainWindow.Hide, App.Current.MainWindow.Show);
             IUiTreeService uiTreeService = new UiTreeService(elementPropertiesProvider, outlinesService);

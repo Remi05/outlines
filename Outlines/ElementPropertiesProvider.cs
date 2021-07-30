@@ -6,6 +6,13 @@ namespace Outlines
 {
     public class ElementPropertiesProvider : IElementPropertiesProvider
     {
+        private ITextPropertiesProvider TextPropertiesProvider { get; set; }
+
+        public ElementPropertiesProvider(ITextPropertiesProvider textPropertiesProvider)
+        {
+            TextPropertiesProvider = textPropertiesProvider;
+        }
+
         public ElementProperties GetElementProperties(AutomationElement element)
         {
             if (element?.Current == null)
@@ -19,7 +26,16 @@ namespace Outlines
                 ControlType controlType = element.Current.ControlType;
                 string controlTypeName = controlType == null ? "" : controlType.ProgrammaticName.Replace("ControlType.", "").Trim();
                 Rect boundingRect = element.Current.BoundingRectangle;
-                return new ElementProperties() { Name = name, ControlType = controlTypeName, BoundingRect = boundingRect, Element = element };
+
+                TextProperties textProperties = TextPropertiesProvider.GetTextProperties(element);
+
+                return new ElementProperties() { 
+                    Name = name, 
+                    ControlType = controlTypeName, 
+                    BoundingRect = boundingRect, 
+                    Element = element, 
+                    TextProperties = textProperties,
+                };
             }
             catch (Exception)
             {

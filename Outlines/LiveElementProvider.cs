@@ -5,27 +5,23 @@ using System.Windows.Automation;
 
 namespace Outlines
 {
-    public class CustomElementProvider  : IElementProvider
+    public class LiveElementProvider : IElementProvider
     {
+        private IElementPropertiesProvider PropertiesProvider { get; set; }
         private Condition FitlerCondition { get; set; }
 
-        public CustomElementProvider()
+        public LiveElementProvider(IElementPropertiesProvider propertiesProvider)
         {
-            
+            PropertiesProvider = propertiesProvider;
             FitlerCondition = new AndCondition(new NotCondition(new AndCondition(new PropertyCondition(AutomationElement.NameProperty, "Outlines", PropertyConditionFlags.IgnoreCase), 
                                                                                  new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Window))),
                                                new PropertyCondition(AutomationElement.IsOffscreenProperty, false));
         }
 
-        public AutomationElement TryGetElementFromProperties(ElementProperties properties)
+        public ElementProperties TryGetElementFromPoint(Point point)
         {
-            return properties?.Element;
-        }
-
-        public AutomationElement TryGetElementFromPoint(Point point)
-        {
-            var res = GetContainingElement(AutomationElement.RootElement, point);
-            return res;
+            var containingElement = GetContainingElement(AutomationElement.RootElement, point);
+            return PropertiesProvider.GetElementProperties(containingElement);
         }
 
         private AutomationElement GetContainingElement(AutomationElement rootElement, Point point)
