@@ -95,6 +95,7 @@
     <Compile Include="ViewModels\ColorPickerViewModel.cs" />
     <Compile Include="ViewModels\DistanceViewModel.cs" />
     <Compile Include="ViewModels\DimensionsViewModel.cs" />
+    <Compile Include="ViewModels\SnapshotInspectorViewModel.cs" />
     <Compile Include="ViewModels\InspectorViewModel.cs" />
     <Compile Include="ViewModels\OverlayViewModel.cs" />
     <Compile Include="ViewModels\PropertiesViewModel.cs" />
