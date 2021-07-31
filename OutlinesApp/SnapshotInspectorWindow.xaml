@@ -6,7 +6,6 @@
         xmlns:local="clr-namespace:OutlinesApp"
         xmlns:views="clr-namespace:OutlinesApp.Views"
         mc:Ignorable="d"
-        Loaded="OnLoaded"
         Title="Outlines - Snapshot">
 
     <views:SnapshotInspectorPage />

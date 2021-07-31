@@ -7,9 +7,14 @@ namespace OutlinesApp.Services
 {
     public class CachedCoordinateConverter : IScreenHelper
     {
-        public UiTreeNode UiTree { get; set; }
+        private UiTreeNode UiTree { get; set; }
         private Point RootPosition => UiTree.ElementProperties.BoundingRect.TopLeft;
         private double ScaleFactor { get; set; } = 1.5;
+
+        public CachedCoordinateConverter(UiTreeNode uiTree)
+        {
+            UiTree = uiTree;
+        }
 
         public Rect GetMonitorRect(Point point)
         {

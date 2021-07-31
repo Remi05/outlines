@@ -5,7 +5,7 @@ namespace Outlines
 {
     public class CachedElementProvider : IElementProvider
     {
-        public UiTreeNode UiTree { get; set; }
+        private UiTreeNode UiTree { get; set; }
 
         public CachedElementProvider(UiTreeNode uiTree)
         {
