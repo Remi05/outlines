@@ -42,7 +42,7 @@ namespace Outlines
             }
 
             string snapshotJson = JsonConvert.SerializeObject(snapshot);
-            string fileName = $"Snapshot-{DateTime.Now.ToFileTime()}.json";
+            string fileName = $"Snapshot-{DateTime.Now.ToFileTime()}.snpt";
             string filePath = Path.Combine(FolderConfig.GetSnapshotsFolder(), fileName);
             File.WriteAllText(filePath, snapshotJson);
         }
