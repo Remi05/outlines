@@ -18,7 +18,7 @@ namespace OutlinesApp
             }
             else
             {
-                window = new MainWindow();
+                window = new LiveInspectorWindow();
             }
             window.Show();
         }

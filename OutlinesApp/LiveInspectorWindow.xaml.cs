@@ -6,11 +6,11 @@ using OutlinesApp.ViewModels;
 
 namespace OutlinesApp
 {
-    public partial class MainWindow : Window
+    public partial class LiveInspectorWindow : Window
     {
         private IGlobalInputListener GlobalInputListener { get; set; }
 
-        public MainWindow()
+        public LiveInspectorWindow()
         {
             InitializeComponent();
 
