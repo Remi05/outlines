@@ -53,7 +53,7 @@ namespace OutlinesApp.ViewModels
             TextContainerRect = new Rect(textContainerTopLeft, TextContainerRectSize);
             TextPlacement = DistanceOutline.IsVertical ? DistanceTextPlacement.Right : DistanceTextPlacement.Bottom;
 
-            Rect monitorRect = ScreenHelper.GetMonitorRect(localMidPoint);
+            Rect monitorRect = ScreenHelper.GetDisplayRect(localMidPoint);
             Rect localMonitorRect = CoordinateConverter.RectFromScreen(monitorRect);
             if (!localMonitorRect.Contains(TextContainerRect))
             {

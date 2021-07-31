@@ -1,9 +1,9 @@
-﻿using System.Windows;
+using System.Windows;
 
 namespace OutlinesApp.Services
 {
     public interface IScreenHelper
     {
-        Rect GetMonitorRect(Point point);
+        Rect GetDisplayRect(Point point);
     }
 }

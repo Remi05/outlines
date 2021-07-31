@@ -42,7 +42,7 @@ namespace OutlinesApp.ViewModels
             Point containerRectBottomCenter = new Point(localElementCenterX, containerRectTopLeft.Y + ContainerRectHeight);
             TextPlacement = DimensionsTextPlacement.Below;
 
-            Rect monitorRect = ScreenHelper.GetMonitorRect(localElementRect.TopLeft);
+            Rect monitorRect = ScreenHelper.GetDisplayRect(localElementRect.TopLeft);
             Rect localMonitorRect = CoordinateConverter.RectFromScreen(monitorRect);
             if (!localMonitorRect.Contains(containerRectBottomCenter))
             {
