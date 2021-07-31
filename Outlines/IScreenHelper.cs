@@ -1,9 +1,10 @@
-using System.Windows;
+﻿using System.Windows;
 
-namespace OutlinesApp.Services
+namespace Outlines
 {
     public interface IScreenHelper
     {
         Rect GetDisplayRect(Point point);
+        double GetDisplayScaleFactor();
     }
 }

@@ -9,18 +9,21 @@ namespace Outlines
     {
         private IScreenshotService ScreenshotService { get; set; }
         private IUiTreeService UiTreeService { get; set; }
+        private IScreenHelper ScreenHelper { get; set; }
         private IFolderConfig FolderConfig { get; set; }
 
-        public SnapshotService(IScreenshotService screenshotService, IUiTreeService uiTreeService, IFolderConfig folderConfig)
+        public SnapshotService(IScreenshotService screenshotService, IUiTreeService uiTreeService, IScreenHelper screenHelper, IFolderConfig folderConfig)
         {
-            if (screenshotService == null || uiTreeService == null || folderConfig == null)
+            if (screenshotService == null || uiTreeService == null || screenHelper ==null || folderConfig == null)
             {
                 throw new ArgumentNullException(screenshotService == null ? nameof(screenshotService)
                                               : uiTreeService == null ? nameof(uiTreeService)
+                                              : screenHelper == null ? nameof(screenHelper)
                                               : nameof(folderConfig));
             }
             ScreenshotService = screenshotService;
             UiTreeService = uiTreeService;
+            ScreenHelper = screenHelper;
             FolderConfig = folderConfig;
         }
 
@@ -28,7 +31,8 @@ namespace Outlines
         {
             UiTreeNode subtree = UiTreeService.GetSubTree(elementProperties);
             Image screenshot = ScreenshotService.TakeScreenshot(elementProperties);
-            return new Snapshot() { UiTree = subtree, Screenshot = screenshot };
+            double scaleFactor = ScreenHelper.GetDisplayScaleFactor();
+            return new Snapshot() { UiTree = subtree, Screenshot = screenshot, ScaleFactor = scaleFactor };
         }
 
         public void SaveSnapshot(Snapshot snapshot)

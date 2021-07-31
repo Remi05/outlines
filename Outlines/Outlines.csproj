@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CachedElementProvider.cs" />
+    <Compile Include="IScreenHelper.cs" />
     <Compile Include="LiveElementProvider.cs" />
     <Compile Include="ElementProperties.cs" />
     <Compile Include="ElementPropertiesProvider.cs" />

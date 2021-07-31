@@ -6,8 +6,9 @@ namespace Outlines
 {
     public class Snapshot
     {
-        public UiTreeNode UiTree { get; set; }
+        public double ScaleFactor { get; set; }
         public string ScreenshotFilePath { get; set; }
+        public UiTreeNode UiTree { get; set; }
 
         private Image screenshot = null;
 

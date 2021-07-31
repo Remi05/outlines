@@ -14,8 +14,8 @@ namespace OutlinesApp
             IDistanceOutlinesProvider distanceOutlinesProvider = new DistanceOutlinesProvider();
             IElementProvider elementProvider = new CachedElementProvider(snapshot.UiTree);
             IOutlinesService outlinesService = new OutlinesService(distanceOutlinesProvider, elementProvider);
-            ICoordinateConverter coordinateConverter = new CachedCoordinateConverter(snapshot.UiTree);
-            IScreenHelper screenHelper = new ScreenHelper();
+            ICoordinateConverter coordinateConverter = new CachedCoordinateConverter(snapshot);
+            IScreenHelper screenHelper = new ScreenHelper(this);
             OverlayViewModel overlayViewModel = new OverlayViewModel(Dispatcher, outlinesService, coordinateConverter, screenHelper);
             PropertiesViewModel propertiesViewModel = new PropertiesViewModel(outlinesService);
             SnapshotInspectorViewModel snapshotInspectorViewModel = new SnapshotInspectorViewModel(outlinesService, coordinateConverter);

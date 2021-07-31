@@ -91,7 +91,6 @@
     <Compile Include="Services\IColorPickerService.cs" />
     <Compile Include="Services\InputMaskingService.cs" />
     <Compile Include="Services\ICoordinateConverter.cs" />
-    <Compile Include="Services\IScreenHelper.cs" />
     <Compile Include="Services\ScreenHelper.cs" />
     <Compile Include="Services\ServiceContainer.cs" />
     <Compile Include="SnapshotInspectorWindow.xaml.cs">

@@ -5,13 +5,13 @@ namespace OutlinesApp.Services
 {
     public class CachedCoordinateConverter : ICoordinateConverter
     {
-        private UiTreeNode UiTree { get; set; }
-        private Point RootPosition => UiTree.ElementProperties.BoundingRect.TopLeft;
-        private double ScaleFactor { get; set; } = 1.5;
+        private Snapshot Snapshot { get; set; }
+        private Point RootPosition => Snapshot.UiTree.ElementProperties.BoundingRect.TopLeft;
+        private double ScaleFactor => Snapshot.ScaleFactor;
 
-        public CachedCoordinateConverter(UiTreeNode uiTree)
+        public CachedCoordinateConverter(Snapshot snapshot)
         {
-            UiTree = uiTree;
+            Snapshot = snapshot;
         }
 
         public Point PointFromScreen(Point screenPoint)
