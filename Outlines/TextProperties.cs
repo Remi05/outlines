@@ -1,5 +1,4 @@
-﻿
-namespace Outlines
+﻿namespace Outlines
 {
     public class TextProperties
     {
