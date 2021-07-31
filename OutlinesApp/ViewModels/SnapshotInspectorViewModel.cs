@@ -9,7 +9,7 @@ namespace OutlinesApp.ViewModels
     public class SnapshotInspectorViewModel : INotifyPropertyChanged
     {
         private IOutlinesService OutlinesService { get; set; }
-        private IScreenHelper ScreenHelper { get; set; }
+        private ICoordinateConverter CoordinateConverter { get; set; }
 
         private Snapshot snapshot = null;
         public Snapshot Snapshot
@@ -40,24 +40,24 @@ namespace OutlinesApp.ViewModels
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public SnapshotInspectorViewModel(IOutlinesService outlinesService, IScreenHelper screenHelper)
+        public SnapshotInspectorViewModel(IOutlinesService outlinesService, ICoordinateConverter coordinateConverter)
         {
             if (outlinesService == null)
             {
                 throw new ArgumentNullException(nameof(outlinesService));
             }
             OutlinesService = outlinesService;
-            ScreenHelper = screenHelper;
+            CoordinateConverter = coordinateConverter;
         }
 
         public void OnMouseMove(Point cursorPos)
         {
-            OutlinesService.TargetElementAt(ScreenHelper.PointToScreen(cursorPos));
+            OutlinesService.TargetElementAt(CoordinateConverter.PointToScreen(cursorPos));
         }
 
         public void OnMouseDown(Point cursorPos)
         {
-            OutlinesService.SelectElementAt(ScreenHelper.PointToScreen(cursorPos));
+            OutlinesService.SelectElementAt(CoordinateConverter.PointToScreen(cursorPos));
         }
 
         public void OnMouseWheelScroll(int scrollDelta)

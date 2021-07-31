@@ -21,13 +21,14 @@ namespace OutlinesApp
             IFolderConfig folderConfig = new FolderConfig();
             IGlobalInputListener globalInputListener = new GlobalInputListener(inputMaskingService);
             IOutlinesService outlinesService = new OutlinesService(distanceOutlinesProvider, elementProvider);
-            IScreenHelper screenHelper = new ScreenHelper(this);
+            ICoordinateConverter coordinateConverter = new LiveCoordinateConverter(this);
+            IScreenHelper screenHelper = new ScreenHelper();
             IScreenshotService screenshotService = new ScreenshotService(App.Current.MainWindow.Hide, App.Current.MainWindow.Show);
             IUiTreeService uiTreeService = new UiTreeService(elementPropertiesProvider, outlinesService);
             ISnapshotService snapshotService = new SnapshotService(screenshotService, uiTreeService, folderConfig);
             ColorPickerViewModel colorPickerViewModel = new ColorPickerViewModel(colorPickerService, globalInputListener);
             InspectorViewModel inspectorViewModel = new InspectorViewModel(outlinesService, globalInputListener);
-            OverlayViewModel overlayViewModel = new OverlayViewModel(Dispatcher, outlinesService, screenHelper);
+            OverlayViewModel overlayViewModel = new OverlayViewModel(Dispatcher, outlinesService, coordinateConverter, screenHelper);
             PropertiesViewModel propertiesViewModel = new PropertiesViewModel(outlinesService);
             ToolBarViewModel toolBarViewModel = new ToolBarViewModel(outlinesService, screenshotService, snapshotService, folderConfig, inspectorViewModel);
             UiTreeViewModel uiTreeViewModel = new UiTreeViewModel(Dispatcher, outlinesService, uiTreeService);
@@ -42,7 +43,6 @@ namespace OutlinesApp
             serviceContainer.AddService(typeof(ITextPropertiesProvider), textPropertiesProvider);
             serviceContainer.AddService(typeof(IGlobalInputListener), globalInputListener);
             serviceContainer.AddService(typeof(IOutlinesService), outlinesService);
-            serviceContainer.AddService(typeof(IScreenHelper), screenHelper);
             serviceContainer.AddService(typeof(IScreenshotService), screenshotService);
             serviceContainer.AddService(typeof(ISnapshotService), snapshotService);
             serviceContainer.AddService(typeof(IUiTreeService), uiTreeService);

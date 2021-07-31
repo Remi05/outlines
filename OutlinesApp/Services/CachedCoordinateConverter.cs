@@ -1,11 +1,9 @@
 ﻿using System.Windows;
-using System.Windows.Forms;
-using System.Windows.Media;
 using Outlines;
 
 namespace OutlinesApp.Services
 {
-    public class CachedCoordinateConverter : IScreenHelper
+    public class CachedCoordinateConverter : ICoordinateConverter
     {
         private UiTreeNode UiTree { get; set; }
         private Point RootPosition => UiTree.ElementProperties.BoundingRect.TopLeft;
@@ -14,13 +12,6 @@ namespace OutlinesApp.Services
         public CachedCoordinateConverter(UiTreeNode uiTree)
         {
             UiTree = uiTree;
-        }
-
-        public Rect GetMonitorRect(Point point)
-        {
-            var drawingPoint = new System.Drawing.Point((int)point.X, (int)point.Y);
-            var drawingRect = Screen.FromPoint(drawingPoint).Bounds;
-            return new Rect(new Point(drawingRect.Left, drawingRect.Top), new Size(drawingRect.Width, drawingRect.Height));
         }
 
         public Point PointFromScreen(Point screenPoint)

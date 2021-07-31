@@ -11,8 +11,9 @@ namespace OutlinesApp.ViewModels
     public class OverlayViewModel : INotifyPropertyChanged
     {
         private Dispatcher Dispatcher { get; set; }
-        private IScreenHelper ScreenHelper { get; set; }
+        private ICoordinateConverter CoordinateConverter { get; set; }
         private IOutlinesService OutlinesService { get; set; }
+        private IScreenHelper ScreenHelper { get; set; }
 
         public ObservableCollection<DistanceViewModel> DistanceOutlines { get; private set; } = new ObservableCollection<DistanceViewModel>();
 
@@ -52,18 +53,19 @@ namespace OutlinesApp.ViewModels
         public bool IsSelectedElementRectVisible => SelectedElementRect != Rect.Empty;
         public bool IsTargetElementRectVisible => TargetElementRect != Rect.Empty && TargetElementRect != SelectedElementRect;
 
-        public DimensionsViewModel SelectedElementDimensionsViewModel => OutlinesService.SelectedElementProperties == null ? null : new DimensionsViewModel(OutlinesService.SelectedElementProperties, ScreenHelper);
-        public DimensionsViewModel TargetElementDimensionsViewModel => OutlinesService.TargetElementProperties == null ? null : new DimensionsViewModel(OutlinesService.TargetElementProperties, ScreenHelper);
+        public DimensionsViewModel SelectedElementDimensionsViewModel => OutlinesService.SelectedElementProperties == null ? null : new DimensionsViewModel(OutlinesService.SelectedElementProperties, CoordinateConverter, ScreenHelper);
+        public DimensionsViewModel TargetElementDimensionsViewModel => OutlinesService.TargetElementProperties == null ? null : new DimensionsViewModel(OutlinesService.TargetElementProperties, CoordinateConverter, ScreenHelper);
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public OverlayViewModel(Dispatcher dispatcher, IOutlinesService outlinesService, IScreenHelper screenHelper)
+        public OverlayViewModel(Dispatcher dispatcher, IOutlinesService outlinesService, ICoordinateConverter coordinateConverter, IScreenHelper screenHelper)
         {
-            if (dispatcher == null || outlinesService == null || screenHelper == null)
+            if (dispatcher == null || outlinesService == null || coordinateConverter == null)
             {
-                throw new ArgumentNullException(dispatcher == null ? nameof(dispatcher) : outlinesService == null ? nameof(outlinesService) : nameof(screenHelper));
+                throw new ArgumentNullException(dispatcher == null ? nameof(dispatcher) : outlinesService == null ? nameof(outlinesService) : nameof(coordinateConverter));
             }
             Dispatcher = dispatcher;
+            CoordinateConverter = coordinateConverter;
             ScreenHelper = screenHelper;
             OutlinesService = outlinesService;
             OutlinesService.SelectedElementChanged += OnSelectedElementChanged;
@@ -75,7 +77,7 @@ namespace OutlinesApp.ViewModels
             Dispatcher.Invoke(() => 
             {
                 SelectedElementRect = OutlinesService.SelectedElementProperties != null
-                                    ? ScreenHelper.RectFromScreen(OutlinesService.SelectedElementProperties.BoundingRect)
+                                    ? CoordinateConverter.RectFromScreen(OutlinesService.SelectedElementProperties.BoundingRect)
                                     : Rect.Empty;
 
             });  
@@ -87,7 +89,7 @@ namespace OutlinesApp.ViewModels
             Dispatcher.Invoke(() => 
             {
                 TargetElementRect = OutlinesService.TargetElementProperties != null 
-                                    ? ScreenHelper.RectFromScreen(OutlinesService.TargetElementProperties.BoundingRect)
+                                    ? CoordinateConverter.RectFromScreen(OutlinesService.TargetElementProperties.BoundingRect)
                                     : Rect.Empty;
             });
             UpdateDistanceOutlines();
@@ -98,7 +100,7 @@ namespace OutlinesApp.ViewModels
             Dispatcher.Invoke(() => 
             {
                 DistanceOutlines.Clear();
-                OutlinesService.DistanceOutlines.ForEach(distanceOutline => DistanceOutlines.Add(new DistanceViewModel(distanceOutline, ScreenHelper)));
+                OutlinesService.DistanceOutlines.ForEach(distanceOutline => DistanceOutlines.Add(new DistanceViewModel(distanceOutline, CoordinateConverter, ScreenHelper)));
             });
         }
     }
