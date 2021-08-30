@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Windows;
 using Outlines;
 using OutlinesApp.Services;
@@ -55,6 +56,12 @@ namespace OutlinesApp
         private void OnClosing(object sender, CancelEventArgs e)
         {
             GlobalInputListener?.UnregisterFromInputEvents();
+        }
+
+        protected void OnSourceInitialized(object sender, EventArgs e)
+        {
+            var focusHelper = new FocusHelper();
+            focusHelper.DisableTakingFocus(this);
         }
     }
 }

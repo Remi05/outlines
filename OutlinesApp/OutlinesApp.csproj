@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -88,6 +88,7 @@
     <Compile Include="NullToVisibilityConverter.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="Services\CachedCoordinateConverter.cs" />
+    <Compile Include="Services\FocusHelper.cs" />
     <Compile Include="Services\IColorPickerService.cs" />
     <Compile Include="Services\InputMaskingService.cs" />
     <Compile Include="Services\ICoordinateConverter.cs" />
