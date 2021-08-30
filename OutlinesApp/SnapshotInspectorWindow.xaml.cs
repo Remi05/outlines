@@ -16,9 +16,11 @@ namespace OutlinesApp
             IOutlinesService outlinesService = new OutlinesService(distanceOutlinesProvider, elementProvider);
             ICoordinateConverter coordinateConverter = new CachedCoordinateConverter(snapshot);
             IScreenHelper screenHelper = new ScreenHelper(this);
+            IUiTreeService uiTreeService = new CachedUiTreeService(snapshot.UiTree);
 
             OverlayViewModel overlayViewModel = new OverlayViewModel(Dispatcher, outlinesService, coordinateConverter, screenHelper);
             PropertiesViewModel propertiesViewModel = new PropertiesViewModel(outlinesService);
+            UiTreeViewModel uiTreeViewModel = new UiTreeViewModel(Dispatcher, outlinesService, uiTreeService);
             SnapshotInspectorViewModel snapshotInspectorViewModel = new SnapshotInspectorViewModel(outlinesService, coordinateConverter);
             snapshotInspectorViewModel.Snapshot = snapshot;
 
@@ -26,6 +28,7 @@ namespace OutlinesApp
             serviceContainer.AddService(typeof(OverlayViewModel), overlayViewModel);
             serviceContainer.AddService(typeof(PropertiesViewModel), propertiesViewModel);
             serviceContainer.AddService(typeof(SnapshotInspectorViewModel), snapshotInspectorViewModel);
+            serviceContainer.AddService(typeof(UiTreeViewModel), uiTreeViewModel);
         }
     }
 }
