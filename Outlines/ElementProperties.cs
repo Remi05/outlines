@@ -4,7 +4,6 @@ using Newtonsoft.Json;
 
 namespace Outlines
 {
-    
     public class ElementProperties
     {
         public string Name { get; set; }
