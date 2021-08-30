@@ -11,22 +11,37 @@
 
     <Page.Resources>
         <ResourceDictionary>
-            <Style x:Key="SidePanelStyle" TargetType="StackPanel">
-                <Setter Property="Width" Value="200" />
+            <Style x:Key="TreeViewPanelStyle" TargetType="StackPanel">
+                <Setter Property="Width" Value="240" />
+                <Setter Property="HorizontalAlignment" Value="Left" />
+                <Setter Property="VerticalAlignment" Value="Top" />
+                <Setter Property="Margin" Value="16,0,0,0" />
+            </Style>
+            <Style x:Key="PropertiesPanelStyle" TargetType="StackPanel">
+                <Setter Property="Width" Value="240" />
                 <Setter Property="HorizontalAlignment" Value="Right" />
-                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="VerticalAlignment" Value="Top" />
                 <Setter Property="Margin" Value="0,0,16,0" />
             </Style>
         </ResourceDictionary>
     </Page.Resources>
 
     <Grid x:Name="Root">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*" MinHeight="60" />
+            <RowDefinition Height="9*" />
+            <RowDefinition Height="*" MinHeight="60" />
+        </Grid.RowDefinitions>
         <Border Background="Black" Opacity="0.3" Visibility="{Binding IsBackdropVisible, Converter={StaticResource BoolToVisibility}, FallbackValue=Collapsed}" />
         <local:OutlinesOverlay Visibility="{Binding IsOverlayVisible, Converter={StaticResource BoolToVisibility}, FallbackValue=Visible}" />
         <local:ToolBar HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,12,0,0" />
-        <Grid Margin="0,60,0,60">
+        <Grid Grid.Row="1">
+            <StackPanel Visibility="{Binding IsTreeViewVisible, Converter={StaticResource BoolToVisibility}, FallbackValue=Visible}" 
+                        Style="{StaticResource TreeViewPanelStyle}">
+                <local:UiTreeView />
+            </StackPanel>
             <StackPanel Visibility="{Binding IsPropertiesPanelVisible, Converter={StaticResource BoolToVisibility}, FallbackValue=Visible}" 
-                        Style="{StaticResource SidePanelStyle}">
+                        Style="{StaticResource PropertiesPanelStyle}">
                 <local:ColorPicker Margin="0,0,0,12" />
                 <local:PropertiesPanel />
             </StackPanel>

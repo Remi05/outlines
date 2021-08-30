@@ -7,7 +7,9 @@
         <ResourceDictionary>
             <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
             <local:NullToVisibilityConverter x:Key="NullToVisibility" />
-            <DropShadowEffect x:Key="SharedShadowEffect" Direction="225" BlurRadius="20" Opacity="0.3" />
+            <DropShadowEffect x:Key="SharedShadowEffectBottom" Direction="270" BlurRadius="20" Opacity="0.3" />
+            <DropShadowEffect x:Key="SharedShadowEffectLeft" Direction="270" BlurRadius="20" Opacity="0.3" />
+            <DropShadowEffect x:Key="SharedShadowEffectRight" Direction="225" BlurRadius="20" Opacity="0.3" />
             <Style x:Key="SharedInspectorBorderStyle" TargetType="Border">
                 <Setter Property="Background" Value="White" />
                 <Setter Property="CornerRadius" Value="8" />

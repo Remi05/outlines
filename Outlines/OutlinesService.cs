@@ -7,10 +7,10 @@ namespace Outlines
 {
     public class OutlinesService : IOutlinesService
     {
-        private IElementProvider ElementProvider { get; set; } = new CustomElementProvider();
-        private DistanceOutlinesProvider DistanceOutlinesProvider { get; set; } = new DistanceOutlinesProvider();
-        private ElementPropertiesProvider ElementPropertiesProvider { get; set; } = new ElementPropertiesProvider();
-        private TextPropertiesProvider TextPropertiesProvider { get; set; } = new TextPropertiesProvider();
+        private IDistanceOutlinesProvider DistanceOutlinesProvider { get; set; }
+        private IElementProvider ElementProvider { get; set; }
+        private IElementPropertiesProvider ElementPropertiesProvider { get; set; }
+        private ITextPropertiesProvider TextPropertiesProvider { get; set; }
 
         private AutomationElement selectedElement = null;
         private AutomationElement SelectedElement
@@ -72,14 +72,33 @@ namespace Outlines
         public event SelectedElementChangedHandler SelectedElementChanged;
         public event TargetElementChangedHandler TargetElementChanged;
 
-        public void TargetElementAt(Point cursorPosition)
+        public OutlinesService(IDistanceOutlinesProvider distanceOutlinesProvider, IElementProvider elementProvider,
+                               IElementPropertiesProvider elementPropertiesProvider, ITextPropertiesProvider textPropertiesProvider)
         {
-            TargetElement = ElementProvider.TryGetElementFromPoint(cursorPosition);
+            DistanceOutlinesProvider = distanceOutlinesProvider;
+            ElementProvider = elementProvider;
+            ElementPropertiesProvider = elementPropertiesProvider;
+            TextPropertiesProvider = textPropertiesProvider;
         }
 
         public void SelectElementAt(Point cursorPosition)
         {
             SelectedElement = ElementProvider.TryGetElementFromPoint(cursorPosition);
+        }
+
+        public void SelectElementWithProperties(ElementProperties properties)
+        {
+            SelectedElement = ElementProvider.TryGetElementFromProperties(properties);
+        }
+
+        public void TargetElementAt(Point cursorPosition)
+        {
+            TargetElement = ElementProvider.TryGetElementFromPoint(cursorPosition);
+        }
+
+        public void TargetElementWithProperties(ElementProperties properties)
+        {
+            TargetElement = ElementProvider.TryGetElementFromProperties(properties);
         }
 
         private void UpdateDistanceOutlines()

@@ -13,7 +13,7 @@
                 <Setter Property="Background" Value="White" />
                 <Setter Property="CornerRadius" Value="4" />
                 <Setter Property="HorizontalAlignment" Value="Stretch" />
-                <Setter Property="Effect" Value="{StaticResource SharedShadowEffect}" />
+                <Setter Property="Effect" Value="{StaticResource SharedShadowEffectBottom}" />
             </Style>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -23,6 +23,7 @@
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
             <Border x:Name="Handle" Height="35" Width="4" CornerRadius="1" Margin="0,0,5,0" Background="#38000000" BorderBrush="#40000000" BorderThickness="1" VerticalAlignment="Center" Visibility="Collapsed" />
             <local:ToolBarToggleButton Content="&#xE721;" IsChecked="{Binding InspectorViewModel.IsOverlayVisible, Mode=TwoWay}" ToolTip="Toggle Overlay" />
+            <local:ToolBarToggleButton Content="&#xF003;" IsChecked="{Binding InspectorViewModel.IsTreeViewVisible, Mode=TwoWay}" ToolTip="Toggle Tree View" />
             <local:ToolBarToggleButton Content="&#xE8FD;" IsChecked="{Binding InspectorViewModel.IsPropertiesPanelVisible, Mode=TwoWay}" ToolTip="Toggle Properties Panel" />
             <local:ToolBarButton Content="&#xE8B9;" Command="{Binding TakeScreenshotCommand}" ToolTip="Take Screenshot" />
             <local:ToolBarButton Content="&#xED15;" Command="{Binding GiveFeedbackCommand}" ToolTip="Give Feedback" />

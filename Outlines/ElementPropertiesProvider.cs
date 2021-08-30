@@ -4,21 +4,22 @@ using System.Windows.Automation;
 
 namespace Outlines
 {
-    public class ElementPropertiesProvider
+    public class ElementPropertiesProvider : IElementPropertiesProvider
     {
         public ElementProperties GetElementProperties(AutomationElement element)
         {
-            if (element == null)
+            if (element?.Current == null)
             {
                 return null;
             }
 
-            try 
-            { 
+            try
+            {
                 string name = element.Current.Name;
-                string controlType = element.Current.ControlType.ProgrammaticName.Replace("ControlType.", "").Trim();
+                ControlType controlType = element.Current.ControlType;
+                string controlTypeName = controlType == null ? "" : controlType.ProgrammaticName.Replace("ControlType.", "").Trim();
                 Rect boundingRect = element.Current.BoundingRectangle;
-                return new ElementProperties(name, controlType, boundingRect);
+                return new ElementProperties(name, controlTypeName, boundingRect, element);
             }
             catch (Exception)
             {

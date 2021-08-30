@@ -2,7 +2,7 @@
 
 namespace Outlines
 {
-    public class TextPropertiesProvider
+    public class TextPropertiesProvider : ITextPropertiesProvider
     {
         public TextProperties GetTextProperties(AutomationElement element)
         {

@@ -3,7 +3,7 @@ using System.Windows;
 
 namespace Outlines
 {
-    public class DistanceOutlinesProvider
+    public class DistanceOutlinesProvider : IDistanceOutlinesProvider
     {
         public List<DistanceOutline> GetDistanceOutlines(ElementProperties selectedElement, ElementProperties targetElement)
         {
@@ -50,8 +50,8 @@ namespace Outlines
             var leftToLeftOutline = new DistanceOutline(containedLeftCenter, new Point(containingRect.Left, containedLeftCenter.Y));
             var rightToRightOutline = new DistanceOutline(containedRightCenter, new Point(containingRect.Right, containedRightCenter.Y));
 
-            return new List<DistanceOutline>() 
-            { 
+            return new List<DistanceOutline>()
+            {
                 topToTopOutline,
                 bottomToBottomOutline,
                 leftToLeftOutline,
