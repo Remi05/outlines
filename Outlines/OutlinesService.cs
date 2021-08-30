@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Automation;
 
 namespace Outlines
 {
@@ -9,31 +7,6 @@ namespace Outlines
     {
         private IDistanceOutlinesProvider DistanceOutlinesProvider { get; set; }
         private IElementProvider ElementProvider { get; set; }
-        private IElementPropertiesProvider ElementPropertiesProvider { get; set; }
-        private ITextPropertiesProvider TextPropertiesProvider { get; set; }
-
-        private AutomationElement selectedElement = null;
-        private AutomationElement SelectedElement
-        {
-            get { return selectedElement; }
-            set
-            {
-                selectedElement = value;
-                SelectedTextProperties = TextPropertiesProvider.GetTextProperties(SelectedElement);
-                SelectedElementProperties = ElementPropertiesProvider.GetElementProperties(SelectedElement);
-            }
-        }
-
-        private AutomationElement targetElement = null;
-        private AutomationElement TargetElement
-        {
-            get { return targetElement; }
-            set
-            {
-                targetElement = value;
-                TargetElementProperties = ElementPropertiesProvider.GetElementProperties(TargetElement);
-            }
-        }
 
         private ElementProperties selectedElementProperties = null;
         public ElementProperties SelectedElementProperties
@@ -72,33 +45,30 @@ namespace Outlines
         public event SelectedElementChangedHandler SelectedElementChanged;
         public event TargetElementChangedHandler TargetElementChanged;
 
-        public OutlinesService(IDistanceOutlinesProvider distanceOutlinesProvider, IElementProvider elementProvider,
-                               IElementPropertiesProvider elementPropertiesProvider, ITextPropertiesProvider textPropertiesProvider)
+        public OutlinesService(IDistanceOutlinesProvider distanceOutlinesProvider, IElementProvider elementProvider)
         {
             DistanceOutlinesProvider = distanceOutlinesProvider;
             ElementProvider = elementProvider;
-            ElementPropertiesProvider = elementPropertiesProvider;
-            TextPropertiesProvider = textPropertiesProvider;
         }
 
         public void SelectElementAt(Point cursorPosition)
         {
-            SelectedElement = ElementProvider.TryGetElementFromPoint(cursorPosition);
+            SelectedElementProperties = ElementProvider.TryGetElementFromPoint(cursorPosition);
         }
 
         public void SelectElementWithProperties(ElementProperties properties)
         {
-            SelectedElement = ElementProvider.TryGetElementFromProperties(properties);
+            SelectedElementProperties = properties;
         }
 
         public void TargetElementAt(Point cursorPosition)
         {
-            TargetElement = ElementProvider.TryGetElementFromPoint(cursorPosition);
+            TargetElementProperties = ElementProvider.TryGetElementFromPoint(cursorPosition);
         }
 
         public void TargetElementWithProperties(ElementProperties properties)
         {
-            TargetElement = ElementProvider.TryGetElementFromProperties(properties);
+            TargetElementProperties = properties;
         }
 
         private void UpdateDistanceOutlines()

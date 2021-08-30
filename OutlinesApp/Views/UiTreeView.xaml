@@ -28,7 +28,7 @@
     <Grid x:Name="Root">
         <Border Style="{StaticResource SharedInspectorBorderStyle}" Effect="{StaticResource SharedShadowEffectLeft}" />
 
-        <StackPanel Margin="16,16,16,16">
+        <StackPanel Margin="16,16,8,8">
             <TextBlock Text="Tree View" Style="{StaticResource HeaderStyle}" />
             <TreeView ItemsSource="{Binding Elements}" Style="{StaticResource TreeViewStyle}" SelectedItemChanged="OnSelectedItemChanged">
                 <TreeView.Resources>

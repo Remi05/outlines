@@ -2,9 +2,8 @@
 
 namespace OutlinesApp.Services
 {
-    public interface IScreenHelper
+    public interface ICoordinateConverter
     {
-        Rect GetMonitorRect(Point point);
         Point PointFromScreen(Point screenPoint);
         Point PointToScreen(Point localPoint);
         Rect RectFromScreen(Rect screenRect);

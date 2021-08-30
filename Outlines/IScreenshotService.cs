@@ -4,6 +4,7 @@ namespace Outlines
 {
     public interface IScreenshotService
     {
-        Bitmap TakeScreenshot(Rectangle rect);
+        Image TakeScreenshot(ElementProperties elementProperties);
+        Image TakeScreenshot(Rectangle rect);
     }
 }

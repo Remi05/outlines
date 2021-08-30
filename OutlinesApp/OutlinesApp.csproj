@@ -87,13 +87,20 @@
     <Compile Include="HoverWatcher.cs" />
     <Compile Include="NullToVisibilityConverter.cs" />
     <Compile Include="RelayCommand.cs" />
+    <Compile Include="Services\CachedCoordinateConverter.cs" />
+    <Compile Include="Services\FocusHelper.cs" />
     <Compile Include="Services\IColorPickerService.cs" />
     <Compile Include="Services\InputMaskingService.cs" />
-    <Compile Include="Services\IScreenHelper.cs" />
+    <Compile Include="Services\ICoordinateConverter.cs" />
+    <Compile Include="Services\ScreenHelper.cs" />
     <Compile Include="Services\ServiceContainer.cs" />
+    <Compile Include="SnapshotInspectorWindow.xaml.cs">
+      <DependentUpon>SnapshotInspectorWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\ColorPickerViewModel.cs" />
     <Compile Include="ViewModels\DistanceViewModel.cs" />
     <Compile Include="ViewModels\DimensionsViewModel.cs" />
+    <Compile Include="ViewModels\SnapshotInspectorViewModel.cs" />
     <Compile Include="ViewModels\InspectorViewModel.cs" />
     <Compile Include="ViewModels\OverlayViewModel.cs" />
     <Compile Include="ViewModels\PropertiesViewModel.cs" />
@@ -102,6 +109,9 @@
     <Compile Include="ViewModels\ToolBarViewModel.cs" />
     <Compile Include="Views\ColorPicker.xaml.cs">
       <DependentUpon>ColorPicker.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SnapshotInspectorPage.xaml.cs">
+      <DependentUpon>SnapshotInspectorPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UiTreeView.xaml.cs">
       <DependentUpon>UiTreeView.xaml</DependentUpon>
@@ -112,7 +122,7 @@
     <Compile Include="Views\OutlinesOverlay.xaml.cs">
       <DependentUpon>OutlinesOverlay.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Services\ScreenHelper.cs" />
+    <Compile Include="Services\LiveCoordinateConverter.cs" />
     <Compile Include="Views\PropertiesPanel.xaml.cs">
       <DependentUpon>PropertiesPanel.xaml</DependentUpon>
     </Compile>
@@ -126,11 +136,15 @@
     <Compile Include="Views\ToolBarToggleButton.xaml.cs">
       <DependentUpon>ToolBarToggleButton.xaml</DependentUpon>
     </Compile>
+    <Page Include="SnapshotInspectorWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ColorPicker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="LiveInspectorWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -139,10 +153,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Services\ColorPickerService.cs" />
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="LiveInspectorWindow.xaml.cs">
+      <DependentUpon>LiveInspectorWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\SnapshotInspectorPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\UiTreeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

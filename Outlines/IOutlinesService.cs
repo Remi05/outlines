@@ -10,7 +10,6 @@ namespace Outlines
     {
         List<DistanceOutline> DistanceOutlines { get; }
         ElementProperties SelectedElementProperties { get; set; }
-        TextProperties SelectedTextProperties { get; }
         ElementProperties TargetElementProperties { get; set; }
 
         event SelectedElementChangedHandler SelectedElementChanged;

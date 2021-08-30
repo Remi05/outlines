@@ -13,6 +13,7 @@ namespace OutlinesApp.ViewModels
         private const int ContainerRectHeight = 35;
 
         private ElementProperties ElementProperties { get; set; }
+        private ICoordinateConverter CoordinateConverter { get; set; }
         private IScreenHelper ScreenHelper { get; set; }
 
         public string DimensionsText => $"{ElementProperties.BoundingRect.Width} x {ElementProperties.BoundingRect.Height}";
@@ -21,27 +22,28 @@ namespace OutlinesApp.ViewModels
 
         public Rect ContainerRect { get; private set; }
 
-        public DimensionsViewModel(ElementProperties elementProperties, IScreenHelper screenHelper)
+        public DimensionsViewModel(ElementProperties elementProperties, ICoordinateConverter coordinateConverter, IScreenHelper screenHelper)
         {
-            if (elementProperties == null || screenHelper == null)
+            if (elementProperties == null || coordinateConverter == null)
             {
-                throw new ArgumentNullException(elementProperties == null ? nameof(elementProperties) : nameof(screenHelper));
+                throw new ArgumentNullException(elementProperties == null ? nameof(elementProperties) : nameof(coordinateConverter));
             }
             ElementProperties = elementProperties;
+            CoordinateConverter = coordinateConverter;
             ScreenHelper = screenHelper;
             InitializeContainerRect();
         }
 
         private void InitializeContainerRect()
         {
-            Rect localElementRect = ScreenHelper.RectFromScreen(ElementProperties.BoundingRect);
+            Rect localElementRect = CoordinateConverter.RectFromScreen(ElementProperties.BoundingRect);
             double localElementCenterX = localElementRect.Left + localElementRect.Width / 2;
             Point containerRectTopLeft = new Point(localElementCenterX - ContainerRectWidth / 2, localElementRect.Bottom);
             Point containerRectBottomCenter = new Point(localElementCenterX, containerRectTopLeft.Y + ContainerRectHeight);
             TextPlacement = DimensionsTextPlacement.Below;
 
-            Rect monitorRect = ScreenHelper.GetMonitorRect(localElementRect.TopLeft);
-            Rect localMonitorRect = ScreenHelper.RectFromScreen(monitorRect);
+            Rect monitorRect = ScreenHelper.GetDisplayRect(localElementRect.TopLeft);
+            Rect localMonitorRect = CoordinateConverter.RectFromScreen(monitorRect);
             if (!localMonitorRect.Contains(containerRectBottomCenter))
             {
                 // If the text is outside the screen when shown below, try above the outline.

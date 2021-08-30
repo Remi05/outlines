@@ -14,6 +14,7 @@ namespace OutlinesApp.ViewModels
         private readonly Size TextContainerRectSize = new Size(TextContainerRectWidth, TextContainerRectHeight);
 
         private DistanceOutline DistanceOutline { get; set; }
+        private ICoordinateConverter CoordinateConverter { get; set; }
         private IScreenHelper ScreenHelper { get; set; }
 
         public string DistanceText => $"{DistanceOutline.Distance}";
@@ -28,31 +29,32 @@ namespace OutlinesApp.ViewModels
 
         public Rect TextContainerRect { get; private set; }
 
-        public DistanceViewModel(DistanceOutline distanceOutline, IScreenHelper screenHelper)
+        public DistanceViewModel(DistanceOutline distanceOutline, ICoordinateConverter coordinateConverter, IScreenHelper screenHelper)
         {
-            if (distanceOutline == null || screenHelper == null)
+            if (distanceOutline == null || coordinateConverter == null)
             {
-                throw new ArgumentNullException(distanceOutline == null ? nameof(distanceOutline) : nameof(screenHelper));
+                throw new ArgumentNullException(distanceOutline == null ? nameof(distanceOutline) : nameof(coordinateConverter));
             }
             DistanceOutline = distanceOutline;
+            CoordinateConverter = coordinateConverter;
             ScreenHelper = screenHelper;
-            StartPoint = ScreenHelper.PointFromScreen(distanceOutline.StartPoint);
-            EndPoint = ScreenHelper.PointFromScreen(distanceOutline.EndPoint);
+            StartPoint = CoordinateConverter.PointFromScreen(distanceOutline.StartPoint);
+            EndPoint = CoordinateConverter.PointFromScreen(distanceOutline.EndPoint);
             InitializeTextContainerRect();
         } 
 
         private void InitializeTextContainerRect()
         {
             // Default to a centered rectangle to the right or below the outline.
-            var localMidPoint = ScreenHelper.PointFromScreen(DistanceOutline.MidPoint);
+            var localMidPoint = CoordinateConverter.PointFromScreen(DistanceOutline.MidPoint);
             var textContainerTopLeft = DistanceOutline.IsVertical
                                      ? new Point(localMidPoint.X, localMidPoint.Y - TextContainerRectHeight / 2)
                                      : new Point(localMidPoint.X - TextContainerRectWidth / 2, localMidPoint.Y);
             TextContainerRect = new Rect(textContainerTopLeft, TextContainerRectSize);
             TextPlacement = DistanceOutline.IsVertical ? DistanceTextPlacement.Right : DistanceTextPlacement.Bottom;
 
-            Rect monitorRect = ScreenHelper.GetMonitorRect(localMidPoint);
-            Rect localMonitorRect = ScreenHelper.RectFromScreen(monitorRect);
+            Rect monitorRect = ScreenHelper.GetDisplayRect(localMidPoint);
+            Rect localMonitorRect = CoordinateConverter.RectFromScreen(monitorRect);
             if (!localMonitorRect.Contains(TextContainerRect))
             {
                 // If the text is outside the screen when shown to the right or below, try on the left or above.
