@@ -45,7 +45,9 @@ namespace Outlines
             }
             ElementPropertiesProvider = elementPropertiesProvider;
             OutlinesService = outlinesService;
-            FilterCondition = new PropertyCondition(AutomationElement.IsOffscreenProperty, false);
+            FilterCondition = new AndCondition(new NotCondition(new AndCondition(new PropertyCondition(AutomationElement.NameProperty, "Outlines", PropertyConditionFlags.IgnoreCase),
+                                                                                 new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Window))),
+                                               new PropertyCondition(AutomationElement.IsOffscreenProperty, false));
             InitializeUiTree();
         }
 
