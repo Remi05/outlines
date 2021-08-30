@@ -9,7 +9,8 @@ namespace Outlines
         {
             List<DistanceOutline> distanceOutlines = new List<DistanceOutline>();
 
-            if (selectedElement == null || targetElement == null)
+            if (selectedElement == null || selectedElement.BoundingRect == Rect.Empty
+             || targetElement == null || targetElement.BoundingRect == Rect.Empty)
             {
                 return distanceOutlines;
             }
