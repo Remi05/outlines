@@ -28,7 +28,7 @@ namespace OutlinesApp
             ICoordinateConverter coordinateConverter = new LiveCoordinateConverter(this);
             IScreenHelper screenHelper = new ScreenHelper(this);
             IScreenshotService screenshotService = new ScreenshotService(App.Current.MainWindow.Hide, App.Current.MainWindow.Show);
-            IUiTreeService uiTreeService = new UiTreeService(elementPropertiesProvider, outlinesService);
+            IUiTreeService uiTreeService = new LiveUiTreeService(elementPropertiesProvider, outlinesService);
             ISnapshotService snapshotService = new SnapshotService(screenshotService, uiTreeService, screenHelper, folderConfig);
 
             ColorPickerViewModel colorPickerViewModel = new ColorPickerViewModel(colorPickerService, GlobalInputListener);

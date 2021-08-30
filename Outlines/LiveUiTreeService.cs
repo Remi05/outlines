@@ -9,7 +9,7 @@ namespace Outlines
 {
     public delegate void RootNodeChangedEventHandler();
 
-    public class UiTreeService : IUiTreeService
+    public class LiveUiTreeService : IUiTreeService
     {
         private const int MaxTreeDepth = int.MaxValue;
         private const int StartupTreeDepth = 2;
@@ -37,7 +37,7 @@ namespace Outlines
 
         public event RootNodeChangedEventHandler RootNodeChanged;
 
-        public UiTreeService(IElementPropertiesProvider elementPropertiesProvider, IOutlinesService outlinesService)
+        public LiveUiTreeService(IElementPropertiesProvider elementPropertiesProvider, IOutlinesService outlinesService)
         {
             if (elementPropertiesProvider == null || outlinesService == null)
             {
