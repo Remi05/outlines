@@ -73,8 +73,7 @@ namespace OutlinesApp.ViewModels
             else
             {
                 var window = App.Current.MainWindow;
-                //var windowBounds = new Rectangle((int)window.Left, (int)window.Top, (int)window.Width, (int)window.Height);
-                var windowBounds = new Rectangle(0, 0, 1920, 1080);
+                var windowBounds = new Rectangle((int)window.Left, (int)window.Top, (int)window.Width, (int)window.Height);
                 screenshot = ScreenshotService.TakeScreenshot(windowBounds);
             }
 
