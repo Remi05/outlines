@@ -27,6 +27,14 @@ namespace Outlines
             FolderConfig = folderConfig;
         }
 
+        public Snapshot TakeSnapshot(Rectangle bounds)
+        {
+            UiTreeNode subtree = UiTreeService.GetSubTreeInBounds(bounds);
+            Image screenshot = ScreenshotService.TakeScreenshot(bounds);
+            double scaleFactor = ScreenHelper.GetDisplayScaleFactor();
+            return new Snapshot() { UiTree = subtree, Screenshot = screenshot, ScaleFactor = scaleFactor };
+        }
+
         public Snapshot TakeSnapshot(ElementProperties elementProperties)
         {
             UiTreeNode subtree = UiTreeService.GetSubTree(elementProperties);

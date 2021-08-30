@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Automation;
 
 namespace Outlines
@@ -16,6 +18,8 @@ namespace Outlines
 
         private IElementPropertiesProvider ElementPropertiesProvider { get; set; }
         private IOutlinesService OutlinesService { get; set; }
+
+        private Condition FilterCondition { get; set; }
 
         private UiTreeNode rootNode = null;
         public UiTreeNode RootNode
@@ -41,6 +45,7 @@ namespace Outlines
             }
             ElementPropertiesProvider = elementPropertiesProvider;
             OutlinesService = outlinesService;
+            FilterCondition = new PropertyCondition(AutomationElement.IsOffscreenProperty, false);
             InitializeUiTree();
         }
 
@@ -74,7 +79,7 @@ namespace Outlines
             }
             try
             {
-                var childrenElements = rootElementProperties.Element.FindAll(TreeScope.Children, Condition.TrueCondition);
+                var childrenElements = rootElementProperties.Element.FindAll(TreeScope.Children, FilterCondition);
                 var childrenNodes = new List<UiTreeNode>();
                 if (treeDepth > 1)
                 {
@@ -94,6 +99,60 @@ namespace Outlines
             {
                 return null;
             }
+        }
+
+        public UiTreeNode GetSubTreeInBounds(Rectangle bounds)
+        {
+            var rect = new Rect(bounds.X, bounds.Y, bounds.Width, bounds.Height);
+            var childrenNodes = GetSubTreeInBounds(rect, AutomationElement.RootElement);
+            var rootProperties = new ElementProperties() { Name = "Root", BoundingRect = rect };
+            return new UiTreeNode() { ElementProperties = rootProperties, Children = childrenNodes };
+        }
+
+        private List<UiTreeNode> GetSubTreeInBounds(Rect bounds, AutomationElement curElement)
+        {
+            var elementsInBounds = new List<UiTreeNode>();
+
+            try
+            {
+                if (bounds.Contains(curElement.Current.BoundingRectangle))
+                {
+                    var childrenElements = curElement.FindAll(TreeScope.Children, FilterCondition);
+                    var childrenNodes = new List<UiTreeNode>();
+
+                    foreach (var child in childrenElements)
+                    {
+                        ElementProperties childElementProperties = ElementPropertiesProvider.GetElementProperties(child as AutomationElement);
+                        UiTreeNode childNode = GetSubTree(childElementProperties, MaxTreeDepth);
+                        if (childNode != null)
+                        {
+                            childrenNodes.Add(childNode);
+                        }
+                    }
+
+                    ElementProperties curElementProperties = ElementPropertiesProvider.GetElementProperties(curElement);
+                    UiTreeNode curNode = new UiTreeNode() { ElementProperties = curElementProperties, Children = childrenNodes };
+                    elementsInBounds.Add(curNode);
+                }
+                else
+                {
+                    var childrenElements = curElement.FindAll(TreeScope.Children, FilterCondition);
+                    foreach (var child in childrenElements)
+                    {
+                        var subTreeInBounds = GetSubTreeInBounds(bounds, child as AutomationElement);
+                        foreach (var childNode in subTreeInBounds)
+                        {
+                            elementsInBounds.Add(childNode);
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
+            return elementsInBounds;
         }
     }
 }
