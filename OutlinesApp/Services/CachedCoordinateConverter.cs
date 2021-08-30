@@ -26,12 +26,12 @@ namespace OutlinesApp.Services
 
         public Size SizeFromScreen(Size screenSize)
         {
-            return new Size(screenSize.Width / ScaleFactor, screenSize.Height / ScaleFactor);
+            return screenSize == Size.Empty ? Size.Empty : new Size(screenSize.Width / ScaleFactor, screenSize.Height / ScaleFactor);
         }
 
         public Size SizeToScreen(Size localSize)
         {
-            return new Size(localSize.Width * ScaleFactor, localSize.Height * ScaleFactor);
+            return localSize == Size.Empty ? Size.Empty : new Size(localSize.Width * ScaleFactor, localSize.Height * ScaleFactor);
         }
 
         public Rect RectFromScreen(Rect screenRect)
