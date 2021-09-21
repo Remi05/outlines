@@ -25,6 +25,8 @@ namespace Outlines
                 string name = element.Current.Name;
                 ControlType controlType = element.Current.ControlType;
                 string controlTypeName = controlType == null ? "" : controlType.ProgrammaticName.Replace("ControlType.", "").Trim();
+                string automationId = element.Current.AutomationId ?? "";
+                string className = element.Current.ClassName ?? "";
                 Rect boundingRect = element.Current.BoundingRectangle;
 
                 TextProperties textProperties = TextPropertiesProvider.GetTextProperties(element);
@@ -35,6 +37,8 @@ namespace Outlines
                     BoundingRect = boundingRect, 
                     Element = element, 
                     TextProperties = textProperties,
+                    AutomationId = automationId,
+                    ClassName = className,
                 };
             }
             catch (Exception)

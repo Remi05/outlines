@@ -1,4 +1,4 @@
-﻿using System.Windows;
+using System.Windows;
 using System.Windows.Automation;
 using Newtonsoft.Json;
 
@@ -8,6 +8,8 @@ namespace Outlines
     {
         public string Name { get; set; }
         public string ControlType { get; set; }
+        public string AutomationId { get; set; }
+        public string ClassName { get; set; }
         public Rect BoundingRect { get; set; }
         public TextProperties TextProperties { get; set; }
 
