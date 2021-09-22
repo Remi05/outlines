@@ -53,7 +53,6 @@
     <Compile Include="IScreenHelper.cs" />
     <Compile Include="LiveElementProvider.cs" />
     <Compile Include="ElementProperties.cs" />
-    <Compile Include="LiveElementPropertiesProvider.cs" />
     <Compile Include="DistanceOutline.cs" />
     <Compile Include="GlobalInputListener.cs" />
     <Compile Include="IDistanceOutlinesProvider.cs" />

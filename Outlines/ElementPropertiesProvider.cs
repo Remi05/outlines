@@ -6,45 +6,74 @@ namespace Outlines
 {
     public class ElementPropertiesProvider : IElementPropertiesProvider
     {
-        private ITextPropertiesProvider TextPropertiesProvider { get; set; }
+        private bool IsCached { get; set; }
 
-        public ElementPropertiesProvider(ITextPropertiesProvider textPropertiesProvider)
+        public ElementPropertiesProvider(bool isCached = false)
         {
-            TextPropertiesProvider = textPropertiesProvider;
+            IsCached = isCached;
         }
 
         public ElementProperties GetElementProperties(AutomationElement element)
         {
-            if (element?.Current == null)
-            {
-                return null;
-            }
-
             try
             {
-                string name = element.Current.Name;
-                ControlType controlType = element.Current.ControlType;
+                if (element == null)
+                {
+                    return null;
+                }
+
+                var elementInfo = IsCached ? element.Cached : element.Current;
+
+                ControlType controlType = elementInfo.ControlType;
                 string controlTypeName = controlType == null ? "" : controlType.ProgrammaticName.Replace("ControlType.", "").Trim();
-                string automationId = element.Current.AutomationId ?? "";
-                string className = element.Current.ClassName ?? "";
-                Rect boundingRect = element.Current.BoundingRectangle;
+                string name = elementInfo.Name ?? "";
+                string automationId = elementInfo.AutomationId ?? "";
+                string className = elementInfo.ClassName ?? "";
+                Rect boundingRect = elementInfo.BoundingRectangle;
 
-                TextProperties textProperties = TextPropertiesProvider.GetTextProperties(element);
-
-                return new ElementProperties() { 
-                    Name = name, 
-                    ControlType = controlTypeName, 
-                    BoundingRect = boundingRect, 
-                    Element = element, 
-                    TextProperties = textProperties,
+                return new ElementProperties()
+                {
+                    ControlType = controlTypeName,
+                    Name = name,
                     AutomationId = automationId,
                     ClassName = className,
-                };
+                    BoundingRect = boundingRect,
+                    TextProperties = GetTextProperties(element),
+                    Element = element,
+            };
             }
             catch (Exception)
             {
                 return null;
             }
+        }
+
+        private TextProperties GetTextProperties(AutomationElement element)
+        {
+            if (element == null)
+            {
+                return null;
+            }
+
+            object textPatternObject;
+            bool wasPatternFound = IsCached ? element.TryGetCachedPattern(TextPattern.Pattern, out textPatternObject)
+                                            : element.TryGetCurrentPattern(TextPattern.Pattern, out textPatternObject);
+
+            if (!wasPatternFound)
+            {
+                return null;
+            }
+
+            var textPatternRange = (textPatternObject as TextPattern).DocumentRange;
+            var textProperties = new TextProperties()
+            {
+                FontName = textPatternRange.GetAttributeValue(TextPattern.FontNameAttribute).ToString(),
+                FontSize = textPatternRange.GetAttributeValue(TextPattern.FontSizeAttribute).ToString(),
+                FontWeight = textPatternRange.GetAttributeValue(TextPattern.FontWeightAttribute).ToString(),
+                ForegroundColor = textPatternRange.GetAttributeValue(TextPattern.ForegroundColorAttribute).ToString(),
+            };
+
+            return textProperties;
         }
     }
 }
