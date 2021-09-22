@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using System.Windows;
 using Outlines;
@@ -20,8 +20,7 @@ namespace OutlinesApp
 
             IColorPickerService colorPickerService = new ColorPickerService();
             IDistanceOutlinesProvider distanceOutlinesProvider = new DistanceOutlinesProvider();
-            ITextPropertiesProvider textPropertiesProvider = new TextPropertiesProvider();
-            IElementPropertiesProvider elementPropertiesProvider = new ElementPropertiesProvider(textPropertiesProvider);
+            IElementPropertiesProvider elementPropertiesProvider = new LiveElementPropertiesProvider();
             IElementProvider elementProvider = new LiveElementProvider(elementPropertiesProvider);
             IFolderConfig folderConfig = new FolderConfig();
             IOutlinesService outlinesService = new OutlinesService(distanceOutlinesProvider, elementProvider);
