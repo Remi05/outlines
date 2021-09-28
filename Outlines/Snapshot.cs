@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.IO;
 using Newtonsoft.Json;
 
@@ -8,6 +9,8 @@ namespace Outlines
     {
         public double ScaleFactor { get; set; }
         public string ScreenshotFilePath { get; set; }
+        [JsonProperty(Order = 1)]
+        public string ScreenshotBase64 { get; set; }
         public UiTreeNode UiTree { get; set; }
 
         private Image screenshot = null;
@@ -28,14 +31,25 @@ namespace Outlines
 
         private void EnsureScreenshot()
         {
-            if (screenshot != null || string.IsNullOrWhiteSpace(ScreenshotFilePath) || !File.Exists(ScreenshotFilePath))
+            if (screenshot != null)
             {
                 return;
             }
 
-            using (var screenshotImage = Image.FromFile(ScreenshotFilePath))
+            if (!string.IsNullOrWhiteSpace(ScreenshotBase64))
             {
-                screenshot = new Bitmap(screenshot);
+                byte[] bytes = Convert.FromBase64String(ScreenshotBase64);
+                using (var memoryStream = new MemoryStream(bytes))
+                {
+                    screenshot = Image.FromStream(memoryStream);
+                }
+            }
+            else if (!string.IsNullOrWhiteSpace(ScreenshotFilePath) && File.Exists(ScreenshotFilePath))
+            {
+                using (var screenshotImage = Image.FromFile(ScreenshotFilePath))
+                {
+                    screenshot = new Bitmap(screenshotImage);
+                }
             }
         }
 
