@@ -19,8 +19,9 @@ namespace OutlinesApp.ViewModels
 
         public string DistanceText => $"{DistanceOutline.Distance}";
 
-        public bool IsDashedLine => DistanceOutline.IsAlignmentLine;
-        public bool IsTextVisible => !DistanceOutline.IsAlignmentLine && DistanceOutline.Distance != 0;
+        public bool IsAlignmentLine => DistanceOutline.IsAlignmentLine;
+        public bool IsDashedLine => !DistanceOutline.IsDistanceLine;
+        public bool IsTextVisible => DistanceOutline.IsDistanceLine && DistanceOutline.Distance != 0;
 
         public DistanceTextPlacement TextPlacement { get; private set; }
 
