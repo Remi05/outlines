@@ -15,7 +15,8 @@
             <SolidColorBrush x:Key="SelectedElementOutlineBrush" Color="#18A0FB" />
             <SolidColorBrush x:Key="TargetElementOutlineBrush" Color="#F24822" />
             <SolidColorBrush x:Key="DistanceOutlineBrush" Color="#F24822" />
-            
+            <SolidColorBrush x:Key="AlignmentOutlineBrush" Color="#8600EB" />
+
             <DoubleCollection x:Key="DashPattern">5,4,5,4</DoubleCollection>
 
             <Style x:Key="ElementOutlineStyle" TargetType="Rectangle">
@@ -27,6 +28,9 @@
                 <Setter Property="Stroke" Value="{StaticResource DistanceOutlineBrush}" />
                 <Setter Property="StrokeThickness" Value="2" />
                 <Style.Triggers>
+                    <DataTrigger Binding="{Binding Path=IsAlignmentLine}" Value="True">
+                        <Setter Property="Stroke" Value="{StaticResource AlignmentOutlineBrush}"/>
+                    </DataTrigger>
                     <DataTrigger Binding="{Binding Path=IsDashedLine}" Value="True">
                         <Setter Property="StrokeDashArray" Value="{StaticResource DashPattern}"/>
                     </DataTrigger>
@@ -67,6 +71,11 @@
                 <Setter Property="HorizontalAlignment" Value="Center"/>
                 <Setter Property="VerticalAlignment" Value="Center"/>
                 <Setter Property="Margin" Value="8,8,8,8"/>
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding Path=IsAlignmentLine}" Value="True">
+                        <Setter Property="Background" Value="{StaticResource AlignmentOutlineBrush}"/>
+                    </DataTrigger>
+                </Style.Triggers>
                 <!--<Style.Triggers>
                     <DataTrigger Binding="{Binding Path=TextPlacement}" Value="{x:Static vm:DistanceTextPlacement.Right}">
                         <Setter Property="HorizontalAlignment" Value="Left"/>
