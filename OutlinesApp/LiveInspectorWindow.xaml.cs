@@ -22,7 +22,8 @@ namespace OutlinesApp
             IDistanceOutlinesProvider distanceOutlinesProvider = new DistanceOutlinesProvider();
             ITextPropertiesProvider textPropertiesProvider = new TextPropertiesProvider();
             IElementPropertiesProvider elementPropertiesProvider = new ElementPropertiesProvider(textPropertiesProvider);
-            IElementProvider elementProvider = new LiveElementProvider(elementPropertiesProvider);
+            INativeWindowService nativeWindowService = new NativeWindowService();
+            IElementProvider elementProvider = new ScopedLiveElementProvider(elementPropertiesProvider, nativeWindowService);
             IFolderConfig folderConfig = new FolderConfig();
             IOutlinesService outlinesService = new OutlinesService(distanceOutlinesProvider, elementProvider);
             ICoordinateConverter coordinateConverter = new LiveCoordinateConverter(this);
