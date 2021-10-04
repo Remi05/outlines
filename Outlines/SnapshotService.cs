@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using Newtonsoft.Json;
 
@@ -11,6 +12,7 @@ namespace Outlines
         private IUiTreeService UiTreeService { get; set; }
         private IScreenHelper ScreenHelper { get; set; }
         private IFolderConfig FolderConfig { get; set; }
+        private bool ShouldSaveAsSingleFile { get; set; } = true;
 
         public SnapshotService(IScreenshotService screenshotService, IUiTreeService uiTreeService, IScreenHelper screenHelper, IFolderConfig folderConfig)
         {
@@ -45,12 +47,24 @@ namespace Outlines
 
         public void SaveSnapshot(Snapshot snapshot)
         {
-            if (string.IsNullOrWhiteSpace(snapshot.ScreenshotFilePath))
+            if (ShouldSaveAsSingleFile)
             {
-                string screenshotFileName = $"Screenshot-{DateTime.Now.ToFileTime()}.png";
-                string screenshotFilePath = Path.Combine(FolderConfig.GetSnapshotsFolder(), screenshotFileName);
-                snapshot.Screenshot.Save(screenshotFilePath);
-                snapshot.ScreenshotFilePath = screenshotFilePath;
+                using (var memoryStream = new MemoryStream())
+                {
+                    snapshot.Screenshot.Save(memoryStream, ImageFormat.Png);
+                    byte[] imageBytes = memoryStream.ToArray();
+                    snapshot.ScreenshotBase64 = Convert.ToBase64String(imageBytes);
+                }
+            }
+            else
+            {
+                if (string.IsNullOrWhiteSpace(snapshot.ScreenshotFilePath))
+                {
+                    string screenshotFileName = $"Screenshot-{DateTime.Now.ToFileTime()}.png";
+                    string screenshotFilePath = Path.Combine(FolderConfig.GetSnapshotsFolder(), screenshotFileName);
+                    snapshot.Screenshot.Save(screenshotFilePath, ImageFormat.Png);
+                    snapshot.ScreenshotFilePath = screenshotFilePath;
+                }
             }
 
             string snapshotJson = JsonConvert.SerializeObject(snapshot);
