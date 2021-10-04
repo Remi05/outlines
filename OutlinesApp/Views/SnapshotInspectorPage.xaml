@@ -33,7 +33,7 @@
                     <Grid.LayoutTransform>
                         <ScaleTransform ScaleX="{Binding ScreenshotScaleFactor}" ScaleY="{Binding ScreenshotScaleFactor}" />
                     </Grid.LayoutTransform>
-                    <Image x:Name="ScreenshotImage" Source="{Binding ScreenshotSource}" />
+                    <Image x:Name="ScreenshotImage" Source="{Binding Snapshot.Screenshot, Converter={StaticResource ImageToImageSource}}" />
                     <local:OutlinesOverlay />
                 </Grid>
             </Grid>

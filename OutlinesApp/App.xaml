@@ -6,6 +6,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
+            <local:ImageToImageSourceConverter x:Key="ImageToImageSource" />
             <local:NullToVisibilityConverter x:Key="NullToVisibility" />
             <DropShadowEffect x:Key="SharedShadowEffectBottom" Direction="270" BlurRadius="20" Opacity="0.3" />
             <DropShadowEffect x:Key="SharedShadowEffectLeft" Direction="270" BlurRadius="20" Opacity="0.3" />

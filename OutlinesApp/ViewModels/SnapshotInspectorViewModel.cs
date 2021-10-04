@@ -18,11 +18,9 @@ namespace OutlinesApp.ViewModels
             set
             {
                 snapshot = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ScreenshotSource)));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Snapshot)));
             }
         }
-
-        public string ScreenshotSource => Snapshot?.ScreenshotFilePath;
 
         private float screenshotScaleFactor = 1.0f;
         public float ScreenshotScaleFactor
