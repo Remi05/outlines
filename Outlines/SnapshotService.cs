@@ -55,12 +55,6 @@ namespace Outlines
                     byte[] imageBytes = memoryStream.ToArray();
                     snapshot.ScreenshotBase64 = Convert.ToBase64String(imageBytes);
                 }
-
-                snapshot.Screenshot = null;
-                var img = snapshot.Screenshot;
-                string screenshotFileName = $"Screenshot-{DateTime.Now.ToFileTime()}.png";
-                string screenshotFilePath = Path.Combine(FolderConfig.GetSnapshotsFolder(), screenshotFileName);
-                img.Save(screenshotFilePath);
             }
             else
             {
