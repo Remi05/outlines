@@ -12,9 +12,9 @@ namespace Outlines
         private IUiTreeService UiTreeService { get; set; }
         private IScreenHelper ScreenHelper { get; set; }
         private IFolderConfig FolderConfig { get; set; }
-        private bool ShouldSaveAsSingleFile { get; set; } = true;
+        private bool ShouldSaveAsSingleFile { get; set; }
 
-        public SnapshotService(IScreenshotService screenshotService, IUiTreeService uiTreeService, IScreenHelper screenHelper, IFolderConfig folderConfig)
+        public SnapshotService(IScreenshotService screenshotService, IUiTreeService uiTreeService, IScreenHelper screenHelper, IFolderConfig folderConfig, bool shouldSaveAsSingleFile = true)
         {
             if (screenshotService == null || uiTreeService == null || screenHelper ==null || folderConfig == null)
             {
@@ -27,6 +27,7 @@ namespace Outlines
             UiTreeService = uiTreeService;
             ScreenHelper = screenHelper;
             FolderConfig = folderConfig;
+            ShouldSaveAsSingleFile = shouldSaveAsSingleFile;
         }
 
         public Snapshot TakeSnapshot(Rectangle bounds)
