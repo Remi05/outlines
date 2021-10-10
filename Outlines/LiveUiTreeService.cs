@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Automation;
@@ -103,11 +102,10 @@ namespace Outlines
             }
         }
 
-        public UiTreeNode GetSubTreeInBounds(Rectangle bounds)
+        public UiTreeNode GetSubTreeInBounds(Rect bounds)
         {
-            var rect = new Rect(bounds.X, bounds.Y, bounds.Width, bounds.Height);
-            var childrenNodes = GetSubTreeInBounds(rect, AutomationElement.RootElement);
-            var rootProperties = new ElementProperties() { Name = "Root", BoundingRect = rect };
+            var childrenNodes = GetSubTreeInBounds(bounds, AutomationElement.RootElement);
+            var rootProperties = new ElementProperties() { Name = "Root", BoundingRect = bounds };
             return new UiTreeNode() { ElementProperties = rootProperties, Children = childrenNodes };
         }
 
