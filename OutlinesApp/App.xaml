@@ -5,18 +5,9 @@
              Startup="OnStartup">
     <Application.Resources>
         <ResourceDictionary>
-            <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
-            <local:ImageToImageSourceConverter x:Key="ImageToImageSource" />
-            <local:NullToVisibilityConverter x:Key="NullToVisibility" />
-            <DropShadowEffect x:Key="SharedShadowEffectBottom" Direction="270" BlurRadius="20" Opacity="0.3" />
-            <DropShadowEffect x:Key="SharedShadowEffectLeft" Direction="270" BlurRadius="20" Opacity="0.3" />
-            <DropShadowEffect x:Key="SharedShadowEffectRight" Direction="225" BlurRadius="20" Opacity="0.3" />
-            <Style x:Key="SharedInspectorBorderStyle" TargetType="Border">
-                <Setter Property="Background" Value="{DynamicResource ThemePanelBackgroundBrush}" />
-                <Setter Property="BorderBrush" Value="{DynamicResource ThemePanelBorderBrush}" />
-                <Setter Property="BorderThickness" Value="1" />
-                <Setter Property="CornerRadius" Value="8" />
-            </Style>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/SharedResources.xaml" />
+            </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

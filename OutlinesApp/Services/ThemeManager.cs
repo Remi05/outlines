@@ -40,8 +40,8 @@ namespace OutlinesApp.Services
 
         private void UpdateThemeDictionary()
         {
-            string themeDictionaryUri = IsLightTheme ? "LightThemeResources.xaml" : "DarkThemeResources.xaml";
-            var newThemeDictionary = Application.LoadComponent(new Uri(themeDictionaryUri, UriKind.RelativeOrAbsolute)) as ResourceDictionary;
+            string themeDictionaryUri = IsLightTheme ? "Resources/LightThemeResources.xaml" : "Resources/DarkThemeResources.xaml";
+            var newThemeDictionary = Application.LoadComponent(new Uri(themeDictionaryUri, UriKind.Relative)) as ResourceDictionary;
             Application.Current.Resources.MergedDictionaries.Remove(CurrentThemeDictionary);
             CurrentThemeDictionary = newThemeDictionary;
             Application.Current.Resources.MergedDictionaries.Add(CurrentThemeDictionary);

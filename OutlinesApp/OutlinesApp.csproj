@@ -140,11 +140,15 @@
     <Compile Include="Views\ToolBarToggleButton.xaml.cs">
       <DependentUpon>ToolBarToggleButton.xaml</DependentUpon>
     </Compile>
-    <Page Include="DarkThemeResources.xaml">
+    <Page Include="Resources\DarkThemeResources.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="LightThemeResources.xaml">
+    <Page Include="Resources\LightThemeResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\SharedResources.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
