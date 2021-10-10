@@ -11,8 +11,8 @@
         <ResourceDictionary>
             <Style x:Key="ToolBarStyle" TargetType="Border">
                 <Setter Property="Background" Value="{DynamicResource ThemePanelBackgroundBrush}" />
-                <Setter Property="BorderThickness" Value="1" />
                 <Setter Property="BorderBrush" Value="{DynamicResource ThemePanelBorderBrush}" />
+                <Setter Property="BorderThickness" Value="1" />
                 <Setter Property="CornerRadius" Value="8" />
                 <Setter Property="HorizontalAlignment" Value="Stretch" />
                 <Setter Property="Effect" Value="{StaticResource SharedShadowEffectBottom}" />

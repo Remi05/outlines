@@ -14,13 +14,18 @@
             <Style x:Key="HeaderStyle" TargetType="TextBlock">
                 <Setter Property="FontSize" Value="14" />
                 <Setter Property="FontFamily" Value="Segoe UI Bold" />
+                <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundColorBrush}" />
                 <Setter Property="Margin" Value="0,0,0,8" />
             </Style>
             <Style x:Key="TreeViewStyle" TargetType="TreeView">
+                <Setter Property="Background" Value="{DynamicResource ThemePanelBackgroundBrush}" />
                 <Setter Property="BorderThickness" Value="0" />
                 <Setter Property="Margin" Value="-8,0,0,0" />
                 <Setter Property="MaxHeight" Value="450" />
                 <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+            </Style>
+            <Style x:Key="TreeViewItemStyle" TargetType="TreeViewItem">
+                <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundColorBrush}" />
             </Style>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -30,7 +35,7 @@
 
         <StackPanel Margin="16,16,8,8">
             <TextBlock Text="Tree View" Style="{StaticResource HeaderStyle}" />
-            <TreeView ItemsSource="{Binding Elements}" Style="{StaticResource TreeViewStyle}" SelectedItemChanged="OnSelectedItemChanged">
+            <TreeView ItemsSource="{Binding Elements}" Style="{StaticResource TreeViewStyle}" ItemContainerStyle="{StaticResource TreeViewItemStyle}" SelectedItemChanged="OnSelectedItemChanged">
                 <TreeView.Resources>
                     <HierarchicalDataTemplate DataType="{x:Type vm:UiTreeItemViewModel}" ItemsSource="{Binding ChildrenElements}">
                         <TextBlock Text="{Binding ElementName}"/>

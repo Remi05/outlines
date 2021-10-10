@@ -14,17 +14,18 @@
                 <Setter Property="FontSize" Value="14" />
                 <Setter Property="FontFamily" Value="Segoe UI Bold" />
                 <Setter Property="Margin" Value="0,0,0,5" />
+                <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundColorBrush}" />
             </Style>
             <Style x:Key="PropertyNameStyle" TargetType="TextBlock">
                 <Setter Property="FontSize" Value="12" />
                 <Setter Property="Margin" Value="0,0,15,5" />
-                <Setter Property="Foreground" Value="#333333" />
+                <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundColorBrush}" />
             </Style>
             <Style x:Key="PropertyValueStyle" TargetType="TextBlock">
                 <Setter Property="FontSize" Value="12" />
                 <Setter Property="Margin" Value="0,0,0,5" />
                 <Setter Property="MaxWidth" Value="100" />
-                <Setter Property="Foreground" Value="#000000" />
+                <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundColorBrush}" />
                 <Setter Property="TextTrimming" Value="CharacterEllipsis" />
                 <Setter Property="TextWrapping" Value="NoWrap" />
             </Style>
