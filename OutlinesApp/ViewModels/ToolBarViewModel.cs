@@ -16,15 +16,17 @@ namespace OutlinesApp.ViewModels
         private IFolderConfig FolderConfig { get; set; }
         public InspectorViewModel InspectorViewModel { get; set; }
 
+        public bool IsElementSnapshotButtonVisible => SnapshotService != null;
+        public bool IsFullscreenSnapshotButtonVisible => SnapshotService != null;
         public bool IsScreenshotButtonVisible => ScreenshotService != null;
-        public bool IsSnapshotButtonVisible => SnapshotService != null;
 
         public RelayCommand<object> CloseAppCommand { get; private set; }
         public RelayCommand<object> GetHelpCommand { get; private set; }
         public RelayCommand<object> GiveFeedbackCommand { get; private set; }
         public RelayCommand<object> ShowMoreInfoCommand { get; private set; }
+        public RelayCommand<object> TakeElementSnapshotCommand { get; private set; }
+        public RelayCommand<object> TakeFullscreenSnapshotCommand { get; private set; }
         public RelayCommand<object> TakeScreenshotCommand { get; private set; }
-        public RelayCommand<object> TakeSnapshotCommand { get; private set; }
 
         public ToolBarViewModel(IOutlinesService outlinesService, IScreenshotService screenshotService, ISnapshotService snapshotService, IFolderConfig folderConfig, InspectorViewModel inspectorViewModel)
         {
@@ -44,8 +46,9 @@ namespace OutlinesApp.ViewModels
             GetHelpCommand = new RelayCommand<object>(_ => GetHelp());
             GiveFeedbackCommand = new RelayCommand<object>(_ => GiveFeedback());
             ShowMoreInfoCommand = new RelayCommand<object>(_ => ShowMoreInfo());
+            TakeElementSnapshotCommand = new RelayCommand<object>(_ => TakeElementSnapshot());
+            TakeFullscreenSnapshotCommand = new RelayCommand<object>(_ => TakeFullscreenSnapshot());
             TakeScreenshotCommand = new RelayCommand<object>(_ => TakeScreenshot());
-            TakeSnapshotCommand = new RelayCommand<object>(_ => TakeSnapshot());
         }
 
         private void GetHelp()
@@ -61,6 +64,22 @@ namespace OutlinesApp.ViewModels
         private void ShowMoreInfo()
         {
             Process.Start("https://github.com/Remi05/outlines");
+        }
+        private void TakeElementSnapshot()
+        {
+            if (OutlinesService.SelectedElementProperties != null)
+            {
+                Snapshot snapshot = SnapshotService.TakeSnapshot(OutlinesService.SelectedElementProperties);
+                SnapshotService.SaveSnapshot(snapshot);
+            }
+        }
+
+        private void TakeFullscreenSnapshot()
+        {
+            var window = App.Current.MainWindow;
+            var windowBounds = new Rectangle((int)window.Left, (int)window.Top, (int)window.Width, (int)window.Height);
+            Snapshot snapshot = SnapshotService.TakeSnapshot(windowBounds);
+            SnapshotService.SaveSnapshot(snapshot);
         }
 
         private void TakeScreenshot()
@@ -82,20 +101,5 @@ namespace OutlinesApp.ViewModels
             screenshot.Save(filePath, ImageFormat.Png);
         }
 
-        private void TakeSnapshot()
-        {
-            Snapshot snapshot;
-            if (OutlinesService.SelectedElementProperties != null)
-            {
-                snapshot = SnapshotService.TakeSnapshot(OutlinesService.SelectedElementProperties);
-            }
-            else
-            {
-                var window = App.Current.MainWindow;
-                var windowBounds = new Rectangle((int)window.Left, (int)window.Top, (int)window.Width, (int)window.Height);
-                snapshot = SnapshotService.TakeSnapshot(windowBounds);
-            }
-            SnapshotService.SaveSnapshot(snapshot);
-        }
     }
 }
