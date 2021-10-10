@@ -24,12 +24,12 @@
             </Grid>
             <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center">
                 <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
-                    <TextBlock Text="RBG:" Padding="0,0,8,0" />
-                    <TextBlock Text="{Binding PickedColorRbg}" />
+                    <TextBlock Text="RBG:" Padding="0,0,8,0" Foreground="{DynamicResource ThemeForegroundColorBrush}" />
+                    <TextBlock Text="{Binding PickedColorRbg}" Foreground="{DynamicResource ThemeForegroundColorBrush}" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Hex:" Padding="0,0,8,0" />
-                    <TextBlock Text="{Binding PickedColorHex}" Margin="0,0,0,0" />
+                    <TextBlock Text="Hex:" Padding="0,0,8,0" Foreground="{DynamicResource ThemeForegroundColorBrush}" />
+                    <TextBlock Text="{Binding PickedColorHex}" Margin="0,0,0,0" Foreground="{DynamicResource ThemeForegroundColorBrush}" />
                 </StackPanel>
             </StackPanel>
         </StackPanel>

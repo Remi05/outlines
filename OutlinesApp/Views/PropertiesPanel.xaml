@@ -14,17 +14,18 @@
                 <Setter Property="FontSize" Value="14" />
                 <Setter Property="FontFamily" Value="Segoe UI Bold" />
                 <Setter Property="Margin" Value="0,0,0,5" />
+                <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundColorBrush}" />
             </Style>
             <Style x:Key="PropertyNameStyle" TargetType="TextBlock">
                 <Setter Property="FontSize" Value="12" />
                 <Setter Property="Margin" Value="0,0,15,5" />
-                <Setter Property="Foreground" Value="#333333" />
+                <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundColorBrush}" />
             </Style>
             <Style x:Key="PropertyValueStyle" TargetType="TextBlock">
                 <Setter Property="FontSize" Value="12" />
                 <Setter Property="Margin" Value="0,0,0,5" />
                 <Setter Property="MaxWidth" Value="100" />
-                <Setter Property="Foreground" Value="#000000" />
+                <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundColorBrush}" />
                 <Setter Property="TextTrimming" Value="CharacterEllipsis" />
                 <Setter Property="TextWrapping" Value="NoWrap" />
             </Style>
@@ -68,9 +69,9 @@
                         <TextBlock Text="Font Weight" Style="{StaticResource PropertyNameStyle}" />
                     </StackPanel>
                     <StackPanel Orientation="Vertical">
-                        <TextBlock x:Name="FontTypeTextBlock"   Text="{Binding TextProperties.FontName, Mode=OneWay}"   Style="{StaticResource PropertyValueStyle}" />
-                        <TextBlock x:Name="FontSizeTextBlock"   Text="{Binding TextProperties.FontSize, Mode=OneWay}"   Style="{StaticResource PropertyValueStyle}" />
-                        <TextBlock x:Name="FontWeightTextBlock" Text="{Binding TextProperties.FontWeight, Mode=OneWay}" Style="{StaticResource PropertyValueStyle}" />
+                        <TextBlock x:Name="FontTypeTextBlock"   Text="{Binding TextProperties.FontName, Mode=OneWay}"   Style="{StaticResource PropertyValueStyle}" ToolTip="{Binding TextProperties.FontName, Mode=OneWay}" />
+                        <TextBlock x:Name="FontSizeTextBlock"   Text="{Binding TextProperties.FontSize, Mode=OneWay}"   Style="{StaticResource PropertyValueStyle}" ToolTip="{Binding TextProperties.FontSize, Mode=OneWay}" />
+                        <TextBlock x:Name="FontWeightTextBlock" Text="{Binding TextProperties.FontWeight, Mode=OneWay}" Style="{StaticResource PropertyValueStyle}" ToolTip="{Binding TextProperties.FontWeight, Mode=OneWay}" />
                     </StackPanel>
                 </StackPanel>
             </StackPanel>

@@ -14,6 +14,8 @@
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -95,6 +97,7 @@
     <Compile Include="Services\ICoordinateConverter.cs" />
     <Compile Include="Services\ScreenHelper.cs" />
     <Compile Include="Services\ServiceContainer.cs" />
+    <Compile Include="Services\ThemeManager.cs" />
     <Compile Include="SnapshotInspectorWindow.xaml.cs">
       <DependentUpon>SnapshotInspectorWindow.xaml</DependentUpon>
     </Compile>
@@ -137,6 +140,18 @@
     <Compile Include="Views\ToolBarToggleButton.xaml.cs">
       <DependentUpon>ToolBarToggleButton.xaml</DependentUpon>
     </Compile>
+    <Page Include="Resources\DarkThemeResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\LightThemeResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\SharedResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SnapshotInspectorWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -236,6 +251,11 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Windows.SDK.Contracts">
+      <Version>10.0.22000.194</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
