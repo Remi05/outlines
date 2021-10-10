@@ -68,9 +68,9 @@
                         <TextBlock Text="Font Weight" Style="{StaticResource PropertyNameStyle}" />
                     </StackPanel>
                     <StackPanel Orientation="Vertical">
-                        <TextBlock x:Name="FontTypeTextBlock"   Text="{Binding TextProperties.FontName, Mode=OneWay}"   Style="{StaticResource PropertyValueStyle}" />
-                        <TextBlock x:Name="FontSizeTextBlock"   Text="{Binding TextProperties.FontSize, Mode=OneWay}"   Style="{StaticResource PropertyValueStyle}" />
-                        <TextBlock x:Name="FontWeightTextBlock" Text="{Binding TextProperties.FontWeight, Mode=OneWay}" Style="{StaticResource PropertyValueStyle}" />
+                        <TextBlock x:Name="FontTypeTextBlock"   Text="{Binding TextProperties.FontName, Mode=OneWay}"   Style="{StaticResource PropertyValueStyle}" ToolTip="{Binding TextProperties.FontName, Mode=OneWay}" />
+                        <TextBlock x:Name="FontSizeTextBlock"   Text="{Binding TextProperties.FontSize, Mode=OneWay}"   Style="{StaticResource PropertyValueStyle}" ToolTip="{Binding TextProperties.FontSize, Mode=OneWay}" />
+                        <TextBlock x:Name="FontWeightTextBlock" Text="{Binding TextProperties.FontWeight, Mode=OneWay}" Style="{StaticResource PropertyValueStyle}" ToolTip="{Binding TextProperties.FontWeight, Mode=OneWay}" />
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
