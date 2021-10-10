@@ -18,6 +18,7 @@ namespace OutlinesApp.ViewModels
 
         public bool IsElementSnapshotButtonVisible => SnapshotService != null;
         public bool IsFullscreenSnapshotButtonVisible => SnapshotService != null;
+        public bool IsRectangleSnapshotButtonVisible => SnapshotService != null;
         public bool IsScreenshotButtonVisible => ScreenshotService != null;
 
         public RelayCommand<object> CloseAppCommand { get; private set; }
@@ -26,6 +27,7 @@ namespace OutlinesApp.ViewModels
         public RelayCommand<object> ShowMoreInfoCommand { get; private set; }
         public RelayCommand<object> TakeElementSnapshotCommand { get; private set; }
         public RelayCommand<object> TakeFullscreenSnapshotCommand { get; private set; }
+        public RelayCommand<object> TakeRectangleSnapshotCommand { get; private set; }
         public RelayCommand<object> TakeScreenshotCommand { get; private set; }
 
         public ToolBarViewModel(IOutlinesService outlinesService, IScreenshotService screenshotService, ISnapshotService snapshotService, IFolderConfig folderConfig, InspectorViewModel inspectorViewModel)
