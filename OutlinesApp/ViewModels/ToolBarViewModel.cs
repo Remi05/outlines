@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -8,7 +9,7 @@ using Outlines;
 
 namespace OutlinesApp.ViewModels
 {
-    public class ToolBarViewModel
+    public class ToolBarViewModel : INotifyPropertyChanged
     {
         private IOutlinesService OutlinesService { get; set; }
         private IScreenshotService ScreenshotService { get; set; }
@@ -16,6 +17,7 @@ namespace OutlinesApp.ViewModels
         private IFolderConfig FolderConfig { get; set; }
         public InspectorViewModel InspectorViewModel { get; set; }
 
+        public bool IsElementSnapshotButtonEnabled => OutlinesService?.SelectedElementProperties != null;
         public bool IsElementSnapshotButtonVisible => SnapshotService != null;
         public bool IsFullscreenSnapshotButtonVisible => SnapshotService != null;
         public bool IsScreenshotButtonVisible => ScreenshotService != null;
@@ -27,6 +29,8 @@ namespace OutlinesApp.ViewModels
         public RelayCommand<object> TakeElementSnapshotCommand { get; private set; }
         public RelayCommand<object> TakeFullscreenSnapshotCommand { get; private set; }
         public RelayCommand<object> TakeScreenshotCommand { get; private set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public ToolBarViewModel(IOutlinesService outlinesService, IScreenshotService screenshotService, ISnapshotService snapshotService, IFolderConfig folderConfig, InspectorViewModel inspectorViewModel)
         {
@@ -41,6 +45,8 @@ namespace OutlinesApp.ViewModels
             SnapshotService = snapshotService;
             FolderConfig = folderConfig;
             InspectorViewModel = inspectorViewModel;
+
+            OutlinesService.SelectedElementChanged += () => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsElementSnapshotButtonEnabled)));
 
             CloseAppCommand = new RelayCommand<object>(_ => App.Current.Shutdown(0));
             GetHelpCommand = new RelayCommand<object>(_ => GetHelp());
