@@ -51,7 +51,7 @@
             </Setter>
             <Style.Triggers>
                 <Trigger Property="IsEnabled" Value="False">
-                    <Setter Property="Foreground" Value="LightGray"/>
+                    <Setter Property="Foreground" Value="{DynamicResource ThemeDisabledForegroundColorBrush}"/>
                 </Trigger>
             </Style.Triggers>
         </Style>

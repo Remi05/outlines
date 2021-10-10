@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Windows;
 using Newtonsoft.Json;
 
 namespace Outlines
@@ -30,7 +31,7 @@ namespace Outlines
             ShouldSaveAsSingleFile = shouldSaveAsSingleFile;
         }
 
-        public Snapshot TakeSnapshot(Rectangle bounds)
+        public Snapshot TakeSnapshot(Rect bounds)
         {
             UiTreeNode subtree = UiTreeService.GetSubTreeInBounds(bounds);
             Image screenshot = ScreenshotService.TakeScreenshot(bounds);

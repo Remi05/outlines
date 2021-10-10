@@ -1,4 +1,4 @@
-﻿using System.Drawing;
+﻿using System.Windows;
 
 namespace Outlines
 {
@@ -9,6 +9,6 @@ namespace Outlines
         event RootNodeChangedEventHandler RootNodeChanged;
 
         UiTreeNode GetSubTree(ElementProperties rootElementProperties);
-        UiTreeNode GetSubTreeInBounds(Rectangle bounds);
+        UiTreeNode GetSubTreeInBounds(Rect bounds);
     }
 }

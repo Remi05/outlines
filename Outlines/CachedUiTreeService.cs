@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Drawing;
+using System.Windows;
 
 namespace Outlines
 {
@@ -37,7 +37,7 @@ namespace Outlines
             return null;
         }
 
-        public UiTreeNode GetSubTreeInBounds(Rectangle bounds)
+        public UiTreeNode GetSubTreeInBounds(Rect bounds)
         {
             throw new NotImplementedException();
         }

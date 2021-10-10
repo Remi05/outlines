@@ -1,21 +1,25 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Windows;
 using Outlines;
+using OutlinesApp.Services;
 
 namespace OutlinesApp.ViewModels
 {
-    public class ToolBarViewModel
+    public class ToolBarViewModel : INotifyPropertyChanged
     {
         private IOutlinesService OutlinesService { get; set; }
         private IScreenshotService ScreenshotService { get; set; }
         private ISnapshotService SnapshotService { get; set; }
         private IFolderConfig FolderConfig { get; set; }
+        private ICoordinateConverter CoordinateConverter { get; set; }
         public InspectorViewModel InspectorViewModel { get; set; }
 
+        public bool IsElementSnapshotButtonEnabled => OutlinesService?.SelectedElementProperties != null;
         public bool IsElementSnapshotButtonVisible => SnapshotService != null;
         public bool IsFullscreenSnapshotButtonVisible => SnapshotService != null;
         public bool IsScreenshotButtonVisible => ScreenshotService != null;
@@ -28,7 +32,10 @@ namespace OutlinesApp.ViewModels
         public RelayCommand<object> TakeFullscreenSnapshotCommand { get; private set; }
         public RelayCommand<object> TakeScreenshotCommand { get; private set; }
 
-        public ToolBarViewModel(IOutlinesService outlinesService, IScreenshotService screenshotService, ISnapshotService snapshotService, IFolderConfig folderConfig, InspectorViewModel inspectorViewModel)
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public ToolBarViewModel(IOutlinesService outlinesService, IScreenshotService screenshotService, ISnapshotService snapshotService, 
+                                IFolderConfig folderConfig, ICoordinateConverter coordinateConverter, InspectorViewModel inspectorViewModel)
         {
             if (outlinesService == null || folderConfig == null || inspectorViewModel == null)
             {
@@ -40,7 +47,10 @@ namespace OutlinesApp.ViewModels
             ScreenshotService = screenshotService;
             SnapshotService = snapshotService;
             FolderConfig = folderConfig;
+            CoordinateConverter = coordinateConverter;
             InspectorViewModel = inspectorViewModel;
+
+            OutlinesService.SelectedElementChanged += () => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsElementSnapshotButtonEnabled)));
 
             CloseAppCommand = new RelayCommand<object>(_ => App.Current.Shutdown(0));
             GetHelpCommand = new RelayCommand<object>(_ => GetHelp());
@@ -77,8 +87,9 @@ namespace OutlinesApp.ViewModels
         private void TakeFullscreenSnapshot()
         {
             var window = App.Current.MainWindow;
-            var windowBounds = new Rectangle((int)window.Left, (int)window.Top, (int)window.Width, (int)window.Height);
-            Snapshot snapshot = SnapshotService.TakeSnapshot(windowBounds);
+            var windowBounds = new Rect(window.Left, window.Top, window.Width, window.Height);
+            var screenWindowBounds = CoordinateConverter.RectToScreen(windowBounds);
+            Snapshot snapshot = SnapshotService.TakeSnapshot(screenWindowBounds);
             SnapshotService.SaveSnapshot(snapshot);
         }
 
@@ -92,7 +103,7 @@ namespace OutlinesApp.ViewModels
             else
             {
                 var window = App.Current.MainWindow;
-                var windowBounds = new Rectangle((int)window.Left, (int)window.Top, (int)window.Width, (int)window.Height);
+                var windowBounds = new Rect(window.Left, window.Top, window.Width, window.Height);
                 screenshot = ScreenshotService.TakeScreenshot(windowBounds);
             }
 

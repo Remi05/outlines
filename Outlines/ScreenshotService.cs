@@ -17,18 +17,18 @@ namespace Outlines
 
         public Image TakeScreenshot(ElementProperties elementProperties)
         {
-            Rect rect = elementProperties.BoundingRect;
-            Rectangle screenshotRect = new Rectangle((int)rect.Left, (int)rect.Top, (int)rect.Width, (int)rect.Height);
-            return TakeScreenshot(screenshotRect);
+            return TakeScreenshot(elementProperties.BoundingRect);
         }
 
-        public Image TakeScreenshot(Rectangle rect)
+        public Image TakeScreenshot(Rect bounds)
         {
-            Image screenshot = new Bitmap(rect.Width, rect.Height);
+            Image screenshot = new Bitmap((int)bounds.Width, (int)bounds.Height);
             HideOverlay?.Invoke();
             using (Graphics g = Graphics.FromImage(screenshot))
             {
-                g.CopyFromScreen(rect.Location, System.Drawing.Point.Empty, rect.Size);
+                var location = new System.Drawing.Point((int)bounds.X, (int)bounds.Y);
+                var size = new System.Drawing.Size((int)bounds.Width, (int)bounds.Height);
+                g.CopyFromScreen(location, System.Drawing.Point.Empty, size);
             }
             RestoreOverlay?.Invoke();
             return screenshot;
