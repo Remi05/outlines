@@ -22,7 +22,7 @@
                             <Border CornerRadius="4">
                                 <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             </Border>
-                            <Border Name="OverlayBorder" Background="{DynamicResource ThemeButtonHoverOverlayBackgroundBrush}" Opacity="0" CornerRadius="4" />
+                            <Border Name="OverlayBorder" Background="{DynamicResource ThemeButtonHoverOverlayBackgroundBrush}" Opacity="0" CornerRadius="{StaticResource ControlCornerRadius}" />
                             <Grid.Triggers>
                                 <EventTrigger RoutedEvent="MouseEnter">
                                     <BeginStoryboard>

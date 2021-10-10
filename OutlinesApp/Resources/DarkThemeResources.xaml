@@ -4,7 +4,7 @@
     <SolidColorBrush x:Key="ThemeForegroundColorBrush" Color="White" />
     <SolidColorBrush x:Key="ThemeAccentForegroundColorBrush" Color="Black" />
     <SolidColorBrush x:Key="ThemePanelBackgroundBrush" Color="#2D2D2D" />
-    <SolidColorBrush x:Key="ThemePanelBorderBrush" Color="#101010" />
+    <SolidColorBrush x:Key="ThemePanelBorderBrush" Color="#181818" />
     <SolidColorBrush x:Key="ThemeSeperatorBrush" Color="#40FFFFFF" />
     <SolidColorBrush x:Key="ThemeAccentButtonBackgroundBrush" Color="{DynamicResource AccentLight2Color}" />
     <SolidColorBrush x:Key="ThemeButtonHoverOverlayBackgroundBrush" Color="White" />

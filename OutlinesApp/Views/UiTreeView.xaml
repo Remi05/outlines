@@ -31,7 +31,7 @@
     </UserControl.Resources>
 
     <Grid x:Name="Root">
-        <Border Style="{StaticResource SharedInspectorBorderStyle}" Effect="{StaticResource SharedShadowEffectLeft}" />
+        <Border Style="{StaticResource SharedInspectorPanelStyle}" Effect="{StaticResource SharedShadowEffectLeft}" />
 
         <StackPanel Margin="16,16,8,8">
             <TextBlock Text="Tree View" Style="{StaticResource HeaderStyle}" />
