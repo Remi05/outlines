@@ -11,6 +11,4 @@ Outlines is licensed under an [MIT License](LICENSE.md).
 
 ## Screenshots
 
-<img width="720" alt="Outlines_Preview" src="https://user-images.githubusercontent.com/12770956/121975457-81877b80-cd36-11eb-95fc-3f8091170c92.png">
-
-<img width="538" alt="Outlines_Screenshot" src="https://user-images.githubusercontent.com/12770956/112552593-523d2000-8d80-11eb-93c4-826b3e30b078.png">
+<img width="1000" alt="Outlines_Screenshot_DarkTheme" src="https://user-images.githubusercontent.com/12770956/136679662-e6a35375-43f5-4af3-a0d0-30e967d2c345.png">
