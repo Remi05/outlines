@@ -104,7 +104,8 @@ namespace OutlinesApp.ViewModels
             {
                 var window = App.Current.MainWindow;
                 var windowBounds = new Rect(window.Left, window.Top, window.Width, window.Height);
-                screenshot = ScreenshotService.TakeScreenshot(windowBounds);
+                var screenWindowBounds = CoordinateConverter.RectToScreen(windowBounds);
+                screenshot = ScreenshotService.TakeScreenshot(screenWindowBounds);
             }
 
             string fileName = $"Screenshot-{DateTime.Now.ToFileTime()}.png";
