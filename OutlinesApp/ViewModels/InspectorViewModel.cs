@@ -12,6 +12,8 @@ namespace OutlinesApp.ViewModels
 
         private IOutlinesService OutlinesService { get; set; }
         private IGlobalInputListener GlobalInputListener { get; set; }
+        private ISnapshotService SnapshotService { get; set; }
+        private RectangleSelectionViewModel RectangleSelectionViewModel { get; set; }
 
         private bool isBackdropVisible = false;
         public bool IsBackdropVisible
@@ -69,10 +71,32 @@ namespace OutlinesApp.ViewModels
                 }
             }
         }
+  
+        private bool isTakingRectangleSnapshot = false;
+        public bool IsTakingRectangleSnapshot
+        {
+            get => isTakingRectangleSnapshot;
+            set
+            {
+                if (value != isTakingRectangleSnapshot)
+                {
+                    isTakingRectangleSnapshot = value;
+                    if (isTakingRectangleSnapshot)
+                    {
+                        RectangleSelectionViewModel.RectangleSelected += OnSnapshotRectangleSelected;
+                    }
+                    else
+                    {
+                        RectangleSelectionViewModel.RectangleSelected -= OnSnapshotRectangleSelected;
+                    }
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsTakingRectangleSnapshot)));
+                }
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public InspectorViewModel(IOutlinesService outlinesService, IGlobalInputListener globalInputListener)
+        public InspectorViewModel(IOutlinesService outlinesService, IGlobalInputListener globalInputListener, ISnapshotService snapshotService, RectangleSelectionViewModel rectangleSelectionViewModel)
         {
             if (outlinesService == null || globalInputListener == null)
             {
@@ -80,6 +104,8 @@ namespace OutlinesApp.ViewModels
             }
             OutlinesService = outlinesService;
             GlobalInputListener = globalInputListener;
+            SnapshotService = snapshotService;
+            RectangleSelectionViewModel = rectangleSelectionViewModel;
 
             HoverWatcher targetHoverWatcher = new HoverWatcher(TargetHoverDelayInMs);
             targetHoverWatcher.MouseHovered += OnMouseHovered;
@@ -87,6 +113,12 @@ namespace OutlinesApp.ViewModels
             GlobalInputListener.MouseDown += OnMouseDown;
             GlobalInputListener.KeyDown += OnKeyDown;
             GlobalInputListener.KeyUp += OnKeyUp;
+        }
+
+        private void OnSnapshotRectangleSelected(Rect snapshotRectangle)
+        {
+            IsTakingRectangleSnapshot = false;
+            // SnapshotService.TakeSnapshot(snapshotRectangle);
         }
 
         private void OnMouseHovered(Point cursorPos)

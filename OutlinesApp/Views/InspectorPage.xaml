@@ -34,6 +34,7 @@
         </Grid.RowDefinitions>
         <Border Background="Black" Opacity="0.3" Visibility="{Binding IsBackdropVisible, Converter={StaticResource BoolToVisibility}, FallbackValue=Collapsed}" Grid.RowSpan="3" />
         <local:OutlinesOverlay Visibility="{Binding IsOverlayVisible, Converter={StaticResource BoolToVisibility}, FallbackValue=Visible}" Grid.RowSpan="3" />
+        <local:RectangleSelection Visibility="{Binding IsTakingRectangleSnapshot, Converter={StaticResource BoolToVisibility}, FallbackValue=Collapsed}" Grid.RowSpan="3" />
         <local:ToolBar HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,12,0,0" />
         <Grid Grid.Row="1">
             <StackPanel Visibility="{Binding IsTreeViewVisible, Converter={StaticResource BoolToVisibility}, FallbackValue=Visible}" 

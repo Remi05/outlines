@@ -104,6 +104,7 @@
     <Compile Include="ViewModels\ColorPickerViewModel.cs" />
     <Compile Include="ViewModels\DistanceViewModel.cs" />
     <Compile Include="ViewModels\DimensionsViewModel.cs" />
+    <Compile Include="ViewModels\RectangleSelectionViewModel.cs" />
     <Compile Include="ViewModels\SnapshotInspectorViewModel.cs" />
     <Compile Include="ViewModels\InspectorViewModel.cs" />
     <Compile Include="ViewModels\OverlayViewModel.cs" />
@@ -113,6 +114,9 @@
     <Compile Include="ViewModels\ToolBarViewModel.cs" />
     <Compile Include="Views\ColorPicker.xaml.cs">
       <DependentUpon>ColorPicker.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RectangleSelection.xaml.cs">
+      <DependentUpon>RectangleSelection.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SnapshotInspectorPage.xaml.cs">
       <DependentUpon>SnapshotInspectorPage.xaml</DependentUpon>
@@ -173,6 +177,10 @@
       <DependentUpon>LiveInspectorWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\RectangleSelection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\SnapshotInspectorPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

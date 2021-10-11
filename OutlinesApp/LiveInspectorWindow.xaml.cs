@@ -31,8 +31,9 @@ namespace OutlinesApp
             IUiTreeService uiTreeService = new LiveUiTreeService(elementPropertiesProvider, outlinesService);
             ISnapshotService snapshotService = new SnapshotService(screenshotService, uiTreeService, screenHelper, folderConfig);
 
+            RectangleSelectionViewModel rectangleSelectionViewModel = new RectangleSelectionViewModel();
             ColorPickerViewModel colorPickerViewModel = new ColorPickerViewModel(colorPickerService, GlobalInputListener);
-            InspectorViewModel inspectorViewModel = new InspectorViewModel(outlinesService, GlobalInputListener);
+            InspectorViewModel inspectorViewModel = new InspectorViewModel(outlinesService, GlobalInputListener, snapshotService, rectangleSelectionViewModel);
             OverlayViewModel overlayViewModel = new OverlayViewModel(Dispatcher, outlinesService, coordinateConverter, screenHelper);
             PropertiesViewModel propertiesViewModel = new PropertiesViewModel(outlinesService);
             ToolBarViewModel toolBarViewModel = new ToolBarViewModel(outlinesService, screenshotService, snapshotService, folderConfig, coordinateConverter, inspectorViewModel);
@@ -44,6 +45,7 @@ namespace OutlinesApp
             serviceContainer.AddService(typeof(InspectorViewModel), inspectorViewModel);
             serviceContainer.AddService(typeof(OverlayViewModel), overlayViewModel);
             serviceContainer.AddService(typeof(PropertiesViewModel), propertiesViewModel);
+            serviceContainer.AddService(typeof(RectangleSelectionViewModel), rectangleSelectionViewModel);
             serviceContainer.AddService(typeof(ToolBarViewModel), toolBarViewModel);
             serviceContainer.AddService(typeof(UiTreeViewModel), uiTreeViewModel);
         }

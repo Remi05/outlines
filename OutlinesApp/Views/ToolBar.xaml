@@ -29,7 +29,7 @@
             <local:ToolBarToggleButton Content="&#xE71D;" IsChecked="{Binding InspectorViewModel.IsPropertiesPanelVisible, Mode=TwoWay}" ToolTip="Toggle Properties Panel" />
             <local:ToolBarButton Content="&#xF7ED;" Command="{Binding TakeElementSnapshotCommand}" Visibility="{Binding IsElementSnapshotButtonVisible, Converter={StaticResource BoolToVisibility}}" IsEnabled="{Binding IsElementSnapshotButtonEnabled, FallbackValue=False}" ToolTip="Element Snapshot" />
             <local:ToolBarButton Content="&#xE9A6;" Command="{Binding TakeFullscreenSnapshotCommand}" Visibility="{Binding IsFullscreenSnapshotButtonVisible, Converter={StaticResource BoolToVisibility}}" ToolTip="Fullscreen Snapshot" />
-            <local:ToolBarButton Content="&#xF407;" Command="{Binding TakeRectangleSnapshotCommand}" Visibility="{Binding IsRectangleSnapshotButtonVisible, Converter={StaticResource BoolToVisibility}}" ToolTip="Rectangle Snapshot" />
+            <local:ToolBarToggleButton Content="&#xF407;" IsChecked="{Binding InspectorViewModel.IsTakingRectangleSnapshot, Mode=TwoWay}" Visibility="{Binding IsRectangleSnapshotButtonVisible, Converter={StaticResource BoolToVisibility}}" ToolTip="Rectangle Snapshot" />
             <!--<local:ToolBarButton Content="&#xE8B9;" Command="{Binding TakeScreenshotCommand}" Visibility="{Binding IsScreenshotButtonVisible, Converter={StaticResource BoolToVisibility}}" ToolTip="Take Screenshot" />-->
             <local:ToolBarButton Content="&#xED15;" Command="{Binding GiveFeedbackCommand}" ToolTip="Give Feedback" />
             <local:ToolBarButton Content="&#xE9CE;" Command="{Binding GetHelpCommand}" ToolTip="Help" />

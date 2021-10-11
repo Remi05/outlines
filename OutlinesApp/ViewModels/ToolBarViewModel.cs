@@ -31,7 +31,6 @@ namespace OutlinesApp.ViewModels
         public RelayCommand<object> ShowMoreInfoCommand { get; private set; }
         public RelayCommand<object> TakeElementSnapshotCommand { get; private set; }
         public RelayCommand<object> TakeFullscreenSnapshotCommand { get; private set; }
-        public RelayCommand<object> TakeRectangleSnapshotCommand { get; private set; }
         public RelayCommand<object> TakeScreenshotCommand { get; private set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
