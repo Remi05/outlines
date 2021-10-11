@@ -3,6 +3,7 @@
                     xmlns:local="clr-namespace:OutlinesApp">
     <SolidColorBrush x:Key="ThemeForegroundColorBrush" Color="Black" />
     <SolidColorBrush x:Key="ThemeAccentForegroundColorBrush" Color="White" />
+    <SolidColorBrush x:Key="ThemeDisabledForegroundColorBrush" Color="#A0A0A0" />
     <SolidColorBrush x:Key="ThemePanelBackgroundBrush" Color="#F8F8F8" />
     <SolidColorBrush x:Key="ThemePanelBorderBrush" Color="#D0D0D0" />
     <SolidColorBrush x:Key="ThemeSeperatorBrush" Color="#40000000" />

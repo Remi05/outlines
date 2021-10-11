@@ -22,12 +22,12 @@
 
     <Grid Name="Root">
         <Border Style="{StaticResource ToolBarStyle}" />
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="6">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="8">
             <Border x:Name="Handle" Height="35" Width="4" CornerRadius="1" Margin="0,0,5,0" Background="#38000000" BorderBrush="#40000000" BorderThickness="1" VerticalAlignment="Center" Visibility="Collapsed" />
             <local:ToolBarToggleButton Content="&#xE721;" IsChecked="{Binding InspectorViewModel.IsOverlayVisible, Mode=TwoWay}" ToolTip="Toggle Overlay" />
             <local:ToolBarToggleButton Content="&#xF003;" IsChecked="{Binding InspectorViewModel.IsTreeViewVisible, Mode=TwoWay}" ToolTip="Toggle Tree View" />
             <local:ToolBarToggleButton Content="&#xE71D;" IsChecked="{Binding InspectorViewModel.IsPropertiesPanelVisible, Mode=TwoWay}" ToolTip="Toggle Properties Panel" />
-            <local:ToolBarButton Content="&#xF7ED;" Command="{Binding TakeElementSnapshotCommand}" Visibility="{Binding IsElementSnapshotButtonVisible, Converter={StaticResource BoolToVisibility}}" ToolTip="Element Snapshot" />
+            <local:ToolBarButton Content="&#xF7ED;" Command="{Binding TakeElementSnapshotCommand}" Visibility="{Binding IsElementSnapshotButtonVisible, Converter={StaticResource BoolToVisibility}}" IsEnabled="{Binding IsElementSnapshotButtonEnabled, FallbackValue=False}" ToolTip="Element Snapshot" />
             <local:ToolBarButton Content="&#xE9A6;" Command="{Binding TakeFullscreenSnapshotCommand}" Visibility="{Binding IsFullscreenSnapshotButtonVisible, Converter={StaticResource BoolToVisibility}}" ToolTip="Fullscreen Snapshot" />
             <local:ToolBarButton Content="&#xF407;" Command="{Binding TakeRectangleSnapshotCommand}" Visibility="{Binding IsRectangleSnapshotButtonVisible, Converter={StaticResource BoolToVisibility}}" ToolTip="Rectangle Snapshot" />
             <!--<local:ToolBarButton Content="&#xE8B9;" Command="{Binding TakeScreenshotCommand}" Visibility="{Binding IsScreenshotButtonVisible, Converter={StaticResource BoolToVisibility}}" ToolTip="Take Screenshot" />-->
@@ -35,7 +35,7 @@
             <local:ToolBarButton Content="&#xE9CE;" Command="{Binding GetHelpCommand}" ToolTip="Help" />
             <!--<local:ToolBarButton Content="&#xE946;" Command="{Binding ShowMoreInfoCommand}" ToolTip="More Info"  />-->
             <!--<local:ToolBarButton Content="&#xE713;" Command="{Binding OpenSettingsCommand}" ToolTip="Settings" />-->
-            <Rectangle Width="0.5" Height="24" Fill="{DynamicResource ThemeSeperatorBrush}" />
+            <Rectangle Width="0.5" Height="24" Fill="{DynamicResource ThemeSeperatorBrush}" Margin="2,0"/>
             <local:ToolBarButton Content="&#xE711;" Command="{Binding CloseAppCommand}" ToolTip="Close App" />
         </StackPanel>
     </Grid>

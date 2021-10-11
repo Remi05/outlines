@@ -35,7 +35,7 @@ namespace OutlinesApp
             InspectorViewModel inspectorViewModel = new InspectorViewModel(outlinesService, GlobalInputListener);
             OverlayViewModel overlayViewModel = new OverlayViewModel(Dispatcher, outlinesService, coordinateConverter, screenHelper);
             PropertiesViewModel propertiesViewModel = new PropertiesViewModel(outlinesService);
-            ToolBarViewModel toolBarViewModel = new ToolBarViewModel(outlinesService, screenshotService, snapshotService, folderConfig, inspectorViewModel);
+            ToolBarViewModel toolBarViewModel = new ToolBarViewModel(outlinesService, screenshotService, snapshotService, folderConfig, coordinateConverter, inspectorViewModel);
             UiTreeViewModel uiTreeViewModel = new UiTreeViewModel(Dispatcher, outlinesService, uiTreeService);
 
             var serviceContainer = ServiceContainer.Instance;
