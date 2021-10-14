@@ -41,7 +41,7 @@ namespace Outlines.Inspection.NetFramework
             }
         }
 
-        public TextProperties GetTextProperties(AutomationElement element)
+        private TextProperties GetTextProperties(AutomationElement element)
         {
             if (element == null)
             {
