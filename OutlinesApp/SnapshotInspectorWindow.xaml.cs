@@ -1,5 +1,5 @@
 ﻿using System.Windows;
-using Outlines;
+using Outlines.Core;
 using OutlinesApp.Services;
 using OutlinesApp.ViewModels;
 
@@ -12,15 +12,15 @@ namespace OutlinesApp
             InitializeComponent();
 
             IDistanceOutlinesProvider distanceOutlinesProvider = new DistanceOutlinesProvider();
-            IElementProvider elementProvider = new CachedElementProvider(snapshot.UiTree);
+            IElementProvider elementProvider = new CachedElementProvider(snapshot.UITree);
             IOutlinesService outlinesService = new OutlinesService(distanceOutlinesProvider, elementProvider);
             ICoordinateConverter coordinateConverter = new CachedCoordinateConverter(snapshot);
             IScreenHelper screenHelper = new ScreenHelper(this);
-            IUiTreeService uiTreeService = new CachedUiTreeService(snapshot.UiTree);
+            IUITreeService uiTreeService = new CachedUITreeService(snapshot.UITree);
 
             OverlayViewModel overlayViewModel = new OverlayViewModel(Dispatcher, outlinesService, coordinateConverter, screenHelper);
             PropertiesViewModel propertiesViewModel = new PropertiesViewModel(outlinesService);
-            UiTreeViewModel uiTreeViewModel = new UiTreeViewModel(Dispatcher, outlinesService, uiTreeService);
+            UITreeViewModel uiTreeViewModel = new UITreeViewModel(Dispatcher, outlinesService, uiTreeService);
             SnapshotInspectorViewModel snapshotInspectorViewModel = new SnapshotInspectorViewModel(outlinesService, coordinateConverter);
             snapshotInspectorViewModel.Snapshot = snapshot;
 
@@ -28,7 +28,7 @@ namespace OutlinesApp
             serviceContainer.AddService(typeof(OverlayViewModel), overlayViewModel);
             serviceContainer.AddService(typeof(PropertiesViewModel), propertiesViewModel);
             serviceContainer.AddService(typeof(SnapshotInspectorViewModel), snapshotInspectorViewModel);
-            serviceContainer.AddService(typeof(UiTreeViewModel), uiTreeViewModel);
+            serviceContainer.AddService(typeof(UITreeViewModel), uiTreeViewModel);
         }
     }
 }

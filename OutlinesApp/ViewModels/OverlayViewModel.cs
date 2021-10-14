@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Threading;
-using Outlines;
+using Outlines.Core;
 using OutlinesApp.Services;
 
 namespace OutlinesApp.ViewModels
@@ -77,7 +77,7 @@ namespace OutlinesApp.ViewModels
             Dispatcher.Invoke(() => 
             {
                 SelectedElementRect = OutlinesService.SelectedElementProperties != null
-                                    ? CoordinateConverter.RectFromScreen(OutlinesService.SelectedElementProperties.BoundingRect)
+                                    ? CoordinateConverter.RectFromScreen(OutlinesService.SelectedElementProperties.BoundingRect).ToWindowsRect()
                                     : Rect.Empty;
 
             });  
@@ -89,7 +89,7 @@ namespace OutlinesApp.ViewModels
             Dispatcher.Invoke(() => 
             {
                 TargetElementRect = OutlinesService.TargetElementProperties != null 
-                                    ? CoordinateConverter.RectFromScreen(OutlinesService.TargetElementProperties.BoundingRect)
+                                    ? CoordinateConverter.RectFromScreen(OutlinesService.TargetElementProperties.BoundingRect).ToWindowsRect()
                                     : Rect.Empty;
             });
             UpdateDistanceOutlines();

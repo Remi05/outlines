@@ -86,18 +86,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="HoverWatcher.cs" />
-    <Compile Include="NullToVisibilityConverter.cs" />
-    <Compile Include="ImageToImageSourceConverter.cs" />
+    <Compile Include="Services\HoverWatcher.cs" />
+    <Compile Include="Converters\NullToVisibilityConverter.cs" />
+    <Compile Include="Converters\ImageToImageSourceConverter.cs" />
     <Compile Include="RelayCommand.cs" />
-    <Compile Include="Services\CachedCoordinateConverter.cs" />
-    <Compile Include="Services\FocusHelper.cs" />
     <Compile Include="Services\IColorPickerService.cs" />
     <Compile Include="Services\InputMaskingService.cs" />
-    <Compile Include="Services\ICoordinateConverter.cs" />
     <Compile Include="Services\ScreenHelper.cs" />
     <Compile Include="Services\ServiceContainer.cs" />
     <Compile Include="Services\ThemeManager.cs" />
+    <Compile Include="Services\TypeConversionUtils.cs" />
     <Compile Include="SnapshotInspectorWindow.xaml.cs">
       <DependentUpon>SnapshotInspectorWindow.xaml</DependentUpon>
     </Compile>
@@ -108,8 +106,8 @@
     <Compile Include="ViewModels\InspectorViewModel.cs" />
     <Compile Include="ViewModels\OverlayViewModel.cs" />
     <Compile Include="ViewModels\PropertiesViewModel.cs" />
-    <Compile Include="ViewModels\UiTreeItemViewModel.cs" />
-    <Compile Include="ViewModels\UiTreeViewModel.cs" />
+    <Compile Include="ViewModels\UITreeItemViewModel.cs" />
+    <Compile Include="ViewModels\UITreeViewModel.cs" />
     <Compile Include="ViewModels\ToolBarViewModel.cs" />
     <Compile Include="Views\ColorPicker.xaml.cs">
       <DependentUpon>ColorPicker.xaml</DependentUpon>
@@ -117,8 +115,8 @@
     <Compile Include="Views\SnapshotInspectorPage.xaml.cs">
       <DependentUpon>SnapshotInspectorPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UiTreeView.xaml.cs">
-      <DependentUpon>UiTreeView.xaml</DependentUpon>
+    <Compile Include="Views\UITreeView.xaml.cs">
+      <DependentUpon>UITreeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\InspectorPage.xaml.cs">
       <DependentUpon>InspectorPage.xaml</DependentUpon>
@@ -130,7 +128,6 @@
     <Compile Include="Views\PropertiesPanel.xaml.cs">
       <DependentUpon>PropertiesPanel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Services\WindowHelper.cs" />
     <Compile Include="Views\ToolBar.xaml.cs">
       <DependentUpon>ToolBar.xaml</DependentUpon>
     </Compile>
@@ -177,7 +174,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UiTreeView.xaml">
+    <Page Include="Views\UITreeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -235,9 +232,17 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Outlines\Outlines.csproj">
-      <Project>{d775e93c-caee-43bd-9b67-36fcae02494e}</Project>
-      <Name>Outlines</Name>
+    <ProjectReference Include="..\Outlines.Core\Outlines.Core.csproj">
+      <Project>{6c3601e0-46a6-46d6-8f20-8010c1b99bbd}</Project>
+      <Name>Outlines.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Outlines.Inspection.Common\Outlines.Inspection.Common.csproj">
+      <Project>{691ec091-5d6e-4d6f-95bf-27b3ff83ee2a}</Project>
+      <Name>Outlines.Inspection.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Outlines.Inspection.NetFramework\Outlines.Inspection.NetFramework.csproj">
+      <Project>{049ff871-64d6-4a04-91e8-66664c65e76c}</Project>
+      <Name>Outlines.Inspection.NetFramework</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

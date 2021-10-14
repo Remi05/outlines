@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel;
 using System.Windows;
-using Outlines;
+using Outlines.Core;
 using OutlinesApp.Services;
 
 namespace OutlinesApp.ViewModels
@@ -48,12 +48,12 @@ namespace OutlinesApp.ViewModels
             CoordinateConverter = coordinateConverter;
         }
 
-        public void OnMouseMove(Point cursorPos)
+        public void OnMouseMove(System.Drawing.Point cursorPos)
         {
             OutlinesService.TargetElementAt(CoordinateConverter.PointToScreen(cursorPos));
         }
 
-        public void OnMouseDown(Point cursorPos)
+        public void OnMouseDown(System.Drawing.Point cursorPos)
         {
             OutlinesService.SelectElementAt(CoordinateConverter.PointToScreen(cursorPos));
         }

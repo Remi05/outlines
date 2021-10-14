@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows;
-using Outlines;
+using Outlines.Core;
 using OutlinesApp.Services;
 
 namespace OutlinesApp.ViewModels
@@ -39,8 +39,8 @@ namespace OutlinesApp.ViewModels
             DistanceOutline = distanceOutline;
             CoordinateConverter = coordinateConverter;
             ScreenHelper = screenHelper;
-            StartPoint = CoordinateConverter.PointFromScreen(distanceOutline.StartPoint);
-            EndPoint = CoordinateConverter.PointFromScreen(distanceOutline.EndPoint);
+            StartPoint = CoordinateConverter.PointFromScreen(distanceOutline.StartPoint).ToWindowsPoint();
+            EndPoint = CoordinateConverter.PointFromScreen(distanceOutline.EndPoint).ToWindowsPoint();
             InitializeTextContainerRect();
         } 
 
@@ -54,9 +54,9 @@ namespace OutlinesApp.ViewModels
             TextContainerRect = new Rect(textContainerTopLeft, TextContainerRectSize);
             TextPlacement = DistanceOutline.IsVertical ? DistanceTextPlacement.Right : DistanceTextPlacement.Bottom;
 
-            Rect monitorRect = ScreenHelper.GetDisplayRect(localMidPoint);
-            Rect localMonitorRect = CoordinateConverter.RectFromScreen(monitorRect);
-            if (!localMonitorRect.Contains(TextContainerRect))
+            var monitorRect = ScreenHelper.GetDisplayRect(localMidPoint);
+            var localMonitorRect = CoordinateConverter.RectFromScreen(monitorRect);
+            if (!localMonitorRect.Contains(TextContainerRect.ToDrawingRectangle()))
             {
                 // If the text is outside the screen when shown to the right or below, try on the left or above.
                 textContainerTopLeft = DistanceOutline.IsVertical 

@@ -41,7 +41,7 @@
         <Grid>
             <StackPanel Visibility="{Binding IsTreeViewVisible, Converter={StaticResource BoolToVisibility}, FallbackValue=Visible}" 
                         Style="{StaticResource TreeViewPanelStyle}">
-                <local:UiTreeView />
+                <local:UITreeView />
             </StackPanel>
             <StackPanel Visibility="{Binding IsPropertiesPanelVisible, Converter={StaticResource BoolToVisibility}, FallbackValue=Visible}" 
                         Style="{StaticResource PropertiesPanelStyle}">

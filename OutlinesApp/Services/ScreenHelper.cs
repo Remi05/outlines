@@ -1,7 +1,7 @@
-﻿using System.Windows;
+﻿using System.Drawing;
 using System.Windows.Forms;
 using System.Windows.Media;
-using Outlines;
+using Outlines.Core;
 
 namespace OutlinesApp.Services
 {
@@ -14,16 +14,14 @@ namespace OutlinesApp.Services
             RootVisual = rootVisual;
         }
 
-        public Rect GetDisplayRect(Point point)
+        public Rectangle GetDisplayRect(Point point)
         {
-            var drawingPoint = new System.Drawing.Point((int)point.X, (int)point.Y);
-            var drawingRect = Screen.FromPoint(drawingPoint).Bounds;
-            return new Rect(new Point(drawingRect.Left, drawingRect.Top), new Size(drawingRect.Width, drawingRect.Height));
+            return Screen.FromPoint(point).Bounds;
         }
 
         public double GetDisplayScaleFactor()
         {
-            return PresentationSource.FromVisual(RootVisual).CompositionTarget.TransformToDevice.M11;
+            return System.Windows.PresentationSource.FromVisual(RootVisual).CompositionTarget.TransformToDevice.M11;
         }
     }
 }

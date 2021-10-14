@@ -1,42 +1,42 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using Outlines;
+using Outlines.Core;
 
 namespace OutlinesApp.ViewModels
 {
-    public class UiTreeItemViewModel : INotifyPropertyChanged
+    public class UITreeItemViewModel : INotifyPropertyChanged
     {
-        public UiTreeNode UiTreeNode { get; private set; }
+        public UITreeNode UITreeNode { get; private set; }
 
         public string ElementName
         {
             get
             {
-                string name = UiTreeNode.ElementProperties.Name;
-                return (string.IsNullOrWhiteSpace(name) ? "<unnamed>" : name) + $" - {UiTreeNode.ElementProperties.ControlType}";
+                string name = UITreeNode.ElementProperties.Name;
+                return (string.IsNullOrWhiteSpace(name) ? "<unnamed>" : name) + $" - {UITreeNode.ElementProperties.ControlType}";
             }
         }
 
-        public ObservableCollection<UiTreeItemViewModel> ChildrenElements { get; private set; } = new ObservableCollection<UiTreeItemViewModel>();
+        public ObservableCollection<UITreeItemViewModel> ChildrenElements { get; private set; } = new ObservableCollection<UITreeItemViewModel>();
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public UiTreeItemViewModel(UiTreeNode uiTreeNode)
+        public UITreeItemViewModel(UITreeNode uiTreeNode)
         {
             if (uiTreeNode == null)
             {
                 throw new ArgumentNullException(nameof(uiTreeNode));
             }
-            UiTreeNode = uiTreeNode;
+            UITreeNode = uiTreeNode;
             UpdateChildrenElements();
         }
 
         private void UpdateChildrenElements()
         {
-            foreach (var child in UiTreeNode.Children)
+            foreach (var child in UITreeNode.Children)
             {
-                ChildrenElements.Add(new UiTreeItemViewModel(child));
+                ChildrenElements.Add(new UITreeItemViewModel(child));
             }
         }
     }

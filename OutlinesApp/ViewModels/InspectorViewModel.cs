@@ -1,8 +1,9 @@
 using System;
 using System.ComponentModel;
-using System.Windows;
 using System.Windows.Input;
-using Outlines;
+using Outlines.Core;
+using Outlines.Inspection.Common;
+using OutlinesApp.Services;
 
 namespace OutlinesApp.ViewModels
 {
@@ -89,12 +90,12 @@ namespace OutlinesApp.ViewModels
             GlobalInputListener.KeyUp += OnKeyUp;
         }
 
-        private void OnMouseHovered(Point cursorPos)
+        private void OnMouseHovered(System.Drawing.Point cursorPos)
         {
             OutlinesService.TargetElementAt(cursorPos);
         }
 
-        private void OnMouseDown(Point cursorPos)
+        private void OnMouseDown(System.Drawing.Point cursorPos)
         {
             OutlinesService.SelectElementAt(cursorPos);
         }

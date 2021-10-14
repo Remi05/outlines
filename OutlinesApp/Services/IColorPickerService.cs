@@ -1,10 +1,9 @@
-﻿using System.Windows;
-using System.Windows.Media;
+﻿using System.Windows.Media;
 
 namespace OutlinesApp.Services
 {
     public interface IColorPickerService
     {
-        Color GetColorAt(Point point);
+        Color GetColorAt(System.Drawing.Point point);
     }
 }

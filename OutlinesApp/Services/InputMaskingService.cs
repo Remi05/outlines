@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
-using Outlines;
+using Outlines.Inspection.Common;
 
 namespace OutlinesApp.Services
 {
@@ -15,14 +15,14 @@ namespace OutlinesApp.Services
             RootElement = rootElement;
         }
 
-        public bool IsInInputMask(Point screenPoint)
+        public bool IsInInputMask(System.Drawing.Point screenPoint)
         {
             if (RootElement == null)
             {
                 return false;
             }
 
-            Point localPoint = RootElement.PointFromScreen(screenPoint);
+            Point localPoint = RootElement.PointFromScreen(screenPoint.ToWindowsPoint());
             var elementAtPoint = RootElement.InputHitTest(localPoint) as FrameworkElement;
 
             return elementAtPoint != null 

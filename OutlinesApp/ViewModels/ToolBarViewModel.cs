@@ -4,8 +4,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Windows;
-using Outlines;
+using Outlines.Core;
 using OutlinesApp.Services;
 
 namespace OutlinesApp.ViewModels
@@ -87,7 +86,7 @@ namespace OutlinesApp.ViewModels
         private void TakeFullscreenSnapshot()
         {
             var window = App.Current.MainWindow;
-            var windowBounds = new Rect(window.Left, window.Top, window.Width, window.Height);
+            var windowBounds = new Rectangle((int)window.Left, (int)window.Top, (int)window.Width, (int)window.Height);
             var screenWindowBounds = CoordinateConverter.RectToScreen(windowBounds);
             Snapshot snapshot = SnapshotService.TakeSnapshot(screenWindowBounds);
             SnapshotService.SaveSnapshot(snapshot);
@@ -103,7 +102,7 @@ namespace OutlinesApp.ViewModels
             else
             {
                 var window = App.Current.MainWindow;
-                var windowBounds = new Rect(window.Left, window.Top, window.Width, window.Height);
+                var windowBounds = new Rectangle((int)window.Left, (int)window.Top, (int)window.Width, (int)window.Height);
                 var screenWindowBounds = CoordinateConverter.RectToScreen(windowBounds);
                 screenshot = ScreenshotService.TakeScreenshot(screenWindowBounds);
             }

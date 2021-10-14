@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows;
-using Outlines;
+using Outlines.Core;
 using OutlinesApp.Services;
 
 namespace OutlinesApp.ViewModels
@@ -36,14 +36,14 @@ namespace OutlinesApp.ViewModels
 
         private void InitializeContainerRect()
         {
-            Rect localElementRect = CoordinateConverter.RectFromScreen(ElementProperties.BoundingRect);
+            var localElementRect = CoordinateConverter.RectFromScreen(ElementProperties.BoundingRect);
             double localElementCenterX = localElementRect.Left + localElementRect.Width / 2;
-            Point containerRectTopLeft = new Point(localElementCenterX - ContainerRectWidth / 2, localElementRect.Bottom);
-            Point containerRectBottomCenter = new Point(localElementCenterX, containerRectTopLeft.Y + ContainerRectHeight);
+            var containerRectTopLeft = new System.Drawing.Point((int)(localElementCenterX - ContainerRectWidth / 2.0), localElementRect.Bottom);
+            var containerRectBottomCenter = new System.Drawing.Point((int)localElementCenterX, containerRectTopLeft.Y + ContainerRectHeight);
             TextPlacement = DimensionsTextPlacement.Below;
 
-            Rect monitorRect = ScreenHelper.GetDisplayRect(localElementRect.TopLeft);
-            Rect localMonitorRect = CoordinateConverter.RectFromScreen(monitorRect);
+            var monitorRect = ScreenHelper.GetDisplayRect(localElementRect.TopLeft());
+            var localMonitorRect = CoordinateConverter.RectFromScreen(monitorRect);
             if (!localMonitorRect.Contains(containerRectBottomCenter))
             {
                 // If the text is outside the screen when shown below, try above the outline.
@@ -58,7 +58,7 @@ namespace OutlinesApp.ViewModels
                 }
             }
 
-            ContainerRect = new Rect(containerRectTopLeft, new Size(ContainerRectWidth, ContainerRectHeight));
+            ContainerRect = new Rect(containerRectTopLeft.ToWindowsPoint(), new Size(ContainerRectWidth, ContainerRectHeight));
         }
     }
 }

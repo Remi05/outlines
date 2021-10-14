@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Runtime.InteropServices;
-using System.Windows;
 using System.Windows.Media;
 
 namespace OutlinesApp.Services
@@ -13,10 +12,10 @@ namespace OutlinesApp.Services
         [DllImport("User32.dll", CharSet = CharSet.Auto)]
         public static extern IntPtr GetWindowDC(IntPtr hWnd);
 
-        public Color GetColorAt(Point point)
+        public Color GetColorAt(System.Drawing.Point point)
         {
             IntPtr windowDC = GetWindowDC(IntPtr.Zero);
-            uint color = GetPixel(windowDC, (int)point.X, (int)point.Y);
+            uint color = GetPixel(windowDC, point.X, point.Y);
             byte[] colorBytes = BitConverter.GetBytes(color);
             return Color.FromRgb(colorBytes[0], colorBytes[1], colorBytes[2]);
         }

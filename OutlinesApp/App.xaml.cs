@@ -1,6 +1,6 @@
 ﻿using System.IO;
 using System.Windows;
-using Outlines;
+using Outlines.Core;
 using OutlinesApp.Services;
 
 namespace OutlinesApp

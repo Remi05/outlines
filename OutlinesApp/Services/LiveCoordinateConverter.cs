@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Windows;
-using System.Windows.Forms;
+using System.Drawing;
 using System.Windows.Media;
+using Outlines.Core;
 
 namespace OutlinesApp.Services
 {
@@ -20,12 +20,12 @@ namespace OutlinesApp.Services
 
         public Point PointFromScreen(Point screenPoint)
         {
-            return RootVisual.PointFromScreen(screenPoint);
+            return RootVisual.PointFromScreen(screenPoint.ToWindowsPoint()).ToDrawingPoint();
         }
 
         public Point PointToScreen(Point localPoint)
         {
-            return RootVisual.PointToScreen(localPoint);
+            return RootVisual.PointToScreen(localPoint.ToWindowsPoint()).ToDrawingPoint();
         }
 
         public Size SizeFromScreen(Size screenSize)
@@ -34,10 +34,10 @@ namespace OutlinesApp.Services
             {
                 return screenSize;
             }
-            Matrix transformFromDevice = PresentationSource.FromVisual(RootVisual).CompositionTarget.TransformFromDevice;
-            Vector screenSizeVector = new Vector(screenSize.Width, screenSize.Height);
-            Vector localSizeVector = transformFromDevice.Transform(screenSizeVector);
-            return new Size(localSizeVector.X, localSizeVector.Y);
+            Matrix transformFromDevice = System.Windows.PresentationSource.FromVisual(RootVisual).CompositionTarget.TransformFromDevice;
+            System.Windows.Vector screenSizeVector = new System.Windows.Vector(screenSize.Width, screenSize.Height);
+            System.Windows.Vector localSizeVector = transformFromDevice.Transform(screenSizeVector);
+            return new Size((int)localSizeVector.X, (int)localSizeVector.Y);
         }
 
         public Size SizeToScreen(Size localSize)
@@ -46,24 +46,24 @@ namespace OutlinesApp.Services
             {
                 return localSize;
             }
-            Matrix transformToDevice = PresentationSource.FromVisual(RootVisual).CompositionTarget.TransformToDevice;
-            Vector localSizeVector = new Vector(localSize.Width, localSize.Height);
-            Vector screenSizeVector = transformToDevice.Transform(localSizeVector);
-            return new Size(screenSizeVector.X, screenSizeVector.Y);
+            Matrix transformToDevice = System.Windows.PresentationSource.FromVisual(RootVisual).CompositionTarget.TransformToDevice;
+            System.Windows.Vector localSizeVector = new System.Windows.Vector(localSize.Width, localSize.Height);
+            System.Windows.Vector screenSizeVector = transformToDevice.Transform(localSizeVector);
+            return new Size((int)screenSizeVector.X, (int)screenSizeVector.Y);
         }
 
-        public Rect RectFromScreen(Rect screenRect)
+        public Rectangle RectFromScreen(Rectangle screenRect)
         {
-            Point localPoint = PointFromScreen(screenRect.TopLeft);
+            Point localPoint = PointFromScreen(screenRect.TopLeft());
             Size localSize = SizeFromScreen(screenRect.Size);
-            return new Rect(localPoint, localSize);
+            return new Rectangle(localPoint, localSize);
         }
 
-        public Rect RectToScreen(Rect localRect)
+        public Rectangle RectToScreen(Rectangle localRect)
         {
-            Point screenPoint = PointToScreen(localRect.TopLeft);
+            Point screenPoint = PointToScreen(localRect.TopLeft());
             Size screenSize = SizeToScreen(localRect.Size);
-            return new Rect(screenPoint, screenSize);
+            return new Rectangle(screenPoint, screenSize);
         }
     }
 }

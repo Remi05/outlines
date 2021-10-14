@@ -1,8 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Windows;
 using System.Windows.Media;
-using Outlines;
+using Outlines.Inspection.Common;
 using OutlinesApp.Services;
 
 namespace OutlinesApp.ViewModels
@@ -53,7 +52,7 @@ namespace OutlinesApp.ViewModels
             GlobalInputListener.MouseMoved += hoverWatcher.OnMouseMoved;
         }
 
-        private void OnMouseHovered(Point cursorPos)
+        private void OnMouseHovered(System.Drawing.Point cursorPos)
         {
             PickedColor = ColorPickerService.GetColorAt(cursorPos);
         }

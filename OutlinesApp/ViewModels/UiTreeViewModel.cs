@@ -2,20 +2,20 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Threading;
-using Outlines;
+using Outlines.Core;
 
 namespace OutlinesApp.ViewModels
 {
-    public class UiTreeViewModel : INotifyPropertyChanged
+    public class UITreeViewModel : INotifyPropertyChanged
     {
         private Dispatcher Dispatcher { get; set; }
         private IOutlinesService OutlinesService { get; set; }
-        private IUiTreeService UiTreeService { get; set; }
-        public ObservableCollection<UiTreeItemViewModel> Elements { get; private set; } = new ObservableCollection<UiTreeItemViewModel>();
+        private IUITreeService UITreeService { get; set; }
+        public ObservableCollection<UITreeItemViewModel> Elements { get; private set; } = new ObservableCollection<UITreeItemViewModel>();
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public UiTreeViewModel(Dispatcher dispatcher, IOutlinesService outlinesService, IUiTreeService uiTreeService)
+        public UITreeViewModel(Dispatcher dispatcher, IOutlinesService outlinesService, IUITreeService uiTreeService)
         {
             if (dispatcher == null || outlinesService == null || uiTreeService == null)
             {
@@ -23,14 +23,14 @@ namespace OutlinesApp.ViewModels
             }
             Dispatcher = dispatcher;
             OutlinesService = outlinesService;
-            UiTreeService = uiTreeService;
-            UiTreeService.RootNodeChanged += UpdateUiTreeViewElements;
+            UITreeService = uiTreeService;
+            UITreeService.RootNodeChanged += UpdateUiTreeViewElements;
             UpdateUiTreeViewElements();
         }
 
-        public void OnElementSelectionChanged(UiTreeItemViewModel uiTreeItemViewModel)
+        public void OnElementSelectionChanged(UITreeItemViewModel uiTreeItemViewModel)
         {
-            OutlinesService.SelectElementWithProperties(uiTreeItemViewModel?.UiTreeNode?.ElementProperties);
+            OutlinesService.SelectElementWithProperties(uiTreeItemViewModel?.UITreeNode?.ElementProperties);
         }
 
         private void UpdateUiTreeViewElements()
@@ -38,9 +38,9 @@ namespace OutlinesApp.ViewModels
             Dispatcher.Invoke(() =>
             {
                 Elements.Clear();
-                if (UiTreeService.RootNode != null)
+                if (UITreeService.RootNode != null)
                 {
-                    var uiTreeItemViewModel = new UiTreeItemViewModel(UiTreeService.RootNode);
+                    var uiTreeItemViewModel = new UITreeItemViewModel(UITreeService.RootNode);
                     Elements.Add(uiTreeItemViewModel);
                 }
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Elements)));

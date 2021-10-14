@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="OutlinesApp.Views.UiTreeView"
+﻿<UserControl x:Class="OutlinesApp.Views.UITreeView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -37,7 +37,7 @@
             <TextBlock Text="Tree View" Style="{StaticResource HeaderStyle}" />
             <TreeView ItemsSource="{Binding Elements}" Style="{StaticResource TreeViewStyle}" ItemContainerStyle="{StaticResource TreeViewItemStyle}" SelectedItemChanged="OnSelectedItemChanged">
                 <TreeView.Resources>
-                    <HierarchicalDataTemplate DataType="{x:Type vm:UiTreeItemViewModel}" ItemsSource="{Binding ChildrenElements}">
+                    <HierarchicalDataTemplate DataType="{x:Type vm:UITreeItemViewModel}" ItemsSource="{Binding ChildrenElements}">
                         <TextBlock Text="{Binding ElementName}"/>
                     </HierarchicalDataTemplate>
                 </TreeView.Resources>

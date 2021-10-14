@@ -1,7 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using Outlines;
 using OutlinesApp.Services;
 using OutlinesApp.ViewModels;
 
@@ -24,12 +23,12 @@ namespace OutlinesApp.Views
 
         private void OnMouseDown(object sender, MouseButtonEventArgs e)
         {
-            ViewModel.OnMouseDown(e.GetPosition(sender as IInputElement));
+            ViewModel.OnMouseDown(e.GetPosition(sender as IInputElement).ToDrawingPoint());
         }
 
         private void OnMouseMove(object sender, MouseEventArgs e)
         {
-            ViewModel.OnMouseMove(e.GetPosition(sender as IInputElement));
+            ViewModel.OnMouseMove(e.GetPosition(sender as IInputElement).ToDrawingPoint());
         }
 
         private void OnMouseWheelScroll(object sender, MouseWheelEventArgs e)
