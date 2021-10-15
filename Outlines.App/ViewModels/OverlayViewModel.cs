@@ -18,7 +18,7 @@ namespace Outlines.App.ViewModels
 
         public ObservableCollection<DistanceViewModel> DistanceOutlines { get; private set; } = new ObservableCollection<DistanceViewModel>();
 
-        private Rect selectedElementRect = Rect.Empty;
+        private Rect selectedElementRect = new Rect(0, 0, 0, 0);
         public Rect SelectedElementRect
         {
             get => selectedElementRect;
@@ -35,7 +35,7 @@ namespace Outlines.App.ViewModels
             }
         }
 
-        private Rect targetElementRect = Rect.Empty;
+        private Rect targetElementRect = new Rect(0, 0, 0, 0);
         public Rect TargetElementRect
         {
             get => targetElementRect;
@@ -79,7 +79,7 @@ namespace Outlines.App.ViewModels
             {
                 SelectedElementRect = OutlinesService.SelectedElementProperties != null
                                     ? CoordinateConverter.RectFromScreen(OutlinesService.SelectedElementProperties.BoundingRect).ToWindowsRect()
-                                    : Rect.Empty;
+                                    : new Rect(0, 0, 0, 0);
 
             });  
             UpdateDistanceOutlines();
@@ -91,7 +91,7 @@ namespace Outlines.App.ViewModels
             {
                 TargetElementRect = OutlinesService.TargetElementProperties != null 
                                     ? CoordinateConverter.RectFromScreen(OutlinesService.TargetElementProperties.BoundingRect).ToWindowsRect()
-                                    : Rect.Empty;
+                                    : new Rect(0, 0, 0, 0);
             });
             UpdateDistanceOutlines();
         }
