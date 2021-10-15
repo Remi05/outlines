@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
 using System.Windows.Media;
-using Outlines.Core;
+using Outlines.Inspection;
 
 namespace OutlinesApp.Services
 {

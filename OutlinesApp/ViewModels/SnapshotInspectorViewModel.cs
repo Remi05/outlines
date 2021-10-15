@@ -1,8 +1,6 @@
 using System;
 using System.ComponentModel;
-using System.Windows;
 using Outlines.Core;
-using OutlinesApp.Services;
 
 namespace OutlinesApp.ViewModels
 {

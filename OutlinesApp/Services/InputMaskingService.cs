@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
-using Outlines.Inspection.Common;
+using Outlines.Inspection;
 
 namespace OutlinesApp.Services
 {

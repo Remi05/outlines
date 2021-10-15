@@ -1,4 +1,4 @@
-﻿namespace Outlines.Core
+﻿namespace Outlines.Inspection
 {
     public interface IFolderConfig
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace Outlines.Core
+namespace Outlines.Inspection
 {
     public class FolderConfig : IFolderConfig
     {

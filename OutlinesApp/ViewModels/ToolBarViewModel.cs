@@ -5,7 +5,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using Outlines.Core;
-using OutlinesApp.Services;
+using Outlines.Inspection;
 
 namespace OutlinesApp.ViewModels
 {

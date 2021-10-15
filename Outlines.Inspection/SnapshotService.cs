@@ -3,8 +3,9 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Text.Json;
+using Outlines.Core;
 
-namespace Outlines.Core
+namespace Outlines.Inspection
 {
     public class SnapshotService : ISnapshotService
     {

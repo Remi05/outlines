@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace Outlines.Core
+namespace Outlines.Inspection
 {
     public interface IScreenHelper
     {

@@ -236,9 +236,9 @@
       <Project>{6c3601e0-46a6-46d6-8f20-8010c1b99bbd}</Project>
       <Name>Outlines.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Outlines.Inspection.Common\Outlines.Inspection.Common.csproj">
+    <ProjectReference Include="..\Outlines.Inspection\Outlines.Inspection.csproj">
       <Project>{691ec091-5d6e-4d6f-95bf-27b3ff83ee2a}</Project>
-      <Name>Outlines.Inspection.Common</Name>
+      <Name>Outlines.Inspection</Name>
     </ProjectReference>
     <ProjectReference Include="..\Outlines.Inspection.NetFramework\Outlines.Inspection.NetFramework.csproj">
       <Project>{049ff871-64d6-4a04-91e8-66664c65e76c}</Project>

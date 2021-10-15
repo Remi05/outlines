@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using Outlines.Core;
+using Outlines.Inspection;
 using OutlinesApp.Services;
 using OutlinesApp.ViewModels;
 

@@ -2,7 +2,7 @@ using System;
 using System.ComponentModel;
 using System.Windows.Input;
 using Outlines.Core;
-using Outlines.Inspection.Common;
+using Outlines.Inspection;
 using OutlinesApp.Services;
 
 namespace OutlinesApp.ViewModels

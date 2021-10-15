@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Interop;
 using Outlines.Core;
-using Outlines.Inspection.Common;
+using Outlines.Inspection;
 using Outlines.Inspection.NetFramework;
 using OutlinesApp.Services;
 using OutlinesApp.ViewModels;

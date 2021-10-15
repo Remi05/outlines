@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace Outlines.Inspection.Common
+namespace Outlines.Inspection
 {
     public interface IInputMaskingService
     {

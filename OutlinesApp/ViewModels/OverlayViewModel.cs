@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Threading;
 using Outlines.Core;
+using Outlines.Inspection;
 using OutlinesApp.Services;
 
 namespace OutlinesApp.ViewModels

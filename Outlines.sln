@@ -7,11 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OutlinesApp", "OutlinesApp\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Outlines.Core", "Outlines.Core\Outlines.Core.csproj", "{6C3601E0-46A6-46D6-8F20-8010C1B99BBD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Outlines.Inspection.Common", "Outlines.Inspection.Common\Outlines.Inspection.Common.csproj", "{691EC091-5D6E-4D6F-95BF-27B3FF83EE2A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Outlines.Inspection", "Outlines.Inspection\Outlines.Inspection.csproj", "{691EC091-5D6E-4D6F-95BF-27B3FF83EE2A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Outlines.Inspection.NetFramework", "Outlines.Inspection.NetFramework\Outlines.Inspection.NetFramework.csproj", "{049FF871-64D6-4A04-91E8-66664C65E76C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Outlines.Inspection.NetCore", "Outlines.Inspection.NetCore\Outlines.Inspection.NetCore.csproj", "{EA8EE01D-1210-4A8F-A27C-B2001B0589D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Outlines.Inspection.NetCore", "Outlines.Inspection.NetCore\Outlines.Inspection.NetCore.csproj", "{EA8EE01D-1210-4A8F-A27C-B2001B0589D1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

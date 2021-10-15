@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace Outlines.Inspection.Common
+namespace Outlines.Inspection
 {
     public delegate void MouseMovedEventHandler(Point cursorPos);
     public delegate void MouseDownEventHandler(Point cursorPos);

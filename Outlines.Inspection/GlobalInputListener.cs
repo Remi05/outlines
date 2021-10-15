@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Drawing;
 
-namespace Outlines.Inspection.Common
+namespace Outlines.Inspection
 {
     public class GlobalInputListener : IGlobalInputListener
     {

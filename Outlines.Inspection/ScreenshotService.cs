@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Drawing;
+using Outlines.Core;
 
-namespace Outlines.Core
+namespace Outlines.Inspection
 {
     public class ScreenshotService : IScreenshotService
     {

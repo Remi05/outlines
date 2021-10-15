@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace Outlines.Inspection.Common
+namespace Outlines.Inspection
 {
     public class FocusHelper
     {
