@@ -1,0 +1,37 @@
+﻿<UserControl x:Class="Outlines.App.Views.ColorPicker"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Outlines.App.Views"
+             mc:Ignorable="d" 
+             Loaded="OnLoaded"
+             d:DesignHeight="40" d:DesignWidth="240">
+
+    <UserControl.Resources>
+        <Style x:Key="ColorPreviewBorderStyle" TargetType="Border">
+            <Setter Property="BorderBrush" Value="#808080" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="4" />
+        </Style>
+    </UserControl.Resources>
+
+    <Grid>
+        <Border Style="{StaticResource SharedInspectorPanelStyle}" Effect="{StaticResource SharedShadowEffectLeft}" />
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="12,12,12,12">
+            <Grid Height="32" Width="32" Margin="0,0,16,0">
+                <Border Background="{Binding PickedColorBrush}" Style="{StaticResource ColorPreviewBorderStyle}" />
+            </Grid>
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center">
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
+                    <TextBlock Text="RBG:" Padding="0,0,8,0" Foreground="{DynamicResource ThemeForegroundColorBrush}" />
+                    <TextBlock Text="{Binding PickedColorRbg}" Foreground="{DynamicResource ThemeForegroundColorBrush}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Hex:" Padding="0,0,8,0" Foreground="{DynamicResource ThemeForegroundColorBrush}" />
+                    <TextBlock Text="{Binding PickedColorHex}" Margin="0,0,0,0" Foreground="{DynamicResource ThemeForegroundColorBrush}" />
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

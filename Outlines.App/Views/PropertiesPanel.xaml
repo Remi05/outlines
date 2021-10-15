@@ -1,0 +1,80 @@
+<UserControl x:Class="Outlines.App.Views.PropertiesPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Outlines.App.Views"
+             mc:Ignorable="d" 
+             Loaded="OnLoaded"
+             d:DesignHeight="600" d:DesignWidth="240">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <Style x:Key="PropertyGroupHeaderStyle" TargetType="TextBlock">
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="FontFamily" Value="Segoe UI Bold" />
+                <Setter Property="Margin" Value="0,0,0,5" />
+                <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundColorBrush}" />
+            </Style>
+            <Style x:Key="PropertyNameStyle" TargetType="TextBlock">
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="Margin" Value="0,0,15,5" />
+                <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundColorBrush}" />
+            </Style>
+            <Style x:Key="PropertyValueStyle" TargetType="TextBlock">
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="Margin" Value="0,0,0,5" />
+                <Setter Property="MaxWidth" Value="100" />
+                <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundColorBrush}" />
+                <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                <Setter Property="TextWrapping" Value="NoWrap" />
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid Name="Root" VerticalAlignment="Top">
+        <Border Style="{StaticResource SharedInspectorPanelStyle}" Effect="{StaticResource SharedShadowEffectRight}" />
+        <StackPanel Margin="16">
+            <StackPanel x:Name="ElementPropertiesGroup" Margin="0,0,0,12">
+                <TextBlock Text="Element Properties" Style="{StaticResource PropertyGroupHeaderStyle}" />
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="Name"          Style="{StaticResource PropertyNameStyle}" />
+                        <TextBlock Text="Control Type"  Style="{StaticResource PropertyNameStyle}" />
+                        <TextBlock Text="Automation ID" Style="{StaticResource PropertyNameStyle}" />
+                        <TextBlock Text="Class Name"    Style="{StaticResource PropertyNameStyle}" />
+                        <TextBlock Text="Width"         Style="{StaticResource PropertyNameStyle}" />
+                        <TextBlock Text="Height"        Style="{StaticResource PropertyNameStyle}" />
+                        <TextBlock Text="Top"           Style="{StaticResource PropertyNameStyle}" />
+                        <TextBlock Text="Left"          Style="{StaticResource PropertyNameStyle}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock x:Name="ElementNameTextBlock"         Text="{Binding ElementProperties.Name, Mode=OneWay}"                Style="{StaticResource PropertyValueStyle}" ToolTip="{Binding ElementProperties.Name, Mode=OneWay}" />
+                        <TextBlock x:Name="ElementControlTypeTextBlock"  Text="{Binding ElementProperties.ControlType, Mode=OneWay}"         Style="{StaticResource PropertyValueStyle}" ToolTip="{Binding ElementProperties.ControlType, Mode=OneWay}" />
+                        <TextBlock x:Name="ElementAutomationIdTextBlock" Text="{Binding ElementProperties.AutomationId, Mode=OneWay}"        Style="{StaticResource PropertyValueStyle}" ToolTip="{Binding ElementProperties.AutomationId, Mode=OneWay}" />
+                        <TextBlock x:Name="ElementClassNameTextBlock"    Text="{Binding ElementProperties.ClassName, Mode=OneWay}"           Style="{StaticResource PropertyValueStyle}" ToolTip="{Binding ElementProperties.ClassName, Mode=OneWay}" />
+                        <TextBlock x:Name="ElementWidthTextBlock"        Text="{Binding ElementProperties.BoundingRect.Width, Mode=OneWay}"  Style="{StaticResource PropertyValueStyle}" />
+                        <TextBlock x:Name="ElementHeightTextBlock"       Text="{Binding ElementProperties.BoundingRect.Height, Mode=OneWay}" Style="{StaticResource PropertyValueStyle}" />
+                        <TextBlock x:Name="ElementTopTextBlock"          Text="{Binding ElementProperties.BoundingRect.Top, Mode=OneWay}"    Style="{StaticResource PropertyValueStyle}" />
+                        <TextBlock x:Name="ElementLeftTextBlock"         Text="{Binding ElementProperties.BoundingRect.Left, Mode=OneWay}"   Style="{StaticResource PropertyValueStyle}" />
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel x:Name="TextPropertiesGroup" Visibility="{Binding TextProperties, Converter={StaticResource NullToVisibility}, FallbackValue=Collapsed}">
+                <TextBlock Text="Typography" Style="{StaticResource PropertyGroupHeaderStyle}" />
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="Font Type"   Style="{StaticResource PropertyNameStyle}" />
+                        <TextBlock Text="Font Size"   Style="{StaticResource PropertyNameStyle}" />
+                        <TextBlock Text="Font Weight" Style="{StaticResource PropertyNameStyle}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock x:Name="FontTypeTextBlock"   Text="{Binding TextProperties.FontName, Mode=OneWay}"   Style="{StaticResource PropertyValueStyle}" ToolTip="{Binding TextProperties.FontName, Mode=OneWay}" />
+                        <TextBlock x:Name="FontSizeTextBlock"   Text="{Binding TextProperties.FontSize, Mode=OneWay}"   Style="{StaticResource PropertyValueStyle}" ToolTip="{Binding TextProperties.FontSize, Mode=OneWay}" />
+                        <TextBlock x:Name="FontWeightTextBlock" Text="{Binding TextProperties.FontWeight, Mode=OneWay}" Style="{StaticResource PropertyValueStyle}" ToolTip="{Binding TextProperties.FontWeight, Mode=OneWay}" />
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

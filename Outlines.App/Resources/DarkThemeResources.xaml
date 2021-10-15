@@ -1,0 +1,12 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Outlines.App">
+    <SolidColorBrush x:Key="ThemeForegroundColorBrush" Color="White" />
+    <SolidColorBrush x:Key="ThemeAccentForegroundColorBrush" Color="Black" />
+    <SolidColorBrush x:Key="ThemeDisabledForegroundColorBrush" Color="#707070" />
+    <SolidColorBrush x:Key="ThemePanelBackgroundBrush" Color="#2D2D2D" />
+    <SolidColorBrush x:Key="ThemePanelBorderBrush" Color="#181818" />
+    <SolidColorBrush x:Key="ThemeSeperatorBrush" Color="#40FFFFFF" />
+    <SolidColorBrush x:Key="ThemeAccentButtonBackgroundBrush" Color="{DynamicResource AccentLight2Color}" />
+    <SolidColorBrush x:Key="ThemeButtonHoverOverlayBackgroundBrush" Color="White" />
+</ResourceDictionary>
