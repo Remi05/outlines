@@ -1,9 +1,9 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using OutlinesApp.Services;
-using OutlinesApp.ViewModels;
+using Outlines.App.Services;
+using Outlines.App.ViewModels;
 
-namespace OutlinesApp.Views
+namespace Outlines.App.Views
 {
     public partial class OutlinesOverlay : UserControl
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace OutlinesApp
+namespace Outlines.App
 {
     public class RelayCommand<T> : ICommand
     {

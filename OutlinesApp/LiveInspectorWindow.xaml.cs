@@ -5,10 +5,10 @@ using System.Windows.Interop;
 using Outlines.Core;
 using Outlines.Inspection;
 using Outlines.Inspection.NetFramework;
-using OutlinesApp.Services;
-using OutlinesApp.ViewModels;
+using Outlines.App.Services;
+using Outlines.App.ViewModels;
 
-namespace OutlinesApp
+namespace Outlines.App
 {
     public partial class LiveInspectorWindow : Window
     {

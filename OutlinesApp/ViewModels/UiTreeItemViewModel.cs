@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using Outlines.Core;
 
-namespace OutlinesApp.ViewModels
+namespace Outlines.App.ViewModels
 {
     public class UITreeItemViewModel : INotifyPropertyChanged
     {

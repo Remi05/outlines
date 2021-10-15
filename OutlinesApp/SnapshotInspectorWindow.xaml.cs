@@ -1,10 +1,10 @@
 ﻿using System.Windows;
 using Outlines.Core;
 using Outlines.Inspection;
-using OutlinesApp.Services;
-using OutlinesApp.ViewModels;
+using Outlines.App.Services;
+using Outlines.App.ViewModels;
 
-namespace OutlinesApp
+namespace Outlines.App
 {
     public partial class SnapshotInspectorWindow : Window
     {

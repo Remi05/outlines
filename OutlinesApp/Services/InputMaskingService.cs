@@ -3,7 +3,7 @@ using System.Linq;
 using System.Windows;
 using Outlines.Inspection;
 
-namespace OutlinesApp.Services
+namespace Outlines.App.Services
 {
     public class InputMaskingService : IInputMaskingService
     {

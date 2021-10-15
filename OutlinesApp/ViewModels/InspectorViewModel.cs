@@ -3,9 +3,9 @@ using System.ComponentModel;
 using System.Windows.Input;
 using Outlines.Core;
 using Outlines.Inspection;
-using OutlinesApp.Services;
+using Outlines.App.Services;
 
-namespace OutlinesApp.ViewModels
+namespace Outlines.App.ViewModels
 {
     public class InspectorViewModel : INotifyPropertyChanged
     {

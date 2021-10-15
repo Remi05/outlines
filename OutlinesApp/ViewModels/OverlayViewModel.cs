@@ -5,9 +5,9 @@ using System.Windows;
 using System.Windows.Threading;
 using Outlines.Core;
 using Outlines.Inspection;
-using OutlinesApp.Services;
+using Outlines.App.Services;
 
-namespace OutlinesApp.ViewModels
+namespace Outlines.App.ViewModels
 {
     public class OverlayViewModel : INotifyPropertyChanged
     {

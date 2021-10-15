@@ -1,9 +1,9 @@
 ﻿using System.IO;
 using System.Windows;
 using Outlines.Core;
-using OutlinesApp.Services;
+using Outlines.App.Services;
 
-namespace OutlinesApp
+namespace Outlines.App
 {
     public partial class App : Application
     {

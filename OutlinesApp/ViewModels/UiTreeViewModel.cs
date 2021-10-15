@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Windows.Threading;
 using Outlines.Core;
 
-namespace OutlinesApp.ViewModels
+namespace Outlines.App.ViewModels
 {
     public class UITreeViewModel : INotifyPropertyChanged
     {

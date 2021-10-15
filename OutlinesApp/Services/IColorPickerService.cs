@@ -1,6 +1,6 @@
 ﻿using System.Windows.Media;
 
-namespace OutlinesApp.Services
+namespace Outlines.App.Services
 {
     public interface IColorPickerService
     {

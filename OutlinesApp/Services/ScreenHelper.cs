@@ -3,7 +3,7 @@ using System.Windows.Forms;
 using System.Windows.Media;
 using Outlines.Inspection;
 
-namespace OutlinesApp.Services
+namespace Outlines.App.Services
 {
     public class ScreenHelper : IScreenHelper
     {

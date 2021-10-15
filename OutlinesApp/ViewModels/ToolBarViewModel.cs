@@ -7,7 +7,7 @@ using System.IO;
 using Outlines.Core;
 using Outlines.Inspection;
 
-namespace OutlinesApp.ViewModels
+namespace Outlines.App.ViewModels
 {
     public class ToolBarViewModel : INotifyPropertyChanged
     {

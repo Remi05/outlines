@@ -6,7 +6,7 @@ using System.IO;
 using System.Windows.Data;
 using System.Windows.Media.Imaging;
 
-namespace OutlinesApp
+namespace Outlines.App
 {
     public class ImageToImageSourceConverter : IValueConverter
     {

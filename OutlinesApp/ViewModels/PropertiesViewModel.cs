@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using Outlines.Core;
 
-namespace OutlinesApp.ViewModels
+namespace Outlines.App.ViewModels
 {
     public class PropertiesViewModel : INotifyPropertyChanged
     {

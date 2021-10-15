@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace OutlinesApp.Services
+namespace Outlines.App.Services
 {
     public class ServiceContainer
     {

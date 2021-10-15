@@ -2,9 +2,9 @@
 using System.ComponentModel;
 using System.Windows.Media;
 using Outlines.Inspection;
-using OutlinesApp.Services;
+using Outlines.App.Services;
 
-namespace OutlinesApp.ViewModels
+namespace Outlines.App.ViewModels
 {
     public class ColorPickerViewModel : INotifyPropertyChanged
     {

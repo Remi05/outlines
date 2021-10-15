@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:OutlinesApp">
+                    xmlns:local="clr-namespace:Outlines.App">
     <SolidColorBrush x:Key="ThemeForegroundColorBrush" Color="Black" />
     <SolidColorBrush x:Key="ThemeAccentForegroundColorBrush" Color="White" />
     <SolidColorBrush x:Key="ThemeDisabledForegroundColorBrush" Color="#A0A0A0" />

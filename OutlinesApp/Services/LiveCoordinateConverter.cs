@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Windows.Media;
 using Outlines.Core;
 
-namespace OutlinesApp.Services
+namespace Outlines.App.Services
 {
     public class LiveCoordinateConverter : ICoordinateConverter
     {

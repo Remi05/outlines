@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Media;
 using Windows.UI.ViewManagement;
 
-namespace OutlinesApp.Services
+namespace Outlines.App.Services
 {
     public static class ColorHelpers
     {

@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.Timers;
 
-namespace OutlinesApp.Services
+namespace Outlines.App.Services
 {
     public delegate void MouseHoveredDelegate(Point cursorPos);
 

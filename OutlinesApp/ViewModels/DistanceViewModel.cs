@@ -2,9 +2,9 @@
 using System.Windows;
 using Outlines.Core;
 using Outlines.Inspection;
-using OutlinesApp.Services;
+using Outlines.App.Services;
 
-namespace OutlinesApp.ViewModels
+namespace Outlines.App.ViewModels
 {
     public enum DistanceTextPlacement { Left, Right, Top, Bottom };
 
