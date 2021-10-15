@@ -5,12 +5,12 @@ using Outlines.Core;
 
 namespace Outlines.Inspection.NetFramework
 {
-    public class LiveElementProvider : IElementProvider
+    public class FilteredLiveElementProvider : IElementProvider
     {
         private IElementPropertiesProvider PropertiesProvider { get; set; }
         private Condition FitlerCondition { get; set; }
 
-        public LiveElementProvider(IElementPropertiesProvider propertiesProvider)
+        public FilteredLiveElementProvider(IElementPropertiesProvider propertiesProvider)
         {
             PropertiesProvider = propertiesProvider;
             FitlerCondition = new AndCondition(new NotCondition(new AndCondition(new PropertyCondition(AutomationElement.NameProperty, "Outlines", PropertyConditionFlags.IgnoreCase), 

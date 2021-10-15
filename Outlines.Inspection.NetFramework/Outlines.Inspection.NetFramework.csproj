@@ -48,7 +48,8 @@
     <Compile Include="AutomationElementProperties.cs" />
     <Compile Include="ElementPropertiesProvider.cs" />
     <Compile Include="IElementPropertiesProvider.cs" />
-    <Compile Include="LiveElementProvider.cs" />
+    <Compile Include="FilteredLiveElementProvider.cs" />
+    <Compile Include="BasicLiveElementProvider.cs" />
     <Compile Include="LiveUITreeService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TypeConversionUtils.cs" />

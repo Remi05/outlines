@@ -24,7 +24,7 @@ namespace Outlines.App
             IColorPickerService colorPickerService = new ColorPickerService();
             IDistanceOutlinesProvider distanceOutlinesProvider = new DistanceOutlinesProvider();
             IElementPropertiesProvider elementPropertiesProvider = new ElementPropertiesProvider();
-            IElementProvider elementProvider = new LiveElementProvider(elementPropertiesProvider);
+            IElementProvider elementProvider = new FilteredLiveElementProvider(elementPropertiesProvider);
             IFolderConfig folderConfig = new FolderConfig();
             IOutlinesService outlinesService = new OutlinesService(distanceOutlinesProvider, elementProvider);
             ICoordinateConverter coordinateConverter = new LiveCoordinateConverter(this);

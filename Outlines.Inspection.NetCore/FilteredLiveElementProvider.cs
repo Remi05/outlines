@@ -5,13 +5,13 @@ using Outlines.Core;
 
 namespace Outlines.Inspection.NetCore
 {
-    public class LiveElementProvider : IElementProvider
+    public class FilteredLiveElementProvider : IElementProvider
     {
         private IUIAutomation UIAutomation { get; set; } = new CUIAutomation();
         private IElementPropertiesProvider PropertiesProvider { get; set; }
         private IUIAutomationCondition FilterCondition { get; set; }
 
-        public LiveElementProvider(IElementPropertiesProvider propertiesProvider)
+        public FilteredLiveElementProvider(IElementPropertiesProvider propertiesProvider)
         {
             PropertiesProvider = propertiesProvider;
             FilterCondition = UIAutomation.CreateAndCondition(UIAutomation.CreateNotCondition(UIAutomation.CreateAndCondition(UIAutomation.CreatePropertyConditionEx(UIA_PropertyIds.UIA_NamePropertyId, "Outlines", PropertyConditionFlags.PropertyConditionFlags_IgnoreCase),
