@@ -5,20 +5,19 @@ using Outlines.Core;
 
 namespace Outlines.Inspection.NetFramework
 {
-    public class FilteredLiveElementProvider : IElementProvider
+    public class FilteredLiveElementProvider : BaseLiveElementProvider
     {
-        private IElementPropertiesProvider PropertiesProvider { get; set; }
         private Condition FitlerCondition { get; set; }
 
         public FilteredLiveElementProvider(IElementPropertiesProvider propertiesProvider)
+            : base(propertiesProvider)
         {
-            PropertiesProvider = propertiesProvider;
             FitlerCondition = new AndCondition(new NotCondition(new AndCondition(new PropertyCondition(AutomationElement.NameProperty, "Outlines", PropertyConditionFlags.IgnoreCase), 
                                                                                  new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.Window))),
                                                new PropertyCondition(AutomationElement.IsOffscreenProperty, false));
         }
 
-        public ElementProperties TryGetElementFromPoint(Point point)
+        public override ElementProperties TryGetElementFromPoint(Point point)
         {
             var containingElement = GetContainingElement(AutomationElement.RootElement, point);
             return PropertiesProvider.GetElementProperties(containingElement);

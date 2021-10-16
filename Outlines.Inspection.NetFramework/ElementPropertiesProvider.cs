@@ -21,6 +21,7 @@ namespace Outlines.Inspection.NetFramework
                 string controlTypeName = controlType == null ? "" : controlType.ProgrammaticName.Replace("ControlType.", "").Trim();
                 string automationId = element.Current.AutomationId ?? "";
                 string className = element.Current.ClassName ?? "";
+                int nativeWindowHandle = element.Current.NativeWindowHandle;
                 Rectangle boundingRect = element.Current.BoundingRectangle.ToDrawingRectangle();
 
                 TextProperties textProperties = GetTextProperties(element);
@@ -33,6 +34,7 @@ namespace Outlines.Inspection.NetFramework
                     TextProperties = textProperties,
                     AutomationId = automationId,
                     ClassName = className,
+                    NativeWindowHandle = nativeWindowHandle,
                 };
             }
             catch (Exception)

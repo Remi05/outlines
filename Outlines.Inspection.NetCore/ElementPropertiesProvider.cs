@@ -20,18 +20,20 @@ namespace Outlines.Inspection.NetCore
                 string controlTypeName = element.CurrentLocalizedControlType;
                 string automationId = element.CurrentAutomationId ?? "";
                 string className = element.CurrentClassName ?? "";
+                int nativeWindowHandle = element.CurrentNativeWindowHandle.ToInt32();
                 Rectangle boundingRect = element.CurrentBoundingRectangle.ToDrawingRectangle();
 
                 TextProperties textProperties = GetTextProperties(element);
 
-                return new AutomationElementProperties() { 
-                    Name = name, 
-                    ControlType = controlTypeName, 
-                    BoundingRect = boundingRect, 
-                    Element = element, 
+                return new AutomationElementProperties() {
+                    Name = name,
+                    ControlType = controlTypeName,
+                    BoundingRect = boundingRect,
+                    Element = element,
                     TextProperties = textProperties,
                     AutomationId = automationId,
                     ClassName = className,
+                    NativeWindowHandle = nativeWindowHandle,
                 };
             }
             catch (Exception)

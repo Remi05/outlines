@@ -8,6 +8,7 @@ namespace Outlines.Core
         public string ControlType { get; set; }
         public string AutomationId { get; set; }
         public string ClassName { get; set; }
+        public int NativeWindowHandle { get; set; }
         public Rectangle BoundingRect { get; set; }
         public TextProperties TextProperties { get; set; }
 

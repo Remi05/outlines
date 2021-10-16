@@ -49,7 +49,7 @@
     <Compile Include="ElementPropertiesProvider.cs" />
     <Compile Include="IElementPropertiesProvider.cs" />
     <Compile Include="FilteredLiveElementProvider.cs" />
-    <Compile Include="BasicLiveElementProvider.cs" />
+    <Compile Include="BaseLiveElementProvider.cs" />
     <Compile Include="LiveUITreeService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TypeConversionUtils.cs" />
