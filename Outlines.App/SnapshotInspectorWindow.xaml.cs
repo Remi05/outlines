@@ -1,4 +1,7 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
+using System.Runtime.InteropServices;
+using System.Windows.Interop;
 using Outlines.Core;
 using Outlines.Inspection;
 using Outlines.App.Services;
@@ -8,9 +11,14 @@ namespace Outlines.App
 {
     public partial class SnapshotInspectorWindow : Window
     {
-        public SnapshotInspectorWindow(Snapshot snapshot)
+        private TitlebarThemeManager TitlebarThemeManager { get; set; }
+
+        public SnapshotInspectorWindow(Snapshot snapshot, ThemeManager themeManager)
         {
             InitializeComponent();
+
+            IntPtr hwnd = new WindowInteropHelper(GetWindow(this)).EnsureHandle();
+            TitlebarThemeManager = new TitlebarThemeManager(themeManager, new TitlebarHelper(), hwnd);
 
             IDistanceOutlinesProvider distanceOutlinesProvider = new DistanceOutlinesProvider();
             IElementProvider elementProvider = new CachedElementProvider(snapshot.UITree);
