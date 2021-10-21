@@ -11,6 +11,8 @@ namespace Outlines.App.ViewModels
 {
     public class OverlayViewModel : INotifyPropertyChanged
     {
+        private static readonly Rect ZeroRect = new Rect(0, 0, 0, 0);
+
         private Dispatcher Dispatcher { get; set; }
         private ICoordinateConverter CoordinateConverter { get; set; }
         private IOutlinesService OutlinesService { get; set; }
@@ -18,7 +20,7 @@ namespace Outlines.App.ViewModels
 
         public ObservableCollection<DistanceViewModel> DistanceOutlines { get; private set; } = new ObservableCollection<DistanceViewModel>();
 
-        private Rect selectedElementRect = new Rect(0, 0, 0, 0);
+        private Rect selectedElementRect = ZeroRect;
         public Rect SelectedElementRect
         {
             get => selectedElementRect;
@@ -35,7 +37,7 @@ namespace Outlines.App.ViewModels
             }
         }
 
-        private Rect targetElementRect = new Rect(0, 0, 0, 0);
+        private Rect targetElementRect = ZeroRect;
         public Rect TargetElementRect
         {
             get => targetElementRect;
@@ -51,8 +53,8 @@ namespace Outlines.App.ViewModels
             }
         }
 
-        public bool IsSelectedElementRectVisible => SelectedElementRect != Rect.Empty;
-        public bool IsTargetElementRectVisible => TargetElementRect != Rect.Empty && TargetElementRect != SelectedElementRect;
+        public bool IsSelectedElementRectVisible => SelectedElementRect != ZeroRect;
+        public bool IsTargetElementRectVisible => TargetElementRect != ZeroRect && TargetElementRect != SelectedElementRect;
 
         public DimensionsViewModel SelectedElementDimensionsViewModel => OutlinesService.SelectedElementProperties == null ? null : new DimensionsViewModel(OutlinesService.SelectedElementProperties, CoordinateConverter, ScreenHelper);
         public DimensionsViewModel TargetElementDimensionsViewModel => OutlinesService.TargetElementProperties == null ? null : new DimensionsViewModel(OutlinesService.TargetElementProperties, CoordinateConverter, ScreenHelper);
@@ -79,7 +81,7 @@ namespace Outlines.App.ViewModels
             {
                 SelectedElementRect = OutlinesService.SelectedElementProperties != null
                                     ? CoordinateConverter.RectFromScreen(OutlinesService.SelectedElementProperties.BoundingRect).ToWindowsRect()
-                                    : new Rect(0, 0, 0, 0);
+                                    : ZeroRect;
 
             });  
             UpdateDistanceOutlines();
@@ -91,7 +93,7 @@ namespace Outlines.App.ViewModels
             {
                 TargetElementRect = OutlinesService.TargetElementProperties != null 
                                     ? CoordinateConverter.RectFromScreen(OutlinesService.TargetElementProperties.BoundingRect).ToWindowsRect()
-                                    : new Rect(0, 0, 0, 0);
+                                    : ZeroRect;
             });
             UpdateDistanceOutlines();
         }
