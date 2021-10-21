@@ -6,7 +6,6 @@
         xmlns:local="clr-namespace:Outlines.App"
         xmlns:views="clr-namespace:Outlines.App.Views"
         mc:Ignorable="d"
-        WindowState="Maximized"
         Title="Outlines - Snapshot">
 
     <views:SnapshotInspectorPage />
