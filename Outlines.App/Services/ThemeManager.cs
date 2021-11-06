@@ -20,7 +20,7 @@ namespace Outlines.App.Services
         private UISettings UISettings { get; set; }
         private ResourceDictionary SystemColorsDictionary { get; set; } = new ResourceDictionary();
         private ResourceDictionary CurrentThemeDictionary { get; set; }
-        private bool IsLightTheme { get; set; }
+        public bool IsLightTheme { get; set; }
 
         public event ThemeChangedEventHandler ThemeChanged;
 
