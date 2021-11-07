@@ -12,6 +12,7 @@ namespace Outlines.App.ViewModels
         private IOutlinesService OutlinesService { get; set; }
         private IUITreeService UITreeService { get; set; }
         public ObservableCollection<UITreeItemViewModel> Elements { get; private set; } = new ObservableCollection<UITreeItemViewModel>();
+        private UITreeItemViewModel SelectedElementViewModel { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -23,6 +24,7 @@ namespace Outlines.App.ViewModels
             }
             Dispatcher = dispatcher;
             OutlinesService = outlinesService;
+            OutlinesService.SelectedElementChanged += OnSelectedElementChanged;
             UITreeService = uiTreeService;
             UITreeService.RootNodeChanged += UpdateUiTreeViewElements;
             UpdateUiTreeViewElements();
@@ -31,6 +33,32 @@ namespace Outlines.App.ViewModels
         public void OnElementSelectionChanged(UITreeItemViewModel uiTreeItemViewModel)
         {
             OutlinesService.SelectElementWithProperties(uiTreeItemViewModel?.UITreeNode?.ElementProperties);
+        }
+
+        private void OnSelectedElementChanged()
+        {
+            if (SelectedElementViewModel != null)
+            {
+                SelectedElementViewModel.IsSelected = false;
+            }
+
+            var selectedElementProperties = OutlinesService.SelectedElementProperties;
+            if (selectedElementProperties == null)
+            {
+                SelectedElementViewModel = null;
+                return;
+            }
+
+            foreach (var elementViewModel in Elements)
+            {
+                var selectedElementViewModel = elementViewModel.FindViewModelFromElementProperties(selectedElementProperties);
+                if (selectedElementViewModel != null)
+                {
+                    SelectedElementViewModel = selectedElementViewModel;
+                    SelectedElementViewModel.IsSelected = true;
+                    return;
+                }
+            }
         }
 
         private void UpdateUiTreeViewElements()

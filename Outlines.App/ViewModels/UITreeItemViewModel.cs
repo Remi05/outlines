@@ -18,6 +18,20 @@ namespace Outlines.App.ViewModels
             }
         }
 
+        private bool isSelected = false;
+        public bool IsSelected
+        {
+            get => isSelected;
+            set
+            {
+                if (value != isSelected)
+                {
+                    isSelected = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsSelected)));
+                }
+            }
+        }
+
         public ObservableCollection<UITreeItemViewModel> ChildrenElements { get; private set; } = new ObservableCollection<UITreeItemViewModel>();
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -30,6 +44,23 @@ namespace Outlines.App.ViewModels
             }
             UITreeNode = uiTreeNode;
             UpdateChildrenElements();
+        }
+
+        public UITreeItemViewModel FindViewModelFromElementProperties(ElementProperties elementProperties)
+        {
+            if (UITreeNode.ElementProperties == elementProperties)
+            {
+                return this;
+            }
+            foreach (var child in ChildrenElements)
+            {
+                var childItemViewModel = child.FindViewModelFromElementProperties(elementProperties);
+                if (childItemViewModel != null)
+                {
+                    return childItemViewModel;
+                }    
+            }
+            return null;
         }
 
         private void UpdateChildrenElements()
