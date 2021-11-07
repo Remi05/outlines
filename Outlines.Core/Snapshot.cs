@@ -60,7 +60,7 @@ namespace Outlines.Core
                 return null;
             }
             string snapshotJson = File.ReadAllText(filePath);
-            return JsonSerializer.Deserialize<Snapshot>(snapshotJson);
+            return JsonSerializer.Deserialize<Snapshot>(snapshotJson, new JsonSerializerOptions { PropertyNameCaseInsensitive = true});
         }
     }
 }
