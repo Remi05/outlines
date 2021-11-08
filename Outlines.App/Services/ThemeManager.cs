@@ -13,12 +13,16 @@ namespace Outlines.App.Services
         }
     }
 
+    public delegate void ThemeChangedEventHandler();
+
     public class ThemeManager
     {
         private UISettings UISettings { get; set; }
         private ResourceDictionary SystemColorsDictionary { get; set; } = new ResourceDictionary();
         private ResourceDictionary CurrentThemeDictionary { get; set; }
-        private bool IsLightTheme { get; set; }
+        public bool IsLightTheme { get; set; }
+
+        public event ThemeChangedEventHandler ThemeChanged;
 
         public ThemeManager()
         {
@@ -33,18 +37,25 @@ namespace Outlines.App.Services
 
         private void UpdateResourceDictionaries()
         {            
-            IsLightTheme = UISettings.GetColorValue(UIColorType.Background) == Windows.UI.Colors.White;
             UpdateSystemColorsDictionary();
             UpdateThemeDictionary();
         }
 
         private void UpdateThemeDictionary()
         {
-            string themeDictionaryUri = IsLightTheme ? "Resources/LightThemeResources.xaml" : "Resources/DarkThemeResources.xaml";
-            var newThemeDictionary = Application.LoadComponent(new Uri(themeDictionaryUri, UriKind.Relative)) as ResourceDictionary;
-            Application.Current.Resources.MergedDictionaries.Remove(CurrentThemeDictionary);
-            CurrentThemeDictionary = newThemeDictionary;
-            Application.Current.Resources.MergedDictionaries.Add(CurrentThemeDictionary);
+            var isLightTheme = UISettings.GetColorValue(UIColorType.Background) == Windows.UI.Colors.White;
+            if (isLightTheme != IsLightTheme || CurrentThemeDictionary == null)
+            {
+                IsLightTheme = isLightTheme;
+
+                string themeDictionaryUri = IsLightTheme ? "Resources/LightThemeResources.xaml" : "Resources/DarkThemeResources.xaml";
+                var newThemeDictionary = Application.LoadComponent(new Uri(themeDictionaryUri, UriKind.Relative)) as ResourceDictionary;
+                Application.Current.Resources.MergedDictionaries.Remove(CurrentThemeDictionary);
+                CurrentThemeDictionary = newThemeDictionary;
+                Application.Current.Resources.MergedDictionaries.Add(CurrentThemeDictionary);
+
+                ThemeChanged?.Invoke();
+            }
         }
 
         private void UpdateSystemColorsDictionary()

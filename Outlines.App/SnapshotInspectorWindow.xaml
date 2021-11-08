@@ -6,9 +6,18 @@
         xmlns:local="clr-namespace:Outlines.App"
         xmlns:views="clr-namespace:Outlines.App.Views"
         mc:Ignorable="d"
-        WindowState="Maximized"
-        Title="Outlines - Snapshot">
+        Background="Transparent"
+        Title="Outlines Snapshot">
+    <WindowChrome.WindowChrome>
+        <WindowChrome
+            CaptionHeight="20"
+            ResizeBorderThickness="8"
+            CornerRadius="0"
+            GlassFrameThickness="-1"
+            NonClientFrameEdges="Bottom,Left,Right"
+            UseAeroCaptionButtons="True" />
+    </WindowChrome.WindowChrome>
 
     <views:SnapshotInspectorPage />
-
+    
 </Window>

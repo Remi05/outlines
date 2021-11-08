@@ -116,7 +116,7 @@ namespace Outlines.Inspection.NetCore
             try
             {
                 Rectangle curElementBounds = curElement.CurrentBoundingRectangle.ToDrawingRectangle();
-                if (bounds.Contains(curElementBounds))
+                if (bounds.IntersectsWith(curElementBounds))
                 {
                     var childrenElements = curElement.FindAll(TreeScope.TreeScope_Children, FilterCondition);
                     var childrenNodes = new List<UITreeNode>();

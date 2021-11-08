@@ -95,6 +95,8 @@
     <Compile Include="Services\ScreenHelper.cs" />
     <Compile Include="Services\ServiceContainer.cs" />
     <Compile Include="Services\ThemeManager.cs" />
+    <Compile Include="Services\WindowEffectsHelper.cs" />
+    <Compile Include="Services\WindowEffectsManager.cs" />
     <Compile Include="Services\TypeConversionUtils.cs" />
     <Compile Include="SnapshotInspectorWindow.xaml.cs">
       <DependentUpon>SnapshotInspectorWindow.xaml</DependentUpon>
