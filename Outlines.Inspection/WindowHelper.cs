@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Drawing;
-using System.Runtime.InteropServices;
-//using System.Windows.Forms;
 
 namespace Outlines.Inspection
 {
     public class WindowHelper
     {
-        [DllImport("user32.dll", CharSet = CharSet.Ansi, SetLastError = true, ExactSpelling = true)]
-        private static extern bool MoveWindow(IntPtr hWnd, int x, int y, int width, int height, bool shouldRepaint);
-
-        public void CoverAllDisplays(IntPtr hWnd)
+        public void CoverAllDisplays(IntPtr hwnd)
         {
-            Rectangle displaysRect = Rectangle.Empty; // SystemInformation.VirtualScreen;
-            MoveWindow(hWnd, displaysRect.X, displaysRect.Y, displaysRect.Width, displaysRect.Height, true);
+            int virtualScreenX = NativeWindowService.GetSystemMetrics(NativeWindowService.SystemMetricsIndices.SM_XVIRTUALSCREEN);
+            int virtualScreenY = NativeWindowService.GetSystemMetrics(NativeWindowService.SystemMetricsIndices.SM_YVIRTUALSCREEN);
+            int virtualScreenWidth = NativeWindowService.GetSystemMetrics(NativeWindowService.SystemMetricsIndices.SM_CXVIRTUALSCREEN);
+            int virtualScreenHeight = NativeWindowService.GetSystemMetrics(NativeWindowService.SystemMetricsIndices.SM_CYVIRTUALSCREEN);
+            Rectangle virtualScreenRect = new Rectangle(virtualScreenX, virtualScreenY, virtualScreenWidth, virtualScreenHeight);
+            NativeWindowService.MoveWindow(hwnd, virtualScreenRect.X, virtualScreenRect.Y, virtualScreenRect.Width, virtualScreenRect.Height, true);
         }
     }
 }
