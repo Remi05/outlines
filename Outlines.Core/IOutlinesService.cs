@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace Outlines.Core
@@ -16,8 +17,10 @@ namespace Outlines.Core
         event TargetElementChangedHandler TargetElementChanged;
 
         void SelectElementAt(Point cursorPosition);
+        void SelectElementWithNativeHandle(IntPtr nativeHandle);
         void SelectElementWithProperties(ElementProperties properties);
         void TargetElementAt(Point cursorPosition);
+        void TargetElementWithNativeHandle(IntPtr nativeHandle);
         void TargetElementWithProperties(ElementProperties properties);
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace Outlines.Core
@@ -56,6 +57,11 @@ namespace Outlines.Core
             SelectedElementProperties = ElementProvider.TryGetElementFromPoint(cursorPosition);
         }
 
+        public void SelectElementWithNativeHandle(IntPtr nativeHandle)
+        {
+            SelectedElementProperties = ElementProvider.TryGetElementFromHandle(nativeHandle);
+        }
+
         public void SelectElementWithProperties(ElementProperties properties)
         {
             SelectedElementProperties = properties;
@@ -64,6 +70,11 @@ namespace Outlines.Core
         public void TargetElementAt(Point cursorPosition)
         {
             TargetElementProperties = ElementProvider.TryGetElementFromPoint(cursorPosition);
+        }
+
+        public void TargetElementWithNativeHandle(IntPtr nativeHandle)
+        {
+            TargetElementProperties = ElementProvider.TryGetElementFromHandle(nativeHandle);
         }
 
         public void TargetElementWithProperties(ElementProperties properties)
