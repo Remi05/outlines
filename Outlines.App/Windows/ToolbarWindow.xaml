@@ -1,4 +1,4 @@
-﻿<Window x:Class="Outlines.App.ToolbarWindow"
+<Window x:Class="Outlines.App.ToolbarWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -26,6 +26,6 @@
     </Window.Resources>
     <Grid x:Name="Root" HorizontalAlignment="Center" VerticalAlignment="Center">
         <views:ToolBar Margin="15" />
-        <views:DragHandle MouseDown="OnHandleMouseDown" Style="{StaticResource HandleStyle}" />
+        <views:DragHandle MouseDown="OnHandleMouseDown" Style="{StaticResource HandleStyle}" ToolTip="Drag ToolBar" />
     </Grid>
 </Window>

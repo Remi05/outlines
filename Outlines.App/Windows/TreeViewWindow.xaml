@@ -32,6 +32,6 @@
     </Window.Resources>
     <Grid x:Name="Root" HorizontalAlignment="Center" VerticalAlignment="Center">
         <views:UITreeView Style="{StaticResource TreeViewPanelStyle}" />
-        <views:DragHandle MouseDown="OnHandleMouseDown" Style="{StaticResource HandleStyle}" />
+        <views:DragHandle MouseDown="OnHandleMouseDown" Style="{StaticResource HandleStyle}" ToolTip="Drag Tree View Window" />
     </Grid>
 </Window>

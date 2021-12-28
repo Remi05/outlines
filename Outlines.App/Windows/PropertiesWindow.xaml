@@ -33,6 +33,6 @@
             <views:ColorPicker Margin="0,0,0,12" />
             <views:PropertiesPanel />
         </StackPanel>
-        <views:DragHandle MouseDown="OnHandleMouseDown" Style="{StaticResource HandleStyle}" />
+        <views:DragHandle MouseDown="OnHandleMouseDown" Style="{StaticResource HandleStyle}" ToolTip="Drag Properties Window" />
     </Grid>
 </Window>
