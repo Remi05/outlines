@@ -107,6 +107,9 @@
     <Compile Include="Windows\ToolbarWindow.xaml.cs">
       <DependentUpon>ToolbarWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\TreeViewWindow.xaml.cs">
+      <DependentUpon>TreeViewWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\ColorPickerViewModel.cs" />
     <Compile Include="ViewModels\DistanceViewModel.cs" />
     <Compile Include="ViewModels\DimensionsViewModel.cs" />
@@ -166,6 +169,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\ToolbarWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\TreeViewWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
