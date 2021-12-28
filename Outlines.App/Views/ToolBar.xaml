@@ -24,9 +24,9 @@
         <Border Style="{StaticResource ToolBarStyle}" />
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="8">
             <Border x:Name="Handle" Height="35" Width="4" CornerRadius="1" Margin="0,0,5,0" Background="#38000000" BorderBrush="#40000000" BorderThickness="1" VerticalAlignment="Center" Visibility="Collapsed" />
-            <local:ToolBarToggleButton Content="&#xE721;" IsChecked="{Binding InspectorViewModel.IsOverlayVisible, Mode=TwoWay}" ToolTip="Toggle Overlay" />
-            <local:ToolBarToggleButton Content="&#xF003;" IsChecked="{Binding InspectorViewModel.IsTreeViewVisible, Mode=TwoWay}" ToolTip="Toggle Tree View" />
-            <local:ToolBarToggleButton Content="&#xE71D;" IsChecked="{Binding InspectorViewModel.IsPropertiesPanelVisible, Mode=TwoWay}" ToolTip="Toggle Properties Panel" />
+            <local:ToolBarToggleButton Content="&#xE721;" IsChecked="{Binding IsOverlayVisible, Mode=TwoWay}" ToolTip="Toggle Overlay" />
+            <local:ToolBarToggleButton Content="&#xF003;" IsChecked="{Binding IsTreeViewVisible, Mode=TwoWay}" ToolTip="Toggle Tree View" />
+            <local:ToolBarToggleButton Content="&#xE71D;" IsChecked="{Binding IsPropertiesPanelVisible, Mode=TwoWay}" ToolTip="Toggle Properties Panel" />
             <local:ToolBarButton Content="&#xF7ED;" Command="{Binding TakeElementSnapshotCommand}" Visibility="{Binding IsElementSnapshotButtonVisible, Converter={StaticResource BoolToVisibility}}" IsEnabled="{Binding IsElementSnapshotButtonEnabled, FallbackValue=False}" ToolTip="Element Snapshot" />
             <local:ToolBarButton Content="&#xE9A6;" Command="{Binding TakeFullscreenSnapshotCommand}" Visibility="{Binding IsFullscreenSnapshotButtonVisible, Converter={StaticResource BoolToVisibility}}" ToolTip="Fullscreen Snapshot" />
             <!--<local:ToolBarButton Content="&#xE8B9;" Command="{Binding TakeScreenshotCommand}" Visibility="{Binding IsScreenshotButtonVisible, Converter={StaticResource BoolToVisibility}}" ToolTip="Take Screenshot" />-->

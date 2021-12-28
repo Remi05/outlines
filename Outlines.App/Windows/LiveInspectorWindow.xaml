@@ -10,7 +10,7 @@
         Closing="OnClosing"
         SourceInitialized="OnSourceInitialized"
         AllowsTransparency="True"
-        Background="Transparent"    
+        Background="Transparent" 
         ShowInTaskbar="True"
         Topmost="True"
         WindowState="Maximized"

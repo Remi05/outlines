@@ -92,11 +92,13 @@
     <Compile Include="Windows\OverlayWindow.xaml.cs">
       <DependentUpon>OverlayWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Services\InspectorStateManager.cs" />
     <Compile Include="Services\HoverWatcher.cs" />
     <Compile Include="Converters\NullToVisibilityConverter.cs" />
     <Compile Include="Converters\ImageToImageSourceConverter.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="Services\IColorPickerService.cs" />
+    <Compile Include="Services\IInspectorStateManager.cs" />
     <Compile Include="Services\InputMaskingService.cs" />
     <Compile Include="Services\ScreenHelper.cs" />
     <Compile Include="Services\ServiceContainer.cs" />
@@ -194,7 +196,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="LiveInspectorWindow.xaml">
+    <Page Include="Windows\LiveInspectorWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -203,7 +205,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Services\ColorPickerService.cs" />
-    <Compile Include="LiveInspectorWindow.xaml.cs">
+    <Compile Include="Windows\LiveInspectorWindow.xaml.cs">
       <DependentUpon>LiveInspectorWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>

@@ -6,6 +6,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using Outlines.Core;
 using Outlines.Inspection;
+using Outlines.App.Services;
 
 namespace Outlines.App.ViewModels
 {
@@ -16,7 +17,25 @@ namespace Outlines.App.ViewModels
         private ISnapshotService SnapshotService { get; set; }
         private IFolderConfig FolderConfig { get; set; }
         private ICoordinateConverter CoordinateConverter { get; set; }
-        public InspectorViewModel InspectorViewModel { get; set; }
+        private IInspectorStateManager InspectorManager { get; set; }
+
+        public bool IsOverlayVisible
+        {
+            get => InspectorManager.IsOverlayVisible;
+            set => InspectorManager.IsOverlayVisible = value;
+        }
+
+        public bool IsPropertiesPanelVisible
+        {
+            get => InspectorManager.IsPropertiesPanelVisible;
+            set => InspectorManager.IsPropertiesPanelVisible = value;
+        }
+
+        public bool IsTreeViewVisible
+        {
+            get => InspectorManager.IsTreeViewVisible;
+            set => InspectorManager.IsTreeViewVisible = value;
+        }
 
         public bool IsElementSnapshotButtonEnabled => OutlinesService?.SelectedElementProperties != null;
         public bool IsElementSnapshotButtonVisible => SnapshotService != null;
@@ -34,20 +53,20 @@ namespace Outlines.App.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
 
         public ToolBarViewModel(IOutlinesService outlinesService, IScreenshotService screenshotService, ISnapshotService snapshotService, 
-                                IFolderConfig folderConfig, ICoordinateConverter coordinateConverter, InspectorViewModel inspectorViewModel)
+                                IFolderConfig folderConfig, ICoordinateConverter coordinateConverter, IInspectorStateManager inspectorManager)
         {
-            if (outlinesService == null || folderConfig == null || inspectorViewModel == null)
+            if (outlinesService == null || folderConfig == null || inspectorManager == null)
             {
                 throw new ArgumentNullException(outlinesService == null ? nameof(outlinesService)
                                               : folderConfig == null ? nameof(folderConfig)
-                                              : nameof(inspectorViewModel));
+                                              : nameof(inspectorManager));
             }
             OutlinesService = outlinesService;
             ScreenshotService = screenshotService;
             SnapshotService = snapshotService;
             FolderConfig = folderConfig;
             CoordinateConverter = coordinateConverter;
-            InspectorViewModel = inspectorViewModel;
+            InspectorManager = inspectorManager;
 
             OutlinesService.SelectedElementChanged += () => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsElementSnapshotButtonEnabled)));
 
@@ -74,6 +93,7 @@ namespace Outlines.App.ViewModels
         {
             Process.Start("https://github.com/Remi05/outlines");
         }
+
         private void TakeElementSnapshot()
         {
             if (OutlinesService.SelectedElementProperties != null)
