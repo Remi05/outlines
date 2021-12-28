@@ -115,8 +115,8 @@
     <Compile Include="Windows\SnapshotInspectorWindow.xaml.cs">
       <DependentUpon>SnapshotInspectorWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\ToolbarWindow.xaml.cs">
-      <DependentUpon>ToolbarWindow.xaml</DependentUpon>
+    <Compile Include="Windows\ToolBarWindow.xaml.cs">
+      <DependentUpon>ToolBarWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\TreeViewWindow.xaml.cs">
       <DependentUpon>TreeViewWindow.xaml</DependentUpon>
@@ -187,7 +187,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\ToolbarWindow.xaml">
+    <Page Include="Windows\ToolBarWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

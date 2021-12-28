@@ -3,9 +3,9 @@ using System.Windows.Input;
 
 namespace Outlines.App
 {
-    public partial class ToolbarWindow : Window
+    public partial class ToolBarWindow : Window
     {
-        public ToolbarWindow()
+        public ToolBarWindow()
         {
             InitializeComponent();
         }

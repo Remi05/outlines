@@ -20,7 +20,7 @@ namespace Outlines.App.Services
         private IScreenHelper ScreenHelper { get; set; } 
         private UiaWindowHelper UiaWindowHelper { get; set; } = new UiaWindowHelper();
 
-        private ToolbarWindow ToolbarWindow { get; set; }
+        private ToolBarWindow ToolBarWindow { get; set; }
         private OverlayWindow OverlayWindow { get; set; }
         private PropertiesWindow PropertiesWindow { get; set; }
         private TreeViewWindow TreeViewWindow { get; set; }
@@ -40,7 +40,7 @@ namespace Outlines.App.Services
 
         public void Show()
         {
-            ToolbarWindow.Show();
+            ToolBarWindow.Show();
             if (InspectorStateManager.IsOverlayVisible)
             {
                 OverlayWindow?.Show();
@@ -62,7 +62,7 @@ namespace Outlines.App.Services
             OverlayWindow?.Close();
             PropertiesWindow?.Close();
             TreeViewWindow?.Close();
-            ToolbarWindow.Close();
+            ToolBarWindow.Close();
         }
 
         private void Hide()
@@ -70,25 +70,25 @@ namespace Outlines.App.Services
             OverlayWindow?.Hide();
             PropertiesWindow?.Hide();
             TreeViewWindow?.Hide();
-            ToolbarWindow.Hide();
+            ToolBarWindow.Hide();
         }
 
         private void CreateWindows()
         {
             OverlayWindow = new OverlayWindow();
-            ToolbarWindow = new ToolbarWindow();
+            ToolBarWindow = new ToolBarWindow();
             PropertiesWindow = new PropertiesWindow();
             TreeViewWindow = new TreeViewWindow();
 
             // Initially hide all the windows.
             PropertiesWindow.ShowInTaskbar = true;
             TreeViewWindow.ShowInTaskbar = true;
-            ToolbarWindow.WindowState = WindowState.Minimized;
+            ToolBarWindow.WindowState = WindowState.Minimized;
             PropertiesWindow.WindowState = WindowState.Minimized;
             TreeViewWindow.WindowState = WindowState.Minimized;
 
             // Wait for the windows to have rendered before showing them.
-            ToolbarWindow.ContentRendered += WindowContentRendered;
+            ToolBarWindow.ContentRendered += WindowContentRendered;
             PropertiesWindow.ContentRendered += WindowContentRendered;
             TreeViewWindow.ContentRendered += WindowContentRendered;
         }
@@ -140,7 +140,7 @@ namespace Outlines.App.Services
             // TODO: Lock here...
             RenderedWindows.Add(sender as Window);
      
-            if (RenderedWindows.Contains(ToolbarWindow)
+            if (RenderedWindows.Contains(ToolBarWindow)
              && RenderedWindows.Contains(PropertiesWindow)
              && RenderedWindows.Contains(TreeViewWindow))
             {
@@ -153,7 +153,7 @@ namespace Outlines.App.Services
             PositionWindows();
 
             // Show the windows, when they all have rendered.
-            ToolbarWindow.WindowState = WindowState.Normal;
+            ToolBarWindow.WindowState = WindowState.Normal;
             PropertiesWindow.WindowState = WindowState.Normal;
             TreeViewWindow.WindowState = WindowState.Normal;
             PropertiesWindow.ShowInTaskbar = false;
@@ -169,8 +169,8 @@ namespace Outlines.App.Services
             var localDisplayRect = CoordinateConverter.RectFromScreen(displayRect);
 
             // Position the Toolbar at the Top-Center of the screen.
-            ToolbarWindow.Top = localDisplayRect.Top;
-            ToolbarWindow.Left = localDisplayRect.Left + localDisplayRect.Width / 2 - ToolbarWindow.ActualWidth / 2;
+            ToolBarWindow.Top = localDisplayRect.Top;
+            ToolBarWindow.Left = localDisplayRect.Left + localDisplayRect.Width / 2 - ToolBarWindow.ActualWidth / 2;
 
             // Position the Properties window on the right side of the screen.
             const int TopOffset = 100;
@@ -186,7 +186,7 @@ namespace Outlines.App.Services
         {
             foreach (Window window in App.Current.Windows)
             {
-                if (window != ToolbarWindow && window != PropertiesWindow && window != TreeViewWindow)
+                if (window != ToolBarWindow && window != PropertiesWindow && window != TreeViewWindow)
                 {
                     IntPtr hwnd = new WindowInteropHelper(window).EnsureHandle();
                     UiaWindowHelper.HideWindowFromUia(hwnd);
