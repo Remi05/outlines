@@ -86,6 +86,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Views\DragHandle.xaml.cs">
+      <DependentUpon>DragHandle.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Services\HoverWatcher.cs" />
     <Compile Include="Converters\NullToVisibilityConverter.cs" />
     <Compile Include="Converters\ImageToImageSourceConverter.cs" />
@@ -148,6 +151,10 @@
     <Compile Include="Views\ToolBarToggleButton.xaml.cs">
       <DependentUpon>ToolBarToggleButton.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\DragHandle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\DarkThemeResources.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
