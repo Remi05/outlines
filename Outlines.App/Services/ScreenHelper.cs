@@ -14,9 +14,14 @@ namespace Outlines.App.Services
             RootVisual = rootVisual;
         }
 
+        public Rectangle GetPrimaryDisplayRect()
+        {
+            return Screen.PrimaryScreen.Bounds;
+        }
+
         public Rectangle GetDisplayRect(Point point)
         {
-            return Screen.FromPoint(point).Bounds;
+            return Screen.GetBounds(point);
         }
 
         public double GetDisplayScaleFactor()
