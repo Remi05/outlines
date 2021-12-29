@@ -13,6 +13,7 @@
         Topmost="True"
         WindowStyle="None"
         Title="Outlines - Properties Window">
+    
     <Window.Resources>
         <ResourceDictionary>
             <Style x:Key="PropertiesPanelStyle" TargetType="StackPanel">
@@ -28,6 +29,7 @@
             </Style>
         </ResourceDictionary>
     </Window.Resources>
+    
     <Grid x:Name="Root" HorizontalAlignment="Center" VerticalAlignment="Center">
         <StackPanel Style="{StaticResource PropertiesPanelStyle}">
             <views:ColorPicker Margin="0,0,0,12" />
@@ -35,4 +37,5 @@
         </StackPanel>
         <views:DragHandle MouseDown="OnHandleMouseDown" Style="{StaticResource HandleStyle}" ToolTip="Drag Properties Window" />
     </Grid>
+    
 </Window>

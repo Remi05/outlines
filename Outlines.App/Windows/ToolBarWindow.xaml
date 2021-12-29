@@ -13,6 +13,7 @@
         Topmost="True"
         WindowStyle="None"
         Title="Outlines">
+    
     <Window.Resources>
         <ResourceDictionary>
             <Style x:Key="HandleStyle" TargetType="views:DragHandle">
@@ -24,8 +25,10 @@
             </Style>
         </ResourceDictionary>
     </Window.Resources>
+    
     <Grid x:Name="Root" HorizontalAlignment="Center" VerticalAlignment="Center">
         <views:ToolBar Margin="15" />
         <views:DragHandle MouseDown="OnHandleMouseDown" Style="{StaticResource HandleStyle}" ToolTip="Drag ToolBar" />
     </Grid>
+    
 </Window>
