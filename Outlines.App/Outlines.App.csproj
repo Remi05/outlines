@@ -87,6 +87,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Services\ILiveInspector.cs" />
+    <Compile Include="Services\WindowInputMaskingService.cs" />
     <Compile Include="Services\SingleWindowLiveInspector.cs" />
     <Compile Include="Services\MultiWindowLiveInspector.cs" />
     <Compile Include="Views\DragHandle.xaml.cs">

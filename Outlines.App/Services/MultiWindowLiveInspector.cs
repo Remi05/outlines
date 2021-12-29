@@ -95,22 +95,28 @@ namespace Outlines.App.Services
 
         private void InitializeServices()
         {
-            InputMaskingService inputMaskingService = new InputMaskingService(null);
-            GlobalInputListener = new GlobalInputListener(inputMaskingService);
+            IColorPickerService colorPickerService = new ColorPickerService();
+            IDistanceOutlinesProvider distanceOutlinesProvider = new DistanceOutlinesProvider();
+            IElementPropertiesProvider elementPropertiesProvider = new ElementPropertiesProvider();
+            IElementProvider elementProvider = new BasicLiveElementProvider(elementPropertiesProvider);
+            IFolderConfig folderConfig = new FolderConfig();
+
+            OutlinesService = new OutlinesService(distanceOutlinesProvider, elementProvider);
+            CoordinateConverter = new LiveCoordinateConverter(OverlayWindow);
+            ScreenHelper = new ScreenHelper(OverlayWindow);
 
             InspectorStateManager = new InspectorStateManager();
             InspectorStateManager.IsOverlayVisibleChanged += OnIsOverlayVisibleChanged;
             InspectorStateManager.IsPropertiesPanelVisibleChanged += OnIsPropertiesPanelVisibleChanged;
             InspectorStateManager.IsTreeViewVisibleChanged += OnIsTreeViewVisibleChanged;
 
-            IColorPickerService colorPickerService = new ColorPickerService();
-            IDistanceOutlinesProvider distanceOutlinesProvider = new DistanceOutlinesProvider();
-            IElementPropertiesProvider elementPropertiesProvider = new ElementPropertiesProvider();
-            IElementProvider elementProvider = new BasicLiveElementProvider(elementPropertiesProvider);
-            IFolderConfig folderConfig = new FolderConfig();
-            OutlinesService = new OutlinesService(distanceOutlinesProvider, elementProvider);
-            CoordinateConverter = new LiveCoordinateConverter(OverlayWindow);
-            ScreenHelper = new ScreenHelper(OverlayWindow);
+            WindowInputMaskingService inputMaskingService = new WindowInputMaskingService(CoordinateConverter);
+            inputMaskingService.Ignore(ToolBarWindow);
+            inputMaskingService.Ignore(PropertiesWindow);
+            inputMaskingService.Ignore(TreeViewWindow);
+
+            GlobalInputListener = new GlobalInputListener(inputMaskingService);
+
             IScreenshotService screenshotService = new ScreenshotService(Hide, Show);
             IUITreeService uiTreeService = new LiveUITreeService(elementPropertiesProvider, OutlinesService);
             ISnapshotService snapshotService =  new SnapshotService(screenshotService, uiTreeService, ScreenHelper, folderConfig);
@@ -122,7 +128,6 @@ namespace Outlines.App.Services
             UITreeViewModel uiTreeViewModel = new UITreeViewModel(TreeViewWindow.Dispatcher, OutlinesService, uiTreeService);
 
             var serviceContainer = ServiceContainer.Instance;
-            serviceContainer.AddService(typeof(InputMaskingService), inputMaskingService);
             serviceContainer.AddService(typeof(ColorPickerViewModel), colorPickerViewModel);
             serviceContainer.AddService(typeof(OverlayViewModel), overlayViewModel);
             serviceContainer.AddService(typeof(PropertiesViewModel), propertiesViewModel);
