@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Interop;
 using Outlines.App.ViewModels;
 using Outlines.Core;
 using Outlines.Inspection;
-using Outlines.Inspection.NetFramework;
+using Outlines.Inspection.NetCore;
 
 namespace Outlines.App.Services
 {
@@ -188,7 +188,7 @@ namespace Outlines.App.Services
 
         private void HideWindowsFromUia()
         {
-            foreach (Window window in App.Current.Windows)
+            foreach (Window window in Application.Current.Windows)
             {
                 if (window != ToolBarWindow && window != PropertiesWindow && window != TreeViewWindow)
                 {
