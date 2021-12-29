@@ -212,7 +212,6 @@ namespace Outlines.App.Services
         {
             if (isOverlayVisible)
             {
-                HideWindowsFromUia();
                 OverlayWindow?.Show();
             }
             else
