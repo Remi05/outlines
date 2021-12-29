@@ -86,11 +86,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Services\ILiveInspector.cs" />
+    <Compile Include="Services\WindowInputMaskingService.cs" />
+    <Compile Include="Services\SingleWindowLiveInspector.cs" />
+    <Compile Include="Services\MultiWindowLiveInspector.cs" />
+    <Compile Include="Views\DragHandle.xaml.cs">
+      <DependentUpon>DragHandle.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\OverlayWindow.xaml.cs">
+      <DependentUpon>OverlayWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Services\InspectorStateManager.cs" />
     <Compile Include="Services\HoverWatcher.cs" />
     <Compile Include="Converters\NullToVisibilityConverter.cs" />
     <Compile Include="Converters\ImageToImageSourceConverter.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="Services\IColorPickerService.cs" />
+    <Compile Include="Services\IInspectorStateManager.cs" />
     <Compile Include="Services\InputMaskingService.cs" />
     <Compile Include="Services\ScreenHelper.cs" />
     <Compile Include="Services\ServiceContainer.cs" />
@@ -98,8 +110,17 @@
     <Compile Include="Services\WindowEffectsHelper.cs" />
     <Compile Include="Services\WindowEffectsManager.cs" />
     <Compile Include="Services\TypeConversionUtils.cs" />
-    <Compile Include="SnapshotInspectorWindow.xaml.cs">
+    <Compile Include="Windows\PropertiesWindow.xaml.cs">
+      <DependentUpon>PropertiesWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\SnapshotInspectorWindow.xaml.cs">
       <DependentUpon>SnapshotInspectorWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\ToolBarWindow.xaml.cs">
+      <DependentUpon>ToolBarWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\TreeViewWindow.xaml.cs">
+      <DependentUpon>TreeViewWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\ColorPickerViewModel.cs" />
     <Compile Include="ViewModels\DistanceViewModel.cs" />
@@ -139,6 +160,14 @@
     <Compile Include="Views\ToolBarToggleButton.xaml.cs">
       <DependentUpon>ToolBarToggleButton.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\DragHandle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\OverlayWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\DarkThemeResources.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -151,7 +180,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SnapshotInspectorWindow.xaml">
+    <Page Include="Windows\PropertiesWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\SnapshotInspectorWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ToolBarWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\TreeViewWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -159,7 +200,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="LiveInspectorWindow.xaml">
+    <Page Include="Windows\LiveInspectorWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -168,7 +209,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Services\ColorPickerService.cs" />
-    <Compile Include="LiveInspectorWindow.xaml.cs">
+    <Compile Include="Windows\LiveInspectorWindow.xaml.cs">
       <DependentUpon>LiveInspectorWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>

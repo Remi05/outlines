@@ -25,6 +25,7 @@ namespace Outlines.App
             IDistanceOutlinesProvider distanceOutlinesProvider = new DistanceOutlinesProvider();
             IElementPropertiesProvider elementPropertiesProvider = new ElementPropertiesProvider();
             IElementProvider elementProvider = new FilteredLiveElementProvider(elementPropertiesProvider);
+            IInspectorStateManager inspectorStateManager = new InspectorStateManager();
             IFolderConfig folderConfig = new FolderConfig();
             IOutlinesService outlinesService = new OutlinesService(distanceOutlinesProvider, elementProvider);
             ICoordinateConverter coordinateConverter = new LiveCoordinateConverter(this);
@@ -34,10 +35,10 @@ namespace Outlines.App
             ISnapshotService snapshotService = new SnapshotService(screenshotService, uiTreeService, screenHelper, folderConfig);
 
             ColorPickerViewModel colorPickerViewModel = new ColorPickerViewModel(colorPickerService, GlobalInputListener);
-            InspectorViewModel inspectorViewModel = new InspectorViewModel(outlinesService, GlobalInputListener);
+            InspectorViewModel inspectorViewModel = new InspectorViewModel(outlinesService, GlobalInputListener, inspectorStateManager);
             OverlayViewModel overlayViewModel = new OverlayViewModel(Dispatcher, outlinesService, coordinateConverter, screenHelper);
             PropertiesViewModel propertiesViewModel = new PropertiesViewModel(outlinesService);
-            ToolBarViewModel toolBarViewModel = new ToolBarViewModel(outlinesService, screenshotService, snapshotService, folderConfig, coordinateConverter, inspectorViewModel);
+            ToolBarViewModel toolBarViewModel = new ToolBarViewModel(outlinesService, screenshotService, snapshotService, folderConfig, coordinateConverter, inspectorStateManager);
             UITreeViewModel uiTreeViewModel = new UITreeViewModel(Dispatcher, outlinesService, uiTreeService);
 
             var serviceContainer = ServiceContainer.Instance;

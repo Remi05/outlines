@@ -13,6 +13,7 @@ namespace Outlines.App.ViewModels
 
         private IOutlinesService OutlinesService { get; set; }
         private IGlobalInputListener GlobalInputListener { get; set; }
+        private IInspectorStateManager InspectorManager { get; set; }
 
         private bool isBackdropVisible = false;
         public bool IsBackdropVisible
@@ -28,59 +29,27 @@ namespace Outlines.App.ViewModels
             }
         }
 
-        private bool isOverlayVisible = true;
-        public bool IsOverlayVisible
-        {
-            get => isOverlayVisible;
-            set
-            {
-                if (value != isOverlayVisible)
-                {
-                    isOverlayVisible = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsOverlayVisible)));
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsBackdropVisible)));
-                }
-            }
-        }
-
-        private bool isPropertiesPanelVisible = true;
-        public bool IsPropertiesPanelVisible
-        {
-            get => isPropertiesPanelVisible;
-            set
-            {
-                if (value != isPropertiesPanelVisible)
-                {
-                    isPropertiesPanelVisible = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsPropertiesPanelVisible)));
-                }
-            }
-        }
-
-        private bool isTreeViewVisible = true;
-        public bool IsTreeViewVisible
-        {
-            get => isTreeViewVisible;
-            set
-            {
-                if (value != isTreeViewVisible)
-                {
-                    isTreeViewVisible = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsTreeViewVisible)));
-                }
-            }
-        }
+        public bool IsOverlayVisible => InspectorManager.IsOverlayVisible;
+        public bool IsPropertiesPanelVisible => InspectorManager.IsPropertiesPanelVisible;
+        public bool IsTreeViewVisible => InspectorManager.IsTreeViewVisible;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public InspectorViewModel(IOutlinesService outlinesService, IGlobalInputListener globalInputListener)
+        public InspectorViewModel(IOutlinesService outlinesService, IGlobalInputListener globalInputListener, IInspectorStateManager inspectorManager)
         {
-            if (outlinesService == null || globalInputListener == null)
+            if (outlinesService == null || globalInputListener == null || inspectorManager == null)
             {
-                throw new ArgumentNullException(outlinesService == null ? nameof(outlinesService) : nameof(globalInputListener));
+                throw new ArgumentNullException(outlinesService == null ? nameof(outlinesService) 
+                                              : globalInputListener == null ? nameof(globalInputListener) 
+                                              : nameof(inspectorManager));
             }
             OutlinesService = outlinesService;
             GlobalInputListener = globalInputListener;
+            InspectorManager = inspectorManager;
+
+            InspectorManager.IsOverlayVisibleChanged         += (_) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsOverlayVisible)));
+            InspectorManager.IsPropertiesPanelVisibleChanged += (_) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsPropertiesPanelVisible)));
+            InspectorManager.IsTreeViewVisibleChanged        += (_) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsTreeViewVisible)));
 
             HoverWatcher targetHoverWatcher = new HoverWatcher(TargetHoverDelayInMs);
             targetHoverWatcher.MouseHovered += OnMouseHovered;

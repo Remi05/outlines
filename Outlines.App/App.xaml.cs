@@ -8,6 +8,7 @@ namespace Outlines.App
     public partial class App : Application
     {
         private ThemeManager ThemeManager { get; set; }
+        private ILiveInspector LiveInspector { get; set; }
 
         private void OnStartup(object sender, StartupEventArgs e)
         {
@@ -20,13 +21,19 @@ namespace Outlines.App
             {
                 var snapshot = Snapshot.LoadFromFile(fileToOpen);
                 window = new SnapshotInspectorWindow(snapshot, ThemeManager);
+                window.Show();
             }
             else
             {
-                window = new LiveInspectorWindow();
+                LiveInspector = new MultiWindowLiveInspector();
+                LiveInspector.Show();
             }
+        }
 
-            window.Show();
+        protected override void OnExit(ExitEventArgs e)
+        {
+            LiveInspector?.Close();
+            base.OnExit(e);
         }
     }
 }

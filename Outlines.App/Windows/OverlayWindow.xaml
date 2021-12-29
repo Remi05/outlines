@@ -1,22 +1,22 @@
-﻿<Window x:Class="Outlines.App.LiveInspectorWindow"
+﻿<Window x:Class="Outlines.App.OverlayWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Outlines.App"
         xmlns:views="clr-namespace:Outlines.App.Views"
         mc:Ignorable="d"
-        Loaded="OnLoaded"
-        Closing="OnClosing"
-        SourceInitialized="OnSourceInitialized"
         AllowsTransparency="True"
         Background="Transparent"    
-        ShowInTaskbar="True"
+        ResizeMode="NoResize"
+        ShowInTaskbar="False"
         Topmost="True"
         WindowState="Maximized"
         WindowStyle="None"
-        Title="Outlines">
+        Title="Outlines - Overlay Window">
     
-    <views:InspectorPage />
+    <Grid x:Name="Root">
+        <Border Background="Black" Opacity="0.3" Visibility="{Binding IsBackdropVisible, Converter={StaticResource BoolToVisibility}, FallbackValue=Collapsed}"  />
+        <views:OutlinesOverlay />
+    </Grid>
     
 </Window>
