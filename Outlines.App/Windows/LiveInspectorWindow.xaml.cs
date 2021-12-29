@@ -4,7 +4,7 @@ using System.Windows;
 using System.Windows.Interop;
 using Outlines.Core;
 using Outlines.Inspection;
-using Outlines.Inspection.NetFramework;
+using Outlines.Inspection.NetCore;
 using Outlines.App.Services;
 using Outlines.App.ViewModels;
 
@@ -30,7 +30,7 @@ namespace Outlines.App
             IOutlinesService outlinesService = new OutlinesService(distanceOutlinesProvider, elementProvider);
             ICoordinateConverter coordinateConverter = new LiveCoordinateConverter(this);
             IScreenHelper screenHelper = new ScreenHelper(this);
-            IScreenshotService screenshotService = new ScreenshotService(App.Current.MainWindow.Hide, App.Current.MainWindow.Show);
+            IScreenshotService screenshotService = new ScreenshotService(Application.Current.MainWindow.Hide, Application.Current.MainWindow.Show);
             IUITreeService uiTreeService = new LiveUITreeService(elementPropertiesProvider, outlinesService);
             ISnapshotService snapshotService = new SnapshotService(screenshotService, uiTreeService, screenHelper, folderConfig);
 

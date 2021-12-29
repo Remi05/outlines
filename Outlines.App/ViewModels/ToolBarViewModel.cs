@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Windows;
 using Outlines.Core;
 using Outlines.Inspection;
 using Outlines.App.Services;
@@ -70,7 +71,7 @@ namespace Outlines.App.ViewModels
 
             OutlinesService.SelectedElementChanged += () => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsElementSnapshotButtonEnabled)));
 
-            CloseAppCommand = new RelayCommand<object>(_ => App.Current.Shutdown(0));
+            CloseAppCommand = new RelayCommand<object>(_ => Application.Current.Shutdown(0));
             GetHelpCommand = new RelayCommand<object>(_ => GetHelp());
             GiveFeedbackCommand = new RelayCommand<object>(_ => GiveFeedback());
             ShowMoreInfoCommand = new RelayCommand<object>(_ => ShowMoreInfo());
@@ -105,7 +106,7 @@ namespace Outlines.App.ViewModels
 
         private void TakeFullscreenSnapshot()
         {
-            var window = App.Current.MainWindow;
+            var window = Application.Current.MainWindow;
             var windowBounds = new Rectangle((int)window.Left, (int)window.Top, (int)window.Width, (int)window.Height);
             var screenWindowBounds = CoordinateConverter.RectToScreen(windowBounds);
             Snapshot snapshot = SnapshotService.TakeSnapshot(screenWindowBounds);
@@ -121,7 +122,7 @@ namespace Outlines.App.ViewModels
             }
             else
             {
-                var window = App.Current.MainWindow;
+                var window = Application.Current.MainWindow;
                 var windowBounds = new Rectangle((int)window.Left, (int)window.Top, (int)window.Width, (int)window.Height);
                 var screenWindowBounds = CoordinateConverter.RectToScreen(windowBounds);
                 screenshot = ScreenshotService.TakeScreenshot(screenWindowBounds);
