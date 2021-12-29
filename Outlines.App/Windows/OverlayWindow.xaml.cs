@@ -1,5 +1,8 @@
-﻿using System.Windows;
-
+﻿using System;
+using System.Windows;
+using System.Windows.Input;
+using System.Windows.Interop;
+using Outlines.Inspection;
 namespace Outlines.App
 {
     public partial class OverlayWindow : Window
@@ -7,6 +10,14 @@ namespace Outlines.App
         public OverlayWindow()
         {
             InitializeComponent();
+
+            IntPtr hwnd = new WindowInteropHelper(this).EnsureHandle();
+
+            var focusHelper = new FocusHelper();
+            focusHelper.DisableTakingFocus(hwnd);
+
+            var taskViewHelper = new TaskViewHelper();
+            taskViewHelper.HideWindowFromTaskView(hwnd);
         }
     }
 }
