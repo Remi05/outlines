@@ -142,7 +142,6 @@ namespace Outlines.App.Services
 
         private void WindowContentRendered(object sender, EventArgs e)
         {
-            // TODO: Lock here...
             RenderedWindows.Add(sender as Window);
      
             if (RenderedWindows.Contains(ToolBarWindow)
