@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Threading.Tasks;
 using UIAutomationClient;
 using Outlines.Core;
@@ -17,8 +18,9 @@ namespace Outlines.Inspection.NetCore
         private IUIAutomation UIAutomation { get; set; } = new CUIAutomation();
         private IElementPropertiesProvider ElementPropertiesProvider { get; set; }
         private IOutlinesService OutlinesService { get; set; }
+        private IIgnorableWindowsSource IgnorableWindowsSource { get; set; }
 
-        private IUIAutomationCondition FilterCondition { get; set; }
+        private IUIAutomationCondition ConstantFilterCondition { get; set; }
 
         private UITreeNode rootNode = null;
         public UITreeNode RootNode
@@ -36,7 +38,7 @@ namespace Outlines.Inspection.NetCore
 
         public event RootNodeChangedEventHandler RootNodeChanged;
 
-        public LiveUITreeService(IElementPropertiesProvider elementPropertiesProvider, IOutlinesService outlinesService)
+        public LiveUITreeService(IElementPropertiesProvider elementPropertiesProvider, IOutlinesService outlinesService, IIgnorableWindowsSource ignorableWindowsSource)
         {
             if (elementPropertiesProvider == null || outlinesService == null)
             {
@@ -44,9 +46,8 @@ namespace Outlines.Inspection.NetCore
             }
             ElementPropertiesProvider = elementPropertiesProvider;
             OutlinesService = outlinesService;
-            FilterCondition = UIAutomation.CreateAndCondition(UIAutomation.CreateNotCondition(UIAutomation.CreateAndCondition(UIAutomation.CreatePropertyConditionEx(UIA_PropertyIds.UIA_NamePropertyId, "Outlines", PropertyConditionFlags.PropertyConditionFlags_IgnoreCase),
-                                                                                              UIAutomation.CreatePropertyCondition(UIA_PropertyIds.UIA_ControlTypePropertyId, UIA_ControlTypeIds.UIA_WindowControlTypeId))),
-                                                              UIAutomation.CreatePropertyCondition(UIA_PropertyIds.UIA_IsOffscreenPropertyId, false));
+            IgnorableWindowsSource = ignorableWindowsSource;
+            ConstantFilterCondition = UIAutomation.CreatePropertyCondition(UIA_PropertyIds.UIA_IsOffscreenPropertyId, false);
             InitializeUiTree();
         }
 
@@ -72,6 +73,19 @@ namespace Outlines.Inspection.NetCore
             return GetSubTree(rootElementProperties as AutomationElementProperties, MaxTreeDepth);
         }
 
+        private IUIAutomationCondition GetFilterCondition()
+        {
+            var windowsToIgnore = IgnorableWindowsSource?.GetWindowsToIgnore();
+            if (windowsToIgnore == null || windowsToIgnore.Count == 0)
+            {
+                return ConstantFilterCondition;
+            }
+
+            var windowConditions = windowsToIgnore.Select(window => UIAutomation.CreatePropertyCondition(UIA_PropertyIds.UIA_NativeWindowHandlePropertyId, window));
+            var ignoredWindowsCondition = UIAutomation.CreateNotCondition(UIAutomation.CreateOrConditionFromArray(windowConditions.ToArray()));
+            return UIAutomation.CreateAndCondition(ConstantFilterCondition, ignoredWindowsCondition);
+        }
+
         private UITreeNode GetSubTree(AutomationElementProperties rootElementProperties, int treeDepth)
         {
             if (rootElementProperties == null)
@@ -80,7 +94,7 @@ namespace Outlines.Inspection.NetCore
             }
             try
             {
-                var childrenElements = rootElementProperties.Element.FindAll(TreeScope.TreeScope_Children, FilterCondition);
+                var childrenElements = rootElementProperties.Element.FindAll(TreeScope.TreeScope_Children, GetFilterCondition());
                 var childrenNodes = new List<UITreeNode>();
                 if (treeDepth > 1)
                 {
@@ -96,7 +110,7 @@ namespace Outlines.Inspection.NetCore
                 }
                 return new UITreeNode() { ElementProperties = rootElementProperties, Children = childrenNodes };
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return null;
             }
@@ -118,7 +132,7 @@ namespace Outlines.Inspection.NetCore
                 Rectangle curElementBounds = curElement.CurrentBoundingRectangle.ToDrawingRectangle();
                 if (bounds.IntersectsWith(curElementBounds))
                 {
-                    var childrenElements = curElement.FindAll(TreeScope.TreeScope_Children, FilterCondition);
+                    var childrenElements = curElement.FindAll(TreeScope.TreeScope_Children, GetFilterCondition());
                     var childrenNodes = new List<UITreeNode>();
 
                     for (int i = 0; i < childrenElements.Length; ++i)
@@ -137,7 +151,7 @@ namespace Outlines.Inspection.NetCore
                 }
                 else
                 {
-                    var childrenElements = curElement.FindAll(TreeScope.TreeScope_Children, FilterCondition);
+                    var childrenElements = curElement.FindAll(TreeScope.TreeScope_Children, GetFilterCondition());
                     for (int i = 0; i < childrenElements.Length; ++i)
                     {
                         var subTreeInBounds = GetSubTreeInBounds(bounds, childrenElements.GetElement(i));
