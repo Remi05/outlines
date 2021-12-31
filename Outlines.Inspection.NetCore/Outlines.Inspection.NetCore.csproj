@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Outlines.Core\Outlines.Core.csproj" />
+    <ProjectReference Include="..\Outlines.Inspection\Outlines.Inspection.csproj" />
   </ItemGroup>
 
 </Project>

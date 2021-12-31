@@ -19,6 +19,7 @@ namespace Outlines.App.Services
         private IOutlinesService OutlinesService { get; set; }
         private IScreenHelper ScreenHelper { get; set; } 
         private UiaWindowHelper UiaWindowHelper { get; set; } = new UiaWindowHelper();
+        private IgnorableWindowsSource IgnorableWindowsSource { get; set; } = new IgnorableWindowsSource();
 
         private ToolBarWindow ToolBarWindow { get; set; }
         private OverlayWindow OverlayWindow { get; set; }
@@ -80,6 +81,12 @@ namespace Outlines.App.Services
             PropertiesWindow = new PropertiesWindow();
             TreeViewWindow = new TreeViewWindow();
 
+            // Ignore all the windows in the TreeView and Snapshots.
+            IgnorableWindowsSource.IgnoreWindow(OverlayWindow);
+            IgnorableWindowsSource.IgnoreWindow(ToolBarWindow);
+            IgnorableWindowsSource.IgnoreWindow(PropertiesWindow);
+            IgnorableWindowsSource.IgnoreWindow(TreeViewWindow);
+
             // Initially hide all the windows.
             PropertiesWindow.ShowInTaskbar = true;
             TreeViewWindow.ShowInTaskbar = true;
@@ -118,7 +125,7 @@ namespace Outlines.App.Services
             GlobalInputListener = new GlobalInputListener(inputMaskingService);
 
             IScreenshotService screenshotService = new ScreenshotService(Hide, Show);
-            IUITreeService uiTreeService = new LiveUITreeService(elementPropertiesProvider, OutlinesService);
+            IUITreeService uiTreeService = new LiveUITreeService(elementPropertiesProvider, OutlinesService, IgnorableWindowsSource);
             ISnapshotService snapshotService =  new SnapshotService(screenshotService, uiTreeService, ScreenHelper, folderConfig);
 
             ColorPickerViewModel colorPickerViewModel = new ColorPickerViewModel(colorPickerService, GlobalInputListener);

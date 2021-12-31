@@ -21,6 +21,9 @@ namespace Outlines.App
             InputMaskingService inputMaskingService = new InputMaskingService(this);
             GlobalInputListener = new GlobalInputListener(inputMaskingService);
 
+            IgnorableWindowsSource ignorableWindowsSource = new IgnorableWindowsSource();
+            ignorableWindowsSource.IgnoreWindow(this);
+
             IColorPickerService colorPickerService = new ColorPickerService();
             IDistanceOutlinesProvider distanceOutlinesProvider = new DistanceOutlinesProvider();
             IElementPropertiesProvider elementPropertiesProvider = new ElementPropertiesProvider();
@@ -30,8 +33,8 @@ namespace Outlines.App
             IOutlinesService outlinesService = new OutlinesService(distanceOutlinesProvider, elementProvider);
             ICoordinateConverter coordinateConverter = new LiveCoordinateConverter(this);
             IScreenHelper screenHelper = new ScreenHelper(this);
-            IScreenshotService screenshotService = new ScreenshotService(Application.Current.MainWindow.Hide, Application.Current.MainWindow.Show);
-            IUITreeService uiTreeService = new LiveUITreeService(elementPropertiesProvider, outlinesService);
+            IScreenshotService screenshotService = new ScreenshotService(Application.Current.MainWindow.Hide, Application.Current.MainWindow.Show);       
+            IUITreeService uiTreeService = new LiveUITreeService(elementPropertiesProvider, outlinesService, ignorableWindowsSource);
             ISnapshotService snapshotService = new SnapshotService(screenshotService, uiTreeService, screenHelper, folderConfig);
 
             ColorPickerViewModel colorPickerViewModel = new ColorPickerViewModel(colorPickerService, GlobalInputListener);
