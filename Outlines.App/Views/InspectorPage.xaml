@@ -11,11 +11,12 @@
 
     <Page.Resources>
         <ResourceDictionary>
-            <Style x:Key="TreeViewPanelStyle" TargetType="StackPanel">
+            <Style x:Key="TreeViewPanelStyle" TargetType="local:InspectorPanel">
                 <Setter Property="Width" Value="240" />
                 <Setter Property="HorizontalAlignment" Value="Left" />
                 <Setter Property="VerticalAlignment" Value="Top" />
                 <Setter Property="Margin" Value="16,0,0,0" />
+                <Setter Property="Effect" Value="{StaticResource SharedShadowEffectRight}" />
             </Style>
             <Style x:Key="PropertiesPanelStyle" TargetType="StackPanel">
                 <Setter Property="Width" Value="240" />
@@ -34,16 +35,22 @@
         </Grid.RowDefinitions>
         <Border Background="Black" Opacity="0.3" Visibility="{Binding IsBackdropVisible, Converter={StaticResource BoolToVisibility}, FallbackValue=Collapsed}" Grid.RowSpan="3" />
         <local:OutlinesOverlay Visibility="{Binding IsOverlayVisible, Converter={StaticResource BoolToVisibility}, FallbackValue=Visible}" Grid.RowSpan="3" />
-        <local:ToolBar HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,12,0,0" />
+        <local:InspectorPanel Effect="{StaticResource SharedShadowEffectBottom}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,12,0,0">
+            <local:ToolBar />
+        </local:InspectorPanel>
         <Grid Grid.Row="1">
-            <StackPanel Visibility="{Binding IsTreeViewVisible, Converter={StaticResource BoolToVisibility}, FallbackValue=Visible}" 
-                        Style="{StaticResource TreeViewPanelStyle}">
+            <local:InspectorPanel Visibility="{Binding IsTreeViewVisible, Converter={StaticResource BoolToVisibility}, FallbackValue=Visible}" 
+                                  Style="{StaticResource TreeViewPanelStyle}">
                 <local:UITreeView />
-            </StackPanel>
+            </local:InspectorPanel>
             <StackPanel Visibility="{Binding IsPropertiesPanelVisible, Converter={StaticResource BoolToVisibility}, FallbackValue=Visible}" 
                         Style="{StaticResource PropertiesPanelStyle}">
-                <local:ColorPicker Margin="0,0,0,12" />
-                <local:PropertiesPanel />
+                <local:InspectorPanel Effect="{StaticResource SharedShadowEffectLeft}">
+                    <local:PropertiesPanel />
+                </local:InspectorPanel>
+                <local:InspectorPanel Effect="{StaticResource SharedShadowEffectLeft}" Margin="0,12,0,0">
+                    <local:ColorPicker />
+                </local:InspectorPanel>
             </StackPanel>
         </Grid>
     </Grid>

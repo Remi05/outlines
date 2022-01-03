@@ -6,7 +6,7 @@
     <SolidColorBrush x:Key="ThemeAccentForegroundColorBrush" Color="Black" />
     <SolidColorBrush x:Key="ThemeDisabledForegroundColorBrush" Color="#707070" />
     <SolidColorBrush x:Key="ThemeAppBackgroundBrush" Color="#1D1D1D" />
-    <SolidColorBrush x:Key="ThemeDragHandleBackgroundBrush" Color="#555555" />
+    <SolidColorBrush x:Key="ThemeDragHandleBackgroundBrush" Color="#9B9B9B" />
     <SolidColorBrush x:Key="ThemePanelBackgroundBrush" Color="#2D2D2D" />
     <SolidColorBrush x:Key="ThemePanelBorderBrush" Color="#181818" />
     <SolidColorBrush x:Key="ThemeSeperatorBrush" Color="#40FFFFFF" />

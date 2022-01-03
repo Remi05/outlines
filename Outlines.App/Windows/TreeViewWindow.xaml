@@ -16,25 +16,27 @@
     
     <Window.Resources>
         <ResourceDictionary>
-            <Style x:Key="TreeViewPanelStyle" TargetType="views:UITreeView">
+            <Style x:Key="TreeViewPanelStyle" TargetType="views:InspectorPanel">
                 <Setter Property="MaxWidth" Value="320" />
                 <Setter Property="MinWidth" Value="240" />
                 <Setter Property="MaxHeight" Value="1000" />
                 <Setter Property="Margin" Value="16" />
             </Style>
             <Style x:Key="HandleStyle" TargetType="views:DragHandle">
-                <Setter Property="Width" Value="48" />
-                <Setter Property="Height" Value="6" />
-                <Setter Property="Margin" Value="0,14,0,0" />
-                <Setter Property="HorizontalAlignment" Value="Center" />
-                <Setter Property="VerticalAlignment" Value="Top" />
+                <Setter Property="Orientation" Value="Horizontal" />
+                <Setter Property="Height" Value="28" />
+                <Setter Property="Margin" Value="0,0,0,-16" />
             </Style>
         </ResourceDictionary>
     </Window.Resources>
-    
+
     <Grid x:Name="Root" HorizontalAlignment="Center" VerticalAlignment="Center">
-        <views:UITreeView Style="{StaticResource TreeViewPanelStyle}" />
-        <views:DragHandle MouseDown="OnHandleMouseDown" Style="{StaticResource HandleStyle}" ToolTip="Drag Tree View Window" />
+        <views:InspectorPanel Style="{StaticResource TreeViewPanelStyle}" Effect="{StaticResource SharedShadowEffectRight}">
+            <StackPanel Orientation="Vertical">
+                <views:DragHandle MouseDown="OnHandleMouseDown" Style="{StaticResource HandleStyle}" ToolTip="Drag Tree View Window" />
+                <views:UITreeView />
+            </StackPanel>
+        </views:InspectorPanel>
     </Grid>
     
 </Window>

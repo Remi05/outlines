@@ -13,7 +13,7 @@ namespace Outlines.App.Views
 
         private void OnLoaded(object sender, System.Windows.RoutedEventArgs e)
         {
-            DataContext = ServiceContainer.Instance.GetService<ColorPickerViewModel>();
+            Root.DataContext = ServiceContainer.Instance.GetService<ColorPickerViewModel>();
         }
     }
 }
