@@ -1,4 +1,4 @@
-﻿using System.Windows.Controls;
+using System.Windows.Controls;
 using Outlines.App.Services;
 using Outlines.App.ViewModels;
 

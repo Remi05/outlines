@@ -21,21 +21,24 @@
                 <Setter Property="Margin" Value="16" />
             </Style>
             <Style x:Key="HandleStyle" TargetType="views:DragHandle">
-                <Setter Property="Width" Value="48" />
-                <Setter Property="Height" Value="6" />
-                <Setter Property="Margin" Value="0,14,0,0" />
-                <Setter Property="HorizontalAlignment" Value="Center" />
-                <Setter Property="VerticalAlignment" Value="Top" />
+                <Setter Property="Orientation" Value="Horizontal" />
+                <Setter Property="Height" Value="28" />
             </Style>
         </ResourceDictionary>
     </Window.Resources>
     
     <Grid x:Name="Root" HorizontalAlignment="Center" VerticalAlignment="Center">
         <StackPanel Style="{StaticResource PropertiesPanelStyle}">
-            <views:ColorPicker Margin="0,0,0,12" />
-            <views:PropertiesPanel />
+            <views:InspectorPanel Effect="{StaticResource SharedShadowEffectLeft}">
+                <StackPanel Orientation="Vertical">
+                    <views:DragHandle MouseDown="OnHandleMouseDown" Style="{StaticResource HandleStyle}" ToolTip="Drag Properties Window" />
+                    <views:PropertiesPanel Margin="16,0,16,16" />                     
+                </StackPanel>
+            </views:InspectorPanel>
+            <views:InspectorPanel Effect="{StaticResource SharedShadowEffectLeft}" Margin="0,12,0,0">
+                <views:ColorPicker />
+            </views:InspectorPanel>
         </StackPanel>
-        <views:DragHandle MouseDown="OnHandleMouseDown" Style="{StaticResource HandleStyle}" ToolTip="Drag Properties Window" />
     </Grid>
     
 </Window>
