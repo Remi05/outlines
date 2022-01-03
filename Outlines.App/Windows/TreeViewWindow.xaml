@@ -25,6 +25,7 @@
             <Style x:Key="HandleStyle" TargetType="views:DragHandle">
                 <Setter Property="Orientation" Value="Horizontal" />
                 <Setter Property="Height" Value="28" />
+                <Setter Property="Margin" Value="0,0,0,-16" />
             </Style>
         </ResourceDictionary>
     </Window.Resources>
@@ -33,7 +34,7 @@
         <views:InspectorPanel Style="{StaticResource TreeViewPanelStyle}" Effect="{StaticResource SharedShadowEffectRight}">
             <StackPanel Orientation="Vertical">
                 <views:DragHandle MouseDown="OnHandleMouseDown" Style="{StaticResource HandleStyle}" ToolTip="Drag Tree View Window" />
-                <views:UITreeView Margin="16,0,16,16" />
+                <views:UITreeView />
             </StackPanel>
         </views:InspectorPanel>
     </Grid>

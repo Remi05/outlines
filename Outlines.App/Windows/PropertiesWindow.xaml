@@ -23,6 +23,7 @@
             <Style x:Key="HandleStyle" TargetType="views:DragHandle">
                 <Setter Property="Orientation" Value="Horizontal" />
                 <Setter Property="Height" Value="28" />
+                <Setter Property="Margin" Value="0,0,0,-16" />
             </Style>
         </ResourceDictionary>
     </Window.Resources>
@@ -32,7 +33,7 @@
             <views:InspectorPanel Effect="{StaticResource SharedShadowEffectLeft}">
                 <StackPanel Orientation="Vertical">
                     <views:DragHandle MouseDown="OnHandleMouseDown" Style="{StaticResource HandleStyle}" ToolTip="Drag Properties Window" />
-                    <views:PropertiesPanel Margin="16,0,16,16" />                     
+                    <views:PropertiesPanel />                     
                 </StackPanel>
             </views:InspectorPanel>
             <views:InspectorPanel Effect="{StaticResource SharedShadowEffectLeft}" Margin="0,12,0,0">
