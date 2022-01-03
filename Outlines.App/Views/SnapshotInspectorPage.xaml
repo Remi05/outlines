@@ -18,44 +18,55 @@
                 <Setter Property="VerticalAlignment" Value="Top" />
                 <Setter Property="Margin" Value="0,7,0,0" />
             </Style>
-            <Style x:Key="TreeViewPanelStyle" TargetType="StackPanel">
+            <Style x:Key="TreeViewPanelStyle" TargetType="Grid">
                 <Setter Property="Width" Value="240" />
-                <Setter Property="HorizontalAlignment" Value="Left" />
-                <Setter Property="VerticalAlignment" Value="Center" />
-                <Setter Property="Margin" Value="16,0,0,0" />
+                <Setter Property="VerticalAlignment" Value="Top" />
+                <Setter Property="Margin" Value="0,75,12,0" />
             </Style>
-            <Style x:Key="PropertiesPanelStyle" TargetType="StackPanel">
+            <Style x:Key="PropertiesPanelStyle" TargetType="Grid">
                 <Setter Property="Width" Value="240" />
-                <Setter Property="HorizontalAlignment" Value="Right" />
-                <Setter Property="VerticalAlignment" Value="Center" />
-                <Setter Property="Margin" Value="0,0,16,0" />
+                <Setter Property="VerticalAlignment" Value="Top" />
+                <Setter Property="Margin" Value="12,75,0,0" />
             </Style>
         </ResourceDictionary>
     </Page.Resources>
 
     <Grid x:Name="Root">
         <TextBlock x:Name="Title" Text="Outlines Snapshots" Style="{StaticResource TitleStyle}" />
-        
-        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Background="Transparent" Margin="0,35,0,0">
-            <Grid MouseWheel="OnMouseWheelScroll" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                <Grid x:Name="InspectionArea" MouseDown="OnMouseDown" MouseMove="OnMouseMove" VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <Grid.LayoutTransform>
-                        <ScaleTransform ScaleX="{Binding ScreenshotScaleFactor}" ScaleY="{Binding ScreenshotScaleFactor}" />
-                    </Grid.LayoutTransform>
-                    <Image x:Name="ScreenshotImage" Source="{Binding Snapshot.Screenshot, Converter={StaticResource ImageToImageSource}}" />
-                    <local:OutlinesOverlay />
-                </Grid>
+
+        <Grid Margin="24">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            
+            <Grid Grid.Column="0" Style="{StaticResource TreeViewPanelStyle}">
+                <Border BorderBrush="{DynamicResource ThemePanelBorderBrush}" BorderThickness="{StaticResource PanelBorderThickness}" CornerRadius="{StaticResource PanelCornerRadius}" />
+                <StackPanel Visibility="{Binding IsTreeViewVisible, Converter={StaticResource BoolToVisibility}, FallbackValue=Visible}">
+                    <local:UITreeView Margin="16" />
+                </StackPanel>
             </Grid>
-        </ScrollViewer>
-        <Grid>
-            <StackPanel Visibility="{Binding IsTreeViewVisible, Converter={StaticResource BoolToVisibility}, FallbackValue=Visible}" 
-                        Style="{StaticResource TreeViewPanelStyle}">
-                <local:UITreeView />
-            </StackPanel>
-            <StackPanel Visibility="{Binding IsPropertiesPanelVisible, Converter={StaticResource BoolToVisibility}, FallbackValue=Visible}" 
-                        Style="{StaticResource PropertiesPanelStyle}">
-                <local:PropertiesPanel />
-            </StackPanel>
+            
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Background="Transparent" Margin="0,35,0,0" Grid.Column="1">
+                <Grid MouseWheel="OnMouseWheelScroll" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <Grid x:Name="InspectionArea" MouseDown="OnMouseDown" MouseMove="OnMouseMove" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Grid.LayoutTransform>
+                            <ScaleTransform ScaleX="{Binding ScreenshotScaleFactor}" ScaleY="{Binding ScreenshotScaleFactor}" />
+                        </Grid.LayoutTransform>
+                        <Image x:Name="ScreenshotImage" Source="{Binding Snapshot.Screenshot, Converter={StaticResource ImageToImageSource}}" />
+                        <local:OutlinesOverlay />
+                    </Grid>
+                </Grid>
+            </ScrollViewer>
+            
+            <Grid Grid.Column="2" Style="{StaticResource PropertiesPanelStyle}">
+                <Border BorderBrush="{DynamicResource ThemePanelBorderBrush}" BorderThickness="{StaticResource PanelBorderThickness}" CornerRadius="{StaticResource PanelCornerRadius}" />
+                <StackPanel Visibility="{Binding IsPropertiesPanelVisible, Converter={StaticResource BoolToVisibility}, FallbackValue=Visible}">
+                    <local:PropertiesPanel Margin="16" />
+                </StackPanel>
+            </Grid>
+            
         </Grid>
     </Grid>
 </Page>
