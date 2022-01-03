@@ -40,12 +40,10 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            
-            <Grid Grid.Column="0" Style="{StaticResource TreeViewPanelStyle}">
+
+            <Grid Grid.Column="0" Style="{StaticResource TreeViewPanelStyle}" Visibility="{Binding IsTreeViewVisible, Converter={StaticResource BoolToVisibility}, FallbackValue=Visible}">
                 <Border BorderBrush="{DynamicResource ThemePanelBorderBrush}" BorderThickness="{StaticResource PanelBorderThickness}" CornerRadius="{StaticResource PanelCornerRadius}" />
-                <StackPanel Visibility="{Binding IsTreeViewVisible, Converter={StaticResource BoolToVisibility}, FallbackValue=Visible}">
-                    <local:UITreeView Margin="16" />
-                </StackPanel>
+                <local:UITreeView />
             </Grid>
             
             <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Background="Transparent" Margin="0,35,0,0" Grid.Column="1">
@@ -59,12 +57,10 @@
                     </Grid>
                 </Grid>
             </ScrollViewer>
-            
-            <Grid Grid.Column="2" Style="{StaticResource PropertiesPanelStyle}">
+
+            <Grid Grid.Column="2" Style="{StaticResource PropertiesPanelStyle}" Visibility="{Binding IsPropertiesPanelVisible, Converter={StaticResource BoolToVisibility}, FallbackValue=Visible}">
                 <Border BorderBrush="{DynamicResource ThemePanelBorderBrush}" BorderThickness="{StaticResource PanelBorderThickness}" CornerRadius="{StaticResource PanelCornerRadius}" />
-                <StackPanel Visibility="{Binding IsPropertiesPanelVisible, Converter={StaticResource BoolToVisibility}, FallbackValue=Visible}">
-                    <local:PropertiesPanel Margin="16" />
-                </StackPanel>
+                <local:PropertiesPanel />
             </Grid>
             
         </Grid>
