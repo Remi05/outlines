@@ -26,12 +26,13 @@
             </Style>
             <Style x:Key="TreeViewItemStyle" TargetType="TreeViewItem">
                 <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundColorBrush}" />
+                <Setter Property="Margin" Value="0,0,0,4" />
             </Style>
         </ResourceDictionary>
     </UserControl.Resources>
 
     <Grid x:Name="Root">
-        <StackPanel Margin="16">
+        <StackPanel Margin="16,16,12,12">
             <TextBlock Text="Tree View" Style="{StaticResource HeaderStyle}" />
             <TreeView ItemsSource="{Binding Elements}" Style="{StaticResource TreeViewStyle}" ItemContainerStyle="{StaticResource TreeViewItemStyle}" SelectedItemChanged="OnSelectedItemChanged">
                 <TreeView.Resources>
