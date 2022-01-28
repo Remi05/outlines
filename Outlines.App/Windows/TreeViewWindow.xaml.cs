@@ -19,6 +19,9 @@ namespace Outlines.App
 
             var taskViewHelper = new TaskViewHelper();
             taskViewHelper.HideWindowFromTaskView(hwnd);
+
+            var windowZOrderHelper = new WindowZOrderHelper();
+            windowZOrderHelper.MoveWindowToUIAccessZBand(hwnd);
         }
 
         private void OnHandleMouseDown(object sender, MouseButtonEventArgs e)
