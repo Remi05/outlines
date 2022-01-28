@@ -16,6 +16,9 @@ namespace Outlines.App
 
             var focusHelper = new FocusHelper();
             focusHelper.DisableTakingFocus(hwnd);
+
+            var windowZOrderHelper = new WindowZOrderHelper();
+            windowZOrderHelper.MoveWindowToUIAccessZBand(hwnd);
         }
 
         private void OnHandleMouseDown(object sender, MouseButtonEventArgs e)
