@@ -127,9 +127,10 @@ namespace Outlines.App.Services
             IScreenshotService screenshotService = new ScreenshotService(Hide, Show);
             IUITreeService uiTreeService = new LiveUITreeService(elementPropertiesProvider, OutlinesService, IgnorableWindowsSource);
             ISnapshotService snapshotService =  new SnapshotService(screenshotService, uiTreeService, ScreenHelper, folderConfig);
+            ICoordinateConverter dpiIndependentCoordinateConverter = new DpiIndependentCoordinateConverter();
 
             ColorPickerViewModel colorPickerViewModel = new ColorPickerViewModel(colorPickerService, GlobalInputListener);
-            OverlayViewModel overlayViewModel = new OverlayViewModel(OverlayWindow.Dispatcher, OutlinesService, CoordinateConverter, ScreenHelper);
+            OverlayViewModel overlayViewModel = new OverlayViewModel(OverlayWindow.Dispatcher, OutlinesService, dpiIndependentCoordinateConverter, ScreenHelper);
             PropertiesViewModel propertiesViewModel = new PropertiesViewModel(OutlinesService);
             ToolBarViewModel toolBarViewModel = new ToolBarViewModel(OutlinesService, screenshotService, snapshotService, folderConfig, CoordinateConverter, InspectorStateManager);
             UITreeViewModel uiTreeViewModel = new UITreeViewModel(TreeViewWindow.Dispatcher, OutlinesService, uiTreeService);
