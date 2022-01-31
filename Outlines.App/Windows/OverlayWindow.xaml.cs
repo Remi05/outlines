@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Input;
 using System.Windows.Interop;
 using Outlines.Inspection;
 namespace Outlines.App
