@@ -28,6 +28,8 @@ namespace Outlines.App.Services
 
         private ISet<Window> RenderedWindows { get; set; } = new HashSet<Window>();
 
+        private bool IsClosing { get; set; } = false;
+
         public MultiWindowLiveInspector()
         {
             CreateWindows();
@@ -58,12 +60,18 @@ namespace Outlines.App.Services
 
         public void Close()
         {
+            if (IsClosing)
+            {
+                return;
+            }
+
+            IsClosing = true;
             GlobalInputListener?.UnregisterFromInputEvents();
 
             OverlayWindow?.Close();
             PropertiesWindow?.Close();
             TreeViewWindow?.Close();
-            ToolBarWindow.Close();
+            ToolBarWindow?.Close();
         }
 
         private void Hide()
@@ -80,6 +88,15 @@ namespace Outlines.App.Services
             ToolBarWindow = new ToolBarWindow();
             PropertiesWindow = new PropertiesWindow();
             TreeViewWindow = new TreeViewWindow();
+
+            // Shutdown the app if the ToolBar window is closed.
+            ToolBarWindow.Closing += (_, __) =>
+            {
+                if (!IsClosing)
+                {
+                    App.Current.Shutdown(0);
+                }
+            };
 
             // Ignore all the windows in the TreeView and Snapshots.
             IgnorableWindowsSource.IgnoreWindow(OverlayWindow);
