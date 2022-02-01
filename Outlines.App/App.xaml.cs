@@ -16,11 +16,10 @@ namespace Outlines.App
 
             ThemeManager = new ThemeManager();
 
-            Window window;
             if (!string.IsNullOrWhiteSpace(fileToOpen) && File.Exists(fileToOpen))
             {
                 var snapshot = Snapshot.LoadFromFile(fileToOpen);
-                window = new SnapshotInspectorWindow(snapshot, ThemeManager);
+                var window = new SnapshotInspectorWindow(snapshot, ThemeManager);
                 window.Show();
             }
             else
