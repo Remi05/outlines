@@ -13,43 +13,31 @@ namespace Outlines.App.ViewModels
 
         private IOutlinesService OutlinesService { get; set; }
         private IGlobalInputListener GlobalInputListener { get; set; }
-        private IInspectorStateManager InspectorManager { get; set; }
+        private IInspectorStateManager InspectorStateManager { get; set; }
 
-        private bool isBackdropVisible = false;
-        public bool IsBackdropVisible
-        {
-            get => isBackdropVisible && IsOverlayVisible;
-            private set
-            {
-                if (value != isBackdropVisible)
-                {
-                    isBackdropVisible = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsBackdropVisible)));
-                }
-            }
-        }
-
-        public bool IsOverlayVisible => InspectorManager.IsOverlayVisible;
-        public bool IsPropertiesPanelVisible => InspectorManager.IsPropertiesPanelVisible;
-        public bool IsTreeViewVisible => InspectorManager.IsTreeViewVisible;
+        public bool IsBackdropVisible => InspectorStateManager.IsBackdropVisible;
+        public bool IsOverlayVisible => InspectorStateManager.IsOverlayVisible;
+        public bool IsPropertiesPanelVisible => InspectorStateManager.IsPropertiesPanelVisible;
+        public bool IsTreeViewVisible => InspectorStateManager.IsTreeViewVisible;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public InspectorViewModel(IOutlinesService outlinesService, IGlobalInputListener globalInputListener, IInspectorStateManager inspectorManager)
+        public InspectorViewModel(IOutlinesService outlinesService, IGlobalInputListener globalInputListener, IInspectorStateManager inspectorStateManager)
         {
-            if (outlinesService == null || globalInputListener == null || inspectorManager == null)
+            if (outlinesService == null || globalInputListener == null || inspectorStateManager == null)
             {
                 throw new ArgumentNullException(outlinesService == null ? nameof(outlinesService) 
                                               : globalInputListener == null ? nameof(globalInputListener) 
-                                              : nameof(inspectorManager));
+                                              : nameof(inspectorStateManager));
             }
             OutlinesService = outlinesService;
             GlobalInputListener = globalInputListener;
-            InspectorManager = inspectorManager;
+            InspectorStateManager = inspectorStateManager;
 
-            InspectorManager.IsOverlayVisibleChanged         += (_) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsOverlayVisible)));
-            InspectorManager.IsPropertiesPanelVisibleChanged += (_) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsPropertiesPanelVisible)));
-            InspectorManager.IsTreeViewVisibleChanged        += (_) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsTreeViewVisible)));
+            InspectorStateManager.IsOverlayVisibleChanged         += (_) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsOverlayVisible)));
+            InspectorStateManager.IsPropertiesPanelVisibleChanged += (_) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsPropertiesPanelVisible)));
+            InspectorStateManager.IsTreeViewVisibleChanged        += (_) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsTreeViewVisible)));
+            InspectorStateManager.IsBackdropVisibleChanged        += (_) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsBackdropVisible)));
 
             HoverWatcher targetHoverWatcher = new HoverWatcher(TargetHoverDelayInMs);
             targetHoverWatcher.MouseHovered += OnMouseHovered;
@@ -74,7 +62,7 @@ namespace Outlines.App.ViewModels
             Key key = KeyInterop.KeyFromVirtualKey(vkCode);
             if (key == Key.LeftCtrl)
             {
-                IsBackdropVisible = true;
+                InspectorStateManager.IsBackdropVisible = true;
             }
         }
 
@@ -83,7 +71,7 @@ namespace Outlines.App.ViewModels
             Key key = KeyInterop.KeyFromVirtualKey(vkCode);
             if (key == Key.LeftCtrl)
             {
-                IsBackdropVisible = false;
+                InspectorStateManager.IsBackdropVisible = false;
             }
         }
     }
