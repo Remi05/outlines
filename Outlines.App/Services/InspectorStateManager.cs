@@ -48,8 +48,8 @@ namespace Outlines.App.Services
         private bool isBackdropVisible = false;
         public bool IsBackdropVisible
         {
-            get => isBackdropVisible && IsOverlayVisible;
-            private set
+            get => isBackdropVisible;
+            set
             {
                 if (value != isBackdropVisible)
                 {
