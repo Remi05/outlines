@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Interop;
 using Outlines.App.ViewModels;
 using Outlines.Core;
@@ -25,6 +26,7 @@ namespace Outlines.App.Services
         private OverlayWindow OverlayWindow { get; set; }
         private PropertiesWindow PropertiesWindow { get; set; }
         private TreeViewWindow TreeViewWindow { get; set; }
+        private BackdropWindow BackdropWindow { get; set; }
 
         private ISet<Window> RenderedWindows { get; set; } = new HashSet<Window>();
 
@@ -88,6 +90,7 @@ namespace Outlines.App.Services
             ToolBarWindow = new ToolBarWindow();
             PropertiesWindow = new PropertiesWindow();
             TreeViewWindow = new TreeViewWindow();
+            BackdropWindow = new BackdropWindow();
 
             // Shutdown the app if the ToolBar window is closed.
             ToolBarWindow.Closing += (_, __) =>
@@ -103,6 +106,7 @@ namespace Outlines.App.Services
             IgnorableWindowsSource.IgnoreWindow(ToolBarWindow);
             IgnorableWindowsSource.IgnoreWindow(PropertiesWindow);
             IgnorableWindowsSource.IgnoreWindow(TreeViewWindow);
+            IgnorableWindowsSource.IgnoreWindow(BackdropWindow);
 
             // Initially hide all the windows.
             PropertiesWindow.ShowInTaskbar = true;
@@ -133,6 +137,7 @@ namespace Outlines.App.Services
             InspectorStateManager.IsOverlayVisibleChanged += OnIsOverlayVisibleChanged;
             InspectorStateManager.IsPropertiesPanelVisibleChanged += OnIsPropertiesPanelVisibleChanged;
             InspectorStateManager.IsTreeViewVisibleChanged += OnIsTreeViewVisibleChanged;
+            InspectorStateManager.IsBackdropVisibleChanged += OnIsBackdropVisibleChanged;
 
             WindowInputMaskingService inputMaskingService = new WindowInputMaskingService(CoordinateConverter);
             inputMaskingService.Ignore(ToolBarWindow);
@@ -215,7 +220,7 @@ namespace Outlines.App.Services
         {
             foreach (Window window in Application.Current.Windows)
             {
-                if (window != ToolBarWindow && window != PropertiesWindow && window != TreeViewWindow)
+                if (window != ToolBarWindow && window != PropertiesWindow && window != TreeViewWindow && window != BackdropWindow)
                 {
                     IntPtr hwnd = new WindowInteropHelper(window).EnsureHandle();
                     UiaWindowHelper.HideWindowFromUia(hwnd);
@@ -266,6 +271,36 @@ namespace Outlines.App.Services
             else
             {
                 TreeViewWindow?.Hide();
+            }
+        }
+
+        private void OnIsBackdropVisibleChanged(bool isBackdropVisible)
+        {
+            if (isBackdropVisible)
+            {
+                BackdropWindow?.Show();
+            }
+            else
+            {
+                BackdropWindow?.Hide();
+            }
+        }
+
+        private void OnKeyDown(int vkCode)
+        {
+            Key key = KeyInterop.KeyFromVirtualKey(vkCode);
+            if (key == Key.LeftCtrl)
+            {
+                InspectorStateManager.IsBackdropVisible = true;
+            }
+        }
+
+        private void OnKeyUp(int vkCode)
+        {
+            Key key = KeyInterop.KeyFromVirtualKey(vkCode);
+            if (key == Key.LeftCtrl)
+            {
+                InspectorStateManager.IsBackdropVisible = false;
             }
         }
     }
