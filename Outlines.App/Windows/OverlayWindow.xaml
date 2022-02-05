@@ -13,10 +13,8 @@
         WindowState="Maximized"
         WindowStyle="None"
         Title="Outlines - Overlay Window">
-    
+
     <Grid x:Name="Root">
-        <Border Background="Black" Opacity="0.3" Visibility="{Binding IsBackdropVisible, Converter={StaticResource BoolToVisibility}, FallbackValue=Collapsed}"  />
         <views:OutlinesOverlay />
     </Grid>
-    
 </Window>
