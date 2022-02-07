@@ -137,8 +137,8 @@ namespace Outlines.App.Services
             IElementProvider elementProvider = new BasicLiveElementProvider(elementPropertiesProvider);
             IFolderConfig folderConfig = new FolderConfig();
 
-            CoordinateConverter = new LiveCoordinateConverter(OverlayWindow);
             ScreenHelper = new ScreenHelper(OverlayWindow);
+            CoordinateConverter = new CachedCoordinateConverter(ScreenHelper.GetDisplayScaleFactor(), new System.Drawing.Point(0, 0));
             OutlinesService = new OutlinesService(distanceOutlinesProvider, elementProvider);
             OutlinesService.TargetElementChanged += OnTargetElementChanged;
 
@@ -318,10 +318,13 @@ namespace Outlines.App.Services
             if (OutlinesService.TargetElementProperties != null)
             {
                 var localElementRect = CoordinateConverter.RectFromScreen(OutlinesService.TargetElementProperties.BoundingRect);
-                BackdropWindow.Top = localElementRect.Top;
-                BackdropWindow.Left = localElementRect.Left;
-                BackdropWindow.Width = localElementRect.Width;
-                BackdropWindow.Height = localElementRect.Height;
+                BackdropWindow.Dispatcher.Invoke(() =>
+                {
+                    BackdropWindow.Top = localElementRect.Top;
+                    BackdropWindow.Left = localElementRect.Left;
+                    BackdropWindow.Width = localElementRect.Width;
+                    BackdropWindow.Height = localElementRect.Height;
+                });
             }
         }
 
@@ -329,7 +332,7 @@ namespace Outlines.App.Services
         {
             if (OutlinesService.TargetElementProperties != null)
             {
-                //UpdateBackdropWindowBounds();
+                UpdateBackdropWindowBounds();
             }
             else
             {
