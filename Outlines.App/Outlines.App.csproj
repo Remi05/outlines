@@ -20,7 +20,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Outlines.Core\Outlines.Core.csproj" />
-    <ProjectReference Include="..\Outlines.Inspection.NetCore\Outlines.Inspection.NetCore.csproj" />
     <ProjectReference Include="..\Outlines.Inspection\Outlines.Inspection.csproj" />
   </ItemGroup>
 

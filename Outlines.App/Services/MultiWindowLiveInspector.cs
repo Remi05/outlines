@@ -6,7 +6,6 @@ using System.Windows.Interop;
 using Outlines.App.ViewModels;
 using Outlines.Core;
 using Outlines.Inspection;
-using Outlines.Inspection.NetCore;
 
 namespace Outlines.App.Services
 {

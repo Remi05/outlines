@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Outlines.Core", "Outlines.C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Outlines.Inspection", "Outlines.Inspection\Outlines.Inspection.csproj", "{691EC091-5D6E-4D6F-95BF-27B3FF83EE2A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Outlines.Inspection.NetCore", "Outlines.Inspection.NetCore\Outlines.Inspection.NetCore.csproj", "{EA8EE01D-1210-4A8F-A27C-B2001B0589D1}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,14 +41,6 @@ Global
 		{691EC091-5D6E-4D6F-95BF-27B3FF83EE2A}.UiAccessDebug|Any CPU.Build.0 = Debug|Any CPU
 		{691EC091-5D6E-4D6F-95BF-27B3FF83EE2A}.UiAccessRelease|Any CPU.ActiveCfg = Release|Any CPU
 		{691EC091-5D6E-4D6F-95BF-27B3FF83EE2A}.UiAccessRelease|Any CPU.Build.0 = Release|Any CPU
-		{EA8EE01D-1210-4A8F-A27C-B2001B0589D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EA8EE01D-1210-4A8F-A27C-B2001B0589D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EA8EE01D-1210-4A8F-A27C-B2001B0589D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EA8EE01D-1210-4A8F-A27C-B2001B0589D1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EA8EE01D-1210-4A8F-A27C-B2001B0589D1}.UiAccessDebug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EA8EE01D-1210-4A8F-A27C-B2001B0589D1}.UiAccessDebug|Any CPU.Build.0 = Debug|Any CPU
-		{EA8EE01D-1210-4A8F-A27C-B2001B0589D1}.UiAccessRelease|Any CPU.ActiveCfg = Release|Any CPU
-		{EA8EE01D-1210-4A8F-A27C-B2001B0589D1}.UiAccessRelease|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

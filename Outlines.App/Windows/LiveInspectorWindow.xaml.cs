@@ -4,7 +4,6 @@ using System.Windows;
 using System.Windows.Interop;
 using Outlines.Core;
 using Outlines.Inspection;
-using Outlines.Inspection.NetCore;
 using Outlines.App.Services;
 using Outlines.App.ViewModels;
 

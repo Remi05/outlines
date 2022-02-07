@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using UIAutomationClient;
 using Outlines.Core;
 
-namespace Outlines.Inspection.NetCore
+namespace Outlines.Inspection
 {
     public class LiveUITreeService : IUITreeService
     {
