@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
-namespace Outlines.Inspection.NetCore
+
+namespace Outlines.Inspection
 {
     public static class TypeConversionUtils
     {
