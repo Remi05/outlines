@@ -4,23 +4,29 @@ namespace Outlines.Core
 {
     public class CachedCoordinateConverter : ICoordinateConverter
     {
-        private Snapshot Snapshot { get; set; }
-        private Point RootPosition => Snapshot.UITree.ElementProperties.BoundingRect.TopLeft();
-        private double ScaleFactor => Snapshot.ScaleFactor;
+        private double ScaleFactor { get; set; }
+        private Point Origin { get; set; }
+
+        public CachedCoordinateConverter(double scaleFactor, Point origin)
+        {
+            ScaleFactor = scaleFactor;
+            Origin = origin;
+        }
 
         public CachedCoordinateConverter(Snapshot snapshot)
         {
-            Snapshot = snapshot;
+            ScaleFactor = snapshot.ScaleFactor;
+            Origin = snapshot.UITree.ElementProperties.BoundingRect.TopLeft();
         }
 
         public Point PointFromScreen(Point screenPoint)
         {
-            return screenPoint.Subtract(RootPosition).Divide(ScaleFactor);
+            return screenPoint.Subtract(Origin).Divide(ScaleFactor);
         }
 
         public Point PointToScreen(Point localPoint)
         {
-            return localPoint.Multiply(ScaleFactor).Add(RootPosition);
+            return localPoint.Multiply(ScaleFactor).Add(Origin);
         }
 
         public Size SizeFromScreen(Size screenSize)

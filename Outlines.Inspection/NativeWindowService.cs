@@ -80,5 +80,9 @@ namespace Outlines.Inspection
         // Based on https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setwindowlongw
         [DllImport("user32.dll")]
         public static extern IntPtr SetWindowLong(IntPtr hwnd, WindowInfoIndices infoIndex, int infoValue);
+
+        // Based on https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getdpiforwindow
+        [DllImport("user32.dll")] 
+        public static extern uint GetDpiForWindow(IntPtr hwnd);
     }
 }

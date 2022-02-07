@@ -19,7 +19,7 @@ namespace Outlines.App.Services
         public bool IsInInputMask(System.Drawing.Point screenPoint)
         {
             var localPoint = CoordinateConverter.PointFromScreen(screenPoint);
-            return WindowsToIgnore.Any(window => WindowContainsPoint(window, localPoint));
+            return WindowsToIgnore.Any(window => window.IsVisible && WindowContainsPoint(window, localPoint));
         }
 
         private bool WindowContainsPoint(Window window, System.Drawing.Point point)
