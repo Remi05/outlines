@@ -75,6 +75,19 @@
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
+            <StackPanel x:Name="ProcessPropertiesGroup" Visibility="{Binding ProcessProperties, Converter={StaticResource NullToVisibility}, FallbackValue=Collapsed}">
+                <TextBlock Text="Process Properties" Style="{StaticResource PropertyGroupHeaderStyle}" />
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="Process ID"   Style="{StaticResource PropertyNameStyle}" />
+                        <TextBlock Text="Process Name"   Style="{StaticResource PropertyNameStyle}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock x:Name="ProcessIdTextBlock"   Text="{Binding ProcessProperties.ProcessId, Mode=OneWay}"   Style="{StaticResource PropertyValueStyle}" ToolTip="{Binding TextProperties.FontName, Mode=OneWay}" />
+                        <TextBlock x:Name="ProcessNameTextBlock"   Text="{Binding ProcessProperties.ProcessName, Mode=OneWay}"   Style="{StaticResource PropertyValueStyle}" ToolTip="{Binding TextProperties.FontSize, Mode=OneWay}" />
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </UserControl>

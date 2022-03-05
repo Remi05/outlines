@@ -11,6 +11,7 @@ namespace Outlines.Core
         public int NativeWindowHandle { get; set; }
         public Rectangle BoundingRect { get; set; }
         public TextProperties TextProperties { get; set; }
+        public ProcessProperties ProcessProperties { get; set; }
 
         public override bool Equals(object obj)
         {

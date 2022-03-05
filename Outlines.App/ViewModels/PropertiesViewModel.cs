@@ -36,6 +36,20 @@ namespace Outlines.App.ViewModels
             }
         }
 
+        private ProcessProperties processProperties;
+        public ProcessProperties ProcessProperties
+        {
+            get => processProperties;
+            private set
+            {
+                if (value != processProperties)
+                {
+                    processProperties = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ProcessProperties)));
+                }
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public PropertiesViewModel(IOutlinesService outlinesService)
@@ -49,12 +63,14 @@ namespace Outlines.App.ViewModels
 
             ElementProperties = OutlinesService.SelectedElementProperties;
             TextProperties = OutlinesService.SelectedElementProperties?.TextProperties;
+            ProcessProperties = OutlinesService.SelectedElementProperties?.ProcessProperties;
         }
 
         protected void OnSelectedElementChanged()
         {
             ElementProperties = OutlinesService.SelectedElementProperties;
             TextProperties = OutlinesService.SelectedElementProperties?.TextProperties;
+            ProcessProperties = OutlinesService.SelectedElementProperties?.ProcessProperties;
         }
     }
 }

@@ -15,8 +15,9 @@
         Topmost="True"
         WindowState="Maximized"
         WindowStyle="None"
+        x:Name="MainWindow"
         Title="Outlines">
-    
+
     <views:InspectorPage />
     
 </Window>

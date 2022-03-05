@@ -91,6 +91,7 @@ namespace Outlines.App.ViewModels
         {    
             Dispatcher.Invoke(() => 
             {
+                var windowCount = App.Current.Windows.Count;
                 TargetElementRect = OutlinesService.TargetElementProperties != null 
                                     ? CoordinateConverter.RectFromScreen(OutlinesService.TargetElementProperties.BoundingRect).ToWindowsRect()
                                     : ZeroRect;

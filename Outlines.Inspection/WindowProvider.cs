@@ -10,11 +10,11 @@ namespace Outlines.Inspection
 {
     public class WindowProvider : IWindowProvider
     {
-        private IntPtr WindowToIgnore { get; set; }
+        private IIgnorableWindowsSource IgnorableWindowsSource { get; set; }
 
-        public WindowProvider(IntPtr windowToIgnore)
+        public WindowProvider(IIgnorableWindowsSource ignorableWindowsSource)
         {
-            WindowToIgnore = windowToIgnore;
+            IgnorableWindowsSource = ignorableWindowsSource;
         }
 
         private List<IntPtr> GetWindows()
@@ -31,13 +31,15 @@ namespace Outlines.Inspection
         public IntPtr TryGetWindowFromPoint(Point point)
         {
             var windows = GetWindows();
+            var windowsToIgnore = IgnorableWindowsSource.GetWindowsToIgnore();
             //var candidateWindows = windows.Where((hwnd) => ShouldConsiderWindow(hwnd));
-            var candidateWindows = windows.Where((hwnd) => ShouldWindowCapturePoint(hwnd, point));
+            var candidateWindows = windows.Except(windowsToIgnore).Where((hwnd) => ShouldWindowCapturePoint(hwnd, point));
             //var candidateWindows = GetTopLevelWindowsAtPoint(point);
             var windowTitles = candidateWindows.Select(window => GetWindowString(window)); //.Where(windowTitle => !string.IsNullOrWhiteSpace(windowTitle));
             Logger.Log(LoggingLevel.Debug, $"Candidate Windows: {string.Join(", ", windowTitles)}");
             //return GetSmallestWindow(candidateWindows);
-            return GetTopLevelWindowFromPoint(point);
+            //return GetTopLevelWindowFromPoint(point);
+            return candidateWindows.FirstOrDefault(); //.FirstOrDefault(hwnd => ShouldWindowCapturePoint(hwnd, point));
         }
 
         private IntPtr GetSmallestWindow(IEnumerable<IntPtr> windows)
@@ -59,7 +61,7 @@ namespace Outlines.Inspection
 
         private IntPtr GetTopmostWindowFromPoint(Point point)
         {
-            IntPtr curWindow = NativeWindowService.GetWindow(WindowToIgnore, NativeWindowService.WindowRelationship.GW_HWNDFIRST);
+            IntPtr curWindow = NativeWindowService.GetWindow(IgnorableWindowsSource.GetWindowsToIgnore().First(), NativeWindowService.WindowRelationship.GW_HWNDFIRST);
             while (curWindow != IntPtr.Zero)
             {
                 if (ShouldWindowCapturePoint(curWindow, point))
@@ -105,11 +107,11 @@ namespace Outlines.Inspection
         private string GetWindowString(IntPtr hwnd)
         {
             string title = GetWindowsTitle(hwnd);
-            string className = GetWindowsClassName(hwnd);
+            string className = GetWindowClassName(hwnd);
             return $"[Title: {title}, ClassName: {className}]";
         }
 
-        private string GetWindowsClassName(IntPtr hwnd)
+        private string GetWindowClassName(IntPtr hwnd)
         {
             int windowClassNameLength = 100;
             StringBuilder windowClassNameBuffer = new StringBuilder(windowClassNameLength);
@@ -128,19 +130,34 @@ namespace Outlines.Inspection
         private bool ShouldWindowCapturePoint(IntPtr hwnd, Point point)
         {
             return ShouldConsiderWindow(hwnd)
-                && GetWindowRect(hwnd).Contains(point)
-                && IsHitTestCaptured(hwnd, point);
+                && GetWindowRect(hwnd).Contains(point);
+            //&& IsHitTestCaptured(hwnd, point);
+
+            //return GetWindowRect(hwnd).Contains(point);
         }
 
         private bool ShouldConsiderWindow(IntPtr hwnd)
         {
-            return hwnd != WindowToIgnore
-                && NativeWindowService.IsWindowEnabled(hwnd)
+            return NativeWindowService.IsWindowEnabled(hwnd)
                 && NativeWindowService.IsWindowVisible(hwnd)
                 && !NativeWindowService.IsIconic(hwnd)
                 && !IsWindowCloaked(hwnd)
                 && !IsWindowTransparent(hwnd)
-                && !IsWindowShowStateMinimized(hwnd);
+                && !IsWindowShowStateMinimized(hwnd)
+                && !IsRootWindow(hwnd)
+                && !IsWorkerWindow(hwnd);
+                //&& !IsHiddenFromUia(hwnd);
+        }
+
+        private bool IsRootWindow(IntPtr hwnd)
+        {
+            return GetWindowClassName(hwnd) == "Progman";
+        }
+
+        private bool IsWorkerWindow(IntPtr hwnd)
+        {
+            string className = GetWindowClassName(hwnd);
+            return className == "WorkerW" || className == "WorkerA";
         }
 
         private bool IsWindowCloaked(IntPtr hwnd)
@@ -170,6 +187,12 @@ namespace Outlines.Inspection
             return (hitTestResult != (int)NativeWindowService.HitTestResults.HTNOWHERE) 
                 && (hitTestResult != (int)NativeWindowService.HitTestResults.HTTRANSPARENT)
                 && (hitTestResult != (int)NativeWindowService.HitTestResults.HTERROR);
+        }
+
+        private bool IsHiddenFromUia(IntPtr hwnd)
+        {
+            const string windowVisibilityPropertyName = "UIA_WindowVisibilityOverriden";
+            return NativeWindowService.GetProp(hwnd, windowVisibilityPropertyName) == new IntPtr(2);
         }
 
         private Rectangle GetWindowRect(IntPtr hwnd)

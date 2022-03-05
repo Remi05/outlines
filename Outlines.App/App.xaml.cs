@@ -15,18 +15,18 @@ namespace Outlines.App
 
             ThemeManager = new ThemeManager();
 
-            Window window;
             if (!string.IsNullOrWhiteSpace(fileToOpen) && File.Exists(fileToOpen))
             {
                 var snapshot = Snapshot.LoadFromFile(fileToOpen);
-                window = new SnapshotInspectorWindow(snapshot, ThemeManager);
+                Window window = new SnapshotInspectorWindow(snapshot, ThemeManager);
+                window.Show();
             }
             else
             {
-                window = new LiveInspectorWindow();
+                Window window = new LiveInspectorWindow();
+                window.Show();
             }
 
-            window.Show();
         }
     }
 }

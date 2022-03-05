@@ -18,13 +18,15 @@ namespace Outlines.App
         {
             InitializeComponent();
 
+            //IntPtr hwnd = new WindowInteropHelper(GetWindow(this)).EnsureHandle();
+
             InputMaskingService inputMaskingService = new InputMaskingService(this);
             GlobalInputListener = new GlobalInputListener(inputMaskingService);
 
             IColorPickerService colorPickerService = new ColorPickerService();
             IDistanceOutlinesProvider distanceOutlinesProvider = new DistanceOutlinesProvider();
             IElementPropertiesProvider elementPropertiesProvider = new ElementPropertiesProvider();
-            IElementProvider elementProvider = new FilteredLiveElementProvider(elementPropertiesProvider);
+            IElementProvider elementProvider = new BaseLiveElementProvider(elementPropertiesProvider);
             IFolderConfig folderConfig = new FolderConfig();
             IOutlinesService outlinesService = new OutlinesService(distanceOutlinesProvider, elementProvider);
             ICoordinateConverter coordinateConverter = new LiveCoordinateConverter(this);
@@ -32,9 +34,14 @@ namespace Outlines.App
             IScreenshotService screenshotService = new ScreenshotService(App.Current.MainWindow.Hide, App.Current.MainWindow.Show);
             IUITreeService uiTreeService = new LiveUITreeService(elementPropertiesProvider, outlinesService);
             ISnapshotService snapshotService = new SnapshotService(screenshotService, uiTreeService, screenHelper, folderConfig);
+            IIgnorableWindowsSource ignorableWindowsSource = new IgnorableWindowsSource(Dispatcher);
+            IWindowProvider windowProvider = new WindowProvider(ignorableWindowsSource);
+
+            //var uiaWindowHelper = new UiaWindowHelper();
+            //uiaWindowHelper.HideWindowFromUia(hwnd);
 
             ColorPickerViewModel colorPickerViewModel = new ColorPickerViewModel(colorPickerService, GlobalInputListener);
-            InspectorViewModel inspectorViewModel = new InspectorViewModel(outlinesService, GlobalInputListener);
+            InspectorViewModel inspectorViewModel = new InspectorViewModel(outlinesService, GlobalInputListener, windowProvider);
             OverlayViewModel overlayViewModel = new OverlayViewModel(Dispatcher, outlinesService, coordinateConverter, screenHelper);
             PropertiesViewModel propertiesViewModel = new PropertiesViewModel(outlinesService);
             ToolBarViewModel toolBarViewModel = new ToolBarViewModel(outlinesService, screenshotService, snapshotService, folderConfig, coordinateConverter, inspectorViewModel);
@@ -62,8 +69,12 @@ namespace Outlines.App
 
         protected void OnSourceInitialized(object sender, EventArgs e)
         {
+            IntPtr hwnd = new WindowInteropHelper(this).Handle;
             var focusHelper = new FocusHelper();
-            focusHelper.DisableTakingFocus(new WindowInteropHelper(this).Handle);
+            focusHelper.DisableTakingFocus(hwnd);
+
+            //var uiaWindowHelper = new UiaWindowHelper();
+            //uiaWindowHelper.HideWindowFromUia(hwnd);
         }
     }
 }

@@ -33,6 +33,7 @@ namespace Outlines.Core
         public static void Log(LoggingLevel loggingLevel, string message)
         {
             Output.WriteLine($"[{loggingLevel}] {message}");
+            Output.Flush();
         }
     }
 }

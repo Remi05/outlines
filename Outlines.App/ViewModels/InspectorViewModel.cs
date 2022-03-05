@@ -13,6 +13,7 @@ namespace Outlines.App.ViewModels
 
         private IOutlinesService OutlinesService { get; set; }
         private IGlobalInputListener GlobalInputListener { get; set; }
+        private IWindowProvider WindowProvider { get; set; }
 
         private bool isBackdropVisible = false;
         public bool IsBackdropVisible
@@ -73,7 +74,7 @@ namespace Outlines.App.ViewModels
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public InspectorViewModel(IOutlinesService outlinesService, IGlobalInputListener globalInputListener)
+        public InspectorViewModel(IOutlinesService outlinesService, IGlobalInputListener globalInputListener, IWindowProvider windowProvider)
         {
             if (outlinesService == null || globalInputListener == null)
             {
@@ -81,6 +82,7 @@ namespace Outlines.App.ViewModels
             }
             OutlinesService = outlinesService;
             GlobalInputListener = globalInputListener;
+            WindowProvider = windowProvider;
 
             HoverWatcher targetHoverWatcher = new HoverWatcher(TargetHoverDelayInMs);
             targetHoverWatcher.MouseHovered += OnMouseHovered;
@@ -92,12 +94,22 @@ namespace Outlines.App.ViewModels
 
         private void OnMouseHovered(System.Drawing.Point cursorPos)
         {
-            OutlinesService.TargetElementAt(cursorPos);
+            //OutlinesService.TargetElementAt(cursorPos);
+            IntPtr windowAtPoint = WindowProvider.TryGetWindowFromPoint(cursorPos);
+            if (windowAtPoint != IntPtr.Zero)
+            {
+                OutlinesService.TargetElementWithNativeHandle(windowAtPoint);
+            }
         }
 
         private void OnMouseDown(System.Drawing.Point cursorPos)
         {
-            OutlinesService.SelectElementAt(cursorPos);
+            //OutlinesService.SelectElementAt(cursorPos);
+            IntPtr windowAtPoint = WindowProvider.TryGetWindowFromPoint(cursorPos);
+            if (windowAtPoint != IntPtr.Zero)
+            {
+                OutlinesService.SelectElementWithNativeHandle(windowAtPoint);
+            }
         }
 
         private void OnKeyDown(int vkCode)

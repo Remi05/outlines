@@ -28,8 +28,15 @@ namespace Outlines.Inspection.NetFramework
 
         public virtual ElementProperties TryGetElementFromHandle(IntPtr handle)
         {
-            var element = AutomationElement.FromHandle(handle);
-            return PropertiesProvider.GetElementProperties(element);
+            try
+            {
+                var element = AutomationElement.FromHandle(handle);
+                return PropertiesProvider.GetElementProperties(element);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
     }
 }

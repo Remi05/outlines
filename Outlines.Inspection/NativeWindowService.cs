@@ -207,9 +207,13 @@ namespace Outlines.Inspection
 
         public delegate bool EnumWindowsCallback(IntPtr hwnd, int lParam);
 
-        //Based on https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-enumwindows
+        // Based on https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-enumwindows
         [DllImport("user32.dll")]
         public static extern bool EnumWindows(EnumWindowsCallback lpEnumFunc, int lParam);
+
+        // Based on https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-findwindowa
+        [DllImport("user32.dll")]
+        public static extern IntPtr FindWindow(string className, string windowName);
 
         // Based on https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getdesktopwindow
         [DllImport("user32.dll")]
@@ -255,6 +259,13 @@ namespace Outlines.Inspection
         [DllImport("user32.dll")]
         public static extern IntPtr SetWindowLong(IntPtr hwnd, WindowInfoIndices infoIndex, int infoValue);
 
+        // Based on ...
+        [DllImport("user32.dll")]
+        public static extern bool SetProp(IntPtr hwnd, string propertyName, IntPtr propertyData);
+
+        [DllImport("user32.dll")]
+        public static extern IntPtr GetProp(IntPtr hwnd, string propertyName);
+
         // Based on https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-isiconic
         [DllImport("user32.dll")]
         public static extern bool IsIconic(IntPtr hwnd); 
@@ -286,5 +297,8 @@ namespace Outlines.Inspection
         // Based on https://docs.microsoft.com/en-us/windows/win32/api/dwmapi/nf-dwmapi-dwmgetwindowattribute
         [DllImport("dwmapi.dll")]
         public static extern int DwmGetWindowAttribute(IntPtr hwnd, DwmWindowAttributes attribute, out uint attributeValue, int attributeValueSize);
+        
+        [DllImport("dwmapi.dll")]
+        public static extern int DwmSetWindowAttribute(IntPtr hwnd, DwmWindowAttributes attribute, uint attributeValue, int attributeValueSize);
     }
 }
