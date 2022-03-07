@@ -7,7 +7,7 @@ Checkout our [User Guide Wiki page](https://github.com/Remi05/outlines/wiki/User
 
 ## License
 
-Outlines is licensed under an [MIT License](LICENSE.md).
+Outlines is licensed under an [MIT License](LICENSE).
 
 ## Screenshots
 
