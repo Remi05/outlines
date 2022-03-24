@@ -80,7 +80,7 @@ namespace Outlines.App.ViewModels
             Dispatcher.Invoke(() => 
             {
                 SelectedElementRect = OutlinesService.SelectedElementProperties != null
-                                    ? CoordinateConverter.RectFromScreen(OutlinesService.SelectedElementProperties.BoundingRect).ToWindowsRect()
+                                    ? OutlinesService.SelectedElementProperties.BoundingRect.ToWindowsRect()
                                     : ZeroRect;
 
             });  
@@ -91,8 +91,8 @@ namespace Outlines.App.ViewModels
         {    
             Dispatcher.Invoke(() => 
             {
-                TargetElementRect = OutlinesService.TargetElementProperties != null 
-                                    ? CoordinateConverter.RectFromScreen(OutlinesService.TargetElementProperties.BoundingRect).ToWindowsRect()
+                TargetElementRect = OutlinesService.TargetElementProperties != null
+                                    ? OutlinesService.TargetElementProperties.BoundingRect.ToWindowsRect()
                                     : ZeroRect;
             });
             UpdateDistanceOutlines();
