@@ -109,21 +109,21 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <local:DpiIndependentContainer>
-        <Grid Name="Root">
-            <ItemsControl ItemsSource="{Binding DistanceOutlines}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <Canvas />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Line X1="{Binding StartPoint.X}" Y1="{Binding StartPoint.Y}" X2="{Binding EndPoint.X}" Y2="{Binding EndPoint.Y}" Style="{StaticResource DistanceOutlineStyle}" />
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+    <Grid Name="Root">
+        <ItemsControl ItemsSource="{Binding DistanceOutlines}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Canvas />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Line X1="{Binding StartPoint.X}" Y1="{Binding StartPoint.Y}" X2="{Binding EndPoint.X}" Y2="{Binding EndPoint.Y}" Style="{StaticResource DistanceOutlineStyle}" />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
 
+        <local:DpiIndependentContainer>
             <Canvas>
                 <Rectangle x:Name="SelectedElementOutline" 
                     Style="{StaticResource ElementOutlineStyle}"
@@ -134,16 +134,6 @@
                     Width="{Binding SelectedElementRect.Width}"
                     Height="{Binding SelectedElementRect.Height}" />
 
-                <Grid
-                    Visibility="{Binding IsSelectedElementRectVisible, Converter={StaticResource BoolToVisibility}, FallbackValue=Collapsed}"
-                    Canvas.Top="{Binding SelectedElementDimensionsViewModel.ContainerRect.Top}"
-                    Canvas.Left="{Binding SelectedElementDimensionsViewModel.ContainerRect.Left}"
-                    Width="{Binding SelectedElementDimensionsViewModel.ContainerRect.Width}">
-                    <Border Background="{StaticResource SelectedElementOutlineBrush}" Style="{StaticResource DimensionsTextContainerStyle}">
-                        <TextBlock Text="{Binding SelectedElementDimensionsViewModel.DimensionsText}" Style="{StaticResource DimensionsTextStyle}" />
-                    </Border>
-                </Grid>
-
                 <Rectangle x:Name="TargetElementOutline" 
                     Style="{StaticResource ElementOutlineStyle}"
                     Stroke="{StaticResource TargetElementOutlineBrush}"
@@ -152,17 +142,29 @@
                     Canvas.Left="{Binding TargetElementRect.Left}"
                     Width="{Binding TargetElementRect.Width}"
                     Height="{Binding TargetElementRect.Height}" />
-
-                <Grid
-                    Visibility="{Binding IsTargetElementRectVisible, Converter={StaticResource BoolToVisibility}, FallbackValue=Collapsed}"
-                    Canvas.Top="{Binding TargetElementDimensionsViewModel.ContainerRect.Top}"
-                    Canvas.Left="{Binding TargetElementDimensionsViewModel.ContainerRect.Left}"
-                    Width="{Binding TargetElementDimensionsViewModel.ContainerRect.Width}">
-                    <Border Background="{StaticResource TargetElementOutlineBrush}" Style="{StaticResource DimensionsTextContainerStyle}">
-                        <TextBlock Text="{Binding TargetElementDimensionsViewModel.DimensionsText}" Style="{StaticResource DimensionsTextStyle}"  />
-                    </Border>
-                </Grid>
             </Canvas>
+        </local:DpiIndependentContainer>
+
+        <Canvas>
+            <Grid
+                Visibility="{Binding IsSelectedElementRectVisible, Converter={StaticResource BoolToVisibility}, FallbackValue=Collapsed}"
+                Canvas.Top="{Binding SelectedElementDimensionsViewModel.ContainerRect.Top}"
+                Canvas.Left="{Binding SelectedElementDimensionsViewModel.ContainerRect.Left}"
+                Width="{Binding SelectedElementDimensionsViewModel.ContainerRect.Width}">
+                <Border Background="{StaticResource SelectedElementOutlineBrush}" Style="{StaticResource DimensionsTextContainerStyle}">
+                    <TextBlock Text="{Binding SelectedElementDimensionsViewModel.DimensionsText}" Style="{StaticResource DimensionsTextStyle}" />
+                </Border>
+            </Grid>
+
+            <Grid
+                Visibility="{Binding IsTargetElementRectVisible, Converter={StaticResource BoolToVisibility}, FallbackValue=Collapsed}"
+                Canvas.Top="{Binding TargetElementDimensionsViewModel.ContainerRect.Top}"
+                Canvas.Left="{Binding TargetElementDimensionsViewModel.ContainerRect.Left}"
+                Width="{Binding TargetElementDimensionsViewModel.ContainerRect.Width}">
+                <Border Background="{StaticResource TargetElementOutlineBrush}" Style="{StaticResource DimensionsTextContainerStyle}">
+                    <TextBlock Text="{Binding TargetElementDimensionsViewModel.DimensionsText}" Style="{StaticResource DimensionsTextStyle}"  />
+                </Border>
+            </Grid>
 
             <ItemsControl ItemsSource="{Binding DistanceOutlines}">
                 <ItemsControl.ItemsPanel>
@@ -186,6 +188,6 @@
                     </Style>
                 </ItemsControl.ItemContainerStyle>
             </ItemsControl>
-        </Grid>
-    </local:DpiIndependentContainer>
+        </Canvas>
+    </Grid>
 </UserControl>
