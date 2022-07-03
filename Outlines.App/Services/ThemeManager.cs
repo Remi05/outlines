@@ -43,7 +43,7 @@ namespace Outlines.App.Services
 
         private void UpdateThemeDictionary()
         {
-            var isLightTheme = UISettings.GetColorValue(UIColorType.Background) == Windows.UI.Colors.White;
+            var isLightTheme = IsCurrentThemeLightTheme();
             if (isLightTheme != IsLightTheme || CurrentThemeDictionary == null)
             {
                 IsLightTheme = isLightTheme;
@@ -56,6 +56,11 @@ namespace Outlines.App.Services
 
                 ThemeChanged?.Invoke();
             }
+        }
+
+        private bool IsCurrentThemeLightTheme()
+        {
+            return UISettings.GetColorValue(UIColorType.Background) == Windows.UI.Color.FromArgb(0xFF, 0xFF, 0xFF, 0xFF);
         }
 
         private void UpdateSystemColorsDictionary()
