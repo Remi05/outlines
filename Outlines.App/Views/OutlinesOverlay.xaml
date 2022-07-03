@@ -123,9 +123,8 @@
             </ItemsControl.ItemTemplate>
         </ItemsControl>
 
-        <local:DpiIndependentContainer>
-            <Canvas>
-                <Rectangle x:Name="SelectedElementOutline" 
+        <Canvas>
+            <Rectangle x:Name="SelectedElementOutline" 
                     Style="{StaticResource ElementOutlineStyle}"
                     Stroke="{StaticResource SelectedElementOutlineBrush}"
                     Visibility="{Binding IsSelectedElementRectVisible, Converter={StaticResource BoolToVisibility}, FallbackValue=Collapsed}"
@@ -134,7 +133,7 @@
                     Width="{Binding SelectedElementRect.Width}"
                     Height="{Binding SelectedElementRect.Height}" />
 
-                <Rectangle x:Name="TargetElementOutline" 
+            <Rectangle x:Name="TargetElementOutline" 
                     Style="{StaticResource ElementOutlineStyle}"
                     Stroke="{StaticResource TargetElementOutlineBrush}"
                     Visibility="{Binding IsTargetElementRectVisible, Converter={StaticResource BoolToVisibility}, FallbackValue=Collapsed}"
@@ -142,8 +141,7 @@
                     Canvas.Left="{Binding TargetElementRect.Left}"
                     Width="{Binding TargetElementRect.Width}"
                     Height="{Binding TargetElementRect.Height}" />
-            </Canvas>
-        </local:DpiIndependentContainer>
+        </Canvas>
 
         <Canvas>
             <Grid
