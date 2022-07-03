@@ -36,4 +36,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:	
         name: 'Outlines App'	
-        path: '.\Outlines.App\bin\${{matrix.configuration}}\netcoreapp3.1\'
+        path: '.\Outlines.App\bin\${{matrix.configuration}}\net6.0-windows10.0.22000\'
