@@ -110,7 +110,7 @@ namespace Outlines.Inspection
                 }
                 return new UITreeNode() { ElementProperties = rootElementProperties, Children = childrenNodes };
             }
-            catch (Exception e)
+            catch
             {
                 return null;
             }
