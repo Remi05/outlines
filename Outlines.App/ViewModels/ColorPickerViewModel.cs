@@ -32,9 +32,9 @@ namespace Outlines.App.ViewModels
 
         public Brush PickedColorBrush => new SolidColorBrush(PickedColor);
 
-        public string PickedColorRbg => PickedColor == null ? "" : $"({PickedColor.R},{PickedColor.G},{PickedColor.B})";
+        public string PickedColorRbg => $"({PickedColor.R},{PickedColor.G},{PickedColor.B})";
 
-        public string PickedColorHex => PickedColor == null ? "" : $"#{PickedColor.R.ToString("X2")}{PickedColor.G.ToString("X2")}{PickedColor.B.ToString("X2")}";
+        public string PickedColorHex => $"#{PickedColor.R.ToString("X2")}{PickedColor.G.ToString("X2")}{PickedColor.B.ToString("X2")}";
 
         public event PropertyChangedEventHandler PropertyChanged;
 
