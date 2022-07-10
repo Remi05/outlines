@@ -33,7 +33,7 @@ jobs:
       run: msbuild $env:Solution_Name /t:Restore /p:Configuration=$env:${{matrix.configuration}} /p:Platform="Any CPU"
 
     - name: Build Solution
-      run: msbuild $env:Solution_Name /p:Configuration=${{matrix.configuration}} p:Platform="Any CPU"
+      run: msbuild $env:Solution_Name /p:Configuration=${{matrix.configuration}} /p:Platform="Any CPU"
     
     - name: 'Publish Outlines App'
       uses: actions/upload-artifact@v2
