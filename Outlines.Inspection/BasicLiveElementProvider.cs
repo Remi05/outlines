@@ -38,7 +38,7 @@ namespace Outlines.Inspection
         private bool ShouldIgnoreElement(IUIAutomationElement automationElement)
         {
             // We want to ignore any element of the current application.
-            return (automationElement == null) && (automationElement.CurrentProcessId == CurrentProcessId);
+            return (automationElement == null) || (automationElement.CurrentProcessId == CurrentProcessId);
         }
     }
 }
