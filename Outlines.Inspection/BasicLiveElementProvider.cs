@@ -20,14 +20,19 @@ namespace Outlines.Inspection
 
         public ElementProperties TryGetElementFromPoint(Point point)
         {
-            var containingElement = UIAutomation.ElementFromPoint(point.ToAutomationPoint());
-
-            if (ShouldIgnoreElement(containingElement))
+            try
+            {
+                var containingElement = UIAutomation.ElementFromPoint(point.ToAutomationPoint());
+                if (ShouldIgnoreElement(containingElement))
+                {
+                    return null;
+                }
+                return PropertiesProvider.GetElementProperties(containingElement);
+            }
+            catch
             {
                 return null;
             }
-
-            return PropertiesProvider.GetElementProperties(containingElement);
         }
 
         private bool ShouldIgnoreElement(IUIAutomationElement automationElement)
