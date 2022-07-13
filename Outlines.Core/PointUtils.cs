@@ -17,12 +17,12 @@ namespace Outlines.Core
 
         public static Point Multiply(this Point p, double factor)
         {
-            return new Point((int)(p.X * factor), (int)(p.Y * factor));
+            return new Point((int)Math.Ceiling(p.X * factor), (int)Math.Ceiling(p.Y * factor));
         }
 
         public static Point Divide(this Point p, double divider)
         {
-            return new Point((int)(p.X / divider), (int)(p.Y / divider));
+            return new Point((int)Math.Ceiling(p.X / divider), (int)Math.Ceiling(p.Y / divider));
         }
 
         public static double Length(this Point p)
