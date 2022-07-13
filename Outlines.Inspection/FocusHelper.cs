@@ -4,11 +4,11 @@ namespace Outlines.Inspection
 {
     public class FocusHelper
     {
-        public void DisableTakingFocus(IntPtr hWnd)
+        public void DisableTakingFocus(IntPtr hwnd)
         {
-            int curWindowStyle = NativeWindowService.GetWindowLong(hWnd, NativeWindowService.WindowInfoIndices.GWL_EXSTYLE);
+            int curWindowStyle = NativeWindowService.GetWindowLong(hwnd, NativeWindowService.WindowInfoIndices.GWL_EXSTYLE);
             int newWindowStyle = curWindowStyle | (int)NativeWindowService.ExtendedWindowStyles.WS_EX_NOACTIVATE;
-            NativeWindowService.SetWindowLong(hWnd, NativeWindowService.WindowInfoIndices.GWL_EXSTYLE, newWindowStyle);
+            NativeWindowService.SetWindowLong(hwnd, NativeWindowService.WindowInfoIndices.GWL_EXSTYLE, newWindowStyle);
         }
     }
 }
