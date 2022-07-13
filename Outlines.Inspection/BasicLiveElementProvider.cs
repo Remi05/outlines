@@ -10,23 +10,17 @@ namespace Outlines.Inspection
     {
         private IUIAutomation UIAutomation { get; set; } = new CUIAutomation();
         private IElementPropertiesProvider PropertiesProvider { get; set; }
-        private Action HideOverlayWindow { get; set; }
-        private Action ShowOverlayWindow { get; set; }
 
         private readonly int CurrentProcessId = Process.GetCurrentProcess().Id;
 
-        public BasicLiveElementProvider(IElementPropertiesProvider propertiesProvider, Action hideOverlayWindow = null, Action showOverlayWindow = null)
+        public BasicLiveElementProvider(IElementPropertiesProvider propertiesProvider)
         {
             PropertiesProvider = propertiesProvider;
-            HideOverlayWindow = hideOverlayWindow;
-            ShowOverlayWindow = showOverlayWindow;
         }
 
         public ElementProperties TryGetElementFromPoint(Point point)
         {
-            HideOverlayWindow?.Invoke();
             var containingElement = UIAutomation.ElementFromPoint(point.ToAutomationPoint());
-            ShowOverlayWindow?.Invoke();
 
             if (ShouldIgnoreElement(containingElement))
             {
