@@ -33,7 +33,10 @@ namespace Outlines.App.Views
 
         private void OnMouseWheelScroll(object sender, MouseWheelEventArgs e)
         {
-            ViewModel.OnMouseWheelScroll(e.Delta);
+            if (Keyboard.GetKeyStates(Key.LeftCtrl) == KeyStates.Down)
+            {
+                ViewModel.OnMouseWheelScroll(e.Delta);
+            }
         }
     }
 }
