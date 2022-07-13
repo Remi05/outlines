@@ -337,7 +337,7 @@ namespace Outlines.App.Services
             }
             else
             {
-                BackdropWindow?.Hide();
+                WindowZOrderHelper.HideWindowNoZOrderChange(BackdropWindow.Hwnd);
             }
         }
 
