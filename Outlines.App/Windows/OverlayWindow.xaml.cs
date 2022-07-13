@@ -6,20 +6,22 @@ namespace Outlines.App
 {
     public partial class OverlayWindow : Window
     {
+        public IntPtr Hwnd { get; private set; }
+
         public OverlayWindow()
         {
             InitializeComponent();
 
-            IntPtr hwnd = new WindowInteropHelper(this).EnsureHandle();
+            Hwnd = new WindowInteropHelper(this).EnsureHandle();
 
             var focusHelper = new FocusHelper();
-            focusHelper.DisableTakingFocus(hwnd);
+            focusHelper.DisableTakingFocus(Hwnd);
 
             var taskViewHelper = new TaskViewHelper();
-            taskViewHelper.HideWindowFromTaskView(hwnd);
+            taskViewHelper.HideWindowFromTaskView(Hwnd);
 
             var windowZOrderHelper = new WindowZOrderHelper();
-            windowZOrderHelper.MoveWindowToUIAccessZBand(hwnd);
+            windowZOrderHelper.MoveWindowToUIAccessZBand(Hwnd);
         }
     }
 }

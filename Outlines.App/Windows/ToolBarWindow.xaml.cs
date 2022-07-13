@@ -8,17 +8,19 @@ namespace Outlines.App
 {
     public partial class ToolBarWindow : Window
     {
+        public IntPtr Hwnd { get; private set; }
+
         public ToolBarWindow()
         {
             InitializeComponent();
 
-            IntPtr hwnd = new WindowInteropHelper(this).EnsureHandle();
+            Hwnd = new WindowInteropHelper(this).EnsureHandle();
 
             var focusHelper = new FocusHelper();
-            focusHelper.DisableTakingFocus(hwnd);
+            focusHelper.DisableTakingFocus(Hwnd);
 
             var windowZOrderHelper = new WindowZOrderHelper();
-            windowZOrderHelper.MoveWindowToUIAccessZBand(hwnd);
+            windowZOrderHelper.MoveWindowToUIAccessZBand(Hwnd);
         }
 
         private void OnHandleMouseDown(object sender, MouseButtonEventArgs e)
