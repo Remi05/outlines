@@ -35,7 +35,7 @@ namespace Outlines.App.Views
         {
             if (Keyboard.GetKeyStates(Key.LeftCtrl) == KeyStates.Down)
             {
-                ViewModel.OnMouseWheelScroll(e.Delta);
+                ViewModel.OnMouseWheelScroll(-e.Delta);
             }
         }
     }
