@@ -5,7 +5,8 @@ namespace Outlines.Inspection
 {
     public class FolderConfig : IFolderConfig
     {
-        private readonly string ImagesRootFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures), "Outlines");
+        private readonly string ImagesRootFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), 
+                                                                @"Pictures\Outlines");
         private string ScreenshotsFolderPath { get; set; }
         private string SnapshotsFolderPath { get; set; }
 
