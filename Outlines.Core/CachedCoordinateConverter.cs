@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
 namespace Outlines.Core
 {
@@ -31,12 +32,12 @@ namespace Outlines.Core
 
         public Size SizeFromScreen(Size screenSize)
         {
-            return screenSize == Size.Empty ? Size.Empty : new Size((int)(screenSize.Width / ScaleFactor), (int)(screenSize.Height / ScaleFactor));
+            return screenSize == Size.Empty ? Size.Empty : new Size((int)Math.Ceiling(screenSize.Width / ScaleFactor), (int)Math.Ceiling(screenSize.Height / ScaleFactor));
         }
 
         public Size SizeToScreen(Size localSize)
         {
-            return localSize == Size.Empty ? Size.Empty : new Size((int)(localSize.Width * ScaleFactor), (int)(localSize.Height * ScaleFactor));
+            return localSize == Size.Empty ? Size.Empty : new Size((int)Math.Ceiling(localSize.Width * ScaleFactor), (int)Math.Ceiling(localSize.Height * ScaleFactor));
         }
 
         public Rectangle RectFromScreen(Rectangle screenRect)

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using UIAutomationClient;
 using Outlines.Core;
@@ -9,22 +10,35 @@ namespace Outlines.Inspection
     {
         private IUIAutomation UIAutomation { get; set; } = new CUIAutomation();
         private IElementPropertiesProvider PropertiesProvider { get; set; }
-        private Action HideOverlayWindow { get; set; }
-        private Action ShowOverlayWindow { get; set; }
 
-        public BasicLiveElementProvider(IElementPropertiesProvider propertiesProvider, Action hideOverlayWindow = null, Action showOverlayWindow = null)
+        private readonly int CurrentProcessId = Process.GetCurrentProcess().Id;
+
+        public BasicLiveElementProvider(IElementPropertiesProvider propertiesProvider)
         {
             PropertiesProvider = propertiesProvider;
-            HideOverlayWindow = hideOverlayWindow;
-            ShowOverlayWindow = showOverlayWindow;
         }
 
         public ElementProperties TryGetElementFromPoint(Point point)
         {
-            HideOverlayWindow?.Invoke();
-            var containingElement = UIAutomation.ElementFromPoint(point.ToAutomationPoint());
-            ShowOverlayWindow?.Invoke();
-            return PropertiesProvider.GetElementProperties(containingElement);
+            try
+            {
+                var containingElement = UIAutomation.ElementFromPoint(point.ToAutomationPoint());
+                if (ShouldIgnoreElement(containingElement))
+                {
+                    return null;
+                }
+                return PropertiesProvider.GetElementProperties(containingElement);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        private bool ShouldIgnoreElement(IUIAutomationElement automationElement)
+        {
+            // We want to ignore any element of the current application.
+            return (automationElement == null) || (automationElement.CurrentProcessId == CurrentProcessId);
         }
     }
 }

@@ -17,7 +17,8 @@ namespace Outlines.App.Services
         private IGlobalInputListener GlobalInputListener { get; set; }
         private IInspectorStateManager InspectorStateManager { get; set; }
         private IOutlinesService OutlinesService { get; set; }
-        private IScreenHelper ScreenHelper { get; set; } 
+        private IScreenHelper ScreenHelper { get; set; }
+        private WindowZOrderHelper WindowZOrderHelper { get; set; } = new WindowZOrderHelper();
         private UiaWindowHelper UiaWindowHelper { get; set; } = new UiaWindowHelper();
         private IgnorableWindowsSource IgnorableWindowsSource { get; set; } = new IgnorableWindowsSource();
 
@@ -78,15 +79,6 @@ namespace Outlines.App.Services
             PropertiesWindow?.Close();
             TreeViewWindow?.Close();
             ToolBarWindow?.Close();
-        }
-
-        private void Hide()
-        {
-            BackdropWindow?.Hide();
-            OverlayWindow?.Hide();
-            PropertiesWindow?.Hide();
-            TreeViewWindow?.Hide();
-            ToolBarWindow.Hide();
         }
 
         private void CreateWindows()
@@ -155,7 +147,7 @@ namespace Outlines.App.Services
 
             GlobalInputListener = new GlobalInputListener(inputMaskingService);
 
-            IScreenshotService screenshotService = new ScreenshotService(Hide, Show);
+            IScreenshotService screenshotService = new ScreenshotService(HideNoZOrderChange, ShowNoZOrderChange);
             IUITreeService uiTreeService = new LiveUITreeService(elementPropertiesProvider, OutlinesService, IgnorableWindowsSource);
             ISnapshotService snapshotService =  new SnapshotService(screenshotService, uiTreeService, ScreenHelper, folderConfig);
 
@@ -238,6 +230,24 @@ namespace Outlines.App.Services
             }
         }
 
+        private void ShowNoZOrderChange()
+        {
+            WindowZOrderHelper.ShowWindowNoZOrderChange(BackdropWindow.Hwnd);
+            WindowZOrderHelper.ShowWindowNoZOrderChange(OverlayWindow.Hwnd);
+            WindowZOrderHelper.ShowWindowNoZOrderChange(PropertiesWindow.Hwnd);
+            WindowZOrderHelper.ShowWindowNoZOrderChange(TreeViewWindow.Hwnd);
+            WindowZOrderHelper.ShowWindowNoZOrderChange(ToolBarWindow.Hwnd);
+        }
+
+        private void HideNoZOrderChange()
+        {
+            WindowZOrderHelper.HideWindowNoZOrderChange(BackdropWindow.Hwnd);
+            WindowZOrderHelper.HideWindowNoZOrderChange(OverlayWindow.Hwnd);
+            WindowZOrderHelper.HideWindowNoZOrderChange(PropertiesWindow.Hwnd);
+            WindowZOrderHelper.HideWindowNoZOrderChange(TreeViewWindow.Hwnd);
+            WindowZOrderHelper.HideWindowNoZOrderChange(ToolBarWindow.Hwnd);
+        }
+
         private void OnMouseHovered(System.Drawing.Point cursorPos)
         {
             OutlinesService.TargetElementAt(cursorPos);
@@ -259,11 +269,11 @@ namespace Outlines.App.Services
         {
             if (isOverlayVisible)
             {
-                OverlayWindow?.Show();
+                WindowZOrderHelper.ShowWindowNoZOrderChange(OverlayWindow.Hwnd);
             }
             else
             {
-                OverlayWindow?.Hide();
+                WindowZOrderHelper.HideWindowNoZOrderChange(OverlayWindow.Hwnd);
             }
         }
 
@@ -271,11 +281,11 @@ namespace Outlines.App.Services
         {
             if (isPropertiesPanelVisible)
             {
-                PropertiesWindow?.Show();
+                WindowZOrderHelper.ShowWindowNoZOrderChange(PropertiesWindow.Hwnd);
             }
             else
             {
-                PropertiesWindow?.Hide();
+                WindowZOrderHelper.HideWindowNoZOrderChange(PropertiesWindow.Hwnd);
             }
         }
 
@@ -283,11 +293,11 @@ namespace Outlines.App.Services
         {
             if (isTreeViewVisible)
             {
-                TreeViewWindow?.Show();
+                WindowZOrderHelper.ShowWindowNoZOrderChange(TreeViewWindow.Hwnd);
             }
             else
             {
-                TreeViewWindow?.Hide();
+                WindowZOrderHelper.HideWindowNoZOrderChange(TreeViewWindow.Hwnd);
             }
         }
 
@@ -296,18 +306,11 @@ namespace Outlines.App.Services
             if (isBackdropVisible && OutlinesService.TargetElementProperties != null)
             {
                 UpdateBackdropWindowBounds();
-
-                BackdropWindow?.Show();
-
-                // Show the backdrop window below the overlay window.
-                IntPtr backdropWindowHandle = new WindowInteropHelper(BackdropWindow).EnsureHandle();
-                IntPtr overlayWindowHandle = new WindowInteropHelper(OverlayWindow).EnsureHandle();
-                var flags = NativeWindowService.SetWindowPosFlags.SWP_NOSIZE | NativeWindowService.SetWindowPosFlags.SWP_NOMOVE | NativeWindowService.SetWindowPosFlags.SWP_NOACTIVATE;
-                NativeWindowService.SetWindowPos(backdropWindowHandle, overlayWindowHandle, 0, 0, 0, 0, flags);
+                WindowZOrderHelper.ShowWindowNoZOrderChange(BackdropWindow.Hwnd);
             }
             else
             {
-                BackdropWindow?.Hide();
+                WindowZOrderHelper.HideWindowNoZOrderChange(BackdropWindow.Hwnd);
             }
         }
 
@@ -334,7 +337,7 @@ namespace Outlines.App.Services
             }
             else
             {
-                BackdropWindow?.Hide();
+                WindowZOrderHelper.HideWindowNoZOrderChange(BackdropWindow.Hwnd);
             }
         }
 
