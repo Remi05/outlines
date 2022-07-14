@@ -7,6 +7,7 @@ namespace Outlines.Inspection
     {
         Snapshot TakeSnapshot(Rectangle bounds);
         Snapshot TakeSnapshot(ElementProperties elementProperties);
-        void SaveSnapshot(Snapshot snapshot);
+        string SaveSnapshot(Snapshot snapshot);
+        void ShowSnapshotNotitication(Snapshot snapshot, string snapshotFilePath);
     }
 }
