@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Text.Json;
+using Microsoft.Toolkit.Uwp.Notifications;
 using Outlines.Core;
 
 namespace Outlines.Inspection
@@ -47,7 +48,7 @@ namespace Outlines.Inspection
             return new Snapshot() { UITree = subtree, Screenshot = screenshot, ScaleFactor = scaleFactor };
         }
 
-        public void SaveSnapshot(Snapshot snapshot)
+        public string SaveSnapshot(Snapshot snapshot)
         {
             if (ShouldSaveAsSingleFile)
             {
@@ -60,19 +61,37 @@ namespace Outlines.Inspection
             }
             else
             {
-                if (string.IsNullOrWhiteSpace(snapshot.ScreenshotFilePath))
-                {
-                    string screenshotFileName = $"Screenshot-{DateTime.Now.ToFileTime()}.png";
-                    string screenshotFilePath = Path.Combine(FolderConfig.GetSnapshotsFolder(), screenshotFileName);
-                    snapshot.Screenshot.Save(screenshotFilePath, ImageFormat.Png);
-                    snapshot.ScreenshotFilePath = screenshotFilePath;
-                }
+                EnsureScreenshotIsSavedAsFile(snapshot);
             }
 
             string snapshotJson = JsonSerializer.Serialize(snapshot);
             string fileName = $"Snapshot-{DateTime.Now.ToFileTime()}.snpt";
             string filePath = Path.Combine(FolderConfig.GetSnapshotsFolder(), fileName);
             File.WriteAllText(filePath, snapshotJson);
+
+            return filePath;
+        }
+
+        private void EnsureScreenshotIsSavedAsFile(Snapshot snapshot)
+        {
+            if (string.IsNullOrWhiteSpace(snapshot.ScreenshotFilePath) || !File.Exists(snapshot.ScreenshotFilePath))
+            {
+                string screenshotFileName = $"Screenshot-{DateTime.Now.ToFileTime()}.png";
+                string screenshotFilePath = Path.Combine(FolderConfig.GetSnapshotsFolder(), screenshotFileName);
+                snapshot.Screenshot.Save(screenshotFilePath, ImageFormat.Png);
+                snapshot.ScreenshotFilePath = screenshotFilePath;
+            }
+        }
+
+        public void ShowSnapshotNotitication(Snapshot snapshot, string snapshotFilePath)
+        {
+            EnsureScreenshotIsSavedAsFile(snapshot);
+
+            new ToastContentBuilder()
+                .AddArgument(snapshotFilePath)
+                .AddHeroImage(new Uri(snapshot.ScreenshotFilePath))
+                .AddText("Snapshot saved")
+                .AddText("Select to open and inspect.").Show();
         }
     }
 }

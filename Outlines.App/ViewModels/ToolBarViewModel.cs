@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -100,7 +100,8 @@ namespace Outlines.App.ViewModels
             if (OutlinesService.SelectedElementProperties != null)
             {
                 Snapshot snapshot = SnapshotService.TakeSnapshot(OutlinesService.SelectedElementProperties);
-                SnapshotService.SaveSnapshot(snapshot);
+                string snapshotFilePath = SnapshotService.SaveSnapshot(snapshot);
+                SnapshotService.ShowSnapshotNotitication(snapshot, snapshotFilePath);
             }
         }
 
@@ -110,7 +111,8 @@ namespace Outlines.App.ViewModels
             var windowBounds = new Rectangle((int)window.Left, (int)window.Top, (int)window.Width, (int)window.Height);
             var screenWindowBounds = CoordinateConverter.RectToScreen(windowBounds);
             Snapshot snapshot = SnapshotService.TakeSnapshot(screenWindowBounds);
-            SnapshotService.SaveSnapshot(snapshot);
+            string snapshotFilePath = SnapshotService.SaveSnapshot(snapshot);
+            SnapshotService.ShowSnapshotNotitication(snapshot, snapshotFilePath);
         }
 
         private void TakeScreenshot()
@@ -132,6 +134,5 @@ namespace Outlines.App.ViewModels
             string filePath = Path.Combine(FolderConfig.GetScreenshotsFolderPath(), fileName);
             screenshot.Save(filePath, ImageFormat.Png);
         }
-
     }
 }
