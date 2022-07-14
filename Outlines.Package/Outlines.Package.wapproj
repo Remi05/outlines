@@ -110,6 +110,7 @@
     <Content Include="Images\SmallTile.scale-150.png" />
     <Content Include="Images\SmallTile.scale-200.png" />
     <Content Include="Images\SmallTile.scale-400.png" />
+    <Content Include="Images\SnapshotIcon.png" />
     <Content Include="Images\SplashScreen.scale-100.png" />
     <Content Include="Images\SplashScreen.scale-125.png" />
     <Content Include="Images\SplashScreen.scale-150.png" />

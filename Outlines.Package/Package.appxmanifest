@@ -11,7 +11,7 @@
   <Identity
     Name="outlines"
     Publisher="CN=remipelletier"
-    Version="1.0.3.0" />
+    Version="1.0.4.0" />
 
   <Properties>
     <DisplayName>Outlines</DisplayName>
@@ -54,6 +54,16 @@
             </com:ExeServer>
           </com:ComServer>
         </com:Extension>
+        <uap:Extension Category="windows.fileTypeAssociation">
+          <uap:FileTypeAssociation Name="snapshot">
+            <uap:SupportedFileTypes>
+              <uap:FileType>.snpt</uap:FileType>
+            </uap:SupportedFileTypes>
+            <uap:DisplayName>Outlines Snapshot</uap:DisplayName>
+            <uap:InfoTip>Element Snapshot used by the Outlines app.</uap:InfoTip>
+            <uap:Logo>Images\SnapshotIcon.png</uap:Logo>
+          </uap:FileTypeAssociation>
+        </uap:Extension>
       </Extensions>
     </Application>
   </Applications>
