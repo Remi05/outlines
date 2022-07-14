@@ -3,6 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32505.173
 MinimumVisualStudioVersion = 10.0.40219.1
+# Note: The order of the projects is important, see issue #96.
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Outlines.Core", "Outlines.Core\Outlines.Core.csproj", "{6C3601E0-46A6-46D6-8F20-8010C1B99BBD}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Outlines.Inspection", "Outlines.Inspection\Outlines.Inspection.csproj", "{691EC091-5D6E-4D6F-95BF-27B3FF83EE2A}"
