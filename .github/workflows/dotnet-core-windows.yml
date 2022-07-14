@@ -12,6 +12,7 @@ jobs:
     strategy:
         matrix:
           configuration: [Debug, Release]
+          platform: [x64, x86, arm64]
 
     runs-on: windows-latest
     
@@ -30,10 +31,10 @@ jobs:
       uses: microsoft/setup-msbuild@v1.1
       
     - name: Restore Solution
-      run: msbuild $env:Solution_Name /t:Restore /p:Configuration=${{matrix.configuration}} /p:BuildingInsideVisualStudio=true
+      run: msbuild $env:Solution_Name /t:Restore /p:Configuration=${{matrix.configuration}} /p:Platform=${{matrix.platform}} /p:BuildingInsideVisualStudio=true
 
     - name: Build Solution
-      run: msbuild $env:Solution_Name /p:Configuration=${{matrix.configuration}} /p:BuildingInsideVisualStudio=true
+      run: msbuild $env:Solution_Name /p:Configuration=${{matrix.configuration}} /p:Platform=${{matrix.platform}} /p:BuildingInsideVisualStudio=true
     
     - name: 'Publish Outlines App'
       uses: actions/upload-artifact@v2
