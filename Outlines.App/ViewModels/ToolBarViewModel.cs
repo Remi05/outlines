@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Windows;
+using Windows.System;
 using Outlines.Core;
 using Outlines.Inspection;
 using Outlines.App.Services;
@@ -80,19 +80,19 @@ namespace Outlines.App.ViewModels
             TakeScreenshotCommand = new RelayCommand<object>(_ => TakeScreenshot());
         }
 
-        private void GetHelp()
+        private async void GetHelp()
         {
-            Process.Start("https://github.com/Remi05/outlines/wiki/User-Guide");
+            await Launcher.LaunchUriAsync(new Uri("https://github.com/Remi05/outlines/wiki/User-Guide"));
         }
 
-        private void GiveFeedback()
+        private async void GiveFeedback()
         {
-            Process.Start("https://github.com/Remi05/outlines/issues");
+            await Launcher.LaunchUriAsync(new Uri("https://github.com/Remi05/outlines/issues"));
         }
 
-        private void ShowMoreInfo()
+        private async void ShowMoreInfo()
         {
-            Process.Start("https://github.com/Remi05/outlines");
+            await Launcher.LaunchUriAsync(new Uri("https://github.com/Remi05/outlines"));
         }
 
         private void TakeElementSnapshot()
