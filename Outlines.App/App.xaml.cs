@@ -38,7 +38,7 @@ namespace Outlines.App
                 }
                 else
                 {
-                    // The provided Snapshot file path is invalid, we shoudl exit (an exit code of 1 indicates an error).
+                    // The provided Snapshot file path is invalid, we should exit (an exit code of 1 indicates an error).
                     App.Current.Shutdown(1);
                 }
             }
