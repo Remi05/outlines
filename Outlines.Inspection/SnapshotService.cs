@@ -87,8 +87,10 @@ namespace Outlines.Inspection
         {
             EnsureScreenshotIsSavedAsFile(snapshot);
 
+            const string outlinesProtocol = "outlines";
+
             new ToastContentBuilder()
-                .AddArgument(snapshotFilePath)
+                .AddToastActivationInfo($"{outlinesProtocol}:{snapshotFilePath}", ToastActivationType.Protocol)
                 .AddHeroImage(new Uri(snapshot.ScreenshotFilePath))
                 .AddText("Snapshot saved")
                 .AddText("Select to open and inspect.").Show();
