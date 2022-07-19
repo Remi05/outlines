@@ -21,11 +21,6 @@ namespace Outlines.Core
         {
             Rectangle elementBounds = rootNode.ElementProperties.BoundingRect;
 
-            if (!elementBounds.Contains(point))
-            {
-                return null;
-            }
-
             var children = rootNode.Children;
             foreach (var child in children)
             {
@@ -38,6 +33,11 @@ namespace Outlines.Core
                     }
                 }
                 catch (Exception) { }
+            }
+
+            if (!elementBounds.Contains(point))
+            {
+                return null;
             }
 
             return rootNode.ElementProperties;
