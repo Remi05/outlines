@@ -232,10 +232,22 @@ namespace Outlines.App.Services
 
         private void ShowNoZOrderChange()
         {
-            WindowZOrderHelper.ShowWindowNoZOrderChange(BackdropWindow.Hwnd);
-            WindowZOrderHelper.ShowWindowNoZOrderChange(OverlayWindow.Hwnd);
-            WindowZOrderHelper.ShowWindowNoZOrderChange(PropertiesWindow.Hwnd);
-            WindowZOrderHelper.ShowWindowNoZOrderChange(TreeViewWindow.Hwnd);
+            if (InspectorStateManager.IsBackdropVisible)
+            {
+                WindowZOrderHelper.ShowWindowNoZOrderChange(BackdropWindow.Hwnd);
+            }
+            if (InspectorStateManager.IsOverlayVisible)
+            {
+                WindowZOrderHelper.ShowWindowNoZOrderChange(OverlayWindow.Hwnd);
+            }
+            if (InspectorStateManager.IsPropertiesPanelVisible)
+            {
+                WindowZOrderHelper.ShowWindowNoZOrderChange(PropertiesWindow.Hwnd);
+            }
+            if (InspectorStateManager.IsTreeViewVisible)
+            {
+                WindowZOrderHelper.ShowWindowNoZOrderChange(TreeViewWindow.Hwnd);
+            }
             WindowZOrderHelper.ShowWindowNoZOrderChange(ToolBarWindow.Hwnd);
         }
 
