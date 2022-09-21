@@ -24,8 +24,7 @@ namespace Outlines.App.ViewModels
             Dispatcher = dispatcher;
             OutlinesService = outlinesService;
             UITreeService = uiTreeService;
-            UITreeService.RootNodeChanged += UpdateUiTreeViewElements;
-            UpdateUiTreeViewElements();
+            UpdateUITreeViewElements();
         }
 
         public void OnElementSelectionChanged(UITreeItemViewModel uiTreeItemViewModel)
@@ -33,17 +32,16 @@ namespace Outlines.App.ViewModels
             OutlinesService.SelectElementWithProperties(uiTreeItemViewModel?.UITreeNode?.ElementProperties);
         }
 
-        private void UpdateUiTreeViewElements()
+        private void UpdateUITreeViewElements()
         {
             Dispatcher.Invoke(() =>
             {
                 Elements.Clear();
                 if (UITreeService.RootNode != null)
                 {
-                    var uiTreeItemViewModel = new UITreeItemViewModel(UITreeService.RootNode);
+                    var uiTreeItemViewModel = new UITreeItemViewModel(Dispatcher, UITreeService.RootNode, true);
                     Elements.Add(uiTreeItemViewModel);
                 }
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Elements)));
             });
         }
     }

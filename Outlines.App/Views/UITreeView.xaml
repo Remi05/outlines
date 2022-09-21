@@ -27,6 +27,7 @@
             <Style x:Key="TreeViewItemStyle" TargetType="TreeViewItem">
                 <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundColorBrush}" />
                 <Setter Property="Margin" Value="0,0,0,4" />
+                <Setter Property="IsExpanded" Value="{Binding ShouldShowChildren, Mode=TwoWay}" />
             </Style>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -37,7 +38,7 @@
             <TreeView ItemsSource="{Binding Elements}" Style="{StaticResource TreeViewStyle}" ItemContainerStyle="{StaticResource TreeViewItemStyle}" SelectedItemChanged="OnSelectedItemChanged">
                 <TreeView.Resources>
                     <HierarchicalDataTemplate DataType="{x:Type vm:UITreeItemViewModel}" ItemsSource="{Binding ChildrenElements}">
-                        <TextBlock Text="{Binding ElementName}"/>
+                        <TextBlock Text="{Binding ElementName, Mode=OneTime}" />
                     </HierarchicalDataTemplate>
                 </TreeView.Resources>
             </TreeView>

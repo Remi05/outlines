@@ -148,7 +148,7 @@ namespace Outlines.App.Services
             GlobalInputListener = new GlobalInputListener(inputMaskingService);
 
             IScreenshotService screenshotService = new ScreenshotService(HideNoZOrderChange, ShowNoZOrderChange);
-            IUITreeService uiTreeService = new LiveUITreeService(elementPropertiesProvider, OutlinesService, IgnorableWindowsSource);
+            IUITreeService uiTreeService = new LiveUITreeService(elementPropertiesProvider, IgnorableWindowsSource);
             ISnapshotService snapshotService =  new SnapshotService(screenshotService, uiTreeService, ScreenHelper, folderConfig);
 
             ColorPickerViewModel colorPickerViewModel = new ColorPickerViewModel(colorPickerService, GlobalInputListener);

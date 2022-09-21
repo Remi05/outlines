@@ -5,21 +5,20 @@ namespace Outlines.Core
 {
     public class CachedUITreeService : IUITreeService
     {
-        public UITreeNode RootNode { get; private set; }
+        private CachedUITreeNode RootCachedNode { get; }
+        public IUITreeNode RootNode => RootCachedNode;
 
-        public event RootNodeChangedEventHandler RootNodeChanged;
-
-        public CachedUITreeService(UITreeNode rootNode)
+        public CachedUITreeService(CachedUITreeNode rootNode)
         {
-            RootNode = rootNode;
+            RootCachedNode = rootNode;
         }
 
-        public UITreeNode GetSubTree(ElementProperties rootElementProperties)
+        public CachedUITreeNode CreateSnapshotOfElementSubTree(ElementProperties rootElementProperties)
         {
-            return RootNode != null ? GetSubTree(rootElementProperties, RootNode) : null;
+            return (RootCachedNode != null) ? CreateSnapshotOfElementSubTree(rootElementProperties, RootCachedNode) : null;
         }
 
-        private UITreeNode GetSubTree(ElementProperties rootElementProperties, UITreeNode curNode)
+        private CachedUITreeNode CreateSnapshotOfElementSubTree(ElementProperties rootElementProperties, CachedUITreeNode curNode)
         {
             if (rootElementProperties == curNode.ElementProperties)
             {
@@ -28,7 +27,7 @@ namespace Outlines.Core
 
             foreach (var child in curNode.Children)
             {
-                var subtree = GetSubTree(rootElementProperties, child);
+                var subtree = CreateSnapshotOfElementSubTree(rootElementProperties, child);
                 if (subtree != null)
                 {
                     return subtree;
@@ -37,7 +36,7 @@ namespace Outlines.Core
             return null;
         }
 
-        public UITreeNode GetSubTreeInBounds(Rectangle bounds)
+        public CachedUITreeNode CreateSnapshotOfSubTreeInBounds(Rectangle bounds)
         {
             throw new NotImplementedException();
         }
