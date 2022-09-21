@@ -90,10 +90,13 @@ namespace Outlines.Inspection
             try
             {
                 var childrenElements = AutomationElement.FindAll(TreeScope.TreeScope_Children, ChildrenFilterCondition);
-                for (int i = 0; i < childrenElements.Length; ++i)
+                if (childrenElements != null)
                 {
-                    var childNode = new LiveUITreeNode(childrenElements.GetElement(i), ElementPropertiesProvider, ChildrenFilterCondition);
-                    newChildrenNodes.Add(childNode);
+                    for (int i = 0; i < childrenElements.Length; ++i)
+                    {
+                        var childNode = new LiveUITreeNode(childrenElements.GetElement(i), ElementPropertiesProvider, ChildrenFilterCondition);
+                        newChildrenNodes.Add(childNode);
+                    }
                 }
             }
             catch
