@@ -95,7 +95,12 @@ namespace Outlines.Inspection
                     for (int i = 0; i < childrenElements.Length; ++i)
                     {
                         var childNode = new LiveUITreeNode(childrenElements.GetElement(i), ElementPropertiesProvider, ChildrenFilterCondition);
-                        newChildrenNodes.Add(childNode);
+                        // For some elements, ElementPropertiesProvider can return null ElementProperties.
+                        // Those elements are useless to us so we should simply ignore them.
+                        if (childNode.ElementProperties != null)
+                        {
+                            newChildrenNodes.Add(childNode);
+                        }
                     }
                 }
             }
