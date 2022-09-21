@@ -106,6 +106,7 @@ namespace Outlines.Inspection
             finally
             {
                 Children = newChildrenNodes;
+                HasChildren = (Children.Count > 0);
                 ChildrenChanged?.Invoke();
             }
         }
