@@ -34,7 +34,7 @@ namespace Outlines.Inspection
 
         public Snapshot TakeSnapshot(Rectangle bounds)
         {
-            UITreeNode subtree = UITreeService.GetSubTreeInBounds(bounds);
+            CachedUITreeNode subtree = UITreeService.CreateSnapshotOfSubTreeInBounds(bounds);
             Image screenshot = ScreenshotService.TakeScreenshot(bounds);
             double scaleFactor = ScreenHelper.GetDisplayScaleFactor();
             return new Snapshot() { UITree = subtree, Screenshot = screenshot, ScaleFactor = scaleFactor };
@@ -42,7 +42,7 @@ namespace Outlines.Inspection
 
         public Snapshot TakeSnapshot(ElementProperties elementProperties)
         {
-            UITreeNode subtree = UITreeService.GetSubTree(elementProperties);
+            CachedUITreeNode subtree = UITreeService.CreateSnapshotOfElementSubTree(elementProperties);
             Image screenshot = ScreenshotService.TakeScreenshot(elementProperties);
             double scaleFactor = ScreenHelper.GetDisplayScaleFactor();
             return new Snapshot() { UITree = subtree, Screenshot = screenshot, ScaleFactor = scaleFactor };

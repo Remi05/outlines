@@ -6,11 +6,9 @@ namespace Outlines.Core
 
     public interface IUITreeService
     {
-        UITreeNode RootNode { get; }
+        IUITreeNode RootNode { get; }
 
-        event RootNodeChangedEventHandler RootNodeChanged;
-
-        UITreeNode GetSubTree(ElementProperties rootElementProperties);
-        UITreeNode GetSubTreeInBounds(Rectangle bounds);
+        CachedUITreeNode CreateSnapshotOfElementSubTree(ElementProperties rootElementProperties);
+        CachedUITreeNode CreateSnapshotOfSubTreeInBounds(Rectangle bounds);
     }
 }

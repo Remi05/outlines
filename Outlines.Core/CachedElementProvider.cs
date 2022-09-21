@@ -5,9 +5,9 @@ namespace Outlines.Core
 {
     public class CachedElementProvider : IElementProvider
     {
-        private UITreeNode UITree { get; set; }
+        private CachedUITreeNode UITree { get; set; }
 
-        public CachedElementProvider(UITreeNode uiTree)
+        public CachedElementProvider(CachedUITreeNode uiTree)
         {
             UITree = uiTree;
         }
@@ -17,7 +17,7 @@ namespace Outlines.Core
             return GetContainingElement(UITree, point); 
         }
 
-        private ElementProperties GetContainingElement(UITreeNode rootNode, Point point)
+        private ElementProperties GetContainingElement(CachedUITreeNode rootNode, Point point)
         {
             Rectangle elementBounds = rootNode.ElementProperties.BoundingRect;
 

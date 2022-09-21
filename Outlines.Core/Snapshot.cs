@@ -11,7 +11,7 @@ namespace Outlines.Core
         public double ScaleFactor { get; set; }
         public string ScreenshotFilePath { get; set; }
         public string ScreenshotBase64 { get; set; }
-        public UITreeNode UITree { get; set; }
+        public CachedUITreeNode UITree { get; set; }
 
         private Image screenshot = null;
 

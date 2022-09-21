@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Threading.Tasks;
 using UIAutomationClient;
 using Outlines.Core;
 
@@ -10,67 +9,22 @@ namespace Outlines.Inspection
 {
     public class LiveUITreeService : IUITreeService
     {
-        private const int MaxTreeDepth = int.MaxValue;
-        private const int StartupTreeDepth = 2;
-        private const int FollowUpTreeDepth1 = 4;
-        private const int FollowUpTreeDepth2 = 10;
+        private IUIAutomation UIAutomation { get; } = new CUIAutomation();
+        private IElementPropertiesProvider ElementPropertiesProvider { get; }
+        private IIgnorableWindowsSource IgnorableWindowsSource { get; }
+        private IUIAutomationCondition ConstantFilterCondition { get; }
+        public IUITreeNode RootNode { get; }
 
-        private IUIAutomation UIAutomation { get; set; } = new CUIAutomation();
-        private IElementPropertiesProvider ElementPropertiesProvider { get; set; }
-        private IOutlinesService OutlinesService { get; set; }
-        private IIgnorableWindowsSource IgnorableWindowsSource { get; set; }
-
-        private IUIAutomationCondition ConstantFilterCondition { get; set; }
-
-        private UITreeNode rootNode = null;
-        public UITreeNode RootNode
+        public LiveUITreeService(IElementPropertiesProvider elementPropertiesProvider, IIgnorableWindowsSource ignorableWindowsSource)
         {
-            get => rootNode;
-            private set
+            if (elementPropertiesProvider == null)
             {
-                if (value != rootNode)
-                {
-                    rootNode = value;
-                    RootNodeChanged?.Invoke();
-                }
-            }
-        }
-
-        public event RootNodeChangedEventHandler RootNodeChanged;
-
-        public LiveUITreeService(IElementPropertiesProvider elementPropertiesProvider, IOutlinesService outlinesService, IIgnorableWindowsSource ignorableWindowsSource)
-        {
-            if (elementPropertiesProvider == null || outlinesService == null)
-            {
-                throw new ArgumentNullException(elementPropertiesProvider == null ? nameof(elementPropertiesProvider) : nameof(outlinesService));
+                throw new ArgumentNullException(nameof(elementPropertiesProvider));
             }
             ElementPropertiesProvider = elementPropertiesProvider;
-            OutlinesService = outlinesService;
             IgnorableWindowsSource = ignorableWindowsSource;
             ConstantFilterCondition = UIAutomation.CreatePropertyCondition(UIA_PropertyIds.UIA_IsOffscreenPropertyId, false);
-            InitializeUiTree();
-        }
-
-        private async Task InitializeUiTree()
-        {
-            // Loading the entire tree on startup is slow, so just show minimal results at first and add more async.
-            await RefreshUiTree(StartupTreeDepth);
-            await RefreshUiTree(FollowUpTreeDepth1);
-            await RefreshUiTree(FollowUpTreeDepth2);
-        }
-
-        private async Task RefreshUiTree(int treeDepth)
-        {
-            await Task.Run(() =>
-            {
-                var rootElementProperties = ElementPropertiesProvider.GetElementProperties(UIAutomation.GetRootElement()) as AutomationElementProperties;
-                RootNode = GetSubTree(rootElementProperties, treeDepth);
-            });
-        }
-
-        public UITreeNode GetSubTree(ElementProperties rootElementProperties)
-        {
-            return GetSubTree(rootElementProperties as AutomationElementProperties, MaxTreeDepth);
+            RootNode = new LiveUITreeNode(UIAutomation.GetRootElement(), ElementPropertiesProvider, GetFilterCondition());
         }
 
         private IUIAutomationCondition GetFilterCondition()
@@ -86,59 +40,59 @@ namespace Outlines.Inspection
             return UIAutomation.CreateAndCondition(ConstantFilterCondition, ignoredWindowsCondition);
         }
 
-        private UITreeNode GetSubTree(AutomationElementProperties rootElementProperties, int treeDepth)
+        public CachedUITreeNode CreateSnapshotOfElementSubTree(ElementProperties rootElementProperties)
         {
-            if (rootElementProperties == null)
+            AutomationElementProperties rootAutomationElementProperties = rootElementProperties as AutomationElementProperties;
+            if (rootAutomationElementProperties == null)
             {
                 return null;
             }
             try
             {
-                var childrenElements = rootElementProperties.Element.FindAll(TreeScope.TreeScope_Children, GetFilterCondition());
-                var childrenNodes = new List<UITreeNode>();
-                if (treeDepth > 1)
+                var childrenElements = rootAutomationElementProperties.Element.FindAll(TreeScope.TreeScope_Children, GetFilterCondition());
+                var childrenNodes = new List<CachedUITreeNode>();
+
+                for (int i = 0; i < childrenElements.Length; ++i)
                 {
-                    for (int i = 0; i < childrenElements.Length; ++i)
+                    var childElementProperties = ElementPropertiesProvider.GetElementProperties(childrenElements.GetElement(i));
+                    CachedUITreeNode childNode = CreateSnapshotOfElementSubTree(childElementProperties);
+                    if (childNode != null)
                     {
-                        var childElementProperties = ElementPropertiesProvider.GetElementProperties(childrenElements.GetElement(i)) as AutomationElementProperties;
-                        UITreeNode childNode = GetSubTree(childElementProperties, treeDepth - 1);
-                        if (childNode != null)
-                        {
-                            childrenNodes.Add(childNode);
-                        }
+                        childrenNodes.Add(childNode);
                     }
                 }
-                return new UITreeNode() { ElementProperties = rootElementProperties, Children = childrenNodes };
+
+                return new CachedUITreeNode() { ElementProperties = rootAutomationElementProperties, Children = childrenNodes };
             }
             catch
             {
+                // TODO: Consider logging the failure to create the subtree.
                 return null;
             }
         }
 
-        public UITreeNode GetSubTreeInBounds(Rectangle bounds)
+        public CachedUITreeNode CreateSnapshotOfSubTreeInBounds(Rectangle bounds)
         {
-            var childrenNodes = GetSubTreeInBounds(bounds, UIAutomation.GetRootElement());
+            var childrenNodes = CreateSnapshotOfSubTreeInBounds(bounds, UIAutomation.GetRootElement());
             var rootProperties = new ElementProperties() { Name = "Root", BoundingRect = bounds };
-            return new UITreeNode() { ElementProperties = rootProperties, Children = childrenNodes };
+            return new CachedUITreeNode() { ElementProperties = rootProperties, Children = childrenNodes };
         }
 
-        private List<UITreeNode> GetSubTreeInBounds(Rectangle bounds, IUIAutomationElement curElement)
+        private List<CachedUITreeNode> CreateSnapshotOfSubTreeInBounds(Rectangle bounds, IUIAutomationElement curElement)
         {
-            var elementsInBounds = new List<UITreeNode>();
-
+            var elementsInBounds = new List<CachedUITreeNode>();
             try
             {
                 Rectangle curElementBounds = curElement.CurrentBoundingRectangle.ToDrawingRectangle();
                 if (bounds.IntersectsWith(curElementBounds))
                 {
                     var childrenElements = curElement.FindAll(TreeScope.TreeScope_Children, GetFilterCondition());
-                    var childrenNodes = new List<UITreeNode>();
+                    var childrenNodes = new List<CachedUITreeNode>();
 
                     for (int i = 0; i < childrenElements.Length; ++i)
                     {
-                        var childElementProperties = ElementPropertiesProvider.GetElementProperties(childrenElements.GetElement(i)) as AutomationElementProperties;
-                        UITreeNode childNode = GetSubTree(childElementProperties, MaxTreeDepth);
+                        var childElementProperties = ElementPropertiesProvider.GetElementProperties(childrenElements.GetElement(i));
+                        CachedUITreeNode childNode = CreateSnapshotOfElementSubTree(childElementProperties);
                         if (childNode != null)
                         {
                             childrenNodes.Add(childNode);
@@ -146,7 +100,7 @@ namespace Outlines.Inspection
                     }
 
                     ElementProperties curElementProperties = ElementPropertiesProvider.GetElementProperties(curElement);
-                    UITreeNode curNode = new UITreeNode() { ElementProperties = curElementProperties, Children = childrenNodes };
+                    CachedUITreeNode curNode = new CachedUITreeNode() { ElementProperties = curElementProperties, Children = childrenNodes };
                     elementsInBounds.Add(curNode);
                 }
                 else
@@ -154,7 +108,7 @@ namespace Outlines.Inspection
                     var childrenElements = curElement.FindAll(TreeScope.TreeScope_Children, GetFilterCondition());
                     for (int i = 0; i < childrenElements.Length; ++i)
                     {
-                        var subTreeInBounds = GetSubTreeInBounds(bounds, childrenElements.GetElement(i));
+                        var subTreeInBounds = CreateSnapshotOfSubTreeInBounds(bounds, childrenElements.GetElement(i));
                         foreach (var childNode in subTreeInBounds)
                         {
                             elementsInBounds.Add(childNode);
@@ -162,8 +116,9 @@ namespace Outlines.Inspection
                     }
                 }
             }
-            catch (Exception)
+            catch
             {
+                // TODO: Consider logging the failure to create the subtree.
                 return null;
             }
 
