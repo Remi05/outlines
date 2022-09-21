@@ -61,7 +61,7 @@ namespace Outlines.Inspection
         public IEnumerable<IUITreeNode> GetAndMonitorChildren()
         {
             // We defer finding and monitoring children elements until GetAndMonitorChildren() is called since loading
-            // loading the entire UI tree is resource intensive so we only load and monitor the parts of it that are needed.
+            // the entire UI tree is resource-intensive so we only load and monitor the parts of it that are needed.
             if (!AreChildrenMonitored)
             {
                 StartMonitoringChildren();
