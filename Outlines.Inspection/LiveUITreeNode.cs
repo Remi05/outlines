@@ -38,7 +38,7 @@ namespace Outlines.Inspection
                 {
                     UIAutomation.RemoveStructureChangedEventHandler(AutomationElement, StructureChangedHandler);
                 }
-                catch (Exception)
+                catch
                 {
                     // TODO: Consider logging the failure to remove the StructureChangedEventHandler.
                 }
@@ -51,7 +51,7 @@ namespace Outlines.Inspection
             {
                 return (AutomationElement.FindFirst(TreeScope.TreeScope_Children, ChildrenFilterCondition) != null);
             }
-            catch (Exception)
+            catch
             {
                 // If we fail to find any child, it is not critical so we shouldn't throw, we can simply assume there are no children.
                 return false;
@@ -78,7 +78,7 @@ namespace Outlines.Inspection
             {
                 UIAutomation.AddStructureChangedEventHandler(AutomationElement, TreeScope.TreeScope_Children, null, StructureChangedHandler);
             }
-            catch (Exception)
+            catch
             {
                 // TODO: Consider logging the failure to monitor children elements.
             }
@@ -96,7 +96,7 @@ namespace Outlines.Inspection
                     newChildrenNodes.Add(childNode);
                 }
             }
-            catch (Exception) 
+            catch
             {
                 // TODO: Consider logging the failure to find children elements.
             }
