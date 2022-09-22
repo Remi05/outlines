@@ -18,6 +18,7 @@ namespace Outlines.App.Services
         private IInspectorStateManager InspectorStateManager { get; set; }
         private IOutlinesService OutlinesService { get; set; }
         private IScreenHelper ScreenHelper { get; set; }
+        private AutomationPropertiesWatcher AutomationPropertiesWatcher { get; set; }
         private WindowZOrderHelper WindowZOrderHelper { get; set; } = new WindowZOrderHelper();
         private UiaWindowHelper UiaWindowHelper { get; set; } = new UiaWindowHelper();
         private IgnorableWindowsSource IgnorableWindowsSource { get; set; } = new IgnorableWindowsSource();
@@ -132,6 +133,8 @@ namespace Outlines.App.Services
             CoordinateConverter = new CachedCoordinateConverter(ScreenHelper.GetDisplayScaleFactor(), new System.Drawing.Point(0, 0));
             OutlinesService = new OutlinesService(distanceOutlinesProvider, elementProvider);
             OutlinesService.TargetElementChanged += OnTargetElementChanged;
+
+            AutomationPropertiesWatcher = new AutomationPropertiesWatcher(OutlinesService, elementPropertiesProvider);
 
             InspectorStateManager = new InspectorStateManager();
             InspectorStateManager.IsOverlayVisibleChanged += OnIsOverlayVisibleChanged;
