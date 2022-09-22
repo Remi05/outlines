@@ -1,102 +1,100 @@
-﻿using UIAutomationClient;
+﻿using System;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using UIAutomationClient;
 using Outlines.Core;
 
 namespace Outlines.Inspection
 {
     public class AutomationPropertiesWatcher
     {
-        private delegate void AutomationPropertyChangedHandler(IUIAutomationElement sender);
-        private delegate void AutomationEventHandler(IUIAutomationElement sender, int eventId);
+        private static readonly TimeSpan RefreshRate = TimeSpan.FromMilliseconds(300);
 
-        private class AutomationPropertyChangedHandlerImpl : IUIAutomationPropertyChangedEventHandler
-        {
-            private AutomationPropertyChangedHandler HandlerFunc { get; set; }
-
-            public AutomationPropertyChangedHandlerImpl(AutomationPropertyChangedHandler handlerFunc)
-            {
-                HandlerFunc = handlerFunc;
-            }
-
-            public void HandlePropertyChangedEvent(IUIAutomationElement sender, int propertyId, object newValue)
-            {
-                HandlerFunc(sender);
-            }
-        }
-
-        private class AutomationEventHandlerImpl : IUIAutomationEventHandler
-        {
-            private AutomationEventHandler HandlerFunc { get; set; }
-
-            public AutomationEventHandlerImpl(AutomationEventHandler handlerFunc)
-            {
-                HandlerFunc = handlerFunc;
-            }
-
-            public void HandleAutomationEvent(IUIAutomationElement sender, int eventId)
-            {
-                HandlerFunc(sender, eventId);
-            }
-        }
-
-        private static readonly int[] PropertiesToWatch = new int[]
-        {
-            UIA_PropertyIds.UIA_AutomationIdPropertyId,
-            UIA_PropertyIds.UIA_BoundingRectanglePropertyId,
-            UIA_PropertyIds.UIA_ClassNamePropertyId,
-            UIA_PropertyIds.UIA_ControlTypePropertyId,
-            UIA_PropertyIds.UIA_NamePropertyId,
-            UIA_PropertyIds.UIA_IsOffscreenPropertyId,
-            UIA_PropertyIds.UIA_ClickablePointPropertyId,
-            UIA_PropertyIds.UIA_CenterPointPropertyId,
-        };
-
-        private IUIAutomation UIAutomation { get; set; } = new CUIAutomation();
         private IOutlinesService OutlinesService { get; set; }
         private IElementPropertiesProvider ElementPropertiesProvider { get; set; }
-        private IUIAutomationElement WatchedElement { get; set; }
-        private IUIAutomationPropertyChangedEventHandler WatchedElementPropertyChangedEventHandler { get; set; }
-        private IUIAutomationEventHandler WatchedElementEventHandler { get; set; }
+
+        private IUIAutomationElement WatchedSelectedElement { get; set; }
+        private IUIAutomationElement WatchedTargetElement { get; set; }
+        private CancellationTokenSource WatchSelectedElementTaskCancellationTokenSource { get; set; }
+        private CancellationTokenSource WatchTargetElementTaskCancellationTokenSource { get; set; }
 
         public AutomationPropertiesWatcher(IOutlinesService outlinesService, IElementPropertiesProvider elementPropertiesProvider)
         {
             ElementPropertiesProvider = elementPropertiesProvider;
             OutlinesService = outlinesService;
-
-            WatchedElementPropertyChangedEventHandler = new AutomationPropertyChangedHandlerImpl(OnWatchedElementPropertyChanged);
-            WatchedElementEventHandler = new AutomationEventHandlerImpl(OnWatchedElementEvent);
             OutlinesService.SelectedElementChanged += OnSelectedElementChanged;
+            OutlinesService.TargetElementChanged += OnTargetElementChanged;
         }
 
         private void OnSelectedElementChanged()
         {
-            if (WatchedElement != null)
+            var selectedElementProperties = OutlinesService.SelectedElementProperties as AutomationElementProperties;
+            if (selectedElementProperties != null)
             {
-                UIAutomation.RemovePropertyChangedEventHandler(WatchedElement, WatchedElementPropertyChangedEventHandler);
-                UIAutomation.RemoveAutomationEventHandler(UIA_EventIds.UIA_LayoutInvalidatedEventId, WatchedElement, WatchedElementEventHandler);
-            }
+                if (!AreSameElement(WatchedSelectedElement, selectedElementProperties.Element))
+                {
+                    // Stop watching the previous selected element.
+                    WatchSelectedElementTaskCancellationTokenSource?.Cancel();
 
-            var automationElementProperties = OutlinesService.SelectedElementProperties as AutomationElementProperties;
-            if (automationElementProperties != null)
-            {
-                WatchedElement = automationElementProperties.Element;
-                UIAutomation.AddPropertyChangedEventHandler(WatchedElement, TreeScope.TreeScope_Element, null, 
-                                                            WatchedElementPropertyChangedEventHandler, PropertiesToWatch);
-
-                UIAutomation.AddAutomationEventHandler(UIA_EventIds.UIA_LayoutInvalidatedEventId, WatchedElement, 
-                                                       TreeScope.TreeScope_Parent, null, WatchedElementEventHandler);
+                    WatchedSelectedElement = selectedElementProperties.Element;
+                    WatchSelectedElementTaskCancellationTokenSource = new CancellationTokenSource();
+                    StartWatchingElementProperties(WatchedSelectedElement, OutlinesService.SelectElementWithProperties, WatchSelectedElementTaskCancellationTokenSource.Token);
+                }
             }
         }
 
-        private void OnWatchedElementPropertyChanged(IUIAutomationElement sender)
+        private void OnTargetElementChanged()
         {
-            ElementProperties elementProperties = ElementPropertiesProvider.GetElementProperties(sender);
-            OutlinesService.SelectElementWithProperties(elementProperties);
+            var targetElementProperties = OutlinesService.TargetElementProperties as AutomationElementProperties;
+            if (targetElementProperties != null)
+            {
+                if (!AreSameElement(WatchedTargetElement, targetElementProperties.Element))
+                {
+                    // Stop watching the previous target element.
+                    WatchTargetElementTaskCancellationTokenSource?.Cancel();
+
+                    WatchedTargetElement = targetElementProperties.Element;
+                    WatchTargetElementTaskCancellationTokenSource = new CancellationTokenSource();
+                    StartWatchingElementProperties(WatchedTargetElement, OutlinesService.TargetElementWithProperties, WatchTargetElementTaskCancellationTokenSource.Token);
+                }
+            }
         }
 
-        private void OnWatchedElementEvent(IUIAutomationElement sender, int eventId)
+        private bool AreSameElement(IUIAutomationElement firstElement, IUIAutomationElement secondElement)
         {
-            ElementProperties elementProperties = ElementPropertiesProvider.GetElementProperties(WatchedElement);
-            OutlinesService.SelectElementWithProperties(elementProperties);
+            // We don't consider two null IUIAutomationElement to be the same element since neither are an actual element.
+            if ((firstElement == null) || (secondElement == null))
+            {
+                return false;
+            }
+
+            try
+            {
+                var firstElementRuntimeId = firstElement.GetRuntimeId();
+                var secondElementRuntimeId = secondElement.GetRuntimeId();
+                return firstElementRuntimeId.SequenceEqual(secondElementRuntimeId);
+            }
+            catch
+            {
+                // GetRuntimeId() can sometimes throw, but it is not fatal, so we should simply consider the two elements
+                // to be different (even if the elements are in fact the same, the main drawback is performance).
+                return false;
+            }
+        }
+
+        private void StartWatchingElementProperties(IUIAutomationElement elementToWatch, Action<ElementProperties> updateElementAction, CancellationToken cancellationToken)
+        {
+            Task.Run(() =>
+            {
+                Thread.Sleep(RefreshRate);
+                while (!cancellationToken.IsCancellationRequested)
+                {
+                    ElementProperties elementProperties = ElementPropertiesProvider.GetElementProperties(elementToWatch);
+                    updateElementAction(elementProperties);
+                    Thread.Sleep(RefreshRate);
+                }
+            });
         }
     }
 }
