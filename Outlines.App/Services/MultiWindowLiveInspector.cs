@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interop;
@@ -11,8 +13,6 @@ namespace Outlines.App.Services
 {
     public class MultiWindowLiveInspector : ILiveInspector
     {
-        private const int TargetHoverDelayInMs = 75;
-
         private ICoordinateConverter CoordinateConverter { get; set; }
         private IGlobalInputListener GlobalInputListener { get; set; }
         private IInspectorStateManager InspectorStateManager { get; set; }
@@ -32,6 +32,7 @@ namespace Outlines.App.Services
         private ISet<Window> RenderedWindows { get; set; } = new HashSet<Window>();
 
         private bool IsClosing { get; set; } = false;
+        private bool ShouldStopWatchingCursor { get; set; } = false;
 
         public MultiWindowLiveInspector()
         {
@@ -73,6 +74,7 @@ namespace Outlines.App.Services
             }
 
             IsClosing = true;
+            ShouldStopWatchingCursor = true;
             GlobalInputListener?.UnregisterFromInputEvents();
 
             BackdropWindow?.Close();
@@ -167,9 +169,6 @@ namespace Outlines.App.Services
             serviceContainer.AddService(typeof(ToolBarViewModel), toolBarViewModel);
             serviceContainer.AddService(typeof(UITreeViewModel), uiTreeViewModel);
 
-            HoverWatcher targetHoverWatcher = new HoverWatcher(TargetHoverDelayInMs);
-            targetHoverWatcher.MouseHovered += OnMouseHovered;
-            GlobalInputListener.MouseMoved += targetHoverWatcher.OnMouseMoved;
             GlobalInputListener.MouseDown += OnMouseDown;
             GlobalInputListener.KeyDown += OnKeyDown;
             GlobalInputListener.KeyUp += OnKeyUp;
@@ -200,6 +199,7 @@ namespace Outlines.App.Services
 
             HideWindowsFromUia();
             GlobalInputListener?.RegisterToInputEvents();
+            WatchCursorPosition();
         }
 
         private void PositionWindows()
@@ -263,9 +263,18 @@ namespace Outlines.App.Services
             WindowZOrderHelper.HideWindowNoZOrderChange(ToolBarWindow.Hwnd);
         }
 
-        private void OnMouseHovered(System.Drawing.Point cursorPos)
+        private void WatchCursorPosition()
         {
-            OutlinesService.TargetElementAt(cursorPos);
+            var cursorPositionRefreshDelay = TimeSpan.FromMilliseconds(60);
+            Task.Run(() =>
+            {
+                while (!ShouldStopWatchingCursor)
+                {
+                    var cursorPos = GlobalInputListener.GetCursorPosition();
+                    OutlinesService.TargetElementAt(cursorPos);
+                    Thread.Sleep(cursorPositionRefreshDelay);
+                }
+            });
         }
 
         private void OnMouseDown(System.Drawing.Point cursorPos)
