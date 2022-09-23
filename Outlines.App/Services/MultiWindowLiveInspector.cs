@@ -44,6 +44,7 @@ namespace Outlines.App.Services
         ~MultiWindowLiveInspector()
         {
             GlobalInputListener?.UnregisterFromInputEvents();
+            ShouldStopWatchingCursor = true;
         }
 
         public void Show()
