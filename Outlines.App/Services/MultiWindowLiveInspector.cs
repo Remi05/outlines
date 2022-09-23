@@ -22,6 +22,7 @@ namespace Outlines.App.Services
         private WindowZOrderHelper WindowZOrderHelper { get; set; } = new WindowZOrderHelper();
         private UiaWindowHelper UiaWindowHelper { get; set; } = new UiaWindowHelper();
         private IgnorableWindowsSource IgnorableWindowsSource { get; set; } = new IgnorableWindowsSource();
+        private ColorPickerViewModel ColorPickerViewModel { get; set; }
 
         private ToolBarWindow ToolBarWindow { get; set; }
         private OverlayWindow OverlayWindow { get; set; }
@@ -156,14 +157,14 @@ namespace Outlines.App.Services
             IUITreeService uiTreeService = new LiveUITreeService(elementPropertiesProvider, IgnorableWindowsSource);
             ISnapshotService snapshotService =  new SnapshotService(screenshotService, uiTreeService, ScreenHelper, folderConfig);
 
-            ColorPickerViewModel colorPickerViewModel = new ColorPickerViewModel(colorPickerService, GlobalInputListener);
+            ColorPickerViewModel = new ColorPickerViewModel(colorPickerService);
             OverlayViewModel overlayViewModel = new OverlayViewModel(OverlayWindow.Dispatcher, OutlinesService, CoordinateConverter, ScreenHelper);
             PropertiesViewModel propertiesViewModel = new PropertiesViewModel(OutlinesService);
             ToolBarViewModel toolBarViewModel = new ToolBarViewModel(OutlinesService, screenshotService, snapshotService, folderConfig, CoordinateConverter, InspectorStateManager);
             UITreeViewModel uiTreeViewModel = new UITreeViewModel(TreeViewWindow.Dispatcher, OutlinesService, uiTreeService);
 
             var serviceContainer = ServiceContainer.Instance;
-            serviceContainer.AddService(typeof(ColorPickerViewModel), colorPickerViewModel);
+            serviceContainer.AddService(typeof(ColorPickerViewModel), ColorPickerViewModel);
             serviceContainer.AddService(typeof(OverlayViewModel), overlayViewModel);
             serviceContainer.AddService(typeof(PropertiesViewModel), propertiesViewModel);
             serviceContainer.AddService(typeof(ToolBarViewModel), toolBarViewModel);
@@ -272,6 +273,7 @@ namespace Outlines.App.Services
                 {
                     var cursorPos = GlobalInputListener.GetCursorPosition();
                     OutlinesService.TargetElementAt(cursorPos);
+                    ColorPickerViewModel.OnMouseMoved(cursorPos);
                     Thread.Sleep(cursorPositionRefreshDelay);
                 }
             });
