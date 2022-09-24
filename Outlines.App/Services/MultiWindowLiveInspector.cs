@@ -28,7 +28,6 @@ namespace Outlines.App.Services
         private OverlayWindow OverlayWindow { get; set; }
         private PropertiesWindow PropertiesWindow { get; set; }
         private TreeViewWindow TreeViewWindow { get; set; }
-        private BackdropWindow BackdropWindow { get; set; }
 
         private ISet<Window> RenderedWindows { get; set; } = new HashSet<Window>();
 
@@ -50,10 +49,6 @@ namespace Outlines.App.Services
         public void Show()
         {
             ToolBarWindow.Show();
-            if (InspectorStateManager.IsBackdropVisible)
-            {
-                BackdropWindow?.Show();
-            }
             if (InspectorStateManager.IsOverlayVisible)
             {
                 OverlayWindow?.Show();
@@ -79,7 +74,6 @@ namespace Outlines.App.Services
             ShouldStopWatchingCursor = true;
             GlobalInputListener?.UnregisterFromInputEvents();
 
-            BackdropWindow?.Close();
             OverlayWindow?.Close();
             PropertiesWindow?.Close();
             TreeViewWindow?.Close();
@@ -88,13 +82,10 @@ namespace Outlines.App.Services
 
         private void CreateWindows()
         {
-            BackdropWindow = new BackdropWindow();
             OverlayWindow = new OverlayWindow();
             ToolBarWindow = new ToolBarWindow();
             PropertiesWindow = new PropertiesWindow();
             TreeViewWindow = new TreeViewWindow();
-
-            BackdropWindow.MouseDown += OnBackdropWindowClicked;
 
             // Shutdown the app if the ToolBar window is closed.
             ToolBarWindow.Closing += (_, __) =>
@@ -106,7 +97,6 @@ namespace Outlines.App.Services
             };
 
             // Ignore all the windows in the TreeView and Snapshots.
-            IgnorableWindowsSource.IgnoreWindow(BackdropWindow);
             IgnorableWindowsSource.IgnoreWindow(OverlayWindow);
             IgnorableWindowsSource.IgnoreWindow(ToolBarWindow);
             IgnorableWindowsSource.IgnoreWindow(PropertiesWindow);
@@ -136,7 +126,6 @@ namespace Outlines.App.Services
             ScreenHelper = new ScreenHelper(OverlayWindow);
             CoordinateConverter = new CachedCoordinateConverter(ScreenHelper.GetDisplayScaleFactor(), new System.Drawing.Point(0, 0));
             OutlinesService = new OutlinesService(distanceOutlinesProvider, elementProvider);
-            OutlinesService.TargetElementChanged += OnTargetElementChanged;
 
             AutomationPropertiesWatcher = new AutomationPropertiesWatcher(OutlinesService, elementPropertiesProvider);
 
@@ -144,15 +133,13 @@ namespace Outlines.App.Services
             InspectorStateManager.IsOverlayVisibleChanged += OnIsOverlayVisibleChanged;
             InspectorStateManager.IsPropertiesPanelVisibleChanged += OnIsPropertiesPanelVisibleChanged;
             InspectorStateManager.IsTreeViewVisibleChanged += OnIsTreeViewVisibleChanged;
-            InspectorStateManager.IsBackdropVisibleChanged += OnIsBackdropVisibleChanged;
 
             WindowInputMaskingService inputMaskingService = new WindowInputMaskingService(CoordinateConverter);
-            inputMaskingService.Ignore(BackdropWindow);
             inputMaskingService.Ignore(ToolBarWindow);
             inputMaskingService.Ignore(PropertiesWindow);
             inputMaskingService.Ignore(TreeViewWindow);
 
-            GlobalInputListener = new GlobalInputListener(inputMaskingService);
+            GlobalInputListener = new GlobalInputListener();
 
             IScreenshotService screenshotService = new ScreenshotService(HideNoZOrderChange, ShowNoZOrderChange);
             IUITreeService uiTreeService = new LiveUITreeService(elementPropertiesProvider, IgnorableWindowsSource);
@@ -171,8 +158,6 @@ namespace Outlines.App.Services
             serviceContainer.AddService(typeof(ToolBarViewModel), toolBarViewModel);
             serviceContainer.AddService(typeof(UITreeViewModel), uiTreeViewModel);
 
-            GlobalInputListener.MouseDown += OnMouseDown;
-            GlobalInputListener.KeyDown += OnKeyDown;
             GlobalInputListener.KeyUp += OnKeyUp;
         }
 
@@ -227,7 +212,7 @@ namespace Outlines.App.Services
         {
             foreach (Window window in Application.Current.Windows)
             {
-                if (window != ToolBarWindow && window != PropertiesWindow && window != TreeViewWindow && window != BackdropWindow)
+                if (window != ToolBarWindow && window != PropertiesWindow && window != TreeViewWindow)
                 {
                     IntPtr hwnd = new WindowInteropHelper(window).EnsureHandle();
                     UiaWindowHelper.HideWindowFromUia(hwnd);
@@ -237,10 +222,6 @@ namespace Outlines.App.Services
 
         private void ShowNoZOrderChange()
         {
-            if (InspectorStateManager.IsBackdropVisible)
-            {
-                WindowZOrderHelper.ShowWindowNoZOrderChange(BackdropWindow.Hwnd);
-            }
             if (InspectorStateManager.IsOverlayVisible)
             {
                 WindowZOrderHelper.ShowWindowNoZOrderChange(OverlayWindow.Hwnd);
@@ -258,7 +239,6 @@ namespace Outlines.App.Services
 
         private void HideNoZOrderChange()
         {
-            WindowZOrderHelper.HideWindowNoZOrderChange(BackdropWindow.Hwnd);
             WindowZOrderHelper.HideWindowNoZOrderChange(OverlayWindow.Hwnd);
             WindowZOrderHelper.HideWindowNoZOrderChange(PropertiesWindow.Hwnd);
             WindowZOrderHelper.HideWindowNoZOrderChange(TreeViewWindow.Hwnd);
@@ -278,11 +258,6 @@ namespace Outlines.App.Services
                     Thread.Sleep(cursorPositionRefreshDelay);
                 }
             });
-        }
-
-        private void OnMouseDown(System.Drawing.Point cursorPos)
-        {
-            OutlinesService.SelectElementAt(cursorPos);
         }
 
         private void OnBackdropWindowClicked(object sender, MouseButtonEventArgs e)
@@ -328,61 +303,13 @@ namespace Outlines.App.Services
             }
         }
 
-        private void OnIsBackdropVisibleChanged(bool isBackdropVisible)
-        {
-            if (isBackdropVisible && OutlinesService.TargetElementProperties != null)
-            {
-                UpdateBackdropWindowBounds();
-                WindowZOrderHelper.ShowWindowNoZOrderChange(BackdropWindow.Hwnd);
-            }
-            else
-            {
-                WindowZOrderHelper.HideWindowNoZOrderChange(BackdropWindow.Hwnd);
-            }
-        }
-
-        private void UpdateBackdropWindowBounds()
-        {
-            if (OutlinesService.TargetElementProperties != null)
-            {
-                var localElementRect = CoordinateConverter.RectFromScreen(OutlinesService.TargetElementProperties.BoundingRect);
-                BackdropWindow.Dispatcher.Invoke(() =>
-                {
-                    BackdropWindow.Top = localElementRect.Top;
-                    BackdropWindow.Left = localElementRect.Left;
-                    BackdropWindow.Width = localElementRect.Width;
-                    BackdropWindow.Height = localElementRect.Height;
-                });
-            }
-        }
-
-        private void OnTargetElementChanged()
-        {
-            if (OutlinesService.TargetElementProperties != null)
-            {
-                UpdateBackdropWindowBounds();
-            }
-            else
-            {
-                WindowZOrderHelper.HideWindowNoZOrderChange(BackdropWindow.Hwnd);
-            }
-        }
-
-        private void OnKeyDown(int vkCode)
-        {
-            Key key = KeyInterop.KeyFromVirtualKey(vkCode);
-            if (key == Key.LeftCtrl)
-            {
-                InspectorStateManager.IsBackdropVisible = true;
-            }
-        }
-
         private void OnKeyUp(int vkCode)
         {
             Key key = KeyInterop.KeyFromVirtualKey(vkCode);
             if (key == Key.LeftCtrl)
             {
-                InspectorStateManager.IsBackdropVisible = false;
+                var cursorPos = GlobalInputListener.GetCursorPosition();
+                OutlinesService.SelectElementAt(cursorPos);
             }
         }
     }

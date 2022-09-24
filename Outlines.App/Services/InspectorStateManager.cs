@@ -45,23 +45,8 @@ namespace Outlines.App.Services
             }
         }
 
-        private bool isBackdropVisible = false;
-        public bool IsBackdropVisible
-        {
-            get => isBackdropVisible;
-            set
-            {
-                if (value != isBackdropVisible)
-                {
-                    isBackdropVisible = value;
-                    IsBackdropVisibleChanged?.Invoke(IsBackdropVisible);
-                }
-            }
-        }
-
         public event IsOverlayVisibleChangedHandler IsOverlayVisibleChanged;
         public event IsPropertiesPanelVisibleChangedHandler IsPropertiesPanelVisibleChanged;
         public event IsTreeViewVisibleChangedHandler IsTreeViewVisibleChanged;
-        public event IsBackdropVisibleChangedHandler IsBackdropVisibleChanged;
     }
 }

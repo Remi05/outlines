@@ -32,61 +32,30 @@ namespace Outlines.Inspection
             public int y;
         }
 
-        // Based on https://docs.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-mousehookstruct
-        [StructLayout(LayoutKind.Sequential)]
-        private class MouseHookStruct
-        {
-            public POINT pt;
-            public IntPtr hwnd;
-            public uint wHitTestCode;
-            public IntPtr dwExtraInfo;
-        }
-
         // From https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setwindowshookexa
         private const int WH_KEYBOARD_LL = 13;
-        private const int WH_MOUSE_LL = 14;
 
-        private const int WM_LBUTTONDOWN = 0x0201; //https://docs.microsoft.com/en-us/windows/win32/inputdev/wm-lbuttondown
         private const int WM_KEYDOWN = 0x0100; // https://docs.microsoft.com/en-us/windows/win32/inputdev/wm-keydown
         private const int WM_KEYUP = 0x0101; // https://docs.microsoft.com/en-us/windows/win32/inputdev/wm-keyup
 
-        private IInputMaskingService InputMaskingService { get; set; }
-
         private HookProc KeyboardHookProc { get; set; }
-        private HookProc MouseHookProc { get; set; }
         private IntPtr KeyboardHookPtr { get; set; }
-        private IntPtr MouseHookPtr { get; set; }
 
         public event KeyDownEventHandler KeyDown;
         public event KeyUpEventHandler KeyUp;
-        public event MouseDownEventHandler MouseDown;
-
-        public GlobalInputListener(IInputMaskingService inputMaskingService = null)
-        {
-            InputMaskingService = inputMaskingService;
-        }
 
         public void RegisterToInputEvents()
         {
             KeyboardHookProc = new HookProc(KeyboardProc);
-            MouseHookProc = new HookProc(MouseProc);
-
             using (Process curProcess = Process.GetCurrentProcess())
             using (ProcessModule curModule = curProcess.MainModule)
             {
                 KeyboardHookPtr = SetWindowsHookEx(WH_KEYBOARD_LL, KeyboardHookProc, GetModuleHandle(curModule.ModuleName), 0);
-                MouseHookPtr = SetWindowsHookEx(WH_MOUSE_LL, MouseHookProc, GetModuleHandle(curModule.ModuleName), 0);
             }
         }
 
         public void UnregisterFromInputEvents()
         {
-            if (MouseHookPtr != IntPtr.Zero)
-            {
-                UnhookWindowsHookEx(MouseHookPtr);
-                MouseHookPtr = IntPtr.Zero;
-                MouseHookProc = null;
-            }
             if (KeyboardHookPtr != IntPtr.Zero)
             {
                 UnhookWindowsHookEx(KeyboardHookPtr);
@@ -112,29 +81,6 @@ namespace Outlines.Inspection
                     break;
                 case WM_KEYUP:
                     KeyUp?.Invoke(vkCode);
-                    break;
-            }
-
-            return CallNextHookEx(IntPtr.Zero, code, wParam, lParam);
-        }
-
-        private int MouseProc(int code, IntPtr wParam, IntPtr lParam)
-        {
-            if (code < 0)
-            {
-                return CallNextHookEx(IntPtr.Zero, code, wParam, lParam);
-            }
-
-            int message = wParam.ToInt32();
-            switch (message)
-            {
-                case WM_LBUTTONDOWN:
-                    var mouseHookStruct = Marshal.PtrToStructure(lParam, typeof(MouseHookStruct)) as MouseHookStruct;
-                    var cursorPos = new Point(mouseHookStruct.pt.x, mouseHookStruct.pt.y);
-                    if (InputMaskingService == null || !InputMaskingService.IsInInputMask(cursorPos))
-                    {
-                        MouseDown?.Invoke(cursorPos);
-                    }
                     break;
             }
 
