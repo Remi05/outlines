@@ -1,8 +1,7 @@
-﻿using System.Drawing;
+using System.Drawing;
 
 namespace Outlines.Inspection
 {
-    public delegate void MouseMovedEventHandler(Point cursorPos);
     public delegate void MouseDownEventHandler(Point cursorPos);
     public delegate void KeyDownEventHandler(int vkCode);
     public delegate void KeyUpEventHandler(int vkCode);
@@ -12,9 +11,10 @@ namespace Outlines.Inspection
         event KeyDownEventHandler KeyDown;
         event KeyUpEventHandler KeyUp;
         event MouseDownEventHandler MouseDown;
-        event MouseMovedEventHandler MouseMoved;
 
         void RegisterToInputEvents();
         void UnregisterFromInputEvents();
+
+        Point GetCursorPosition();
     }
 }

@@ -15,16 +15,13 @@ namespace Outlines.Inspection
         private IElementPropertiesProvider ElementPropertiesProvider { get; set; }
 
         private IUIAutomationElement WatchedSelectedElement { get; set; }
-        private IUIAutomationElement WatchedTargetElement { get; set; }
         private CancellationTokenSource WatchSelectedElementTaskCancellationTokenSource { get; set; }
-        private CancellationTokenSource WatchTargetElementTaskCancellationTokenSource { get; set; }
 
         public AutomationPropertiesWatcher(IOutlinesService outlinesService, IElementPropertiesProvider elementPropertiesProvider)
         {
             ElementPropertiesProvider = elementPropertiesProvider;
             OutlinesService = outlinesService;
             OutlinesService.SelectedElementChanged += OnSelectedElementChanged;
-            OutlinesService.TargetElementChanged += OnTargetElementChanged;
         }
 
         private void OnSelectedElementChanged()
@@ -39,24 +36,7 @@ namespace Outlines.Inspection
 
                     WatchedSelectedElement = selectedElementProperties.Element;
                     WatchSelectedElementTaskCancellationTokenSource = new CancellationTokenSource();
-                    StartWatchingElementProperties(WatchedSelectedElement, OutlinesService.SelectElementWithProperties, WatchSelectedElementTaskCancellationTokenSource.Token);
-                }
-            }
-        }
-
-        private void OnTargetElementChanged()
-        {
-            var targetElementProperties = OutlinesService.TargetElementProperties as AutomationElementProperties;
-            if (targetElementProperties != null)
-            {
-                if (!AreSameElement(WatchedTargetElement, targetElementProperties.Element))
-                {
-                    // Stop watching the previous target element.
-                    WatchTargetElementTaskCancellationTokenSource?.Cancel();
-
-                    WatchedTargetElement = targetElementProperties.Element;
-                    WatchTargetElementTaskCancellationTokenSource = new CancellationTokenSource();
-                    StartWatchingElementProperties(WatchedTargetElement, OutlinesService.TargetElementWithProperties, WatchTargetElementTaskCancellationTokenSource.Token);
+                    StartWatchingSelectedElementProperties(WatchedSelectedElement, WatchSelectedElementTaskCancellationTokenSource.Token);
                 }
             }
         }
@@ -83,7 +63,7 @@ namespace Outlines.Inspection
             }
         }
 
-        private void StartWatchingElementProperties(IUIAutomationElement elementToWatch, Action<ElementProperties> updateElementAction, CancellationToken cancellationToken)
+        private void StartWatchingSelectedElementProperties(IUIAutomationElement elementToWatch, CancellationToken cancellationToken)
         {
             Task.Run(() =>
             {
@@ -91,7 +71,7 @@ namespace Outlines.Inspection
                 while (!cancellationToken.IsCancellationRequested)
                 {
                     ElementProperties elementProperties = ElementPropertiesProvider.GetElementProperties(elementToWatch);
-                    updateElementAction(elementProperties);
+                    OutlinesService.SelectElementWithProperties(elementProperties);
                     Thread.Sleep(RefreshRate);
                 }
             });

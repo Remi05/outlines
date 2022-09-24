@@ -1,17 +1,13 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows.Media;
-using Outlines.Inspection;
 using Outlines.App.Services;
 
 namespace Outlines.App.ViewModels
 {
     public class ColorPickerViewModel : INotifyPropertyChanged
     {
-        private const int HoverDelayInMs = 50;
-
         private IColorPickerService ColorPickerService { get; set; }
-        private IGlobalInputListener GlobalInputListener { get; set; }
 
         private Color pickedColor = Colors.Black;
         public Color PickedColor
@@ -38,21 +34,16 @@ namespace Outlines.App.ViewModels
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public ColorPickerViewModel(IColorPickerService colorPickerService, IGlobalInputListener globalInputListener)
+        public ColorPickerViewModel(IColorPickerService colorPickerService)
         {
-            if (colorPickerService == null || globalInputListener == null)
+            if (colorPickerService == null)
             {
-                throw new ArgumentNullException(colorPickerService == null ? nameof(colorPickerService) : nameof(globalInputListener));
+                throw new ArgumentNullException(nameof(colorPickerService));
             }
             ColorPickerService = colorPickerService;
-            GlobalInputListener = globalInputListener;
-
-            var hoverWatcher = new HoverWatcher(HoverDelayInMs);
-            hoverWatcher.MouseHovered += OnMouseHovered;
-            GlobalInputListener.MouseMoved += hoverWatcher.OnMouseMoved;
         }
 
-        private void OnMouseHovered(System.Drawing.Point cursorPos)
+        public void OnMouseMoved(System.Drawing.Point cursorPos)
         {
             PickedColor = ColorPickerService.GetColorAt(cursorPos);
         }
