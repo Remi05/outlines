@@ -65,11 +65,21 @@ namespace Outlines.Inspection
             }
 
             string snapshotJson = JsonSerializer.Serialize(snapshot);
-            string fileName = $"Snapshot-{DateTime.Now.ToFileTime()}.snpt";
+            string fileName = GetSnapshotFileName(snapshot);
             string filePath = Path.Combine(FolderConfig.GetSnapshotsFolder(), fileName);
             File.WriteAllText(filePath, snapshotJson);
 
             return filePath;
+        }
+
+        private string GetSnapshotFileName(Snapshot snapshot)
+        {
+            string snapshotName = "Snapshot";
+            if (!string.IsNullOrWhiteSpace(snapshot.UITree.ElementProperties.Name))
+            {
+                snapshotName = snapshot.UITree.ElementProperties.Name;
+            }
+            return $"{snapshotName}-{DateTime.Now.ToFileTime()}.snpt";
         }
 
         private void EnsureScreenshotIsSavedAsFile(Snapshot snapshot)
