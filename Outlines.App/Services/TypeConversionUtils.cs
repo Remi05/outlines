@@ -1,6 +1,6 @@
 ﻿using Outlines.Core;
 
-namespace Outlines.App.Services
+namespace Outlines.App
 {
     public static class TypeConversionUtils
     {

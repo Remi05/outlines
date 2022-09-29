@@ -18,6 +18,7 @@ namespace Outlines.App.Views
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
             ViewModel = ServiceContainer.Instance.GetService<SnapshotInspectorViewModel>();
+            ViewModel.FitScreenshotToContainerSize(ScreenshotContainer.RenderSize);
             Root.DataContext = ViewModel;
         }
 

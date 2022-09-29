@@ -63,5 +63,14 @@ namespace Outlines.App.ViewModels
             float scaleMultiplier = Math.Max((1.0f - scrollDelta / scrollSensitity), minScaleFactor);
             ScreenshotScaleFactor *= scaleMultiplier;
         }
+
+        public void FitScreenshotToContainerSize(System.Windows.Size containerSize)
+        {
+            // The following sets the screenshot's scale factor such that it is entirely visible without scrolling.
+            var containerSizeInPhysicalPixels = CoordinateConverter.SizeToScreen(containerSize.ToDrawingSize());
+            float heightScaleFactor = (float)containerSizeInPhysicalPixels.Height / Snapshot.Screenshot.Size.Height;
+            float widthScaleFactor = (float)containerSizeInPhysicalPixels.Width / Snapshot.Screenshot.Size.Width;
+            ScreenshotScaleFactor = (float)Math.Min(Math.Min(heightScaleFactor, widthScaleFactor), 1.0);
+        }
     }
 }

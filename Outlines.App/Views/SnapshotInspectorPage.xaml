@@ -46,7 +46,7 @@
                 <local:UITreeView />
             </Grid>
             
-            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Background="Transparent" Margin="0,35,0,0" Grid.Column="1">
+            <ScrollViewer x:Name="ScreenshotContainer" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Background="Transparent" Margin="0,35,0,0" Grid.Column="1">
                 <Grid MouseWheel="OnMouseWheelScroll" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="Transparent">
                     <Grid x:Name="InspectionArea" MouseDown="OnMouseDown" MouseMove="OnMouseMove" VerticalAlignment="Center" HorizontalAlignment="Center">
                         <Grid.LayoutTransform>
