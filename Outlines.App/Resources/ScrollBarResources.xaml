@@ -5,182 +5,181 @@
     <SolidColorBrush x:Key="LineButtonRestBrush" Color="#9F9F9F" />
     <SolidColorBrush x:Key="LineButtonHoveredBrush" Color="#CFCFCF" />
     <SolidColorBrush x:Key="ScrollBarBackgroundBrush" Color="#5F5F5F" />
-  
+
     <!-- Based on https://learn.microsoft.com/en-us/dotnet/desktop/wpf/controls/scrollbar-styles-and-templates?view=netframeworkdesktop-4.8 -->
-    
-      <Style TargetType="{x:Type Thumb}">
-      <Setter Property="SnapsToDevicePixels" Value="True" />
-      <Setter Property="OverridesDefaultStyle" Value="True"/>
-      <Setter Property="IsTabStop" Value="False"/>
-      <Setter Property="Focusable" Value="False" />
-      <Setter Property="Background" Value="{StaticResource ThumbBackgroundBrush}" />
-      <Setter Property="Template">
-        <Setter.Value>
-          <ControlTemplate TargetType="{x:Type Thumb}">
-            <Border x:Name="ThumbBackgroundBorder"
-                    Background="{TemplateBinding Background}"
-                    Height="{TemplateBinding Height}"
-                    Width="{TemplateBinding Width}" 
-                    SnapsToDevicePixels="True"
-                    CornerRadius="3" />
-          </ControlTemplate>
-        </Setter.Value>
-      </Setter>
+    <Style TargetType="{x:Type Thumb}">
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="Background" Value="{StaticResource ThumbBackgroundBrush}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Thumb}">
+                    <Border x:Name="ThumbBackgroundBorder"
+                            Background="{TemplateBinding Background}"
+                            Height="{TemplateBinding Height}"
+                            Width="{TemplateBinding Width}"
+                            SnapsToDevicePixels="True"
+                            CornerRadius="3" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
-  
+
     <Style x:Key="ScrollBarLineButton" TargetType="{x:Type RepeatButton}">
-      <Setter Property="SnapsToDevicePixels" Value="True" />
-      <Setter Property="OverridesDefaultStyle" Value="True" />
-      <Setter Property="Focusable" Value="False" />
-      <Setter Property="FontSize" Value="8" />
-      <Setter Property="FontFamily" Value="Segoe Fluent Icons" />
-      <Setter Property="Foreground" Value="{StaticResource LineButtonRestBrush}" />
-      <Setter Property="Template">
-        <Setter.Value>
-          <ControlTemplate TargetType="{x:Type RepeatButton}">
-            <ContentPresenter Content="&#xF5B0;" />
-            <ControlTemplate.Triggers>
-              <Trigger Property="IsMouseOver" Value="True">
-                  <Setter Property="Foreground" Value="{StaticResource LineButtonHoveredBrush}" />
-              </Trigger>
-          </ControlTemplate.Triggers>
-          </ControlTemplate>
-        </Setter.Value>
-      </Setter>
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="FontSize" Value="8" />
+        <Setter Property="FontFamily" Value="Segoe Fluent Icons" />
+        <Setter Property="Foreground" Value="{StaticResource LineButtonRestBrush}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RepeatButton}">
+                    <ContentPresenter Content="&#xF5B0;" />
+                      <ControlTemplate.Triggers>
+                          <Trigger Property="IsMouseOver" Value="True">
+                              <Setter Property="Foreground" Value="{StaticResource LineButtonHoveredBrush}" />
+                          </Trigger>
+                      </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
-  
+
     <Style x:Key="ScrollBarPageButton" TargetType="{x:Type RepeatButton}">
-      <Setter Property="SnapsToDevicePixels" Value="True" />
-      <Setter Property="OverridesDefaultStyle" Value="True" />
-      <Setter Property="IsTabStop" Value="False" />
-      <Setter Property="Focusable" Value="False" />
-      <Setter Property="Template">
-        <Setter.Value>
-          <ControlTemplate TargetType="{x:Type RepeatButton}">
-            <Border Background="Transparent" />
-          </ControlTemplate>
-        </Setter.Value>
-      </Setter>
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RepeatButton}">
+                    <Border Background="Transparent" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <ControlTemplate x:Key="HorizontalScrollBar" TargetType="{x:Type ScrollBar}">
-      <Grid SnapsToDevicePixels="True">
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition MaxWidth="12" />
-          <ColumnDefinition Width="*" />
-          <ColumnDefinition MaxWidth="12" />
-        </Grid.ColumnDefinitions>
-        <Border x:Name="ScrollBarBackground" 
-                Grid.ColumnSpan="3" 
-                Background="{StaticResource ScrollBarBackgroundBrush}" 
-                Opacity="0.01" 
-                CornerRadius="6" />
-        <RepeatButton x:Name="LineLeftButton"
-                      Grid.Column="0"
-                      Width="8"
-                      Style="{StaticResource ScrollBarLineButton}"
-                      Command="ScrollBar.LineLeftCommand"
-                      VerticalAlignment="Center"
-                      Visibility="Collapsed">
-          <RepeatButton.RenderTransform>
-            <RotateTransform CenterX="4" CenterY="4" Angle="180" />
-          </RepeatButton.RenderTransform>
-        </RepeatButton>
-        <!-- The Track's name must be PART_Track, see doc: https://learn.microsoft.com/en-us/dotnet/desktop/wpf/controls/scrollbar-styles-and-templates?view=netframeworkdesktop-4.8 -->
-        <Track x:Name="PART_Track"
-                Grid.Column="1"
-                Height="2"
-                IsDirectionReversed="False"
-                IsEnabled="{TemplateBinding IsMouseOver}"
-                VerticalAlignment="Center">
-            <Track.DecreaseRepeatButton>
-                <RepeatButton Style="{StaticResource ScrollBarPageButton}" Command="{x:Static ScrollBar.PageLeftCommand}" />
-            </Track.DecreaseRepeatButton>
-            <Track.IncreaseRepeatButton>
-                <RepeatButton Style="{StaticResource ScrollBarPageButton}" Command="{x:Static ScrollBar.PageRightCommand}" />
-            </Track.IncreaseRepeatButton>
-            <Track.Thumb>
-                <Thumb />
-            </Track.Thumb>
-        </Track>
-        <RepeatButton x:Name="LineRightButton" 
-                      Grid.Column="2"
-                      Width="8"
-                      Style="{StaticResource ScrollBarLineButton}"
-                      Command="ScrollBar.LineRightCommand"
-                      VerticalAlignment="Center"
-                      Visibility="Collapsed" />
-      </Grid>
-      <ControlTemplate.Triggers>
-        <Trigger Property="IsMouseOver" Value="True">
-            <Setter TargetName="PART_Track" Property="Height" Value="6" />
-            <Setter TargetName="ScrollBarBackground" Property="Opacity" Value="0.1" />
-            <Setter TargetName="LineLeftButton" Property="Visibility" Value="Visible" />
-            <Setter TargetName="LineRightButton" Property="Visibility" Value="Visible" />
-        </Trigger>
-      </ControlTemplate.Triggers>
+        <Grid SnapsToDevicePixels="True">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition MaxWidth="12" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition MaxWidth="12" />
+            </Grid.ColumnDefinitions>
+            <Border x:Name="ScrollBarBackground"
+                    Grid.ColumnSpan="3"
+                    Background="{StaticResource ScrollBarBackgroundBrush}"
+                    Opacity="0.01"
+                    CornerRadius="6" />
+            <RepeatButton x:Name="LineLeftButton"
+                          Grid.Column="0"
+                          Width="8"
+                          Style="{StaticResource ScrollBarLineButton}"
+                          Command="ScrollBar.LineLeftCommand"
+                          VerticalAlignment="Center"
+                          Visibility="Collapsed">
+                <RepeatButton.RenderTransform>
+                    <RotateTransform CenterX="4" CenterY="4" Angle="180" />
+                </RepeatButton.RenderTransform>
+            </RepeatButton>
+            <!-- The Track's name must be PART_Track, see doc: https://learn.microsoft.com/en-us/dotnet/desktop/wpf/controls/scrollbar-styles-and-templates?view=netframeworkdesktop-4.8 -->
+            <Track x:Name="PART_Track"
+                   Grid.Column="1"
+                   Height="2"
+                   IsDirectionReversed="False"
+                   IsEnabled="{TemplateBinding IsMouseOver}"
+                   VerticalAlignment="Center">
+                <Track.DecreaseRepeatButton>
+                    <RepeatButton Style="{StaticResource ScrollBarPageButton}" Command="{x:Static ScrollBar.PageLeftCommand}" />
+                </Track.DecreaseRepeatButton>
+                <Track.IncreaseRepeatButton>
+                    <RepeatButton Style="{StaticResource ScrollBarPageButton}" Command="{x:Static ScrollBar.PageRightCommand}" />
+                </Track.IncreaseRepeatButton>
+                <Track.Thumb>
+                    <Thumb />
+                </Track.Thumb>
+            </Track>
+            <RepeatButton x:Name="LineRightButton" 
+                          Grid.Column="2"
+                          Width="8"
+                          Style="{StaticResource ScrollBarLineButton}"
+                          Command="ScrollBar.LineRightCommand"
+                          VerticalAlignment="Center"
+                          Visibility="Collapsed" />
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName="PART_Track" Property="Height" Value="6" />
+                    <Setter TargetName="ScrollBarBackground" Property="Opacity" Value="0.1" />
+                    <Setter TargetName="LineLeftButton" Property="Visibility" Value="Visible" />
+                    <Setter TargetName="LineRightButton" Property="Visibility" Value="Visible" />
+            </Trigger>
+        </ControlTemplate.Triggers>
     </ControlTemplate>
 
     <ControlTemplate x:Key="VerticalScrollBar" TargetType="{x:Type ScrollBar}">
-      <Grid SnapsToDevicePixels="True">
-        <Grid.RowDefinitions>
-          <RowDefinition MaxHeight="12" />
-          <RowDefinition Height="*" />
-          <RowDefinition MaxHeight="12" />
-        </Grid.RowDefinitions>
-        <Border x:Name="ScrollBarBackground" 
-                Grid.RowSpan="3" 
-                Background="{StaticResource ScrollBarBackgroundBrush}" 
-                Opacity="0.01" 
-                CornerRadius="6" />
-        <RepeatButton x:Name="LineUpButton"
-                      Grid.Row="0"
-                      Height="8"
-                      Style="{StaticResource ScrollBarLineButton}"
-                      Command="ScrollBar.LineUpCommand"
-                      HorizontalAlignment="Center"
-                      Visibility="Collapsed">
-          <RepeatButton.RenderTransform>
-            <RotateTransform CenterX="4" CenterY="4" Angle="270" />
-          </RepeatButton.RenderTransform>
-        </RepeatButton>
-        <!-- The Track's name must be PART_Track, see doc: https://learn.microsoft.com/en-us/dotnet/desktop/wpf/controls/scrollbar-styles-and-templates?view=netframeworkdesktop-4.8 -->
-        <Track x:Name="PART_Track"
-                Grid.Row="1"
-                Width="2"
-                IsDirectionReversed="True"
-                IsEnabled="{TemplateBinding IsMouseOver}"
-                HorizontalAlignment="Center">
-          <Track.DecreaseRepeatButton>
-            <RepeatButton Style="{StaticResource ScrollBarPageButton}" Command="{x:Static ScrollBar.PageUpCommand}" />
-          </Track.DecreaseRepeatButton>
-          <Track.IncreaseRepeatButton>
-            <RepeatButton Style="{StaticResource ScrollBarPageButton}" Command="{x:Static ScrollBar.PageDownCommand}" />
-          </Track.IncreaseRepeatButton>
-          <Track.Thumb>
-            <Thumb />
-          </Track.Thumb>
-        </Track>
-        <RepeatButton x:Name="LineDownButton"
-                      Grid.Row="2"
-                      Height="8"
-                      Style="{StaticResource ScrollBarLineButton}"
-                      Command="ScrollBar.LineDownCommand"
-                      HorizontalAlignment="Center"
-                      Visibility="Collapsed">
-          <RepeatButton.RenderTransform>
-            <RotateTransform CenterX="4" CenterY="4" Angle="90" />
-          </RepeatButton.RenderTransform>
-        </RepeatButton>
-      </Grid>
-      <ControlTemplate.Triggers>
-          <Trigger Property="IsMouseOver" Value="True">
-              <Setter TargetName="PART_Track" Property="Width" Value="6" />
-              <Setter TargetName="ScrollBarBackground" Property="Opacity" Value="0.1" />
-              <Setter TargetName="LineUpButton" Property="Visibility" Value="Visible" />
-              <Setter TargetName="LineDownButton" Property="Visibility" Value="Visible" />
-          </Trigger>
-      </ControlTemplate.Triggers>
+        <Grid SnapsToDevicePixels="True">
+            <Grid.RowDefinitions>
+                <RowDefinition MaxHeight="12" />
+                <RowDefinition Height="*" />
+                <RowDefinition MaxHeight="12" />
+            </Grid.RowDefinitions>
+            <Border x:Name="ScrollBarBackground"
+                    Grid.RowSpan="3"
+                    Background="{StaticResource ScrollBarBackgroundBrush}"
+                    Opacity="0.01"
+                    CornerRadius="6" />
+            <RepeatButton x:Name="LineUpButton"
+                          Grid.Row="0"
+                          Height="8"
+                          Style="{StaticResource ScrollBarLineButton}"
+                          Command="ScrollBar.LineUpCommand"
+                          HorizontalAlignment="Center"
+                          Visibility="Collapsed">
+                <RepeatButton.RenderTransform>
+                    <RotateTransform CenterX="4" CenterY="4" Angle="270" />
+                </RepeatButton.RenderTransform>
+            </RepeatButton>
+            <!-- The Track's name must be PART_Track, see doc: https://learn.microsoft.com/en-us/dotnet/desktop/wpf/controls/scrollbar-styles-and-templates?view=netframeworkdesktop-4.8 -->
+            <Track x:Name="PART_Track"
+                   Grid.Row="1"
+                   Width="2"
+                   IsDirectionReversed="True"
+                   IsEnabled="{TemplateBinding IsMouseOver}"
+                   HorizontalAlignment="Center">
+                <Track.DecreaseRepeatButton>
+                    <RepeatButton Style="{StaticResource ScrollBarPageButton}" Command="{x:Static ScrollBar.PageUpCommand}" />
+                </Track.DecreaseRepeatButton>
+                <Track.IncreaseRepeatButton>
+                    <RepeatButton Style="{StaticResource ScrollBarPageButton}" Command="{x:Static ScrollBar.PageDownCommand}" />
+                </Track.IncreaseRepeatButton>
+                <Track.Thumb>
+                    <Thumb />
+                </Track.Thumb>
+            </Track>
+            <RepeatButton x:Name="LineDownButton"
+                          Grid.Row="2"
+                          Height="8"
+                          Style="{StaticResource ScrollBarLineButton}"
+                          Command="ScrollBar.LineDownCommand"
+                          HorizontalAlignment="Center"
+                          Visibility="Collapsed">
+                <RepeatButton.RenderTransform>
+                    <RotateTransform CenterX="4" CenterY="4" Angle="90" />
+                </RepeatButton.RenderTransform>
+            </RepeatButton>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="PART_Track" Property="Width" Value="6" />
+                <Setter TargetName="ScrollBarBackground" Property="Opacity" Value="0.1" />
+                <Setter TargetName="LineUpButton" Property="Visibility" Value="Visible" />
+                <Setter TargetName="LineDownButton" Property="Visibility" Value="Visible" />
+            </Trigger>
+        </ControlTemplate.Triggers>
     </ControlTemplate>
 
     <Style TargetType="{x:Type ScrollBar}">
@@ -203,42 +202,42 @@
     <!-- By default, the ScrollViewer has a white square in the corner when both ScrollBars are visible.
          We don't want that corner square so we override the default style. -->
     <Style TargetType="{x:Type ScrollViewer}">
-      <Setter Property="OverridesDefaultStyle" Value="True"/>
-      <Setter Property="Template">
-        <Setter.Value>
-          <ControlTemplate TargetType="{x:Type ScrollViewer}">
-            <Grid>
-              <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-              </Grid.ColumnDefinitions>
-              <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="Auto" />
-              </Grid.RowDefinitions>
-              
-              <ScrollContentPresenter Grid.Column="0" Grid.Row="0" />
-              
-              <ScrollBar x:Name="PART_VerticalScrollBar"
-                         Grid.Column="1"
-                         Grid.Row="0"
-                         Orientation="Vertical"
-                         Value="{TemplateBinding VerticalOffset}"
-                         Maximum="{TemplateBinding ScrollableHeight}"
-                         ViewportSize="{TemplateBinding ViewportHeight}"
-                         Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"/>
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ScrollViewer}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                            
+                        <ScrollContentPresenter Grid.Column="0" Grid.Row="0" />
+                            
+                        <ScrollBar x:Name="PART_VerticalScrollBar"
+                                   Grid.Column="1"
+                                   Grid.Row="0"
+                                   Orientation="Vertical"
+                                   Value="{TemplateBinding VerticalOffset}"
+                                   Maximum="{TemplateBinding ScrollableHeight}"
+                                   ViewportSize="{TemplateBinding ViewportHeight}"
+                                   Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"/>
 
-              <ScrollBar x:Name="PART_HorizontalScrollBar"
-                         Grid.Column="0"
-                         Grid.Row="1"
-                         Orientation="Horizontal"
-                         Value="{TemplateBinding HorizontalOffset}"
-                         Maximum="{TemplateBinding ScrollableWidth}"
-                         ViewportSize="{TemplateBinding ViewportWidth}"
-                         Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"/>
-            </Grid>
-          </ControlTemplate>
-        </Setter.Value>
-      </Setter>
+                        <ScrollBar x:Name="PART_HorizontalScrollBar"
+                                   Grid.Column="0"
+                                   Grid.Row="1"
+                                   Orientation="Horizontal"
+                                   Value="{TemplateBinding HorizontalOffset}"
+                                   Maximum="{TemplateBinding ScrollableWidth}"
+                                   ViewportSize="{TemplateBinding ViewportWidth}"
+                                   Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 </ResourceDictionary>
