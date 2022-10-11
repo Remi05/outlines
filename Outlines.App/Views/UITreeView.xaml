@@ -33,7 +33,7 @@
     </UserControl.Resources>
 
     <Grid x:Name="Root">
-        <StackPanel Margin="16,16,12,12">
+        <StackPanel Margin="16,16,4,4">
             <TextBlock Text="Tree View" Style="{StaticResource HeaderStyle}" />
             <TreeView ItemsSource="{Binding Elements}" Style="{StaticResource TreeViewStyle}" ItemContainerStyle="{StaticResource TreeViewItemStyle}" SelectedItemChanged="OnSelectedItemChanged">
                 <TreeView.Resources>
