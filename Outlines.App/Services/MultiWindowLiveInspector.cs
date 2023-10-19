@@ -358,6 +358,13 @@ namespace Outlines.App.Services
 
         private void OnTargetElementChanged()
         {
+            // The target element sometimes changes while the app is closing, which causes an exception
+            // to be thrown when calling UpdateBackdropWindowBounds at that point, this check prevents it.
+            if (IsClosing)
+            {
+                return;
+            }
+
             if (OutlinesService.TargetElementProperties != null)
             {
                 UpdateBackdropWindowBounds();
