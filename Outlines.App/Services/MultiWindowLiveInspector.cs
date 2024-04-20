@@ -171,7 +171,6 @@ namespace Outlines.App.Services
             serviceContainer.AddService(typeof(ToolBarViewModel), toolBarViewModel);
             serviceContainer.AddService(typeof(UITreeViewModel), uiTreeViewModel);
 
-            GlobalInputListener.MouseDown += OnMouseDown;
             GlobalInputListener.KeyDown += OnKeyDown;
             GlobalInputListener.KeyUp += OnKeyUp;
         }
@@ -273,16 +272,20 @@ namespace Outlines.App.Services
                 while (!ShouldStopWatchingCursor)
                 {
                     var cursorPos = GlobalInputListener.GetCursorPosition();
-                    OutlinesService.TargetElementAt(cursorPos);
+                    if (GlobalInputListener.IsKeyDown(KeyInterop.VirtualKeyFromKey(Key.LeftShift)))
+                    {
+                        OutlinesService.TargetElementAt(cursorPos);
+                    }
+                    else
+                    {
+                        OutlinesService.TargetElementWithProperties(null);
+                        OutlinesService.SelectElementAt(cursorPos);
+                    }
+
                     ColorPickerViewModel.OnMouseMoved(cursorPos);
                     Thread.Sleep(cursorPositionRefreshDelay);
                 }
             });
-        }
-
-        private void OnMouseDown(System.Drawing.Point cursorPos)
-        {
-            OutlinesService.SelectElementAt(cursorPos);
         }
 
         private void OnBackdropWindowClicked(object sender, MouseButtonEventArgs e)

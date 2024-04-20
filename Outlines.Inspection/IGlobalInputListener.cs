@@ -16,5 +16,7 @@ namespace Outlines.Inspection
         void UnregisterFromInputEvents();
 
         Point GetCursorPosition();
+
+        bool IsKeyDown(int vkCode);
     }
 }

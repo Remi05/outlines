@@ -24,6 +24,9 @@ namespace Outlines.Inspection
         [DllImport("user32.dll")]
         private static extern bool GetCursorPos(out POINT lpPoint);
 
+        [DllImport("user32.dll")]
+        private static extern short GetKeyState(int vkCode);
+
         // Based on https://docs.microsoft.com/en-us/previous-versions/dd162805(v=vs.85)
         [StructLayout(LayoutKind.Sequential)]
         private struct POINT
@@ -144,6 +147,12 @@ namespace Outlines.Inspection
         public Point GetCursorPosition()
         {
             return GetCursorPos(out POINT cursorPos) ? new Point(cursorPos.x, cursorPos.y) : Point.Empty;
+        }
+
+        public bool IsKeyDown(int vkCode)
+        {
+            // Based on https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getkeystate#return-value
+            return (GetKeyState(vkCode) & 0x8000) != 0;
         }
     }
 }
