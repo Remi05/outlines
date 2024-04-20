@@ -48,14 +48,14 @@
                         <TextBlock Text="Left"          Style="{StaticResource PropertyNameStyle}" />
                     </StackPanel>
                     <StackPanel Orientation="Vertical">
-                        <TextBlock x:Name="ElementNameTextBlock"         Text="{Binding ElementProperties.Name, Mode=OneWay}"                Style="{StaticResource PropertyValueStyle}" ToolTip="{Binding ElementProperties.Name, Mode=OneWay}" />
-                        <TextBlock x:Name="ElementControlTypeTextBlock"  Text="{Binding ElementProperties.ControlType, Mode=OneWay}"         Style="{StaticResource PropertyValueStyle}" ToolTip="{Binding ElementProperties.ControlType, Mode=OneWay}" />
-                        <TextBlock x:Name="ElementAutomationIdTextBlock" Text="{Binding ElementProperties.AutomationId, Mode=OneWay}"        Style="{StaticResource PropertyValueStyle}" ToolTip="{Binding ElementProperties.AutomationId, Mode=OneWay}" />
-                        <TextBlock x:Name="ElementClassNameTextBlock"    Text="{Binding ElementProperties.ClassName, Mode=OneWay}"           Style="{StaticResource PropertyValueStyle}" ToolTip="{Binding ElementProperties.ClassName, Mode=OneWay}" />
-                        <TextBlock x:Name="ElementWidthTextBlock"        Text="{Binding ElementProperties.BoundingRect.Width, Mode=OneWay}"  Style="{StaticResource PropertyValueStyle}" />
-                        <TextBlock x:Name="ElementHeightTextBlock"       Text="{Binding ElementProperties.BoundingRect.Height, Mode=OneWay}" Style="{StaticResource PropertyValueStyle}" />
-                        <TextBlock x:Name="ElementTopTextBlock"          Text="{Binding ElementProperties.BoundingRect.Top, Mode=OneWay}"    Style="{StaticResource PropertyValueStyle}" />
-                        <TextBlock x:Name="ElementLeftTextBlock"         Text="{Binding ElementProperties.BoundingRect.Left, Mode=OneWay}"   Style="{StaticResource PropertyValueStyle}" />
+                        <TextBlock x:Name="ElementNameTextBlock"         Text="{Binding ElementProperties.Name, Mode=OneWay}"                Style="{StaticResource PropertyValueStyle}" PreviewMouseDown="ElementProperty_OnPreviewMouseDown" ToolTip="{Binding ElementProperties.Name, Mode=OneWay}" />
+                        <TextBlock x:Name="ElementControlTypeTextBlock"  Text="{Binding ElementProperties.ControlType, Mode=OneWay}"         Style="{StaticResource PropertyValueStyle}" PreviewMouseDown="ElementProperty_OnPreviewMouseDown" ToolTip="{Binding ElementProperties.ControlType, Mode=OneWay}" />
+                        <TextBlock x:Name="ElementAutomationIdTextBlock" Text="{Binding ElementProperties.AutomationId, Mode=OneWay}"        Style="{StaticResource PropertyValueStyle}" PreviewMouseDown="ElementProperty_OnPreviewMouseDown" ToolTip="{Binding ElementProperties.AutomationId, Mode=OneWay}" />
+                        <TextBlock x:Name="ElementClassNameTextBlock"    Text="{Binding ElementProperties.ClassName, Mode=OneWay}"           Style="{StaticResource PropertyValueStyle}" PreviewMouseDown="ElementProperty_OnPreviewMouseDown" ToolTip="{Binding ElementProperties.ClassName, Mode=OneWay}" />
+                        <TextBlock x:Name="ElementWidthTextBlock"        Text="{Binding ElementProperties.BoundingRect.Width, Mode=OneWay}"  Style="{StaticResource PropertyValueStyle}" PreviewMouseDown="ElementProperty_OnPreviewMouseDown" />
+                        <TextBlock x:Name="ElementHeightTextBlock"       Text="{Binding ElementProperties.BoundingRect.Height, Mode=OneWay}" Style="{StaticResource PropertyValueStyle}" PreviewMouseDown="ElementProperty_OnPreviewMouseDown" />
+                        <TextBlock x:Name="ElementTopTextBlock"          Text="{Binding ElementProperties.BoundingRect.Top, Mode=OneWay}"    Style="{StaticResource PropertyValueStyle}" PreviewMouseDown="ElementProperty_OnPreviewMouseDown" />
+                        <TextBlock x:Name="ElementLeftTextBlock"         Text="{Binding ElementProperties.BoundingRect.Left, Mode=OneWay}"   Style="{StaticResource PropertyValueStyle}" PreviewMouseDown="ElementProperty_OnPreviewMouseDown" />
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
@@ -68,9 +68,9 @@
                         <TextBlock Text="Font Weight" Style="{StaticResource PropertyNameStyle}" />
                     </StackPanel>
                     <StackPanel Orientation="Vertical">
-                        <TextBlock x:Name="FontTypeTextBlock"   Text="{Binding TextProperties.FontName, Mode=OneWay, FallbackValue=''}"   Style="{StaticResource PropertyValueStyle}" ToolTip="{Binding TextProperties.FontName, Mode=OneWay}" />
-                        <TextBlock x:Name="FontSizeTextBlock"   Text="{Binding TextProperties.FontSize, Mode=OneWay, FallbackValue=''}"   Style="{StaticResource PropertyValueStyle}" ToolTip="{Binding TextProperties.FontSize, Mode=OneWay}" />
-                        <TextBlock x:Name="FontWeightTextBlock" Text="{Binding TextProperties.FontWeight, Mode=OneWay, FallbackValue=''}" Style="{StaticResource PropertyValueStyle}" ToolTip="{Binding TextProperties.FontWeight, Mode=OneWay}" />
+                        <TextBlock x:Name="FontTypeTextBlock"   Text="{Binding TextProperties.FontName, Mode=OneWay, FallbackValue=''}"   Style="{StaticResource PropertyValueStyle}" PreviewMouseDown="ElementProperty_OnPreviewMouseDown" ToolTip="{Binding TextProperties.FontName, Mode=OneWay}" />
+                        <TextBlock x:Name="FontSizeTextBlock"   Text="{Binding TextProperties.FontSize, Mode=OneWay, FallbackValue=''}"   Style="{StaticResource PropertyValueStyle}" PreviewMouseDown="ElementProperty_OnPreviewMouseDown" ToolTip="{Binding TextProperties.FontSize, Mode=OneWay}" />
+                        <TextBlock x:Name="FontWeightTextBlock" Text="{Binding TextProperties.FontWeight, Mode=OneWay, FallbackValue=''}" Style="{StaticResource PropertyValueStyle}" PreviewMouseDown="ElementProperty_OnPreviewMouseDown" ToolTip="{Binding TextProperties.FontWeight, Mode=OneWay}" />
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
