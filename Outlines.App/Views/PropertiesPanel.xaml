@@ -28,6 +28,7 @@
                 <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundColorBrush}" />
                 <Setter Property="TextTrimming" Value="CharacterEllipsis" />
                 <Setter Property="TextWrapping" Value="NoWrap" />
+                <Setter Property="MaxLines" Value="1" />
             </Style>
         </ResourceDictionary>
     </UserControl.Resources>
