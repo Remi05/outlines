@@ -53,7 +53,11 @@ namespace Outlines.Core
 
         public void SelectElementAt(Point cursorPosition)
         {
-            SelectedElementProperties = ElementProvider.TryGetElementFromPoint(cursorPosition);
+            ElementProperties newSelectedElementProperties = ElementProvider.TryGetElementFromPoint(cursorPosition);
+            if (newSelectedElementProperties != null)
+            {
+                SelectedElementProperties = newSelectedElementProperties;
+            }
         }
 
         public void SelectElementWithProperties(ElementProperties properties)
@@ -63,7 +67,11 @@ namespace Outlines.Core
 
         public void TargetElementAt(Point cursorPosition)
         {
-            TargetElementProperties = ElementProvider.TryGetElementFromPoint(cursorPosition);
+            ElementProperties newTargetElementProperties = ElementProvider.TryGetElementFromPoint(cursorPosition);
+            if (newTargetElementProperties != null)
+            {
+                TargetElementProperties = newTargetElementProperties;
+            }
         }
 
         public void TargetElementWithProperties(ElementProperties properties)
