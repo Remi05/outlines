@@ -1,4 +1,4 @@
-name: .NET Core Windows
+name: Main CI
 
 on:
   push:
@@ -25,7 +25,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v2
       with:
-        dotnet-version: 6.0.x
+        dotnet-version: 8.0.x
         
     - name: Setup MSBuild.exe
       uses: microsoft/setup-msbuild@v1.1
@@ -40,4 +40,4 @@ jobs:
       uses: actions/upload-artifact@v3
       with:	
         name: 'Outlines App'	
-        path: '.\Outlines.App\bin\${{matrix.configuration}}\net6.0-windows10.0.22000\'
+        path: '.\Outlines.App\bin\${{matrix.configuration}}\net8.0-windows10.0.22000\'

@@ -1,4 +1,4 @@
-#  ![favicon-32x32](https://user-images.githubusercontent.com/12770956/117379501-75351680-ae8c-11eb-86e7-d2a3e4a1b23f.png) Outlines [![.NET Core Windows](https://github.com/Remi05/outlines/actions/workflows/dotnet-core-windows.yml/badge.svg)](https://github.com/Remi05/outlines/actions/workflows/dotnet-core-windows.yml)
+#  ![favicon-32x32](https://user-images.githubusercontent.com/12770956/117379501-75351680-ae8c-11eb-86e7-d2a3e4a1b23f.png) Outlines [![Main CI](https://github.com/Remi05/outlines/actions/workflows/main-ci.yml/badge.svg)](https://github.com/Remi05/outlines/actions/workflows/main-ci.yml)
 
 An app to help review your UI implementation.
 
