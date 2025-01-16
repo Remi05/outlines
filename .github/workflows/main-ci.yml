@@ -39,5 +39,5 @@ jobs:
     - name: 'Publish Outlines App'
       uses: actions/upload-artifact@v4
       with:	
-        name: 'Outlines App'	
+        name: 'outlines-app-${{matrix.configuration}}'	
         path: '.\Outlines.App\bin\${{matrix.configuration}}\net8.0-windows10.0.22000\'
