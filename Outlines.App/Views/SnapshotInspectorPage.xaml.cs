@@ -39,5 +39,10 @@ namespace Outlines.App.Views
                 ViewModel.OnMouseWheelScroll(-e.Delta);
             }
         }
+
+        private void SaveAsContextDefinitionButton_Click(object sender, RoutedEventArgs e)
+        {
+            ViewModel.SaveAsContextDefinition();
+        }
     }
 }

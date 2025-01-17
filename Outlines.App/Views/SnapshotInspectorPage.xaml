@@ -64,5 +64,12 @@
             </Grid>
             
         </Grid>
+
+        <Button x:Name="SaveAsContextDefinitionButton" 
+                Content="Save as context definition"
+                Click="SaveAsContextDefinitionButton_Click"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Margin="16" />
     </Grid>
 </Page>

@@ -19,6 +19,7 @@ namespace Outlines.App.ViewModels
         private IFolderConfig FolderConfig { get; set; }
         private ICoordinateConverter CoordinateConverter { get; set; }
         private IInspectorStateManager InspectorManager { get; set; }
+        private ContextDefinitionWriter ContextDefinitionWriter { get; set; } = new();
 
         public bool IsOverlayVisible
         {
@@ -100,6 +101,7 @@ namespace Outlines.App.ViewModels
             if (OutlinesService.SelectedElementProperties != null)
             {
                 Snapshot snapshot = SnapshotService.TakeSnapshot(OutlinesService.SelectedElementProperties);
+                ContextDefinitionWriter.ExportContextDefinition(snapshot);
                 string snapshotFilePath = SnapshotService.SaveSnapshot(snapshot);
                 SnapshotService.ShowSnapshotNotitication(snapshot, snapshotFilePath);
             }

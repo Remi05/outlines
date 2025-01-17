@@ -1,5 +1,7 @@
 using System;
 using System.ComponentModel;
+using System.IO;
+using Outlines.App.Services;
 using Outlines.Core;
 
 namespace Outlines.App.ViewModels
@@ -71,6 +73,12 @@ namespace Outlines.App.ViewModels
             float heightScaleFactor = (float)containerSizeInPhysicalPixels.Height / Snapshot.Screenshot.Size.Height;
             float widthScaleFactor = (float)containerSizeInPhysicalPixels.Width / Snapshot.Screenshot.Size.Width;
             ScreenshotScaleFactor = (float)Math.Min(Math.Min(heightScaleFactor, widthScaleFactor), 1.0);
+        }
+
+        public void SaveAsContextDefinition()
+        {
+            ContextDefinitionWriter contextDefinitionWriter = new();
+            contextDefinitionWriter.ExportContextDefinition(Snapshot);
         }
     }
 }
