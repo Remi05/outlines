@@ -98,7 +98,7 @@ internal class ContextDefinitionWriter
     private string MergeAndCapitalize(string originalString)
     {
         // Merge the words and capitalize the first letter of each word.
-        string[] parts = originalString.Trim().Split(" ");
+        string[] parts = originalString.Trim().Split(" ", System.StringSplitOptions.RemoveEmptyEntries);
         return string.Join("", parts.Select(part => part.Substring(0, 1).ToUpper() + part.Substring(1)));
     }
 }
